@@ -2,4 +2,3 @@ node_modules
 client/lib
 ._*
 db/
-test/
