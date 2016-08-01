@@ -1,0 +1,31 @@
+{
+  "name": "zarad",
+  "version": "1.0.0",
+  "description": "full stack application to manage sport clubs and their users ",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test",
+    "start" : "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sportitsu/Zarad.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sportitsu/Zarad/issues"
+  },
+  "homepage": "https://github.com/Sportitsu/Zarad#readme",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "mocha": "^3.0.0",
+    "sinon": "^1.17.5"
+  },
+  "dependencies": {
+    "angular": "^1.5.8",
+    "express": "^4.14.0",
+    "node": "0.0.0"
+  }
+}
