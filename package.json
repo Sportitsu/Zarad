@@ -1,31 +1,31 @@
 {
   "name": "zarad",
   "version": "1.0.0",
-  "description": "full stack application to manage sport clubs and their users ",
-  "main": "index.js",
-  "scripts": {
-    "test": "npm test",
-    "start" : "gulp"
+  "contributors" : [
+    "Mohammad Al-Bakri <mohammad.albakri93@gmail.com>",
+    "Mihyar Almaslama <eng.mihyear@gmail.com>",
+    "Fatima Hamami <en.f.h90@gmail.com>",
+    "elham Rababha <elham_rababah@yahoo.com>"
+  ],
+  "scripts":{
+    "test": "mocha test/**/*.js -w"
   },
-  "repository": {
+  "respository" : {
     "type": "git",
-    "url": "git+https://github.com/Sportitsu/Zarad.git"
+    "url" : "https://github.com/Sportitsu/Zarad.git"
   },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Sportitsu/Zarad/issues"
+  "license" : "UNLICENSED",
+  "private" : false,
+  "devDependencies" : {
+    "chai" : "^3.5.0",
+    "mocha" : "^3.0.0"
   },
-  "homepage": "https://github.com/Sportitsu/Zarad#readme",
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "mocha": "^3.0.0",
-    "sinon": "^1.17.5"
-  },
-  "dependencies": {
-    "angular": "^1.5.8",
-    "express": "^4.14.0",
-    "node": "0.0.0"
+  "dependencies" : {
+    "bcrypt-nodejs" : "0.0.3",
+    "express": "^4.4.5",
+    "jwt-simple": "^0.2.0",
+    "mongoose" : "^4.1.0",
+    "morgan": "^1.1.1",
+    "q": "^1.4.1"
   }
 }
