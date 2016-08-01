@@ -2,3 +2,6 @@ node_modules
 client/lib
 ._*
 db/
+npm-debug.log
+coverage/
+
