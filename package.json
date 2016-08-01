@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "jwt-simple": "^0.2.0",
     "mongoose": "^4.1.0",
