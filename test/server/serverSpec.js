@@ -1,8 +1,10 @@
 
 var expect = require ('chai').expect;
 var path = require('path')
-
-var test = require(path.join(__dirname,'../../' ,'./client/app.js'));
+var express = require('express');
+var mongoose = require('mongoose');
+var app = express();
+var test = require(path.join(__dirname,'../../' ,'./server/server.js'));
 
 console.log(test);
 
