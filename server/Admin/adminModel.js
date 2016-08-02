@@ -4,7 +4,7 @@ var Schema = mongoose.Schema ;
 
 // Admin table is here.
 var adminSchema = new Schema ({
-	username : {type: String, require : true, unique: true},
+	username : {type: String, require : true, index : { unique : true }},
 	password : {type: String, require : true},
 	firstName : {type: String, require : true},
 	lastName : {type: String, require : true},
