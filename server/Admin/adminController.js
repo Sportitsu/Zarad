@@ -4,6 +4,7 @@ var jwt = require('jwt-simple');
 module.exports = {
 	//fetch one admin
 	getAdmin : function (req, res){
+		console.log("you are here")
 		Admin.findOne({username:req.params.username})
 		.exec(function (error,admin) {
 			if(error){
