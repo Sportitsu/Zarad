@@ -8,6 +8,7 @@ var chai = require('chai')
 
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
+var User = require('../../server/User/userModel');
 var request = supertest.agent(server);
 
 describe("Integration Server Database test", function (){
@@ -65,7 +66,6 @@ describe("Integration Server Database test", function (){
 							expect(res.body.lastName).to.not.equal(null);
 							expect(res.body).to.have.property('email');
 							expect(res.body.email).to.not.equal(null);
-
 							done();
 						});
 			})
@@ -140,6 +140,80 @@ describe("Integration Server Database test", function (){
 		})
 	});
 	describe('User Test Database', function(done){
+
+		User.collection.drop();
+
+		beforeEach(function(done){
+			var newUser = new User({
+				'username' : 'mohammad',
+			    'password' : 'testing', 
+			});
+			newUser.save(function(err,savedUser){
+				done();
+
+			})
+		});
+		afterEach(function(done){
+		    User.collection.drop();
+			done();
+		});
+
+		it('should get all users in database', function(done){
+			chai.request(server)
+				.get('/api/users')
+				.end(function(err, res){
+					expect(res.status).to.be.equal(200);
+					expect(res.body.length).to.be.equal(1);
+					expect(res.body[0].username).to.be.equal('mohammad');
+					expect(res.body[0].password).to.be.equal(undefined);
+					done();
+				})
+		});
+
+		it('should return with status 500' , function(done){
+			User.collection.drop();
+			chai.request(server)
+				.get('/api/users')
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					expect(res.body.length).to.be.equal(undefined);
+					done();
+				})
+		})
+
+		it('should get one user when username is passed in route' , function(done){
+			var newUser = new User({
+				'username' : 'super',
+			    'password' : '123', 
+			    'firstName' : 'Iron' ,
+			    'lastName' : 'Man',
+			    'email' : 'ironman@avengers.com'
+			})
+			newUser.save(function(error , newUser){
+				chai.request(server)
+					.get('/api/user/'+ newUser.username)
+					.end(function(err, res){
+						expect(res.status).to.be.equal(200);
+						expect(res.body.username).to.be.equal('super');
+						expect(res.body).to.have.property('username');
+						expect(res.body).to.have.property('firstName');
+						expect(res.body).to.have.property('lastName');
+						expect(res.body).to.have.property('email');
+						done();
+					})
+				
+			})
+		})
+
+		it('should respond with status 500 Error if user is not available', function(done){
+			chai.request(server)
+				.get('/api/user/dontenter')
+				.end(function(err,res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		})
+
 		// TODO User Test Database
 	});
 	describe('Club Test Database', function(done){
