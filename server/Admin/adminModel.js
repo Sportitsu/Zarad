@@ -1,5 +1,7 @@
 var mongoose = require('mongoose');
 
+var Schema = mongoose.Schema ;
+
 // Admin table is here.
 var adminSchema = new Schema ({
 	username : {type: String, require : true},
