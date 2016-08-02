@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "test": "karma start karma.conf.js",
-    "cover": "istanbul cover test/**/*.js"
+    "cover" : "istanbul cover test/**/*.js"
   },
   "respository": {
     "type": "git",
