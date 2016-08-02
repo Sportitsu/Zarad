@@ -25,10 +25,27 @@ describe("Server", function (){
 	describe('/POST',  function(done){
 		it('should respond with status 201 OK on route /api/admin' , function(done){
 			chai.request(server)
-				.post('/api/home')
-				.field('username' , 'admin-memf')
-				.field('password' , '')
+				.post('/api/admin')
+				.send({'username':'mihyar'})
+				.end(function (err,res) {
+				expect(err).to.be.null;
+				expect(res.status).to.be.equal(201);
+				done();
+				})
 		})
+	});
+
+	describe('/POST/admin', function (done){
+		it('Should respond with status 200 ok on route /api/admin', function (done){
+			chai.request(server)
+			.post('/api/admin:username')
+			.send({'username':'mihyar'})
+			.end(function(err,res){
+				expect(err).to.be.null;
+				expect(res.status).to.be.equal(200);
+				done();
+			})
 	})
+})
 
 });

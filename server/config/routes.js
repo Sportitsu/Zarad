@@ -1,4 +1,5 @@
 // Require all the controller functions here 
+var adminController = require('../Admin/adminController');
 
 // Waiting for database setup 
 
@@ -8,12 +9,11 @@ module.exports = function(app,express){
 		res.status(200).send('Connected to home');
 	});
 
-	app.get('/api/admin' , function(req,res){
-		res.status(200).send('Admin on road');
-	})
-
+	// admin routes
+	app.get('/api/admin/:username' ,adminController.getAdmin);
+	app.post('/api/admincreate', adminController.addAdmin);
 	app.post('/api/admin' , function(req,res){
-		res.status(201)
+		res.status(201).send('test');
 	})
 
 }
