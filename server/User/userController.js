@@ -38,6 +38,63 @@ module.exports={
 				res.status(200).json(newArr);
 			}
 		});
+	},
+
+	signin : function(req, res){
+		var username = req.body.username;
+		var password = req.body.password;
+	},
+
+	signup : function(req, res){
+		var username = req.body.username;
+		var password = req.body.password;
+
+			User.findOne({username: username})
+	    		.exec(function(error,user){
+			        if(user){
+			          res.status(500).send('User Already Exists');
+				    } else {
+				        var newUser = new User ({
+				            username: req.body.username,
+			  	            password: req.body.password,
+				            email: req.body.email,
+			     	        firstName: req.body.firstName,
+				            lastName: req.body.lastName,
+				            middleName: req.body.middleName,
+			    	        age: req.body.age,
+			   	            image: req.body.image || 'http://i.imgur.com/FlEXhZo.jpg?1',
+			   	            country : req.body.country,
+			   	            phone : req.body.phone, 
+			   	            club : req.body.club,
+			   	            beltColor : req.body.beltColor,
+			   	            attendance : req.body.attendance || 0,
+			   	            achievements : req.body.achievements
+				        });
+			        
+				        newUser.save(function(err, newUser){
+				            if(err){
+				                res.status(500).send(err);
+				            } else {
+				              res.status(200).send(newUser);
+				            };
+				        });
+	                }
+	      
+	    });
+
+	},
+
+	editPorfile : function(req,res){
+
+	}, 
+
+	deleteUser : function(req, res){
+
+	}, 
+
+
+	checkAuth : function(req,res){
+
 	}
 
 }
