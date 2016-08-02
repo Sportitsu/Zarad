@@ -16,7 +16,8 @@ var userSchema = new Schema ({
 	club: {type: String},
 	beltColor: {type: String},
 	attendance : {type: Number},
-	achievements: Schema.Types.Mixed
+	achievements: Schema.Types.Mixed,
+  country : {type : String}
 });
 
 userSchema.pre('save', function (next) {
