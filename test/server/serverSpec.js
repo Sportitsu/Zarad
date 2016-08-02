@@ -10,12 +10,7 @@ chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
 var request = supertest.agent(server);
 
-
-beforeEach(function(){
-	// TODO FIND FAKE POSTS AND DELETE THEM FROM DATABASE. 
-})
-
-describe("Server", function (){
+describe("Integration Server Database test", function (){
 	describe('/GET' , function(done){
 		it("is just for testing mocha and chai ", function (done){
 			chai.request(server)
@@ -143,5 +138,14 @@ describe("Server", function (){
 					done();
 				})
 		})
-	})
+	});
+	describe('User Test Database', function(done){
+		// TODO User Test Database
+	});
+	describe('Club Test Database', function(done){
+		// TODO ClubTestDatabase 
+	});
+	describe('Tournaments DataBase', function(done){
+		// TODO Tournaments Database
+	});
 });
