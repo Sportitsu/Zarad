@@ -8,7 +8,7 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
-    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js"
+    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' -x 'server.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js"
   },
   "respository": {
     "type": "git",
