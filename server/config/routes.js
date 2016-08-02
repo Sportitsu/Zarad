@@ -1,5 +1,7 @@
 // Require all the controller functions here 
 var helpers = require('./helpers.js'); // our custom middleware
+var adminController = require('../Admin/adminController');
+
 // Waiting for database setup 
 module.exports = function(app,express){
 	// Home page Routes
@@ -8,17 +10,15 @@ module.exports = function(app,express){
 	});
 	// Just for testing mocha
 
+
+
 	// Admin Page Routes
-	app.post('/api/admin' , function(req,res){
-		// console.log(req.body);
-		console.log(req.params.username)
-		// TO DO ....
-	});
+	app.get('/api/admin/:username' ,adminController.getAdmin);
+	app.post('/api/admincreate', adminController.addAdmin);
+	// *************************** //	
+	
 
-	app.get('/api/admin/:username' , function(req,res){
-		console.log(req.body);
-
-	})
+	
 
 
 	// Club Page Routes

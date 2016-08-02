@@ -7,7 +7,7 @@ var chai = require('chai')
       ,chaiHttp = require('chai-http');
 
 chai.use(chaiHttp);
-
+var Admin = require('../../server/Admin/adminModel');
 var request = supertest.agent(server);
 
 
@@ -75,11 +75,9 @@ describe("Server", function (){
 			})
 		})
 
-
-
 		it('should update admin with a new one with response 201 OK' , function(done){
 			chai.request(server)
-				.post('/api/admin')
+				.post('/api/admincreate')
 				.set('Accept','application/json')
 				.send({
 						'username' : 'admin-memf',
