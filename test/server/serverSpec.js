@@ -16,7 +16,7 @@ beforeEach(function(){
 })
 
 describe("Server", function (){
-	xdescribe('/GET' , function(done){
+	describe('/GET' , function(done){
 		it("is just for testing mocha and chai ", function (done){
 			chai.request(server)
 				.get('/api/home')
@@ -55,7 +55,7 @@ describe("Server", function (){
 			    'lastName' : 'Man',
 			    'email' : 'ironman@avengers.com'
 			});
-			testAdmin.save(function(err,data){	
+			testAdmin.save(function(error,data){	
 				 request.get('/api/admin/'+ data.username)
 						.set('Accept','application/json')
 						.expect(200)
@@ -70,9 +70,28 @@ describe("Server", function (){
 							expect(res.body.lastName).to.not.equal(null);
 							expect(res.body).to.have.property('email');
 							expect(res.body.email).to.not.equal(null);
+
 							done();
 						});
 			})
+		});
+
+
+		it('should fail when sending wrong username' , function(done){
+			var testAdmin = new Admin({
+				'username' : 'super',
+			    'password' : '123', 
+			    'firstName' : 'Iron' ,
+			    'lastName' : 'Man',
+			    'email' : 'ironman@avengers.com'
+			});
+			request.get('/api/admin/dont' )
+				   .set('Accept' , 'application/json')
+				   .expect(500)
+				   .end(function(err,res){
+				   		expect(res.status).to.be.equal(500);
+				   		done();
+				   })
 		})
 
 		it('should add admin with response 201 OK' , function(done){
@@ -96,6 +115,33 @@ describe("Server", function (){
 				});
 		});
 
+		it('should fail when missing username key' , function(done){
+			chai.request(server)
+				.post('/api/admincreate')
+				.send({
+					'password' : 'test' ,
+					'email' : 'blaBla'
+				})
+				.end(function(err,res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		})
 
+		it('should fail when creating an existing admin', function(done){
+			chai.request(server)
+				.post('/api/admincreate')
+				.send({
+					'username' : 'admin-memf',
+				    'password' : '123', 
+				    'firstName' : 'testing' ,
+				    'lastName' : 'noneOfYourBusiness',
+				    'email' : 'notGonnaTellYou'
+				})
+				.end(function(err ,res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		})
 	})
 });
