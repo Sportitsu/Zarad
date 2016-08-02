@@ -27,7 +27,8 @@ module.exports = function(app,express){
 
 
 	// User Page Routes
-	app.get('/api/user/:username',userController.getOne);
+	app.get('/api/user/:username', userController.getUser);
+	app.get('/api/users', userController.getAllUsers);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
