@@ -108,7 +108,26 @@ module.exports={
 
 
 	checkAuth : function(req,res){
-
+	    // checking to see if the user is authenticated
+	    // grab the token in the header is any
+	    // then decode the token, which we end up being the user object
+	    // check to see if that user exists in the database
+	    var token = req.headers['x-access-token'];
+	    if (!token) {
+	      res.status(500).send(new Error('No token'));
+	    } else {
+	      var user = jwt.decode(token, 'secret');
+	      User.findOne({username: user.username})
+	        .exec(function (error, foundUser) {
+	          if(error){
+	            res.status(500).send(error);
+	          } else if (foundUser) {
+	            res.send(200);
+	          } else {
+	            res.send(401);
+	          }
+	        });
+	    }
 	}
 
 }
