@@ -17,13 +17,13 @@ module.exports = {
 	//Add new admin 
 
 	addAdmin: function (req, res) {
+
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
       if(error){
         res.status(500).send(error);
       } else if(!admin){
-      	console.log("YAAAAAAAAAAAA")
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
@@ -36,7 +36,7 @@ module.exports = {
           if(err){
             res.status(500).send(err);
           } else {
-            res.status(200).send(newAdmin);
+            res.status(201).send(newAdmin);
           }
         })
       } else {
