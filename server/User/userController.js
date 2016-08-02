@@ -38,6 +38,26 @@ module.exports={
 				res.json(newArr);
 			}
 		});
-	}
+	},
+	signin : function (req,res){
+		username = req.body.username;
+		password = req.body.password;
 
+		User.findOne({username : username})
+		.exec(function (error,user) {
+			if (error) {
+				res.status(500).send(error);
+			}else if(!user){
+				res.status(500).send(new Error('User does not exist'));
+			}else{
+				  var token = jwt.encode(user, 'secret');
+	              res.setHeader('x-access-token',token);
+	              var data={
+	                token: token,
+	                username: username
+	              }
+	            res.json(data);
+			}
+		});
+	}
 }
