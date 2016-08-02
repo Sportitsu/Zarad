@@ -278,6 +278,55 @@ describe("Integration Server Database test", function (){
 		})
 
 
+		describe('Sign in User', function(done){
+			it('should have a method called singin', function(done){
+				expect(typeof userController.signin).to.be.equal('function');
+				done();
+			});
+
+			it('should response 500 ERROR if user is not available', function(done){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' :'amNotAvailable'
+					})
+					.end(function(err, res){
+						expect(err).to.not.equal(null);
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			});
+
+			it('should give access tokens when signin in', function(done){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' : 'mohammad', 
+						'password' : 'testing'
+					})
+					.end(function(err, res){
+						expect(res.body.token).to.not.equal(undefined);
+						expect(res.body).to.have.property('token');
+						done();
+					})
+			});
+
+			it('should return 500 ERROR if password is incorrect', function(done){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' : 'mohammad', 
+						'password' : 'notme'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			})
+
+		})
+
+
 		// TODO User Test Database
 	});
 	describe('Club Test Database', function(done){
