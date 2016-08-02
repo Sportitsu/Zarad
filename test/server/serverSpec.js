@@ -75,21 +75,19 @@ describe("Server", function (){
 			})
 		})
 
-		it('should update admin with a new one with response 201 OK' , function(done){
+		it('should add admin with response 201 OK' , function(done){
 			chai.request(server)
 				.post('/api/admincreate')
 				.send({
-						'username' : 'admin-memf',
+						'username' : 'RebootKamp',
 					    'password' : '123', 
 					    'firstName' : 'testing' ,
 					    'lastName' : 'noneOfYourBusiness',
 					    'email' : 'notGonnaTellYou'
 					})
 				.end(function(err,res){
-					console.log(res.body)
-					expect(err).to.be.null;
 					expect(res.status).to.be.equal(201);
-					expect(res.body.username).to.be.equal('admin-memf');
+					expect(res.body.username).to.be.equal('RebootKamp');
 					expect(res.body.password).to.be.equal(null);
 					expect(res.body.firstName).to.be.equal('testing');
 					expect(res.body.lastName).to.be.equal('noneOfYourBusiness');

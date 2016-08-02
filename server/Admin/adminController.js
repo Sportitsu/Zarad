@@ -23,6 +23,7 @@ module.exports = {
 	//Add new admin 
 
 	addAdmin: function (req, res) {
+
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
@@ -41,7 +42,7 @@ module.exports = {
           if(err){
             res.status(500).send(err);
           } else {
-            res.status(200).send(newAdmin);
+            res.status(201).send(newAdmin);
           }
         })
       } else {
