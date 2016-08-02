@@ -15,13 +15,13 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/lib/angular/angular.min.js',
-      'client/lib/angular-route/angular-route.js',
+      'client/lib/angular/angular.js',
       'client/lib/angular-mocks/angular-mocks.js',
-
-      'client/app/**/*.js',
-
-       'test/front-end/clientSpec.js',
+      'client/lib/angular-route/angular-route.js',
+      'client/app.js',
+      'client/app/auth/auth.js',
+      'client/app/services/services.js',
+      'test/front-end/clientSpec.js'
     ],
 
 
@@ -33,15 +33,20 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
+        'client/app/**/*.js' : 'coverage'
     },
 
 
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['nyan','unicorn'],
+    reporters: ['progress','coverage'],
 
-
+    coverageReporter : {
+      type : 'html',
+      dir : 'coverage/',
+      file : 'coverage.txt'
+    },
     // web server port
     port: 9876,
 
@@ -56,17 +61,17 @@ module.exports = function(config) {
 
 
     // enable / disable watching file and executing tests whenever any file changes
-    autoWatch: false,
+    autoWatch: true,
 
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

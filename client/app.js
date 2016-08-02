@@ -1,11 +1,12 @@
 angular.module('zarad',[
 	'zarad.auth',
+	'zarad.services',
 	'ngRoute'
 ])
 .config(function ($routeProvider , $httpProvider) {
 	$routeProvider
 	.when('/signin', {
-		templateURL : '',
+		templateURL : 'client/app/auth/auth.js',
 		controller : 'AuthController'
 	})
 	.when('/signup', {
