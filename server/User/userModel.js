@@ -8,16 +8,18 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema ({
 	username : { type: String, required: true, index : {unique: true}},
 	password : { type: String, required: true},
-	email: { type: String},
+	email: { type: String },
 	firstName: { type: String},
-	lastName: { type: String},
-	phone: {type: String},
-	Date: {type: Date, default: Date.now},
-	club: {type: String},
-	beltColor: {type: String},
-	attendance : {type: Number},
+	lastName: { type: String },
+  middleName : { type : String },
+  age : { type : Number},
+	phone: { type: String },
+	Date: { type: Date, default: Date.now },
+	club: { type: String, required: true},
+	beltColor: { type: String },
+	attendance : { type: Number },
 	achievements: Schema.Types.Mixed,
-  country : {type : String}
+  country : { type : String , required : true }
 });
 
 userSchema.pre('save', function (next) {
