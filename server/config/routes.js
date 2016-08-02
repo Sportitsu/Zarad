@@ -13,18 +13,16 @@ module.exports = function(app,express){
 	// Just for testing mocha
 
 
-
 	// Admin Page Routes
 	app.get('/api/admin/:username' ,adminController.getAdmin);
 	app.post('/api/admincreate', adminController.addAdmin);
 	// *************************** //	
 	
 
-	
 
 
 	// Club Page Routes
-	app.post('api/clubRegister',clubController.addClub)
+	app.post('/api/clubregister',clubController.addClub)
 
 
 
