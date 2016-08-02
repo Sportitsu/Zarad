@@ -1,3 +1,4 @@
+process.env.NODE_ENV = 'test';
 var should = require('chai').should();
 var expect = require ('chai').expect;
 var path = require('path')
@@ -5,6 +6,7 @@ var supertest = require('supertest');
 var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
 var chai = require('chai')
       ,chaiHttp = require('chai-http');
+
 
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
