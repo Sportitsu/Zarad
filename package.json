@@ -8,6 +8,8 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
+    "karma": "karma start karma.conf.js",
+    "cover" : "istanbul cover test/**/*.js",
     "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js"
   },
   "respository": {
@@ -20,7 +22,13 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "istanbul": "^0.4.4",
+    "karma": "^1.1.2",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-coverage": "^1.1.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs2-launcher": "^0.5.0",
     "mocha": "^3.0.0",
+    "nyan": "^1.0.3",
     "supertest": "^2.0.0"
   },
   "dependencies": {
@@ -28,8 +36,14 @@
     "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "jwt-simple": "^0.2.0",
+    "karma-chai": "^0.1.0",
+    "karma-mocha": "^1.1.1",
+    "karma-sinon": "^1.0.5",
     "mongoose": "^4.1.0",
     "morgan": "^1.1.1",
-    "q": "^1.4.1"
+    "path": "^0.12.7",
+    "q": "^1.4.1",
+    "request": "^2.74.0",
+    "sinon": "^1.17.5"
   }
 }
