@@ -10,7 +10,13 @@ module.exports = {
 			if(error){
 				console.error(error);
 			}else{
-				res.status(200).send(admin);
+				var returnAdmin = new Admin ({
+					username : admin.username,
+					email : admin.email,
+					firstName : admin.firstName,
+					lastName : admin.lastName
+				})
+				res.status(200).send(returnAdmin);
 			}
 		})
 	},
@@ -23,7 +29,6 @@ module.exports = {
       if(error){
         res.status(500).send(error);
       } else if(!admin){
-      	console.log("YAAAAAAAAAAAA")
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
