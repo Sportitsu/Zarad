@@ -17,10 +17,10 @@ module.exports={
 	getAllUsers :  function (req,res){
 		User.find({})
 		.exec(function (error,users) {
-			if (error) {
-				res.status(500).send(error);
-			}else{
-				var newarr=[];
+			if (users.length === 0) {
+				res.status(500).send('Empty Table');
+			} else {
+				var newArr=[];
 				for (var i = 0; i < users.length; i++) {
 					var newObject = {};
 					newObject.username = users[i].username;
@@ -33,9 +33,9 @@ module.exports={
 					newObject.beltColor = users[i].beltColor;
 					newObject.attendenc = users[i].attendenc;
 					newObject.achievements = users[i].achievements;
-					newarr.push(newObject);
+					newArr.push(newObject);
 				}
-				res.json(newArr);
+				res.status(200).json(newArr);
 			}
 		});
 	}
