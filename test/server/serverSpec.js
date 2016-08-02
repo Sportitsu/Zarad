@@ -326,6 +326,27 @@ describe("Integration Server Database test", function (){
 
 		})
 
+		describe('Checking Authentication in user Controller', function(done){
+			it('should have a method called checkAuth' , function(done){
+				expect(typeof userController.checkAuth).to.be.equal('function');
+				done();
+			});
+
+			it('should respond with status 500 ERROR if token is not available in headers', function(done){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' : 'mohammadsdf' ,
+						'password' : 'testing'
+					})
+					.end(function(err, response){
+						expect(response.header['x-access.token']).to.be.equal(undefined);
+						done();
+					})
+			})
+
+		})
+
 
 		// TODO User Test Database
 	});
