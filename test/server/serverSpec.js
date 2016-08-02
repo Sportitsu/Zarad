@@ -63,7 +63,7 @@ describe("Server", function (){
 							expect(res.body).to.have.property('username');
 							expect(res.body.username).to.not.equal(null);
 							expect(res.body.username).to.be.equal('super');
-							expect(res.body.password).to.be.equal(null);
+							expect(res.body.password).to.be.equal(undefined);
 							expect(res.body).to.have.property('firstName');
 							expect(res.body.firstName).to.not.equal(null);
 							expect(res.body).to.have.property('lastName');
@@ -88,7 +88,7 @@ describe("Server", function (){
 				.end(function(err,res){
 					expect(res.status).to.be.equal(201);
 					expect(res.body.username).to.be.equal('RebootKamp');
-					expect(res.body.password).to.be.equal(null);
+					expect(res.body.password).to.be.equal(undefined);
 					expect(res.body.firstName).to.be.equal('testing');
 					expect(res.body.lastName).to.be.equal('noneOfYourBusiness');
 					expect(res.body.email).to.be.equal('notGonnaTellYou');
