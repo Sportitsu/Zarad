@@ -8,8 +8,9 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
-    "test": "karma start karma.conf.js",
-    "cover" : "istanbul cover test/**/*.js"
+    "karma": "karma start karma.conf.js",
+    "cover" : "istanbul cover test/**/*.js",
+    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js"
   },
   "respository": {
     "type": "git",

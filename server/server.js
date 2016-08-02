@@ -8,7 +8,7 @@ var app = express();
 var mongoURI =  process.env.MONGODB_URI || 'mongodb://localhost/zarad';
 var port = process.env.PORT || 8000;
 
-mongoose.createConnection(mongoURI);
+mongoose.connect(mongoURI);
 
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
