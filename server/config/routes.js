@@ -2,6 +2,7 @@
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
+var clubController = require('../Club/clubController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
@@ -23,6 +24,7 @@ module.exports = function(app,express){
 
 
 	// Club Page Routes
+	app.post('api/clubRegister',clubController.addClub)
 
 
 

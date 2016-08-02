@@ -129,7 +129,9 @@ module.exports={
 	        });
 	    }
 	},
-	User.findOne({username : username})
+	signin : function(req,res){
+		var username = req.params.username;
+		User.findOne({username : username})
 		.exec(function (error,user) {
 			if (error) {
 				res.status(500).send(error);

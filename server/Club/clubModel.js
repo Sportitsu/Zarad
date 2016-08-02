@@ -9,5 +9,5 @@ var clubSchema = new Schema ({
 	clubName : {type : String}
 });
 
-var Club = mongoose.modle('Club',clubSchema);
+var Club = mongoose.model('Club',clubSchema);
 module.exports = Club;
