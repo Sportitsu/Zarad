@@ -8,12 +8,10 @@ module.exports = function(app,express){
 		res.status(200).send('Connected to home');
 	});
 
-	app.get('/api/admin' , function(req,res){
-		res.status(200).send('Admin on road');
-	})
 
 	app.post('/api/admin' , function(req,res){
-		res.status(201)
+		console.log(req.body);
+		res.status(201).send('You are not convincing me to give you aanything')
 	})
 
 }
