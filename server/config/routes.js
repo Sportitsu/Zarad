@@ -1,6 +1,7 @@
 // Require all the controller functions here 
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
+var userController = require('../User/userController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
@@ -26,6 +27,7 @@ module.exports = function(app,express){
 
 
 	// User Page Routes
+	app.get('/api/user/:username',userController.getOne);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler

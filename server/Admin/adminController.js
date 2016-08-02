@@ -4,7 +4,6 @@ var jwt = require('jwt-simple');
 module.exports = {
 	//fetch one admin
 	getAdmin : function (req, res){
-
 		Admin.findOne({username:req.params.username})
 		.exec(function (error,admin) {
 			if(admin){
@@ -15,9 +14,11 @@ module.exports = {
 					lastName : admin.lastName
 				})
 				res.status(200).send(returnAdmin);
+
 			} else {
         res.status(500).send('InCorrect');
       }
+
 		})
 	},
 	//Add new admin 
