@@ -16,8 +16,7 @@ beforeEach(function(){
 })
 
 describe("Server", function (){
-
-	describe('/GET' , function(done){
+	xdescribe('/GET' , function(done){
 		it("is just for testing mocha and chai ", function (done){
 			chai.request(server)
 				.get('/api/home')
@@ -45,10 +44,9 @@ describe("Server", function (){
 			})
 		});
 		afterEach(function(done){
-			Admin.collection.drop();
+		    Admin.collection.drop();
 			done();
 		});
-
 		it('should be an object with keys and values', function(done){
 			var testAdmin = new Admin({
 				'username' : 'super',
@@ -58,12 +56,14 @@ describe("Server", function (){
 			    'email' : 'ironman@avengers.com'
 			});
 			testAdmin.save(function(err,data){	
-				 request.get('/api/admin/'+ data._id)
+				 request.get('/api/admin/'+ data.username)
 						.set('Accept','application/json')
 						.expect(200)
 						.end(function(err, res){
 							expect(res.body).to.have.property('username');
 							expect(res.body.username).to.not.equal(null);
+							expect(res.body.username).to.be.equal('super');
+							expect(res.body.password).to.be.equal(null);
 							expect(res.body).to.have.property('firstName');
 							expect(res.body.firstName).to.not.equal(null);
 							expect(res.body).to.have.property('lastName');
@@ -78,7 +78,6 @@ describe("Server", function (){
 		it('should update admin with a new one with response 201 OK' , function(done){
 			chai.request(server)
 				.post('/api/admincreate')
-				.set('Accept','application/json')
 				.send({
 						'username' : 'admin-memf',
 					    'password' : '123', 
@@ -87,6 +86,7 @@ describe("Server", function (){
 					    'email' : 'notGonnaTellYou'
 					})
 				.end(function(err,res){
+					console.log(res.body)
 					expect(err).to.be.null;
 					expect(res.status).to.be.equal(201);
 					expect(res.body.username).to.be.equal('admin-memf');
@@ -95,7 +95,7 @@ describe("Server", function (){
 					expect(res.body.lastName).to.be.equal('noneOfYourBusiness');
 					expect(res.body.email).to.be.equal('notGonnaTellYou');
 					done();
-				})
+				});
 		});
 
 
