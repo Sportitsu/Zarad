@@ -8,7 +8,7 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
-    "test": "istanbul cover -x '*Spec.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js -w"
+    "test": "istanbul cover -x '*Spec.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js"
   },
   "respository": {
     "type": "git",
@@ -18,8 +18,10 @@
   "private": false,
   "devDependencies": {
     "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
     "istanbul": "^0.4.4",
-    "mocha": "^3.0.0"
+    "mocha": "^3.0.0",
+    "supertest": "^2.0.0"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
