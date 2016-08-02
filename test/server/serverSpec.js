@@ -14,10 +14,12 @@ describe("Server", function (){
 
 	describe('/GET' , function(done){
 		it("should respond with status 200 OK when routing to /api/home ", function (done){
-			chai.request(server).get('/api/home').end(function(err,res){
-				expect(err).to.be.null;
-				expect(res.status).to.be.equal(200);
-				done();
+			chai.request(server)
+				.get('/api/home')
+				.end(function(err,res){
+					expect(err).to.be.null;
+					expect(res.status).to.be.equal(200);
+					done();
 			})
 		});	
 	});
@@ -25,9 +27,16 @@ describe("Server", function (){
 	describe('/POST',  function(done){
 		it('should respond with status 201 OK on route /api/admin' , function(done){
 			chai.request(server)
-				.post('/api/home')
-				.field('username' , 'admin-memf')
-				.field('password' , '')
+				.post('/api/admin')
+				.send({
+						'username' : 'admin-memf',
+					    'password' : '123'
+					})
+				.end(function(err,res){
+					expect(err).to.be.null;
+					expect(res.status).to.be.equal(201);
+					done();
+				})
 		})
 	})
 
