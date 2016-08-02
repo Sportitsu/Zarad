@@ -11,6 +11,7 @@ var chai = require('chai')
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
 var User = require('../../server/User/userModel');
+var userController = require('../../server/User/userController');
 var request = supertest.agent(server);
 
 describe("Integration Server Database test", function (){
@@ -149,6 +150,8 @@ describe("Integration Server Database test", function (){
 			var newUser = new User({
 				'username' : 'mohammad',
 			    'password' : 'testing', 
+			    'club' : 'DesertForce',
+			    'country' : 'Jordan'
 			});
 			newUser.save(function(err,savedUser){
 				done();
@@ -189,7 +192,9 @@ describe("Integration Server Database test", function (){
 			    'password' : '123', 
 			    'firstName' : 'Iron' ,
 			    'lastName' : 'Man',
-			    'email' : 'ironman@avengers.com'
+			    'club' : 'Makhai',
+			    'email' : 'ironman@avengers.com', 
+			    'country' : 'Jordan'
 			})
 			newUser.save(function(error , newUser){
 				chai.request(server)
@@ -214,7 +219,64 @@ describe("Integration Server Database test", function (){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
+		});
+
+		describe('Signing up in User Controller' ,function(done){
+			it('should have a method called signUp', function(done){
+				expect(typeof userController.signup).to.be.equal('function');
+				done();
+			});
+
+			it('return 500 if username already exists', function(done){
+				chai.request(server)
+					.post('/api/user/signup')
+					.send({
+						'username' : 'mohammad',
+					    'password' : 'testing', 
+					    'club' : 'DesertForce',
+					    'country' : 'Jordan'
+					})
+					.end(function(req,res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			});
+
+			it('should signup a new user', function(done){
+				chai.request(server)
+					.post('/api/user/signup')
+					.send({
+						'username' : 'Fighter',
+						'password' : 'fighting',
+						'club' : 'sourceMMA',
+						'country' : 'Jordan'
+					})
+					.end(function(err, res){
+						expect(err).to.be.equal(null);
+						expect(res.body.country).to.be.equal('Jordan');
+						expect(res.body).to.have.property('username');
+						expect(res.body).to.have.property('password');
+						expect(res.body).to.have.property('country');
+						expect(res.body).to.have.property('club');
+						done();
+					})
+			})
+
+			it('should return 500 Error if you forgot to add required keys', function(done){
+				chai.request(server)
+					.post('/api/user/signup')
+					.send({
+						'username' : 'ahmad',
+						'password' : 'ahmad',
+						'club' : 'makhai'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			})
 		})
+
 
 		// TODO User Test Database
 	});
