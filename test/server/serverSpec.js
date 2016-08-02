@@ -1,16 +1,34 @@
-
 var expect = require ('chai').expect;
 var path = require('path')
-var express = require('express');
-var mongoose = require('mongoose');
-var app = express();
-var test = require(path.join(__dirname,'../../' ,'./server/server.js'));
+var supertest = require('supertest');
+var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
+var chai = require('chai')
+      , chaiHttp = require('chai-http');
 
-console.log(test);
+chai.use(chaiHttp);
+
+var request = supertest.agent(server);
 
 
-describe("Testing Server", function (){
-	it("should work", function (){
-		expect(true).to.be.true
+describe("Server", function (){
+
+	describe('/GET' , function(done){
+		it("should respond with status 200 OK when routing to /api/home ", function (done){
+			chai.request(server).get('/api/home').end(function(err,res){
+				expect(err).to.be.null;
+				expect(res.status).to.be.equal(200);
+				done();
+			})
+		});	
+	});
+
+	describe('/POST',  function(done){
+		it('should respond with status 201 OK on route /api/admin' , function(done){
+			chai.request(server)
+				.post('/api/home')
+				.field('username' , 'admin-memf')
+				.field('password' , '')
+		})
 	})
-})
+
+});
