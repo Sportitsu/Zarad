@@ -5,16 +5,17 @@ angular.module('zarad.admin',[])
 	$scope.club = {};
   $scope.tournament = {};
 
+  //add club function
   $scope.Addclub =function(){
     console.log($scope.club);
   	Admin.Addclub($scope.club)
-  	.then()
+  	//.then()
   }
-
+  //add tournament function
   $scope.Addtournament =function(){
     console.log($scope.tournament);
     Admin.Addtournament($scope.tournament)
-    .then()
-    
+    //.then()
+
   }
 })
