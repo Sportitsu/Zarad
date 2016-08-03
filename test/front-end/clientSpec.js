@@ -1,27 +1,39 @@
 
 'use strict';
 
-describe('Autherization factory',function(){
-	var Auth;
-	beforeEach(module('zarad')); //load the app module before each test , actully angular mock allow us to load our angular modules to test
-	beforeEach(inject(function(_Auth_){ // inject here is injecting a service
-		Auth=_Auth_;
-	}))
-	it('auth factory should exist',function(){
-		expect(Auth).toBeDefined();
+
+describe('AuthController',function(){
+	var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
+	beforeEach(module('zarad'))
+	beforeEach(inject(function($injector){
+		$rootScope=$injector.get('$rootScope');
+		$location=$injector.get('$location');
+		$window=$injector.get('$window');
+		Auth=$injector.get('Auth');
+		$scope=$rootScope.$new();
+		var $controller=$injector.get('$controller');
+		
+		createController = function () {
+			return $controller('AuthController', {
+				$scope: $scope,
+        		$window: $window,
+        		$location: $location,
+       			 Auth: Auth
+       			});
+		};
+		createController();
+
+	}));
+	it("should have a signin metheod",function(){
+		expect($scope.signin).to.be.a('function')
 	});
-
-	describe('.siginin', function(){
-
-		it('should exist', function(){
-			expect(Auth.siginin).toBeDefined();
-		});
-	});
-
-	describe('.siginup',function(){
-		it('should exist',function(){
-			expect(Auth.siginup).toBeDefined();
-		})
+	it('should store token in localStorage after signin',function(){
+		var token = 'sjj232hwjhr3urw90rof';
+    $httpBackend.expectPOST('/api/user/signin').respond({token: token});
+    $scope.signin();
+    $httpBackend.flush();
+    expect($window.localStorage.getItem('com.zarad')).to.equal(token);
 	})
+
 })
 

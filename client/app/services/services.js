@@ -6,18 +6,23 @@ angular.module('zarad.services', [])
       method: 'POST',
       data: user
     }
-    if(user[type]==="player"){
+
+    // this if statement to determain the type of user 
+    if(user['type']==="player"){
       ObjUser["url"]='/api/user/signin'
     }
-     if(user[type]==="admin"){
+     if(user['type']==="admin"){
       ObjUser["url"]=''
     }
-     if(user[type]==="club"){
+     if(user['type']==="club"){
+
       ObjUser["url"]=''
     }
    return $http(ObjUser)
     .then(function (resp) {
-      return resp.data.token;
+      return {token:resp.data.token,
+        path:resp.data.path
+      }
     });
   };
 
@@ -34,15 +39,18 @@ angular.module('zarad.services', [])
 
 
 .factory('Admin', function ($http, $location, $window) {
+  //send club information to server
   var Addclub=function(club){
+    console.log(club)
     return $http({
       method:'POST',
       data: club,
-      url:''
-
+      url:'/api/clubregister'
     })
 
   };
+   //send club information to tournament
+
   var Addtournament=function(tournament){
     return $http({
       method:'POST',
