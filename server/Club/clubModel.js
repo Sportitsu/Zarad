@@ -1,6 +1,4 @@
 var mongoose = require("mongoose");
-var Schema = mongoose.Schema;
-<<<<<<< HEAD
 var bluebird = require('bluebird');
 var SALT_WORK_FACTOR = 10;
 
@@ -40,7 +38,7 @@ clubSchema.pre('save', function (next) {
 
 var Club = mongoose.model('Club',clubSchema);
 
-User.comparePassword = function(candidatePassword, savedPassword, res, cb){
+Club.comparePassword = function(candidatePassword, savedPassword, res, cb){
   bcrypt.compare( candidatePassword, savedPassword, function(err, isMatch){
     if(err){
       res.status(500).send('Error');
