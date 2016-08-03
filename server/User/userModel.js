@@ -19,7 +19,8 @@ var userSchema = new Schema ({
 	beltColor: { type: String },
 	attendance : { type: Number },
 	achievements: Schema.Types.Mixed,
-  country : { type : String , required : true }
+  country : { type : String , required : true },
+  salt : { type : String}
 });
 
 userSchema.pre('save', function (next) {
