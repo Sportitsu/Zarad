@@ -150,8 +150,8 @@ module.exports= {
 
 	deleteUser : function(req, res){
 		var username = req.body.username;
-		User.findOne({username: username}).remove().exec(function(err,data){
-			console.log(data.result.n);
+		User.findOne({username: username}).remove().exec(
+			function(err,data){
 			if(data.result.n){
 				res.status(201).send('User Deleted');
 			} else {

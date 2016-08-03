@@ -283,13 +283,44 @@ describe("Integration Server Database test", function (){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
+		});
+
+		it('should respond with an error if club username is incorrect', function(done){
+			chai.request(server)
+				.post('/api/club/signin')
+				.send({
+					'username' : 'PeterPan',
+					'password' : 'really?'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should remove club when passed the right username', function(done){
+			chai.request(server)
+				.post('/api/club/delete')
+				.send({
+					'username' : 'fighterX'
+				})
+				.end(function(err, res){
+					findClub();
+					expect(res.status).to.be.equal(201);
+				})
+				var findClub = function(){
+					Club.findOne({username : 'fighterX'}).exec(function(err, user){
+						expect(user).to.be.equal(null);
+						done();
+					})
+				}
 		})
 	})
 
 
 
 
-	xdescribe('User Test Database', function(done){
+	describe('User Test Database', function(done){
 
 		User.collection.drop();
 
@@ -565,16 +596,21 @@ describe("Integration Server Database test", function (){
 						'password' : 'testing'
 					})
 					.end(function(err, res){
+						findUser(done);
 						expect(res.status).to.be.equal(201);
 					});
-
-				chai.request(server)
-					.get('/api/users')
-					.end(function(err, res){
-						expect(Object.keys(res.body).length).to.be.equal(0);
-						done();
+					var findUser = function(done) { 
+						User.findOne({username : 'mohammad'}).exec(function(err, user){
+							expect(user).to.be.equal(null);
+						})
+					}
+					chai.request(server)
+						.get('/api/users')
+						.end(function(err, res){
+							console.log(res.body);
+							expect(Object.keys(res.body).length).to.be.equal(0);
+							done();
 					})
-
 			})
 		});
 
