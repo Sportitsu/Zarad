@@ -7,7 +7,7 @@ module.exports= {
 		User.findOne({username: req.params.username})
 		.exec(function(error,user){
 			if(user){
-				
+
 				res.status(200).send(user);
 			}else{
 				res.status(500).send(error);
@@ -117,22 +117,14 @@ module.exports= {
 					user.attendance = req.body.attendance || user.attendance
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
-							if(found){
 								user.password = req.body.password;
-
 								user.save(function(err, savedUser){
-									if(savedUser){
-										res.status(201).send('Updated \n' + savedUser)
-									}
+									res.status(201).send('Updated \n' + savedUser)
 								})
-
-							}
 						})
 					}
 					user.save(function(err, savedUser){
-						if(savedUser){
-							res.status(201).send(savedUser)	
-						}
+						res.status(201).send(savedUser)	
 					});
 				}
 			})
