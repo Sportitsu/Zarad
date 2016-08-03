@@ -1,5 +1,6 @@
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
+var Club = require('../Club/clubModel.js');
 
 module.exports= {
 	// fetching a user based on the user name
@@ -84,6 +85,7 @@ module.exports= {
 			   	            achievements : req.body.achievements
 				        });
 			        
+
 				        newUser.save(function(err, newUser){
 				            if(err){
 				                res.status(500).send(err);
@@ -96,6 +98,22 @@ module.exports= {
 	    });
 
 	},
+
+
+	// Club.findOne({ clubName : req.body.club})
+	// 		        	.exec(function(err, foundClub){
+	// 		        		if(!foundClub){
+	// 		        			res.status(500).send('Club Not Found');
+	// 		        		} else {
+	// 					        newUser.save(function(err, newUser){
+	// 					            if(err){
+	// 					                res.status(500).send(err);
+	// 					            } else {
+	// 					                res.status(200).send(newUser);
+	// 					            };
+	// 					        });			        			
+	// 		        		}
+	// 		        	})
 
 	editProfile : function(req,res){
 		User.findOne({username  : req.body.username})
