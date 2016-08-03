@@ -27,8 +27,8 @@ describe('AuthController',function(){
 	it("should have a signin metheod",function(){
 		expect($scope.signin).to.be.a('function')
 	});
-	it('should store token in localStorage after signin',function(){
-		var token = 'sjj232hwjhr3urw90rof';
+	xit('should store token in localStorage after signin',function(){
+	var token = 'sjj232hwjhr3urw90rof';
     $httpBackend.expectPOST('/api/user/signin').respond({token: token});
     $scope.signin();
     $httpBackend.flush();
