@@ -16,6 +16,7 @@ module.exports = function(app,express){
 	// Admin Page Routes
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/create', adminController.addAdmin);
+	app.post('/api/admin/signin', adminController.signin);
 	// *************************** //	
 	
 
