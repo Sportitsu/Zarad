@@ -436,8 +436,6 @@ describe("Integration Server Database test", function (){
 	})
 
 
-
-
 	describe('User Test Database', function(done){
 
 		User.collection.drop();
