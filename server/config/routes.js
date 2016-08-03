@@ -23,9 +23,9 @@ module.exports = function(app,express){
 
 
 	// Club Page Routes
-	app.post('/api/clubregister',clubController.addClub);
-	app.get('/api/club/:username', clubController.getClub);
-	app.get('/api/clubs', clubController.getAllClubs);
+	app.post('/api/club/register',clubController.addClub);
+	app.get('/api/club/x/:username', clubController.getClub);
+	app.get('/api/clubs', clubController.getAllClubs); //Done testing
 
 
 
