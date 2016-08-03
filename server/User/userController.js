@@ -103,7 +103,7 @@ module.exports={
 	}, 
 
 	deleteUser : function(req, res){
-
+		
 	}, 
 
 
