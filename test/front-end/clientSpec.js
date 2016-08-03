@@ -26,11 +26,13 @@ describe('AuthController',function(){
 	it('should have a signup method',function(){
 		expect($scope.signup).to.be.a('function');
 	});
+
 	it('should store token in local stoarge',function(){
 		var token= 'sjj232hwjhr3urw90rof';
 		$httpBackend.expectPOST('/api/user/signup').respond({token : token});
 		$scope.signup();
 		$httpBackend.flush();
 		expect($window.localStorage.getItem('com.zarad')).to.equal(token)
-	})
-})
+	});
+
+});

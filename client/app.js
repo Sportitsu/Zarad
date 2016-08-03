@@ -1,18 +1,23 @@
+
 angular.module('zarad',[
-	'zarad.auth',
 	'zarad.services',
+	'zarad.admin',
+	'zarad.auth',
 	'ngRoute'
 ])
 .config(function ($routeProvider , $httpProvider) {
+
 	$routeProvider
 	.when('/signin', {
-		templateurl : 'client/app/auth/auth.js',
+
+		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
-	.when('/signup', {
-		templateurl : '',
-		controller : 'AuthController'
+	.when('/AdminHome',{
+		templateUrl :'app/Admin/AdminHome.html',
+		controller : 'AdminController'
 	})
+	
 
 	$httpProvider.interceptors.push('AttachTokens');
 })
