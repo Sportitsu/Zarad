@@ -156,7 +156,6 @@ describe("Integration Server Database test", function (){
 				'country'  : 'Jordan'
 			});
 			newClub.save(function(err, savedClub){
-				console.log(savedClub);
 				done();
 			})
 		});
@@ -171,6 +170,90 @@ describe("Integration Server Database test", function (){
 					expect(res.status).to.be.equal(200);
 					expect(Array.isArray(res.body)).to.be.equal(true);
 					expect(res.body.length).to.be.equal(1);
+					done();
+				})
+		});
+
+		it('should return error 500 when collection is empty', function(done){
+			Club.collection.drop();
+			chai.request(server)
+				.get('/api/clubs')
+				.end(function(err, res){
+					expect(res.body.length).to.be.equal(undefined);
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		})
+
+		it('should get a club upon passing username in params', function(done){
+			chai.request(server)
+				.get('/api/club/x/'+ 'fighterX')
+				.end(function(err, res){
+					expect(res.status).to.be.equal(200);
+					done();
+				})
+		});
+		
+		it('should return error 500 when passing wrong username', function(done){
+			chai.request(server)
+				.get('/api/club/x/dontEnter')
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should add club when passing all required keys', function(done){
+			chai.request(server)
+				.post('/api/club/register')
+				.send({
+					'username' : '103948', 
+					'password' : 'catchmeifyoucan',
+					'clubName' : 'Desert-Force', 
+					'country' : 'Jordan'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(201);
+					expect(res.body).to.have.property('username');
+					expect(res.body).to.have.property('clubName');
+					expect(res.body).to.have.property('country');
+					done();
+				});
+		})
+
+		it('should respond with error 500 when user exists', function(done){
+			var newClub = new Club({
+					'username' : 'fighteX',
+					'password' : 'iShouldNotWork',
+					'clubName' : 'BlaBla' ,
+					'country'  : 'Jordan'
+			})
+			newClub.save(function(err , savedClub){
+				chai.request(server)
+					.post('/api/club/register')
+					.send({
+						'username' : 'fighteX',
+						'password' : 'iShouldNotWork',
+						'clubName' : 'BlaBla' ,
+						'country'  : 'Jordan'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						expect(res.body.username).to.be.equal(undefined);
+						done();
+					})
+			})
+		});
+
+		it('should return error 500 if required keys are not supported', function(done){
+			chai.request(server)
+				.post('/api/club/register')
+				.send({
+					'username' : 'newClub',
+					'password' : 'hmmmm'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
 					done();
 				})
 		})
@@ -461,7 +544,7 @@ describe("Integration Server Database test", function (){
 				chai.request(server)
 					.get('/api/users')
 					.end(function(err, res){
-						console.log(res.body);
+						expect(Object.keys(res.body).length).to.be.equal(0);
 						done();
 					})
 
