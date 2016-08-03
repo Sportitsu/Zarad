@@ -47,5 +47,24 @@ module.exports ={
 				res.status(500).send("Club Already Exists");
 			}
 		})
+	},
+	// fetch all clubs
+	getAllClubs : function (req, res){
+		Club.findAll()
+		.exec(function (error,clubs) {
+			if(clubs.length === 0){
+				res.status(500).send("Empty Table");
+			}else{
+				var clubArray = [];
+				for (var i = 0; i < clubs.length; i++) {
+					var clubObj = {};
+					clubObj.username = clubs[i].username;
+					clubObj.country = clubs[i].country;
+					clubObj.clubName = clubs[i].clubName;
+					clubArray.push(clubObj);
+				}
+				res.status(200).send(clubArray);
+			}
+		})
 	}
 }
