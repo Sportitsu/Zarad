@@ -101,5 +101,38 @@ module.exports ={
 				res.status(500).send("Not Available");
 			}
 		})
+	},
+	// this function is to modify the information of a club
+	clubEdit : function (req,res) {
+		Club.findOne({ username : req.body.username })
+		.exec(function (error, club) {
+			if(!club){
+				res.status(500).send("Club Not Available");
+			}else{
+				club.country = req.body.country || club.country;
+				if(req.body.newClubName){
+					var clubName = req.body.newClubName;
+					Club.findOne({ clubName : clubName})
+					.exec(function (error,club) {
+						if(club){
+							res.status(500).send("Club Name Already Exists");
+						}else{
+							club.clubName = req.body.newClubName;
+						}
+					})
+				}
+				if(req.body.oldPassword){
+					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
+						club.password = req.body.password;
+						club.save(function(error,savedClub){
+							res.status(201).send('Updated/n'+savedClub);
+						})
+					})
+				}
+				club.save(function (error, savedClub) {
+					res.status(201).send(savedClub);
+				})
+			}
+		})
 	}
 }
