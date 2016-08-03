@@ -1,5 +1,4 @@
 
-
 angular.module('zarad',[
 	'zarad.services',
 	'zarad.auth',
@@ -9,11 +8,11 @@ angular.module('zarad',[
 
 	$routeProvider
 	.when('/signin', {
+
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
 	
-
 
 	$httpProvider.interceptors.push('AttachTokens');
 })

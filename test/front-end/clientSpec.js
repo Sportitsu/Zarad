@@ -1,7 +1,8 @@
 'use strict';
 
+
 describe('AuthController',function(){
-<<<<<<< HEAD
+
 	//var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
 	var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
 	beforeEach(module('zarad'));
@@ -9,7 +10,7 @@ describe('AuthController',function(){
         console.log($injector.get);
 		// mock out our dependencies
 	    $rootScope = $injector.get('$rootScope');
-	    //console.log("asaadsdsddsd",$rootScope)
+	    
 	    $location = $injector.get('$location');
 	    $window = $injector.get('$window');
 	    $httpBackend = $injector.get('$httpBackend');
@@ -39,39 +40,33 @@ describe('AuthController',function(){
   });
 
 })
-=======
-	var $scope, $location , $window , $httpBackend , $rootScope , createController , Auth ;
 
-	beforeEach(module('zarad'));
-	beforeEach(inject(function($injector) {
-		
-		$rootScope = $injector.get('$rootScope');
-		$location= $injector.get('$location');
-		$window = $injector.get('$window');
-		$httpBackend = $injector.get('$httpBackend');
-		Auth= $injector.get('Auth');
-		$scope= $rootScope.$new();
+describe('Autherization factory',function(){
+	var Auth;
+	beforeEach(module('zarad')); //load the app module before each test , actully angular mock allow us to load our angular modules to test
+	beforeEach(inject(function(_Auth_){ // inject here is injecting a service
+		console.log(_Auth_)
+		Auth=_Auth_;
+	}))
 
-		var $controller= $injector.get('$controller');
-
-		createController = function(){
-			return $controller('AuthController',{
-				$scope: $scope,
-				$window : $window,
-				$location : $location,
-				Auth: Auth
-			});
-		};
-		createController();
-	}));
-
-	afterEach(function(){
-		$httpBackend.verifyNoOutstandingExpectation();
-		$httpBackend.verifyNoOutstandingRequest();
-		//$window.localSorage.removeItem('com.zarad');
+	it('auth factory should exist',function(){
+		expect(Auth).toBeDefined();
 	});
-	it('should have a signup method',function(){
-		expect($scope.signup).to.be.a('function');
+
+	describe('.siginin', function(){
+
+		it('should exist', function(){
+			expect(Auth.siginin).toBeDefined();
+		});
 	});
+	describe('.siginup',function(){
+		it('should exist',function(){
+			expect(Auth.siginup).toBeDefined();
+		})
+	})
+
 });
->>>>>>> ce19a72ca44eb375feb47de79e87cf9d8307eba9
+
+	
+
+
