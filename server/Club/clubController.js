@@ -68,21 +68,20 @@ module.exports ={
 		})
 	},
 	// club sign in
-	singin : function (req,res) {
+	signin : function (req,res) {
 		var username = req.body.username;
-		var password = req.boddy.password;
+		var password = req.body.password;
 
 		Club.findOne({ username: username})
 		.exec(function (error,club) {
 			if(!club){
 				res.status(500).send(new Error('User does not exist'));
 			}else{
-<<<<<<< HEAD
-				Club.comparePassword(password,user.password, res, function(found){
+				Club.comparePassword(password,club.password, res, function(found){
         		        if(!found){
        				       res.status(500).send('Wrong Password');
       			        } else {
-     			            var token = jwt.encode(user, 'secret');
+     			            var token = jwt.encode(club, 'secret');
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
                         }
@@ -114,8 +113,8 @@ module.exports ={
 				if(req.body.newClubName){
 					var clubName = req.body.newClubName;
 					Club.findOne({ clubName : clubName})
-					.exec(function (error,club) {
-						if(club){
+					.exec(function (error,clubTwo) {
+						if(clubTwo){
 							res.status(500).send("Club Name Already Exists");
 						}else{
 							club.clubName = req.body.newClubName;
@@ -123,19 +122,22 @@ module.exports ={
 					})
 				}
 				if(req.body.oldPassword){
+					console.log(req.body.oldPassword);
+					console.log(club.password);
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
-						club.password = req.body.password;
-						club.save(function(error,savedClub){
-							res.status(201).send('Updated/n'+savedClub);
-						})
+						if(found){
+							club.password = req.body.password;
+							club.save(function(error,savedClub){
+								res.status(201).send('Updated/n'+savedClub);
+							})
+						} else {
+							res.status(500).send('Wrong Entry');
+						}
 					})
 				}
 				club.save(function (error, savedClub) {
 					res.status(201).send(savedClub);
 				})
-=======
-				club
->>>>>>> 8a675b45ba283570606e49e9bd6bef32483b5a2a
 			}
 		})
 	}

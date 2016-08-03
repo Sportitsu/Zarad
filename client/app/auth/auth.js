@@ -1,10 +1,14 @@
 angular.module('zarad.auth',[])
 
-.controller('AuthController',function($scope, $window, $location,Auth){
-
-	$scope.user = {};
-
-  $scope.signin =function(){
+.controller('AuthController',function($scope , $window , Auth){
+	$scope.user={};
+	$scope.signup=function(){
+		Auth.signup().then(function(resp){
+			$window.localStorage.setItem('com.zarad',resp.token)
+		})
+	}
+  
+	$scope.signin =function(){
   	Auth.signin($scope.user)
   	.then(function(data){
   		$location.path(data.path);
@@ -12,7 +16,4 @@ angular.module('zarad.auth',[])
   		console.error(error);
   	})
   }
-})
-
-
-
+});
