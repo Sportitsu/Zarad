@@ -4,28 +4,32 @@
 <button>Add tournament</button>
 
 
-
-
-<h>AddClub</h>
 <div id='Addclub'>
   <h1>AddClub</h1>
-  <form name="Addclub" ng-submit='Addclub()'>
-    <input type='text' ng-model='club.username'>
-    <input type="password" ng-model='club.password'>
-    <button>Add club</button>
-    
+  <form name="Add club" ng-submit='Addclub()'>
+    <label>Club Name</label>
+    <input type='text' ng-model='club.Name'></br>
+    <label>Club Username</label>
+    <input type='text' ng-model='club.username'></br>
+    <label>Club password</label>
+    <input type="password" ng-model='club.password'></br>
+    <button>Addclub</button>
+
   </form>
   
 </div>
 
 
-<h>Addtournament</h>
-<div id='Add tournament'>
+
+
+<div id='Add-tournament'>
+
   <h1>Add tournament</h1>
   <form name="Add tournament" ng-submit='Addtournament()'>
     <input type='text' ng-model='tournament.id'>
     <input type="text" ng-model='tournament.password'>
     <button>Addtournament</button>
+
     
   </form>
   
