@@ -1,3 +1,4 @@
+
 angular.module('zarad.services', [])
 .factory('Auth', function ($http, $location, $window) {
   var signin = function (user) {
@@ -22,3 +23,4 @@ angular.module('zarad.services', [])
     
   };
 });
+

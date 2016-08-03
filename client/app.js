@@ -1,4 +1,5 @@
 
+
 angular.module('zarad',[
 	'zarad.services',
 	'zarad.auth',
@@ -12,6 +13,7 @@ angular.module('zarad',[
 		controller : 'AuthController'
 	})
 	
+
 
 	$httpProvider.interceptors.push('AttachTokens');
 })

@@ -4,11 +4,11 @@ var Schema = mongoose.Schema ;
 
 // Admin table is here.
 var adminSchema = new Schema ({
-	username : {type: String, require : true},
-	password : {type: String, require : true},
-	firstName : {type: String, require : true},
-	lastName : {type: String, require : true},
-	email : {type: String, require : true}
+	username : {type: String, required : true, index : { unique : true }},
+	password : {type: String, required : true},
+	firstName : {type: String, required : true},
+	lastName : {type: String, required : true},
+	email : {type: String, required : true}
 });
 
 var Admin = mongoose.model('Admin', adminSchema);
