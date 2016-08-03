@@ -277,7 +277,11 @@ describe("Integration Server Database test", function (){
 				.post('/api/club/signin')
 				.send({
 					'username' : 'fighterX' , 
-					'password' : 'BlaBla'
+					'password' : 'BlaBla' 
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
 				})
 		})
 	})
