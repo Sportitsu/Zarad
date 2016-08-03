@@ -11,7 +11,9 @@ var chai = require('chai')
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
 var User = require('../../server/User/userModel');
+var Club = require('../../server/Club/clubModel');
 var userController = require('../../server/User/userController');
+var clubController = require('../../server/Club/clubController');
 var jwt = require('jwt-simple');
 var request = supertest.agent(server);
 
@@ -143,7 +145,41 @@ describe("Integration Server Database test", function (){
 				})
 		})
 	});
-	describe('User Test Database', function(done){
+
+	describe('Club Test Database', function(done){
+		Club.collection.drop();
+		beforeEach(function(done){
+			var newClub = new Club({
+				'username' : 'fighterX' , 
+				'password' : '1234' , 
+				'clubName' : 'Fight-X',
+				'country'  : 'Jordan'
+			});
+			newClub.save(function(err, savedClub){
+				console.log(savedClub);
+				done();
+			})
+		});
+		afterEach(function(done){
+			Club.collection.drop();
+			done();
+		})
+		it('should get all clubs' , function(done){
+			chai.request(server)
+				.get('/api/clubs')
+				.end(function(err , res){
+					expect(res.status).to.be.equal(200);
+					expect(Array.isArray(res.body)).to.be.equal(true);
+					expect(res.body.length).to.be.equal(1);
+					done();
+				})
+		})
+	})
+
+
+
+
+	xdescribe('User Test Database', function(done){
 
 		User.collection.drop();
 
