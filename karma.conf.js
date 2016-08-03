@@ -19,6 +19,7 @@ module.exports = function(config) {
       'client/lib/angular-mocks/angular-mocks.js',
       'client/lib/angular-route/angular-route.js',
       'client/app.js',
+      'client/app/**/*.js',
       'client/app/auth/auth.js',
       'client/app/services/services.js',
       'test/front-end/clientSpec.js'
