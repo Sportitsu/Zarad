@@ -77,6 +77,7 @@ module.exports ={
 			if(!club){
 				res.status(500).send(new Error('User does not exist'));
 			}else{
+<<<<<<< HEAD
 				Club.comparePassword(password,user.password, res, function(found){
         		        if(!found){
        				       res.status(500).send('Wrong Password');
@@ -132,6 +133,9 @@ module.exports ={
 				club.save(function (error, savedClub) {
 					res.status(201).send(savedClub);
 				})
+=======
+				club
+>>>>>>> 8a675b45ba283570606e49e9bd6bef32483b5a2a
 			}
 		})
 	}

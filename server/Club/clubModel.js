@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
+<<<<<<< HEAD
 var bluebird = require('bluebird');
 var SALT_WORK_FACTOR = 10;
 
@@ -49,5 +50,7 @@ User.comparePassword = function(candidatePassword, savedPassword, res, cb){
   });
 };
 
+
+var Club = mongoose.model('Club',clubSchema);
 
 module.exports = Club;
