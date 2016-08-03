@@ -8,7 +8,7 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
-    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' -x 'server.js' node_modules/.bin/_mocha -- -R spec ./test/server/*.js",
+    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' -x 'server.js' -x 'middleware.js' -x 'clubModel.js'  node_modules/.bin/_mocha -- -R spec ./test/server/*.js",
     "karma" : "karma start karma.conf.js",
     "cover" : "istanbul cover test/front-end/*.js"
   },

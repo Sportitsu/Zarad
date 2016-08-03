@@ -1,15 +1,16 @@
 var mongoose = require("mongoose");
 var bluebird = require('bluebird');
+var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10;
 
 var Schema = mongoose.Schema;
 
 //Club Table is here 
 var clubSchema = new Schema ({
-	username : {type : String, required : true, index : {unique : true}},
-	password : {type : String, required : true},
-	country  : {type : String},
-	clubName : {type : String, index : {unique : true}}
+	username : {type : String, required : true, index : {unique : true} },
+	password : {type : String, required : true },
+	country  : {type : String, required : true },
+	clubName : {type : String, required : true, index : { unique : true } },
 });
 
 clubSchema.pre('save', function (next) {
