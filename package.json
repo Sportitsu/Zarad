@@ -8,9 +8,9 @@
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
   "scripts": {
-    "karma": "karma start karma.conf.js",
-    "cover" : "istanbul cover test/front-end/*.js",
-    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' -x 'server.js' node_modules/.bin/_mocha -- -R spec ./test/server/*.js"
+    "test": "istanbul cover -x '*Spec.js' -x 'helpers.js' -x 'userModel.js' -x 'server.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js",
+    "karma" : "karma start karma.conf.js",
+    "cover" : "istanbul cover test/**/*.js"
   },
   "respository": {
     "type": "git",
@@ -22,6 +22,7 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "istanbul": "^0.4.4",
+    "jasmine-core": "^2.4.1",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
     "karma-coverage": "^1.1.1",
