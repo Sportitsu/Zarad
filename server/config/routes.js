@@ -27,7 +27,8 @@ module.exports = function(app,express){
 
 
 	// User Page Routes
-	app.get('/api/user/signedin', userController.checkAuth);
+	app.post('/api/user/delete', userController.deleteUser);
+	app.post('/api/user/editProfile', userController.editProfile);
 	app.get('/api/user/:username', userController.getUser);
 	app.get('/api/users', userController.getAllUsers);
 	app.post('/api/user/signin' , userController.signin);
