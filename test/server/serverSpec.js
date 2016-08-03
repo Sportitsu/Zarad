@@ -56,7 +56,7 @@ describe("Integration Server Database test", function (){
 			    'email' : 'ironman@avengers.com'
 			});
 			testAdmin.save(function(error,data){	
-				 request.get('/api/admin/'+ data.username)
+				 request.get('/api/admin/x/'+ data.username)
 						.set('Accept','application/json')
 						.expect(200)
 						.end(function(err, res){
@@ -84,7 +84,7 @@ describe("Integration Server Database test", function (){
 			    'lastName' : 'Man',
 			    'email' : 'ironman@avengers.com'
 			});
-			request.get('/api/admin/dont' )
+			request.get('/api/admin/x/dont' )
 				   .set('Accept' , 'application/json')
 				   .expect(500)
 				   .end(function(err,res){
@@ -95,7 +95,7 @@ describe("Integration Server Database test", function (){
 
 		it('should add admin with response 201 OK' , function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 						'username' : 'RebootKamp',
 					    'password' : '123', 
@@ -116,7 +116,7 @@ describe("Integration Server Database test", function (){
 
 		it('should fail when missing username key' , function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 					'password' : 'test' ,
 					'email' : 'blaBla'
@@ -129,7 +129,7 @@ describe("Integration Server Database test", function (){
 
 		it('should fail when creating an existing admin', function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 					'username' : 'admin-memf',
 				    'password' : '123', 
@@ -199,7 +199,7 @@ describe("Integration Server Database test", function (){
 			})
 			newUser.save(function(error , newUser){
 				chai.request(server)
-					.get('/api/user/'+ newUser.username)
+					.get('/api/user/x/'+ newUser.username)
 					.end(function(err, res){
 						expect(res.status).to.be.equal(200);
 						expect(res.body.username).to.be.equal('super');
@@ -215,7 +215,7 @@ describe("Integration Server Database test", function (){
 
 		it('should respond with status 500 Error if user is not available', function(done){
 			chai.request(server)
-				.get('/api/user/dontenter')
+				.get('/api/user/x/dontenter')
 				.end(function(err,res){
 					expect(res.status).to.be.equal(500);
 					done();
