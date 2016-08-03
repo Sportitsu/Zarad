@@ -16,16 +16,19 @@ module.exports = function(app,express){
 	// Admin Page Routes
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/create', adminController.addAdmin);
-	// app.post('/api/createclub', clubController.addClub);???
+	app.post('/api/admin/signin', adminController.signin);
 	// *************************** //	
 	
 
 
 
 	// Club Page Routes
-	app.post('/api/clubregister',clubController.addClub);
-	app.get('/api/club/:username', clubController.getClub);
+	app.post('/api/club/register',clubController.addClub);
+	app.get('/api/club/x/:username', clubController.getClub);
 	app.get('/api/clubs', clubController.getAllClubs);
+	app.post('/api/club/delete', clubController.clubRemove);
+	app.post('/api/club/editProfile', clubController.clubEdit);
+	app.post('/api/club/signin', clubController.signin);
 
 
 

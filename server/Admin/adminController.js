@@ -55,5 +55,26 @@ module.exports = {
         res.send(500,'Admin Already Exists');
       }
     })
+  },
+  // Admin sign in function 
+  signin : function (req,res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    Admin.findOne({ username : username })
+    .exec(function (error,admin) {
+      if(!admin){
+        res.status(500).send(new Error('Admin Not Found'));
+      }else{
+        Admin.comparePassword(password,user.password, res, function(found){
+          if(!found){
+            res.status(500).send('Wrong Password');
+          } else {
+            var token = jwt.encode(user, 'secret');
+            res.setHeader('x-access-token',token);
+            res.json({token: token});
+          }
+        });
+      }
+    })
   }
 }

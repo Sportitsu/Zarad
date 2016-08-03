@@ -1,6 +1,7 @@
 
 'use strict';
 
+
 describe('AuthController',function(){
 	var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
 	beforeEach(module('zarad'))
@@ -28,7 +29,7 @@ describe('AuthController',function(){
 	});
 	it('should store token in localStorage after signin',function(){
 		var token = 'sjj232hwjhr3urw90rof';
-    $httpBackend.expectPOST('/api/user/signin'||).respond({token: token});
+    $httpBackend.expectPOST('/api/user/signin').respond({token: token});
     $scope.signin();
     $httpBackend.flush();
     expect($window.localStorage.getItem('com.zarad')).to.equal(token);

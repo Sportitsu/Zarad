@@ -4,6 +4,7 @@ angular.module('zarad.admin',[])
 
 	$scope.club = {};
   $scope.tournament = {};
+
   //add club function
   $scope.Addclub =function(){
     console.log($scope.club);
@@ -15,6 +16,6 @@ angular.module('zarad.admin',[])
     console.log($scope.tournament);
     Admin.Addtournament($scope.tournament)
     //.then()
-    
+
   }
 })
