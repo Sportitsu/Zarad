@@ -77,7 +77,15 @@ module.exports ={
 			if(!club){
 				res.status(500).send(new Error('User does not exist'));
 			}else{
-				club
+				Club.comparePassword(password,user.password, res, function(found){
+        		        if(!found){
+       				       res.status(500).send('Wrong Password');
+      			        } else {
+     			            var token = jwt.encode(user, 'secret');
+         			        res.setHeader('x-access-token',token);
+                            res.json({token: token});
+                        }
+                });
 			}
 		})
 	}
