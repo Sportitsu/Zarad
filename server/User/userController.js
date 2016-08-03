@@ -1,12 +1,13 @@
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 
-module.exports={
+module.exports= {
 	// fetching a user based on the user name
 	getUser: function(req,res){
 		User.findOne({username: req.params.username})
 		.exec(function(error,user){
 			if(user){
+				
 				res.status(200).send(user);
 			}else{
 				res.status(500).send(error);
@@ -39,7 +40,6 @@ module.exports={
 			}
 		});
 	},
-
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
@@ -60,7 +60,6 @@ module.exports={
                 }
             });
 	},
-
 	signup : function(req, res){
 		var username = req.body.username;
 			User.findOne({username: username})
@@ -119,7 +118,7 @@ module.exports={
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
 							if(found){
-								user.password = req.body.password || user.password;
+								user.password = req.body.password;
 
 								user.save(function(err, savedUser){
 									if(savedUser){
