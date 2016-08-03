@@ -12,6 +12,7 @@ chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
 var User = require('../../server/User/userModel');
 var userController = require('../../server/User/userController');
+var jwt = require('jwt-simple');
 var request = supertest.agent(server);
 
 describe("Integration Server Database test", function (){
@@ -55,7 +56,7 @@ describe("Integration Server Database test", function (){
 			    'email' : 'ironman@avengers.com'
 			});
 			testAdmin.save(function(error,data){	
-				 request.get('/api/admin/'+ data.username)
+				 request.get('/api/admin/x/'+ data.username)
 						.set('Accept','application/json')
 						.expect(200)
 						.end(function(err, res){
@@ -83,7 +84,7 @@ describe("Integration Server Database test", function (){
 			    'lastName' : 'Man',
 			    'email' : 'ironman@avengers.com'
 			});
-			request.get('/api/admin/dont' )
+			request.get('/api/admin/x/dont' )
 				   .set('Accept' , 'application/json')
 				   .expect(500)
 				   .end(function(err,res){
@@ -94,7 +95,7 @@ describe("Integration Server Database test", function (){
 
 		it('should add admin with response 201 OK' , function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 						'username' : 'RebootKamp',
 					    'password' : '123', 
@@ -115,7 +116,7 @@ describe("Integration Server Database test", function (){
 
 		it('should fail when missing username key' , function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 					'password' : 'test' ,
 					'email' : 'blaBla'
@@ -128,7 +129,7 @@ describe("Integration Server Database test", function (){
 
 		it('should fail when creating an existing admin', function(done){
 			chai.request(server)
-				.post('/api/admincreate')
+				.post('/api/admin/create')
 				.send({
 					'username' : 'admin-memf',
 				    'password' : '123', 
@@ -198,7 +199,7 @@ describe("Integration Server Database test", function (){
 			})
 			newUser.save(function(error , newUser){
 				chai.request(server)
-					.get('/api/user/'+ newUser.username)
+					.get('/api/user/x/'+ newUser.username)
 					.end(function(err, res){
 						expect(res.status).to.be.equal(200);
 						expect(res.body.username).to.be.equal('super');
@@ -214,7 +215,7 @@ describe("Integration Server Database test", function (){
 
 		it('should respond with status 500 Error if user is not available', function(done){
 			chai.request(server)
-				.get('/api/user/dontenter')
+				.get('/api/user/x/dontenter')
 				.end(function(err,res){
 					expect(res.status).to.be.equal(500);
 					done();
@@ -323,29 +324,113 @@ describe("Integration Server Database test", function (){
 						done();
 					})
 			})
-
+			
 		})
 
-		describe('Checking Authentication in user Controller', function(done){
-			it('should have a method called checkAuth' , function(done){
-				expect(typeof userController.checkAuth).to.be.equal('function');
+
+		describe('Editing User Profile' , function(done){
+			it('should have a method called editProfile', function(done){
+				expect(typeof userController.editProfile).to.be.equal('function');
 				done();
 			});
 
-			it('should respond with status 500 ERROR if token is not available in headers', function(done){
+			it('should return error if user is not found' , function(done){
 				chai.request(server)
-					.post('/api/user/signin')
+					.post('/api/user/editProfile')
 					.send({
-						'username' : 'mohammadsdf' ,
+						'username' : 'nothere',
+						'password' : 'wrong' ,
+						'club' : 'newClub'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			});
+
+			it('should update user with new attributes', function(done){
+				chai.request(server)
+					.post('/api/user/editProfile')
+					.send({
+						'username' : 'mohammad' ,
+						'club' : 'UaeJJF'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(201);
+						expect(res.body.club).to.be.equal('UaeJJF');
+						expect(res.body.country).to.be.equal('Jordan');
+						done();
+					})
+			});
+
+			it('should change password if oldPassword is passed in the body', function(done){
+				chai.request(server)	
+					.post('/api/user/editProfile')
+					.send({
+						'username' : 'mohammad' ,
+						'oldPassword' : 'testing' ,
+						'password'  : 'passing'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(201);
+						done();
+					})
+			});
+
+			it('should return 500 ERROR if old Password is incorrect', function(done){
+				chai.request(server)
+					.post('/api/user/editProfile')
+					.send({
+						'username' : 'mohamamd', 
+						'oldPassword' : 'blabla', 
 						'password' : 'testing'
 					})
-					.end(function(err, response){
-						expect(response.header['x-access.token']).to.be.equal(undefined);
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			})
+		});
+
+		describe('Delete User' , function(done){
+			it('should have a method called deleteUser', function(done){
+				expect(typeof userController.deleteUser).to.be.equal('function');
+				done();
+			})
+
+			it('should return with an error if username is not available', function(done){
+				chai.request(server)
+					.post('/api/user/delete')
+					.send({
+						'username' : 'notMe',
+						'Password' : 'wrong'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
 						done();
 					})
 			})
 
-		})
+			it('should delete user when given the an available username', function(done){
+				chai.request(server)
+					.post('/api/user/delete')
+					.send({
+						'username' : 'mohammad' ,
+						'password' : 'testing'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(201);
+					});
+
+				chai.request(server)
+					.get('/api/users')
+					.end(function(err, res){
+						console.log(res.body);
+						done();
+					})
+
+			})
+		});
 
 
 		// TODO User Test Database

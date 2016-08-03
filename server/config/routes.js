@@ -2,6 +2,7 @@
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
+var clubController = require('../Club/clubController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
@@ -12,23 +13,26 @@ module.exports = function(app,express){
 	// Just for testing mocha
 
 
-
 	// Admin Page Routes
-	app.get('/api/admin/:username' ,adminController.getAdmin);
-	app.post('/api/admincreate', adminController.addAdmin);
+	app.get('/api/admin/x/:username' ,adminController.getAdmin);
+	app.post('/api/admin/create', adminController.addAdmin);
+	// app.post('/api/createclub', clubController.addClub);???
 	// *************************** //	
 	
 
-	
 
 
 	// Club Page Routes
+	app.post('/api/clubregister',clubController.addClub);
+	app.get('/api/club/:username', clubController.getClub);
+	app.get('/api/clubs', clubController.getAllClubs);
 
 
 
 	// User Page Routes
-	app.get('/api/user/signedin', userController.checkAuth);
-	app.get('/api/user/:username', userController.getUser);
+    app.post('/api/user/delete', userController.deleteUser); // 
+	app.post('/api/user/editProfile', userController.editProfile);
+	app.get('/api/user/x/:username', userController.getUser);
 	app.get('/api/users', userController.getAllUsers);
 	app.post('/api/user/signin' , userController.signin);
 	app.post('/api/user/signup', userController.signup);
