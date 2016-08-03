@@ -113,8 +113,8 @@ module.exports ={
 				if(req.body.newClubName){
 					var clubName = req.body.newClubName;
 					Club.findOne({ clubName : clubName})
-					.exec(function (error,club) {
-						if(club){
+					.exec(function (error,clubTwo) {
+						if(clubTwo){
 							res.status(500).send("Club Name Already Exists");
 						}else{
 							club.clubName = req.body.newClubName;
@@ -122,11 +122,17 @@ module.exports ={
 					})
 				}
 				if(req.body.oldPassword){
+					console.log(req.body.oldPassword);
+					console.log(club.password);
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
-						club.password = req.body.password;
-						club.save(function(error,savedClub){
-							res.status(201).send('Updated/n'+savedClub);
-						})
+						if(found){
+							club.password = req.body.password;
+							club.save(function(error,savedClub){
+								res.status(201).send('Updated/n'+savedClub);
+							})
+						} else {
+							res.status(500).send('Wrong Entry');
+						}
 					})
 				}
 				club.save(function (error, savedClub) {
