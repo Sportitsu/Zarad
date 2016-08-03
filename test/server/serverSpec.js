@@ -45,10 +45,12 @@ describe("Integration Server Database test", function (){
 				done();
 			})
 		});
+
 		afterEach(function(done){
 		    Admin.collection.drop();
 			done();
 		});
+
 		it('should be an object with keys and values', function(done){
 			var testAdmin = new Admin({
 				'username' : 'super',
@@ -159,6 +161,7 @@ describe("Integration Server Database test", function (){
 				done();
 			})
 		});
+
 		afterEach(function(done){
 			Club.collection.drop();
 			done();
@@ -452,10 +455,14 @@ describe("Integration Server Database test", function (){
 
 			})
 		});
+
+
 		afterEach(function(done){
 		    User.collection.drop();
 			done();
 		});
+
+		
 
 		it('should get all users in database', function(done){
 			chai.request(server)
