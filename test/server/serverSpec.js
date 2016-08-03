@@ -315,12 +315,54 @@ describe("Integration Server Database test", function (){
 					})
 				}
 		})
+
+		it('should handle errors when pasing wrong username', function(done){
+			chai.request(server)
+				.post('/api/club/delete')
+				.send({
+					'username' : 'catchMe'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should handle errors when passing wrong Club to edit', function(done){
+			chai.request(server)
+				.post('/api/club/editProfile')
+				.send({
+					'username' : 'MaElak',
+					'country' : 'Amman' ,
+					'clubName' : 'SourceMMA'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should edit Club when passing right username and keys', function(done){
+			chai.request(server)
+				.post('/api/club/editProfile')
+				.send({
+					'username' : 'fighterX', 
+					'country' : 'Amman'
+				})
+				.end(function(err, res){
+					console.log(res.body);
+					expect(res.status).to.be.equal(201);
+					expect(res.body).to.have.property('country');
+					expect(res.body).to.have.property('clubName');
+					done();
+				})
+		})
 	})
 
 
 
 
-	describe('User Test Database', function(done){
+	xdescribe('User Test Database', function(done){
 
 		User.collection.drop();
 
@@ -607,18 +649,11 @@ describe("Integration Server Database test", function (){
 					chai.request(server)
 						.get('/api/users')
 						.end(function(err, res){
-							console.log(res.body);
 							expect(Object.keys(res.body).length).to.be.equal(0);
 							done();
 					})
 			})
 		});
-
-
-		// TODO User Test Database
-	});
-	describe('Club Test Database', function(done){
-		// TODO ClubTestDatabase 
 	});
 	describe('Tournaments DataBase', function(done){
 		// TODO Tournaments Database
