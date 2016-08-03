@@ -12,7 +12,7 @@ angular.module('zarad',[
 	.when('/signup', {
 		templateurl : '',
 		controller : 'AuthController'
-	});
+	})
 
 	$httpProvider.interceptors.push('AttachTokens');
 })

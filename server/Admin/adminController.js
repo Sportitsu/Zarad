@@ -6,9 +6,7 @@ module.exports = {
 	getAdmin : function (req, res){
 		Admin.findOne({username:req.params.username})
 		.exec(function (error,admin) {
-			if(error){
-				console.error(error);
-			}else{
+			if(admin){
 				var returnAdmin = new Admin ({
 					username : admin.username,
 					email : admin.email,
@@ -16,7 +14,11 @@ module.exports = {
 					lastName : admin.lastName
 				})
 				res.status(200).send(returnAdmin);
-			}
+
+			} else {
+        res.status(500).send('InCorrect');
+      }
+
 		})
 	},
 	//Add new admin 
@@ -26,9 +28,8 @@ module.exports = {
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
-      if(error){
-        res.status(500).send(error);
-      } else if(!admin){
+
+       if(!admin){
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
