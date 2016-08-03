@@ -78,11 +78,11 @@ module.exports ={
 				res.status(500).send(new Error('User does not exist'));
 			}else{
 <<<<<<< HEAD
-				Club.comparePassword(password,user.password, res, function(found){
+				Club.comparePassword(password,club.password, res, function(found){
         		        if(!found){
        				       res.status(500).send('Wrong Password');
       			        } else {
-     			            var token = jwt.encode(user, 'secret');
+     			            var token = jwt.encode(club, 'secret');
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
                         }
