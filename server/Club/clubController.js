@@ -88,5 +88,18 @@ module.exports ={
                 });
 			}
 		})
+	},
+
+	// this function is to remove a club
+	clubRemove :  function (req, res){
+		var username = req.body.username;
+		Club.findOne({ username : username }).remove()
+		.exec(function (error,data) {
+			if(data.result.n){
+				res.status(201).send("Club Deleted");
+			}else{
+				res.status(500).send("Not Available");
+			}
+		})
 	}
 }
