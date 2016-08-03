@@ -23,6 +23,7 @@ describe('AuthController',function(){
 		};
 		createController();
 	}))
+
 	it('should have a signup method',function(){
 		expect($scope.signup).to.be.a('function');
 	});
@@ -34,5 +35,16 @@ describe('AuthController',function(){
 		$httpBackend.flush();
 		expect($window.localStorage.getItem('com.zarad')).to.equal(token)
 	});
+
+	it("should have a signin metheod",function(){
+		expect($scope.signin).to.be.a('function')
+	});
+	it('should store token in localStorage after signin',function(){
+		var token = 'sjj232hwjhr3urw90rof';
+	    $httpBackend.expectPOST('/api/user/signin').respond({token: token});
+	    $scope.signin();
+	    $httpBackend.flush();
+	    expect($window.localStorage.getItem('com.zarad')).to.equal(token);
+	})
 
 });
