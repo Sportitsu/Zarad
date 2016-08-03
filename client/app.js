@@ -1,6 +1,7 @@
 
 angular.module('zarad',[
 	'zarad.services',
+	'zarad.admin',
 	'zarad.auth',
 	'ngRoute'
 ])
@@ -11,6 +12,10 @@ angular.module('zarad',[
 
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
+	})
+	.when('/AdminHome',{
+		templateUrl :'app/Admin/AdminHome.html',
+		controller : 'AdminController'
 	})
 	
 
