@@ -50,7 +50,7 @@ module.exports ={
 	},
 	// fetch all clubs
 	getAllClubs : function (req, res){
-		Club.findAll()
+		Club.find({})
 		.exec(function (error,clubs) {
 			if(clubs.length === 0){
 				res.status(500).send("Empty Table");
