@@ -14,8 +14,9 @@ module.exports = function(app,express){
 
 
 	// Admin Page Routes
-	app.get('/api/admin/:username' ,adminController.getAdmin);
-	app.post('/api/admincreate', adminController.addAdmin);
+	app.get('/api/admin/x/:username' ,adminController.getAdmin);
+	app.post('/api/admin/create', adminController.addAdmin);
+	// app.post('/api/createclub', clubController.addClub);???
 	// *************************** //	
 	
 
@@ -27,9 +28,9 @@ module.exports = function(app,express){
 
 
 	// User Page Routes
-	app.post('/api/user/delete', userController.deleteUser);
+    app.post('/api/user/delete', userController.deleteUser); // 
 	app.post('/api/user/editProfile', userController.editProfile);
-	app.get('/api/user/:username', userController.getUser);
+	app.get('/api/user/x/:username', userController.getUser);
 	app.get('/api/users', userController.getAllUsers);
 	app.post('/api/user/signin' , userController.signin);
 	app.post('/api/user/signup', userController.signup);
