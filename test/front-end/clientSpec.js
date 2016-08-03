@@ -3,11 +3,12 @@
 describe('AuthController',function(){
 	//var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
 	var $scope, $rootScope, $location, $window, $httpBackend, createController, Auth;
-	beforeEach(function (){module('zarad')});
+	beforeEach(module('zarad'));
 	beforeEach(inject(function($injector){
-
+        console.log($injector.get);
 		// mock out our dependencies
-	    //$rootScope = $injector.get('$rootScope');
+	    $rootScope = $injector.get('$rootScope');
+	    //console.log("asaadsdsddsd",$rootScope)
 	    $location = $injector.get('$location');
 	    $window = $injector.get('$window');
 	    $httpBackend = $injector.get('$httpBackend');

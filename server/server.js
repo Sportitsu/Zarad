@@ -10,12 +10,13 @@ var port = process.env.PORT || 8000;
 
 mongoose.connect(mongoURI);
 
-
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
 require('./config/routes.js')(app, express);
 
 // start listening on port 8000
-app.listen(port , function(){
-	console.log('List')
+var listener = app.listen(port , function(){
+	console.log('Listening on port ' + listener.address().port); // Listening port
 })
+
+module.exports = app;

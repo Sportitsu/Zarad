@@ -9,7 +9,7 @@
   ],
   "scripts": {
 
-    "test": "istanbul cover -x '*Spec.js' node_modules/.bin/_mocha -- -R spec ./test/**/*.js |karma start karma.conf.js"
+    "test": "karma start karma.conf.js"
 
   },
   "respository": {
@@ -21,6 +21,7 @@
   "devDependencies": {
     "chai": "^3.5.0",
 
+
     "jasmine-core": "^2.4.1",
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
@@ -29,13 +30,19 @@
     "karma-phantomjs-launcher": "^1.0.1",
     "karma-requirejs": "^1.0.0",
     "mocha": "^3.0.0",
-    "requirejs": "^2.2.0",
     "istanbul": "^0.4.4",
-    "mocha": "^3.0.0"
+    "mocha": "^3.0.0",
+
+
+    "chai-http": "^3.0.0",
+    "istanbul": "^0.4.4",
+    "mocha": "^3.0.0",
+    "supertest": "^2.0.0"
 
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.4.3",
     "express": "^4.4.5",
     "jwt-simple": "^0.2.0",
 
