@@ -68,16 +68,70 @@ module.exports ={
 		})
 	},
 	// club sign in
-	singin : function (req,res) {
+	signin : function (req,res) {
 		var username = req.body.username;
-		var password = req.boddy.password;
+		var password = req.body.password;
 
 		Club.findOne({ username: username})
 		.exec(function (error,club) {
 			if(!club){
 				res.status(500).send(new Error('User does not exist'));
 			}else{
-				club
+				Club.comparePassword(password, club.password, res, function(found){
+        		        if(!found){
+       				       res.status(500).send('Wrong Password');
+      			        } else {
+     			            var token = jwt.encode(club, 'secret');
+         			        res.setHeader('x-access-token',token);
+                            res.json({token: token});
+                        }
+                });
+			}
+		})
+	},
+
+	// this function is to remove a club
+	clubRemove :  function (req, res){
+		var username = req.body.username;
+		Club.findOne({ username : username }).remove()
+		.exec(function (error,data) {
+			if(data.result.n){
+				res.status(201).send("Club Deleted");
+			}else{
+				res.status(500).send("Not Available");
+			}
+		})
+	},
+	// this function is to modify the information of a club
+	clubEdit : function (req,res) {
+		Club.findOne({ username : req.body.username })
+		.exec(function (error, club) {
+			if(!club){
+				res.status(500).send("Club Not Available");
+			}else{
+				club.country = req.body.country || club.country;
+				if(req.body.newClubName){
+					var clubName = req.body.newClubName;
+					Club.findOne({ clubName : clubName})
+					.exec(function (error,club) {
+						if(club){
+							res.status(500).send("Club Name Already Exists");
+						}else{
+							club.clubName = req.body.newClubName;
+						}
+					})
+				}
+				if(req.body.oldPassword){
+					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
+						club.password = req.body.password;
+						club.save(function(error,savedClub){
+							res.status(201).send('Updated/n'+savedClub);
+						})
+					})
+				}
+				club.save(function (error, savedClub) {
+					res.status(201).send(savedClub);
+				})
 			}
 		})
 	}

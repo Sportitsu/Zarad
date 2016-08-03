@@ -260,7 +260,7 @@ describe("Integration Server Database test", function (){
 
 		it('should respond with token key when user are correctly signed in', function(done){
 			chai.request(server)
-				.post('/api/club/')
+				.post('/api/club/signin')
 				.send({
 					'username' : 'fighterX' , 
 					'password' : '1234' 
@@ -271,6 +271,15 @@ describe("Integration Server Database test", function (){
 					done();
 				});
 		});
+
+		it('should respond with error if username is not compatible with password', function(done){
+			chai.request(server)
+				.post('/api/club/signin')
+				.send({
+					'username' : 'fighterX' , 
+					'password' : 'BlaBla'
+				})
+		})
 	})
 
 
