@@ -1,12 +1,21 @@
+angular.module('zarad.services',[])
 
-angular.module('zarad.services', [])
-.factory('Auth', function ($http, $location, $window) {
+.factory('Auth',function($http){
+	var signup=function(data){
+		return $http({
+			method: 'POST',
+			url :'/api/user/signup',
+			data: data
+		})
+		.then(function(resp){
+			return resp.data;
+		})
+}
   var signin = function (user) {
     var ObjUser={
       method: 'POST',
       data: user
     }
-
     // this if statement to determain the type of user 
     if(user['type']==="player"){
       ObjUser["url"]='/api/user/signin'
@@ -25,18 +34,16 @@ angular.module('zarad.services', [])
       }
     });
   };
+ 	var isAuth = function () {
+    	return !!$window.localStorage.getItem('com.zarad');
+  	};
 
-  var isAuth = function () {
-    return !!$window.localStorage.getItem('com.zarad');
-  };
-
-  return {
-    signin: signin,
-    isAuth:isAuth
-    
-  };
+	return{
+		signup : signup,
+		signin : signin,
+		isAuth : isAuth
+	}
 })
-
 
 .factory('Admin', function ($http, $location, $window) {
   //send club information to server
@@ -47,7 +54,6 @@ angular.module('zarad.services', [])
       data: club,
       url:'/api/clubregister'
     })
-
   };
    //send club information to tournament
 
@@ -56,14 +62,12 @@ angular.module('zarad.services', [])
       method:'POST',
       data: tournament,
       url:''
-
     })
   };
 
   return {
     Addclub: Addclub,
     Addtournament:Addtournament
-    
   };
 });
 
