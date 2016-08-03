@@ -1,10 +1,10 @@
 angular.module('zarad.services',[])
 
 .factory('Auth',function($http){
-	var siginin=function(data){
+	var signup=function(data){
 		return $http({
 			method: 'POST',
-			url : '',
+			url :'/api/user/signup',
 			data: data
 		})
 		.then(function(resp){
@@ -13,6 +13,6 @@ angular.module('zarad.services',[])
 	}
 
 	return{
-		siginin: siginin
+		signup : signup
 	}
 })
