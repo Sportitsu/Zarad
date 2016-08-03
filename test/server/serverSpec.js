@@ -412,9 +412,6 @@ describe("Integration Server Database test", function (){
 			})
 
 			it('should delete user when given the an available username', function(done){
-
-
-
 				chai.request(server)
 					.post('/api/user/delete')
 					.send({
@@ -433,7 +430,7 @@ describe("Integration Server Database test", function (){
 					})
 
 			})
-		})
+		});
 
 
 		// TODO User Test Database
