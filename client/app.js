@@ -6,11 +6,11 @@ angular.module('zarad',[
 .config(function ($routeProvider , $httpProvider) {
 	$routeProvider
 	.when('/signin', {
-		templateURL : 'client/app/auth/auth.js',
+		templateurl : 'client/app/auth/auth.js',
 		controller : 'AuthController'
 	})
 	.when('/signup', {
-		templateURL : '',
+		templateurl : '',
 		controller : 'AuthController'
 	});
 
