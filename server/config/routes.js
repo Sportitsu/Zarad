@@ -2,6 +2,7 @@
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
+var clubController = require('../Club/clubController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
@@ -12,7 +13,6 @@ module.exports = function(app,express){
 	// Just for testing mocha
 
 
-
 	// Admin Page Routes
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/create', adminController.addAdmin);
@@ -20,10 +20,12 @@ module.exports = function(app,express){
 	// *************************** //	
 	
 
-	
 
 
 	// Club Page Routes
+	app.post('/api/clubregister',clubController.addClub);
+	app.get('/api/club/:username', clubController.getClub);
+	app.get('/api/clubs', clubController.getAllClubs);
 
 
 
