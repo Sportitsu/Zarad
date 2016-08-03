@@ -66,5 +66,19 @@ module.exports ={
 				res.status(200).send(clubArray);
 			}
 		})
+	},
+	// club sign in
+	singin : function (req,res) {
+		var username = req.body.username;
+		var password = req.boddy.password;
+
+		Club.findOne({ username: username})
+		.exec(function (error,club) {
+			if(!club){
+				res.status(500).send(new Error('User does not exist'));
+			}else{
+				club
+			}
+		})
 	}
 }

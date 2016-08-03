@@ -128,57 +128,5 @@ module.exports={
 	          }
 	        });
 	    }
-	},
-	signin : function(req,res){
-		var username = req.params.username;
-		User.findOne({username : username})
-		.exec(function (error,user) {
-			if (error) {
-				res.status(500).send(error);
-			}else if(!user){
-				res.status(500).send(new Error('User does not exist'));
-			}else{
-				  var token = jwt.encode(user, 'secret');
-	              res.setHeader('x-access-token',token);
-	              var data={
-	                token: token,
-	                username: username
-	              }
-	            res.json(data);
-			}
-		});
-	},
-	// this function is for adding new users
-	addUser :  function (req,res){
-		username = req.body.username;
-		User.findOne({username : username})
-		.exec(function (error,user) {
-			if(error){
-				res.status(500).send(error);
-			}else if(!user){
-				var newUser = new User ({
-					username : req.body.username,
-					password : req.body.password,
-					email : req.body.email,
-					firstName : req.body.firstName,
-					lastName : req.body.lastName,
-					phone : req.body.phone,
-					Date : req.body.Date,
-					club : req.body.club,
-					beltColor : req.body.beltColor,
-					attendenc : req.body.attendenc,
-					achievements : req.body.achievements
-				})
-				newUser.save(function (error,user) {
-					if(error){
-						res.status(500).send(error);
-					}else{
-						res.status(201).send(user)
-					}
-				})
-			}else{
-				res.status(500).send("User Already Exists");
-			}
-		})
 	}
 }
