@@ -256,7 +256,21 @@ describe("Integration Server Database test", function (){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
-		})
+		});
+
+		it('should respond with token key when user are correctly signed in', function(done){
+			chai.request(server)
+				.post('/api/club/')
+				.send({
+					'username' : 'fighterX' , 
+					'password' : '1234' 
+				})
+				.end(function(err, res){
+					expect(typeof res.header['x-access-token']).to.be.equal('string');
+					expect(res.status).to.be.equal(200);
+					done();
+				});
+		});
 	})
 
 
