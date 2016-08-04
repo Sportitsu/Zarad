@@ -58,5 +58,17 @@ module.exports = {
 				res.status(500).send(error);
 			}
 		})
+	},
+	// function to delete a tournament
+	tournamentRemove : function (req,res) {
+		var id = req.body.id;
+		Tournament.findOne({ _id : id }).remove()
+		.exec(function(error, data){
+			if(data.result.n){
+				res.status(201).send('Tournament Deleted');
+			}else{
+				res.status(500).send('Not Available');				
+			}
+		})
 	}
 }
