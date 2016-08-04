@@ -1,12 +1,20 @@
-process.env.NODE_ENV = 'test';
+
 var should = require('chai').should();
 var expect = require ('chai').expect;
 var path = require('path')
 var supertest = require('supertest');
-var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
+var server = require(path.join(__dirname,'../../' ,'./server/config/routes.js'));
+var config = require(path.join(__dirname,'../../' ,'./server/_config.js'));
+
 var chai = require('chai')
       ,chaiHttp = require('chai-http');
 
+var mongoose = require('mongoose');
+
+// Mongoose PArt
+process.env.NODE_ENV = 'test';
+mongoose.Promise = global.Promise;
+/////////////
 
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
@@ -18,23 +26,41 @@ var jwt = require('jwt-simple');
 var request = supertest.agent(server);
 var mongoose = require('mongoose');
 
+
 describe("Integration Server Database test", function (){
-	describe('/GET' , function(done){
-		it("is just for testing mocha and chai ", function (done){
-			chai.request(server)
-				.get('/api/home')
-				.end(function(err,res){
-					expect(err).to.be.null;
-					expect(res.status).to.be.equal(200);
-					done();
-			})
-		});	
-	});		
+	// beforeEach(function(done){
+	// 	mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+	// 		if(err){
+	// 			console.log('Error Connecting to the database. ' + err);
+	// 		} else {
+	// 			console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+	// 		}
+	// 	});
+	// 	done();
+	// })
+	// // describe('/GET' , function(done){
+	// 	it("is just for testing mocha and chai ", function (done){
+	// 		chai.request(server)
+	// 			.get('/api/home')
+	// 			.end(function(err,res){
+	// 				expect(err).to.be.null;
+	// 				expect(res.status).to.be.equal(200);
+	// 				done();
+	// 		})
+	// 	});	
+	// });		
 	describe('Admin Test Database', function(done){
 
 		Admin.collection.drop();
 
 		beforeEach(function(done){
+			mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+			if(err){
+				console.log('Error Connecting to the database. ' + err);
+			} else {
+				console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+			}
+			});
 			var newAdmin = new Admin({
 				'username' : 'admin-memf',
 			    'password' : '123', 
@@ -49,6 +75,7 @@ describe("Integration Server Database test", function (){
 
 		afterEach(function(done){
 		    Admin.collection.drop();
+		    mongoose.connection.close();
 			done();
 		});
 
@@ -152,6 +179,13 @@ describe("Integration Server Database test", function (){
 	describe('Club Test Database', function(done){
 		Club.collection.drop();
 		beforeEach(function(done){
+			mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+			if(err){
+				console.log('Error Connecting to the database. ' + err);
+			} else {
+				console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+			}
+			});
 			var newClub = new Club({
 				'username' : 'fighterX' , 
 				'password' : '1234' , 
@@ -165,6 +199,7 @@ describe("Integration Server Database test", function (){
 
 		afterEach(function(done){
 			Club.collection.drop();
+		    mongoose.connection.close();
 			done();
 		})
 		it('should get all clubs' , function(done){
@@ -445,6 +480,13 @@ describe("Integration Server Database test", function (){
 		User.collection.drop();
 
 		beforeEach(function(done){
+			mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+			if(err){
+				console.log('Error Connecting to the database. ' + err);
+			} else {
+				console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+			}
+			});
 			var newUser = new User({
 				'username' : 'mohammad',
 			    'password' : 'testing', 
@@ -460,6 +502,7 @@ describe("Integration Server Database test", function (){
 
 		afterEach(function(done){
 		    User.collection.drop();
+		    mongoose.connection.close();
 			done();
 		});
 
