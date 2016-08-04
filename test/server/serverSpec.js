@@ -22,7 +22,7 @@ var request = supertest.agent(server);
 describe("Integration Server Database test", function (){
 	describe('/GET' , function(done){
 		it("is just for testing mocha and chai ", function (done){
-			request
+			chai.request(server)
 				.get('/api/home')
 				.end(function(err,res){
 					expect(err).to.be.null;
