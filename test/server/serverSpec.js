@@ -1,21 +1,16 @@
 process.env.NODE_ENV = 'test';
-var should = require('chai').should();
 var expect = require ('chai').expect;
 var path = require('path')
-var supertest = require('supertest');
 var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
 var chai = require('chai')
       ,chaiHttp = require('chai-http');
-
-
 chai.use(chaiHttp);
+
 var Admin = require('../../server/Admin/adminModel');
 var User = require('../../server/User/userModel');
 var Club = require('../../server/Club/clubModel');
 var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
-var jwt = require('jwt-simple');
-var request = supertest.agent(server);
 
 describe("Integration Server Database test", function (){
 	describe('/GET' , function(done){
@@ -60,10 +55,11 @@ describe("Integration Server Database test", function (){
 			    'email' : 'ironman@avengers.com'
 			});
 			testAdmin.save(function(error,data){	
-				 request.get('/api/admin/x/'+ data.username)
+				 chai.request(server)
+				 		.get('/api/admin/x/'+ data.username)
 						.set('Accept','application/json')
-						.expect(200)
 						.end(function(err, res){
+							expect(res.status).to.be.equal(200);
 							expect(res.body).to.have.property('username');
 							expect(res.body.username).to.not.equal(null);
 							expect(res.body.username).to.be.equal('super');
@@ -88,9 +84,9 @@ describe("Integration Server Database test", function (){
 			    'lastName' : 'Man',
 			    'email' : 'ironman@avengers.com'
 			});
-			request.get('/api/admin/x/dont' )
+			chai.request(server)
+				   .get('/api/admin/x/dont' )
 				   .set('Accept' , 'application/json')
-				   .expect(500)
 				   .end(function(err,res){
 				   		expect(res.status).to.be.equal(500);
 				   		done();
@@ -544,18 +540,28 @@ describe("Integration Server Database test", function (){
 			});
 
 			it('should signup a new user', function(done){
+				var newClub = new Club({
+					'username' : 'Mihyar' , 
+					'password' : '1234' , 
+					'clubName' : 'SourceMMA' , 
+					'country'  : 'Jordan'
+				})
+				newClub.save();
 				chai.request(server)
 					.post('/api/user/signup')
 					.send({
 						'username' : 'Fighter',
 						'password' : 'fighting',
-						'club' : 'sourceMMA',
+						'club' : 'SourceMMA',
 						'country' : 'Jordan'
 					})
 					.end(function(err, res){
 						expect(err).to.be.equal(null);
+						expect(res.status).to.be.equal(201);
 						expect(res.body.country).to.be.equal('Jordan');
 						expect(res.body).to.have.property('username');
+						expect(res.body).to.have.property('club');
+						expect(res.body.club).to.be.equal('SourceMMA');
 						expect(res.body).to.have.property('password');
 						expect(res.body).to.have.property('country');
 						expect(res.body).to.have.property('club');
