@@ -131,5 +131,66 @@ describe('Admin Test Database', function(done){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
+		});
+
+		it('should signin user when keys are passed correctly', function(done){
+			var newAdmin = new Admin({
+				'username' : 'Admin' , 
+				'password' : 'adminto',
+				'firstName' : 'Mohammad',
+				'lastName' : 'Albakri' ,
+				'email' : 'mohammad.albakri93@gmail.com'
+			})
+			newAdmin.save();
+
+			chai.request(server)
+				.post('/api/admin/signin')
+				.send({
+				 'username'	: 'Admin',
+				 'password'	: 'adminto'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(200);
+					expect(res.body).to.have.property('token');
+					expect(typeof res.body.token).to.be.equal('string');
+					done();
+				})
+		});
+
+		it('should return an error when passing the wrong username', function(done){
+			chai.request(server)
+				.post('/api/admin/signin')
+				.send({
+					'username' : 'admin' , 
+					'password' : 'adminto',
+
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					expect(Object.keys(res.body).length).to.be.equal(0);
+					done();
+				})
+		});
+
+		it('should return an error when passing wrong password', function(done){
+			var newAdmin = new Admin({
+				'username' : 'Admin' , 
+				'password' : 'adminto',
+				'firstName' : 'Mohammad',
+				'lastName' : 'Albakri' ,
+				'email' : 'mohammad.albakri93@gmail.com'
+			})
+			newAdmin.save();
+			chai.request(server)
+				.post('/api/admin/signin')
+				.send({
+					'username' : 'Admin', 
+					'password' : 'None'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
 		})
+
 	});
