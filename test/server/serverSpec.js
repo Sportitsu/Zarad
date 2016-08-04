@@ -588,18 +588,28 @@ describe("Integration Server Database test", function (){
 			});
 
 			it('should signup a new user', function(done){
+				var newClub = new Club({
+					'username' : 'Mihyar' , 
+					'password' : '1234' , 
+					'clubName' : 'SourceMMA' , 
+					'country'  : 'Jordan'
+				})
+				newClub.save();
 				chai.request(server)
 					.post('/api/user/signup')
 					.send({
 						'username' : 'Fighter',
 						'password' : 'fighting',
-						'club' : 'sourceMMA',
+						'club' : 'SourceMMA',
 						'country' : 'Jordan'
 					})
 					.end(function(err, res){
 						expect(err).to.be.equal(null);
+						expect(res.status).to.be.equal(201);
 						expect(res.body.country).to.be.equal('Jordan');
 						expect(res.body).to.have.property('username');
+						expect(res.body).to.have.property('club');
+						expect(res.body.club).to.be.equal('SourceMMA');
 						expect(res.body).to.have.property('password');
 						expect(res.body).to.have.property('country');
 						expect(res.body).to.have.property('club');
