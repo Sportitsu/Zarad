@@ -1,5 +1,19 @@
 language : node_js
+sudo: required
 services: mongodb
+# env:
+#   global:
+#     - MONGODB_VERSION=2.6.10
+# install:
+#   - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+#   - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
+#   - export PATH=`pwd`/mongodb-linux-x86_64-$MONGODB_VERSION/bin:$PATH
+#   - mkdir -p data/db
+#   - mongod --dbpath=data/db &
+#   - sleep 3
+# script:
+#   - mongo --eval 'db.hostInfo()'
+
 
 before_script:
   - sleep 15
