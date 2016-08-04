@@ -3,6 +3,7 @@ angular.module('zarad',[
 	'zarad.services',
 	'zarad.admin',
 	'zarad.auth',
+	'zarad.club',
 	'ngRoute'
 ])
 .config(function ($routeProvider , $httpProvider) {
