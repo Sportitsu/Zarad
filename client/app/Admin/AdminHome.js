@@ -7,13 +7,11 @@ angular.module('zarad.admin',[])
 
   //add club function
   $scope.Addclub =function(){
-    console.log($scope.club);
   	Admin.Addclub($scope.club)
   	//.then()
   }
   //add tournament function
   $scope.Addtournament =function(){
-    console.log($scope.tournament);
     Admin.Addtournament($scope.tournament)
     //.then()
 

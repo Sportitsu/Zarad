@@ -1,5 +1,4 @@
 'use strict';
-
 describe('AuthController',function(){
 	var $scope, $rootScope, $window, $location ,$httpBackend , createController, Auth;
 	beforeEach(module('zarad'))
@@ -22,7 +21,7 @@ describe('AuthController',function(){
 			});
 		};
 		createController();
-	}))
+	}));
 
 	it('should have a signup method',function(){
 		expect($scope.signup).to.be.a('function');
@@ -39,12 +38,15 @@ describe('AuthController',function(){
 	it("should have a signin metheod",function(){
 		expect($scope.signin).to.be.a('function')
 	});
-	it('should store token in localStorage after signin',function(){
+	it('should have a user property on the $scope', function () {
+		expect($scope.user).to.be.an('object')
+	});
+
+	xit('should store token in localStorage after signin',function(){
 		var token = 'sjj232hwjhr3urw90rof';
 	    $httpBackend.expectPOST('/api/user/signin').respond({token: token});
 	    $scope.signin();
 	    $httpBackend.flush();
 	    expect($window.localStorage.getItem('com.zarad')).to.equal(token);
 	})
-
 });

@@ -1,1 +1,9 @@
 language : node_js
+<<<<<<< HEAD
+=======
+services: mongodb
+
+before_script:
+  - sleep 15
+  - mongo mydb_test --eval 'db.addUser("travis", "test");'
+>>>>>>> df28f63906822524bac2a8509f49c87e7558ea45

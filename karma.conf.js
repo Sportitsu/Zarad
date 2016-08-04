@@ -24,7 +24,9 @@ module.exports = function(config) {
       'client/app/**/*.js',
       'client/app/auth/auth.js',
       'client/app/services/services.js',
-      'test/front-end/clientSpec.js'
+      'test/front-end/clientSpec.js',
+      'test/front-end/Adminspec.js',
+      'test/front-end/routingSpec.js'
     ],
 
 
