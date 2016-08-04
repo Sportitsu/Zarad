@@ -150,7 +150,7 @@ describe("Integration Server Database test", function (){
 		})
 	});
 
-	xdescribe('Club Test Database', function(done){
+	describe('Club Test Database', function(done){
 		Club.collection.drop();
 		beforeEach(function(done){
 			var newClub = new Club({
@@ -441,7 +441,7 @@ describe("Integration Server Database test", function (){
 	})
 
 
-	xdescribe('User Test Database', function(done){
+	describe('User Test Database', function(done){
 
 		User.collection.drop();
 
@@ -524,7 +524,7 @@ describe("Integration Server Database test", function (){
 				})
 		});
 
-		xdescribe('Signing up in User Controller' ,function(done){
+		describe('Signing up in User Controller' ,function(done){
 			it('should have a method called signUp', function(done){
 				expect(typeof userController.signup).to.be.equal('function');
 				done();
@@ -591,7 +591,7 @@ describe("Integration Server Database test", function (){
 		})
 
 
-		xdescribe('Sign in User', function(done){
+		describe('Sign in User', function(done){
 			it('should have a method called singin', function(done){
 				expect(typeof userController.signin).to.be.equal('function');
 				done();
@@ -640,7 +640,7 @@ describe("Integration Server Database test", function (){
 		})
 
 
-		xdescribe('Editing User Profile' , function(done){
+		describe('Editing User Profile' , function(done){
 			it('should have a method called editProfile', function(done){
 				expect(typeof userController.editProfile).to.be.equal('function');
 				done();
@@ -704,7 +704,7 @@ describe("Integration Server Database test", function (){
 			})
 		});
 
-		xdescribe('Delete User' , function(done){
+		describe('Delete User' , function(done){
 			it('should have a method called deleteUser', function(done){
 				expect(typeof userController.deleteUser).to.be.equal('function');
 				done();
