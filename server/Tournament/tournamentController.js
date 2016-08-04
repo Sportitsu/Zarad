@@ -85,10 +85,11 @@ module.exports = {
 				tournament.organizer = req.body.organizer || tournament.organizer;
 				tournament.details = req.body.details || tournament.details;
 				tournament.poster = req.body.poster || tournament.poster;
-			}
-			.save(function(error,saved){
+				tournament.save(function(error,saved){
 				res.status(200).send(saved);
+				})
+			}
+
 			})
-		})
-	}
+		}
 }
