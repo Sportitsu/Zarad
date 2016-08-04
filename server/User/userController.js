@@ -69,8 +69,8 @@ module.exports= {
 			          res.status(500).send('User Already Exists');
 				    } else {
 			    		Club.findOne({ clubName : req.body.club})
-				        	.exec(function(err, foundClub){
 
+				        	.exec(function(err, foundClub){
 				        		if(!foundClub){
 				        			res.status(500).send('Club Not Found');
 				        		} else {
