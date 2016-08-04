@@ -26,7 +26,7 @@ module.exports= {
 				for (var i = 0; i < users.length; i++) {
 					var newObject = {};
 					newObject.username = users[i].username;
-					newObject.email = users[i].username;
+					newObject.email = users[i].email;
 					newObject.firstName = users[i].firstName;
 					newObject.lastName = users[i].lastName;
 					newObject.phone = users[i].phone;
@@ -69,8 +69,8 @@ module.exports= {
 			          res.status(500).send('User Already Exists');
 				    } else {
 			    		Club.findOne({ clubName : req.body.club})
-				        	.exec(function(err, foundClub){
 
+				        	.exec(function(err, foundClub){
 				        		if(!foundClub){
 				        			res.status(500).send('Club Not Found');
 				        		} else {
