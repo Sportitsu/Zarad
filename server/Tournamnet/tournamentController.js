@@ -1,6 +1,7 @@
 var Tournament = require('./tournamentModel');
 
 module.exports = {
+	// fetch all tournaments function
 	getAll : function (req,res) {
 		Tournament.find({})
 		.exec(function (error, tournaments) {
@@ -19,6 +20,30 @@ module.exports = {
 					tournamentsArray.push(tournamentObj);
 				}
 				res.status(200).send(tournamentsArray);
+			}
+		})
+	},
+	// Add tournament function
+	addTournament : function (req, res) {
+		Tournament.exec(function (error,tournament) {
+			if(error){
+				res.status(500).send(error);
+			}else{
+				var newTournament = new Tournament({
+					name : req.body.name,
+					Date : req.body.Date,
+					place : req.body.place,
+					organizer : req.body.organizer,
+					details : req.body.details,
+					poster : req.body.poster
+				})
+				newTournament.save(function(error, tournament){
+					if(error){
+						res.status(500).send(error);
+					}else{
+						res.status(201).send(tournament);
+					}
+				})
 			}
 		})
 	}
