@@ -3,6 +3,7 @@ var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
+var tournamentController = require('../Tournament/tournamentController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
@@ -12,6 +13,13 @@ module.exports = function(app,express){
 	app.post('/api/admin/signin', adminController.signin);
 	// *************************** //	
 	
+	//Tournament Page Routes
+	app.get('/api/tournament/x/:name', tournamentController.getOne);
+	app.get('/api/tournament/tournaments', tournamentController.getAll);
+	app.post('/api/tournament/create', tournamentController.addTournament);
+	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
+	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
+
 
 
 
