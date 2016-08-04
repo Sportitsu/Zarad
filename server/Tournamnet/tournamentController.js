@@ -46,5 +46,17 @@ module.exports = {
 				})
 			}
 		})
+	},
+	// function to fetch one tournament
+	getOne : function (req,res) {
+		var name = req.body.name;
+		Tournament.findOne({ name : name })
+		.exec(function(error,tournament){
+			if(tournament){
+				res.status(200).send(tournament);
+			}else{
+				res.status(500).send(error);
+			}
+		})
 	}
 }
