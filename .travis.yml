@@ -1,6 +1,8 @@
 language : node_js
 sudo: false
-services: mongodb
+services: 
+  - mongodb 
+  - docker
 before_script:
   - sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
   - echo 'deb http://downloads-distro.mongodb.org/repo/ubuntu-upstart dist 10gen' | sudo tee /etc/apt/sources.list.d/mongodb.list
@@ -12,8 +14,6 @@ before_script:
 env:
   global:
     - MONGODB_VERSION=2.6.10
-
-
 before_install:
   - wget http://fastdl.mongodb.org/linux/mongodb-linux-x86_64-$MONGODB_VERSION.tgz
   - tar xfz mongodb-linux-x86_64-$MONGODB_VERSION.tgz
@@ -22,7 +22,7 @@ before_install:
   - mongod --dbpath=data/db &
   - sleep 3
 
-  
+
 # env:
 #   global:
 #     - MONGODB_VERSION=2.6.10
