@@ -1,4 +1,4 @@
-process.env.NODE_ENV = 'test';
+
 var should = require('chai').should();
 var expect = require ('chai').expect;
 var path = require('path')
@@ -12,14 +12,8 @@ var chai = require('chai')
 var mongoose = require('mongoose');
 
 // Mongoose PArt
+process.env.NODE_ENV = 'test';
 mongoose.Promise = global.Promise;
-mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
-	if(err){
-		console.log('Error Connecting to the database. ' + err);
-	} else {
-		console.log('Connected to Database ' + config.mongoURI[server.settings.env])
-	}
-});
 /////////////
 
 chai.use(chaiHttp);
@@ -34,7 +28,17 @@ var mongoose = require('mongoose');
 
 
 describe("Integration Server Database test", function (){
-	describe('/GET' , function(done){
+	beforeEach(function(done){
+		mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+			if(err){
+				console.log('Error Connecting to the database. ' + err);
+			} else {
+				console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+			}
+		});
+		done();
+	})
+	// describe('/GET' , function(done){
 		it("is just for testing mocha and chai ", function (done){
 			chai.request(server)
 				.get('/api/home')
@@ -44,7 +48,7 @@ describe("Integration Server Database test", function (){
 					done();
 			})
 		});	
-	});		
+	// });		
 	describe('Admin Test Database', function(done){
 
 		Admin.collection.drop();
