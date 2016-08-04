@@ -20,20 +20,15 @@ angular.module('zarad.services',[])
     if(user['type']==="player"){
       ObjUser["url"]='/api/user/signin'
     }
-     if(user['type']==="admin"){
-      ObjUser["url"]=''
-    }
      if(user['type']==="club"){
 
-      ObjUser["url"]=''
+      ObjUser["url"]='/api/club/signin'
     }
     return $http(ObjUser)
     .then(function (resp) {
-      return {token:resp.data.token,
-        path:resp.data.path
-      }
+      return resp.data;
     });
-  };
+  }
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -47,8 +42,9 @@ angular.module('zarad.services',[])
 
 .factory('Admin', function ($http, $location, $window) {
   //send club information to server
+  
   var Addclub=function(club){
-    console.log(club)
+     console.log(club)
     return $http({
       method:'POST',
       data: club,
@@ -58,6 +54,7 @@ angular.module('zarad.services',[])
    //send club information to tournament
 
   var Addtournament=function(tournament){
+    console.log(tournament)
     return $http({
       method:'POST',
       data: tournament,
@@ -65,9 +62,30 @@ angular.module('zarad.services',[])
     })
   };
 
+var Adminsignin= function(admin){
+ //console.log("dsads")
+  return $http({
+      method:'POST',
+      data: admin,
+      url:'/api/admin/signin'
+    }).then(function (resp) {
+      return resp.data;
+    });
+}
+
+var Addadmin=function(newAdmin){
+  //console.log(newAdmin)
+  return $http({
+  method:'POST',
+  data: newAdmin,
+  url:'/api/admin/create'
+})
+}
   return {
     Addclub: Addclub,
-    Addtournament:Addtournament
+    Addtournament:Addtournament,
+    Adminsignin:Adminsignin,
+    Addadmin:Addadmin
   };
 });
 

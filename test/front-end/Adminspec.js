@@ -36,11 +36,16 @@ describe('AdminController',function(){
 	it('should have a Addtournament method',function(){
 		expect($scope.Addtournament).to.be.a('function');
 	});
+	it('should have a Adminsignin method',function(){
+		expect($scope.Adminsignin).to.be.a('function');
+	});
 	//test if the property in  scope
 	it('should have a club property on the $scope', function () {
 		expect($scope.club).to.be.an('object');
 	});
-
+	it('should have a user property on the $scope', function () {
+		expect($scope.user).to.be.an('object');
+	});
 	it('should have a tournament property on the $scope', function () {
 		expect($scope.tournament).to.be.an('object');
 	});
@@ -48,6 +53,11 @@ describe('AdminController',function(){
 	it('should be able to create new Club with Addclub()', function () {
 		$httpBackend.expectPOST("/api/clubregister").respond(201, '');
     	$scope.Addclub();
+    	$httpBackend.flush();
+	});
+	it('should be able to create new admin with Adminsignin()', function () {
+		$httpBackend.expectPOST("/api/admin/signin").respond(201, '');
+    	$scope.Adminsignin();
     	$httpBackend.flush();
 	});
 	//this must be fill  be fill 
@@ -58,3 +68,49 @@ describe('AdminController',function(){
 	});
 	
 })
+
+/*angular.module('MyAppMocks',[]).
+  factory('Admin', function(){
+    return {
+      //search: sinon.stub()
+      Addclub: sinon.stub(),
+      Addtournament:sinon.stub()
+  };
+
+  });*/
+
+
+
+
+/*describe('Adminfactories:Admin', function () {
+  // Load your module.
+  var scope, Admin, controllerFactory, spy;
+
+  function createController() {
+    return controllerFactory('Admin', {
+      $scope: scope,
+      Admin: Admin
+    });
+  }
+  beforeEach(module('zarad'));
+
+  beforeEach(module('MyAppMocks'));
+  beforeEach(inject(function($controller, $rootScope, _Admin_){
+    scope = $rootScope.$new();
+
+    Admin = _Admin_;
+
+    controllerFactory = $controller;
+
+  }));
+
+it('should call Admin.Addclub', function(){
+    createController();
+    expect(Admin.Addclub).to.have.been.called();
+  });
+
+  // Setup the mock service in an anonymous module.
+ 
+ 
+  
+});*/

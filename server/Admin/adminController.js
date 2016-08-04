@@ -25,18 +25,30 @@ module.exports = {
 
 	addAdmin: function (req, res) {
 
-    var username=req.body.username;
+    console.log("edfdg")
+    
+    //var username=req.body.username;
+    var username="1"
+    console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
-
+  console.log("fsgf++++")
        if(!admin){
-        var newAdmin = new Admin ({
+         var newAdmin = new Admin ({
+          username:"elham",
+          password: "1",
+          email: "wwew",
+          firstName: "dsd",
+          lastName: "sdsd"
+        });
+        /*var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
           email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName
         });
+        */
         
         newAdmin.save(function(err, newAdmin){
           if(err){
@@ -55,10 +67,13 @@ module.exports = {
         res.send(500,'Admin Already Exists');
       }
     })
-  },
+  
+},
   // Admin sign in function 
   signin : function (req,res) {
-    var username = req.body.username;
+    //var username = req.body.username;
+    //var password = req.body.password;
+     var username = req.body.user
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {

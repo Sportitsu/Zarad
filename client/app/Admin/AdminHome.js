@@ -4,6 +4,9 @@ angular.module('zarad.admin',[])
 
 	$scope.club = {};
   $scope.tournament = {};
+  $scope.user={};
+
+
 
   //add club function
   $scope.Addclub =function(){
@@ -16,4 +19,18 @@ angular.module('zarad.admin',[])
     //.then()
 
   }
+  $scope.Adminsignin =function(){
+    console.log($scope.user)
+    Admin.Adminsignin($scope.user)
+    .then(function(data){
+    $location.path('/admin');
+    }).catch(function(error){
+      console.error(error);
+    })
+  }
+       
+$scope.Addadmin =function(){
+    //console.log($scope.user)
+    Admin.Addadmin($scope.user)
+}
 })

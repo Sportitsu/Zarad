@@ -12,7 +12,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 
 
-    frameworks: ['mocha','chai'],
+    frameworks: ['mocha','chai','sinon'],
 
 
     // list of files / patterns to load in the browser
@@ -25,7 +25,7 @@ module.exports = function(config) {
       'client/app/auth/auth.js',
       'client/app/services/services.js',
       'test/front-end/clientSpec.js',
-      'test/front-end/Adminspec.js',
+      'test/front-end/adminspec.js',
       'test/front-end/routingSpec.js'
     ],
 
