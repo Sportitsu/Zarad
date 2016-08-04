@@ -16,6 +16,7 @@ var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
 var jwt = require('jwt-simple');
 var request = supertest.agent(server);
+var mongoose = require('mongoose');
 
 describe("Integration Server Database test", function (){
 	describe('/GET' , function(done){

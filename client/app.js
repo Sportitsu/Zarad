@@ -9,7 +9,6 @@ angular.module('zarad',[
 
 	$routeProvider
 	.when('/signin', {
-
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
