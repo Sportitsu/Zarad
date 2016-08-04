@@ -122,8 +122,6 @@ module.exports ={
 					})
 				}
 				if(req.body.oldPassword){
-					console.log(req.body.oldPassword);
-					console.log(club.password);
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
 						if(found){
 							club.password = req.body.password;
