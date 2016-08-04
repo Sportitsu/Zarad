@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var bluebird = require('bluebird');
 var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10
 

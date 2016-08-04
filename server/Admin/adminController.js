@@ -23,34 +23,29 @@ module.exports = {
 	},
 	//Add new admin 
 
-	addAdmin: function (req, res) {
-
-    console.log("edfdg")
-    
-    //var username=req.body.username;
-    var username="1"
-    console.log("fsgf")
+	addAdmin: function (req, res) { 
+    var username=req.body.username;
+    // var username="1"
+    // console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
-  console.log("fsgf++++")
        if(!admin){
-         var newAdmin = new Admin ({
-          username:"elham",
-          password: "1",
-          email: "wwew",
-          firstName: "dsd",
-          lastName: "sdsd"
-        });
-        /*var newAdmin = new Admin ({
+        //  var newAdmin = new Admin ({
+        //   username:"elham",
+        //   password: "1",
+        //   email: "wwew",
+        //   firstName: "dsd",
+        //   lastName: "sdsd"
+        // });
+        var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
           email: req.body.email,
           firstName: req.body.firstName,
           lastName: req.body.lastName
         });
-        */
-        
         newAdmin.save(function(err, newAdmin){
+          console.log(newAdmin);
           if(err){
             res.status(500).send(err);
           } else {
@@ -80,11 +75,11 @@ module.exports = {
       if(!admin){
         res.status(500).send(new Error('Admin Not Found'));
       }else{
-        Admin.comparePassword(password,user.password, res, function(found){
+        Admin.comparePassword(password, admin.password, res, function(found){
           if(!found){
             res.status(500).send('Wrong Password');
           } else {
-            var token = jwt.encode(user, 'secret');
+            var token = jwt.encode(admin, 'secret');
             res.setHeader('x-access-token',token);
             res.json({token: token});
           }

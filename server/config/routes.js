@@ -6,13 +6,6 @@ var clubController = require('../Club/clubController');
 
 // Waiting for database setup 
 module.exports = function(app,express){
-	// Home page Routes
-	app.get('/api/home' , function(req,res){
-		res.status(200).send('Connected to home');
-	});
-	// Just for testing mocha
-
-
 	// Admin Page Routes
 	app.post('/api/admin/create', adminController.addAdmin);
 	app.post('/api/admin/signin', adminController.signin);
