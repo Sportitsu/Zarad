@@ -12,6 +12,11 @@ angular.module('zarad',[
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
+	.when('/signup', {
+
+		templateUrl :'app/auth/signup.html',
+		controller : 'AuthController'
+	})
 	.when('/AdminHome',{
 		templateUrl :'app/Admin/AdminHome.html',
 		controller : 'AdminController'
