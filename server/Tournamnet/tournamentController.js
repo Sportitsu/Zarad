@@ -70,5 +70,25 @@ module.exports = {
 				res.status(500).send('Not Available');				
 			}
 		})
+	},
+	// function to edit Trounament
+	tournamentEdit : function (req,res) {
+		var id = req.body.id;
+		Trounament.findOne({ _id : id })
+		.exec(function(error, tournament){
+			if(!tournament){
+				res.status(500).send("Tournament Not Available");
+			}else{
+				tournament.name = req.body.name || tournament.name;
+				tournament.Date = req.body.Date || tournament.Date;
+				tournament.place = req.body.place || tournament.place;
+				tournament.organizer = req.body.organizer || tournament.organizer;
+				tournament.details = req.body.details || tournament.details;
+				tournament.poster = req.body.poster || tournament.poster;
+			}
+			.save(function(error,saved){
+				res.status(200).send(saved);
+			})
+		})
 	}
 }
