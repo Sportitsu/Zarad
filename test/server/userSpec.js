@@ -145,15 +145,38 @@ describe('User Test Database', function(done){
 					expect(res.body).to.have.property('club');
 					done();
 				})
-		})
+		});
 
-		it('should return 500 Error if you forgot to add required keys', function(done){
+
+
+		it('should return 500 Error if Club is not Found', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
 					'username' : 'ahmad',
 					'password' : 'ahmad',
 					'club' : 'makhai'
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should return 500 Error if keys are not complete', function(done){
+			var newClub = new Club({
+				'username' : 'Mihyar' , 
+				'password' : '1234' , 
+				'clubName' : 'SourceMMA' , 
+				'country'  : 'Jordan'
+			})
+			newClub.save();
+			chai.request(server)
+				.post('/api/user/signup')
+				.send({
+					'username' : 'Other' , 
+					'password' : 'testing' , 
+					'club' : 'SourceMMA'
 				})
 				.end(function(err, res){
 					expect(res.status).to.be.equal(500);
