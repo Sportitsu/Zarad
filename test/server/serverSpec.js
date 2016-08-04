@@ -3,10 +3,24 @@ var should = require('chai').should();
 var expect = require ('chai').expect;
 var path = require('path')
 var supertest = require('supertest');
-var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
+var server = require(path.join(__dirname,'../../' ,'./server/config/routes.js'));
+var config = require(path.join(__dirname,'../../' ,'./server/_config.js'));
+
 var chai = require('chai')
       ,chaiHttp = require('chai-http');
 
+var mongoose = require('mongoose');
+
+// Mongoose PArt
+mongoose.Promise = global.Promise;
+mongoose.connect(config.mongoURI[server.settings.env],function(err, res){
+	if(err){
+		console.log('Error Connecting to the database. ' + err);
+	} else {
+		console.log('Connected to Database ' + config.mongoURI[server.settings.env])
+	}
+});
+/////////////
 
 chai.use(chaiHttp);
 var Admin = require('../../server/Admin/adminModel');
@@ -16,7 +30,7 @@ var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
 var jwt = require('jwt-simple');
 var request = supertest.agent(server);
-var mongoose = require('mongoose');
+
 
 describe("Integration Server Database test", function (){
 	describe('/GET' , function(done){

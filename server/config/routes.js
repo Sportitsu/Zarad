@@ -4,8 +4,11 @@ var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
 
+var express = require('express');
+var app = express();
+require('./middleware.js')(app,express);
 // Waiting for database setup 
-module.exports = function(app,express){
+// module.exports = function(app,express){
 	// Home page Routes
 	app.get('/api/home' , function(req,res){
 		res.status(200).send('Connected to home');
@@ -44,4 +47,10 @@ module.exports = function(app,express){
     // send it through our custom error handler
     app.use(helpers.errorLogger);
     app.use(helpers.errorHandler);
-}
+
+    
+	// require('./routes.js')(app, express);
+
+// }
+
+module.exports = app;
