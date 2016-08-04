@@ -31,7 +31,7 @@ describe("Integration Server Database test", function (){
 			})
 		});	
 	});		
-	xdescribe('Admin Test Database', function(done){
+	describe('Admin Test Database', function(done){
 
 		Admin.collection.drop();
 
