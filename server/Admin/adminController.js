@@ -39,7 +39,6 @@ module.exports = {
         });
   
         newAdmin.save(function(err, newAdmin){
-          console.log(newAdmin);
           if(err){
             res.status(500).send(err);
           } else {

@@ -10,6 +10,7 @@ var clubSchema = new Schema ({
 	password : {type : String, required : true },
 	country  : {type : String, required : true },
 	clubName : {type : String, required : true, index : { unique : true } },
+  salt : { type : String}
 });
 
 clubSchema.pre('save', function (next) {
@@ -47,8 +48,5 @@ Club.comparePassword = function(candidatePassword, savedPassword, res, cb){
     }
   });
 };
-
-
-var Club = mongoose.model('Club',clubSchema);
 
 module.exports = Club;
