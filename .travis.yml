@@ -1,4 +1,2 @@
 language : node_js
-sudo: false
-services: 
-  - mongodb 
+services: mongodb

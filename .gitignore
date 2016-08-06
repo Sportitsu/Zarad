@@ -1,5 +1,5 @@
 node_modules
-client/lib
+www/client/lib
 ._*
 db/
 npm-debug.log
