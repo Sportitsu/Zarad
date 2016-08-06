@@ -1,4 +1,3 @@
-
 angular.module('zarad',[
 	'zarad.services',
 	'zarad.admin',

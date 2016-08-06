@@ -4,7 +4,6 @@ angular.module('zarad.auth',['ionic'])
 	$scope.user={};
 	$scope.signup=function(){
 		Auth.signup().then(function(resp){
-			conosole.log(resp.data);
 		})
 	}
 	
