@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var bluebird = require('bluebird');
 var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10;
 
@@ -48,8 +47,5 @@ Club.comparePassword = function(candidatePassword, savedPassword, res, cb){
     }
   });
 };
-
-
-var Club = mongoose.model('Club',clubSchema);
 
 module.exports = Club;

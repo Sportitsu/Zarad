@@ -37,8 +37,9 @@ module.exports = {
           firstName: req.body.firstName,
           lastName: req.body.lastName
         });
-        
+  
         newAdmin.save(function(err, newAdmin){
+          console.log(newAdmin);
           if(err){
             res.status(500).send(err);
           } else {
@@ -65,11 +66,11 @@ module.exports = {
       if(!admin){
         res.status(500).send(new Error('Admin Not Found'));
       }else{
-        Admin.comparePassword(password,user.password, res, function(found){
+        Admin.comparePassword(password, admin.password, res, function(found){
           if(!found){
             res.status(500).send('Wrong Password');
           } else {
-            var token = jwt.encode(user, 'secret');
+            var token = jwt.encode(admin, 'secret');
             res.setHeader('x-access-token',token);
             res.json({token: token});
           }

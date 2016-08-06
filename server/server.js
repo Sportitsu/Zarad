@@ -5,16 +5,7 @@ var config = require('./_config');
 var app = express();
 
 // connect to mongoDB database
-// var mongoURI =  process.env.MONGODB_URI || 'mongodb://localhost/zarad';
 var port = process.env.PORT || 8000;
-
-
-
-var options = {
- index: "../www/index.html"
-};
-
-//app.use('/', express.static('app', options));
 
 mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI[app.settings.env],function(err, res){
