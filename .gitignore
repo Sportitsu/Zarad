@@ -10,11 +10,14 @@ coverage/
 
 node_modules/
 platforms/
+platforms/ios
 plugins/
 bower_components/
 
+resources/
+
 .tmp/
-www/
+www/lib
 .sass-cache
 *.DS_Store
 *.log

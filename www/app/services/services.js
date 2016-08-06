@@ -41,7 +41,9 @@ angular.module('zarad.services',[])
       method:'POST',
       data: club,
       url:'/api/clubregister'
-    })
+    }).then(function (resp) {
+      return resp.data;
+    });
   };
    //send club information to tournament
 
@@ -50,7 +52,9 @@ angular.module('zarad.services',[])
       method:'POST',
       data: tournament,
       url:''
-    })
+    }).then(function (resp) {
+      return resp.data;
+    });
   };
 
   return {

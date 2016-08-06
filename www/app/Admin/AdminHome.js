@@ -8,12 +8,16 @@ angular.module('zarad.admin',['ionic'])
   //add club function
   $scope.Addclub =function(){
   	Admin.Addclub($scope.club)
-  	//.then()
+   .then(function (res) {
+       console.log(res);
+      })
   }
   //add tournament function
   $scope.Addtournament =function(){
-    //Admin.Addtournament($scope.tournament)
-    //.then()
+    Admin.Addtournament($scope.tournament)
+    .then(function (res) {
+       console.log(res);
+      })
 
   }
 })
