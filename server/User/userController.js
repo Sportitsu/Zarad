@@ -46,18 +46,18 @@ module.exports= {
 		var password = req.body.password;
 		User.findOne({username: username})
       		.exec(function (error, user) {
-       			if (!user) {
-     		 	    res.status(500).send(new Error('User does not exist'));
-    		    } else {
-       			    User.comparePassword(password,user.password, res, function(found){
-        		        if(!found){
-       				       res.status(500).send('Wrong Password');
-      			        } else {
-     			            var token = jwt.encode(user, 'secret');
+       			if (user) {
+     		 	      User.comparePassword(password,user.password, res, function(found){
+        		        if(found){
+       				       var token = jwt.encode(user, 'secret');
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
+      			        } else {
+       				       res.status(500).send('Wrong Password');
                         }
                     });
+    		    } else {
+     		 	    res.status(500).send(new Error('User does not exist'));
                 }
             });
 	},
@@ -71,10 +71,8 @@ module.exports= {
 			    		Club.findOne({ clubName : req.body.club})
 
 				        	.exec(function(err, foundClub){
-				        		if(!foundClub){
-				        			res.status(500).send('Club Not Found');
-				        		} else {
-							        var newUser = new User ({
+				        		if(foundClub){
+				        			var newUser = new User ({
 							            username: req.body.username,
 						  	            password: req.body.password,
 							            email: req.body.email,
@@ -96,7 +94,9 @@ module.exports= {
 							            } else {
 							                res.status(201).send(newUser);
 							            };
-							        });			        			
+							        });	
+				        		} else {
+				        			res.status(500).send('Club Not Found');
 				        		}
 				        	})
 	                }
@@ -105,15 +105,10 @@ module.exports= {
 
 	},
 
-
-
-
 	editProfile : function(req,res){
 		User.findOne({username  : req.body.username})
 			.exec(function(err , user){
-				if(!user){
-					res.status(500).send('User not Available');
-				} else {
+				if(user){
 					user.email = req.body.email || user.email, 
 					user.firstName = req.body.firstName || user.firstName,
 					user.lastName = req.body.lastName || user.lastName,
@@ -137,6 +132,8 @@ module.exports= {
 					user.save(function(err, savedUser){
 						res.status(201).send(savedUser)	
 					});
+				} else {
+					res.status(500).send('User not Available');
 				}
 			})
 	}, 
