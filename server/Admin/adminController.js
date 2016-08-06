@@ -19,7 +19,6 @@ module.exports = {
 			} else {
         helpers.errorHandler('InCorrect',req,res);
       }
-
 		})
 	},
 	//Add new admin 
