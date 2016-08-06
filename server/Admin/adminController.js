@@ -23,14 +23,32 @@ module.exports = {
 		});
 	},
 	//Add new admin 
+<<<<<<< HEAD
+
+	addAdmin: function (req, res) { 
+=======
 	addAdmin: function (req, res) {
+>>>>>>> 35b17c9ad7c534c0c45e1dbe8b5311c1aecdd15b
     var username=req.body.username;
+    // var username="1"
+    // console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
+<<<<<<< HEAD
+       if(!admin){
+        //  var newAdmin = new Admin ({
+        //   username:"elham",
+        //   password: "1",
+        //   email: "wwew",
+        //   firstName: "dsd",
+        //   lastName: "sdsd"
+        // });
+=======
 
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
       } else {
+>>>>>>> 35b17c9ad7c534c0c45e1dbe8b5311c1aecdd15b
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
@@ -38,7 +56,6 @@ module.exports = {
           firstName: req.body.firstName,
           lastName: req.body.lastName
         });
-  
         newAdmin.save(function(err, newAdmin){
           if(err){
             helpers.errorHandler(err,req,res);
@@ -53,11 +70,19 @@ module.exports = {
           }
         });
       }
+<<<<<<< HEAD
+    })
+  
+},
+=======
     });
   },
+>>>>>>> 35b17c9ad7c534c0c45e1dbe8b5311c1aecdd15b
   // Admin sign in function 
   signin : function (req,res) {
-    var username = req.body.username;
+    //var username = req.body.username;
+    //var password = req.body.password;
+     var username = req.body.user
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {

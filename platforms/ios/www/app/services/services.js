@@ -11,17 +11,31 @@ angular.module('zarad.services',[])
 			return resp.data;
 		})
 }
-  var signin = function (user,url) {
-    return $http({
-      method:'POST',
-      url: url,
-      data:user
-    })
-    .then(function(resp,err){
+  var signin = function (user) {
+    var ObjUser={
+      method: 'POST',
+      data: user
+    }
+    // this if statement to determain the type of user 
+    if(user['type']==="player"){
+      ObjUser["url"]='/api/user/signin'
+    }
+     if(user['type']==="club"){
+
+      ObjUser["url"]='/api/club/signin'
+    }
+    return $http(ObjUser)
+    .then(function (resp) {
+<<<<<<< HEAD:client/app/services/services.js
+      return resp.data;
+    });
+  }
+=======
       return resp;
-    }) 
+    });
   };
   
+>>>>>>> 5188d08d33f631bf868f85cb736047a544adcb7f:platforms/ios/www/app/services/services.js
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -35,31 +49,50 @@ angular.module('zarad.services',[])
 
 .factory('Admin', function ($http, $location, $window) {
   //send club information to server
+  
   var Addclub=function(club){
-    console.log(club)
+     console.log(club)
     return $http({
       method:'POST',
       data: club,
       url:'/api/clubregister'
-    }).then(function (resp) {
-      return resp.data;
-    });
+    })
   };
    //send club information to tournament
 
   var Addtournament=function(tournament){
+    console.log(tournament)
     return $http({
       method:'POST',
       data: tournament,
-      url:'/api/tournament/create'
+      url:''
+    })
+  };
+
+var Adminsignin= function(admin){
+ //console.log("dsads")
+  return $http({
+      method:'POST',
+      data: admin,
+      url:'/api/admin/signin'
     }).then(function (resp) {
       return resp.data;
     });
-  };
+}
 
+var Addadmin=function(newAdmin){
+  //console.log(newAdmin)
+  return $http({
+  method:'POST',
+  data: newAdmin,
+  url:'/api/admin/create'
+})
+}
   return {
     Addclub: Addclub,
-    Addtournament:Addtournament
+    Addtournament:Addtournament,
+    Adminsignin:Adminsignin,
+    Addadmin:Addadmin
   };
 })
 

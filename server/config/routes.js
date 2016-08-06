@@ -9,9 +9,9 @@ var tournamentController = require('../Tournament/tournamentController');
 // Waiting for database setup 
 module.exports = function(app){
 	// Admin Page Routes
-	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/create', adminController.addAdmin);
 	app.post('/api/admin/signin', adminController.signin);
+	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	// *************************** //	
 	
 	//Tournament Page Routes
