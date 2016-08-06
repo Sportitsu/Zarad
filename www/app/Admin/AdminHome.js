@@ -4,12 +4,13 @@ angular.module('zarad.admin',['ionic'])
 
 	$scope.club = {};
   $scope.tournament = {};
+  $scope.user={};
 
   //add club function
   $scope.Addclub =function(){
   	Admin.Addclub($scope.club)
    .then(function (res) {
-    console.log(res);
+    //console.log(res);
       })
   }
   //add tournament function

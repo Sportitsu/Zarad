@@ -1,4 +1,5 @@
-var mongoose = require("mongoose");
+'use strict';
+var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var SALT_WORK_FACTOR = 10;
 

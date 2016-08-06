@@ -64,7 +64,7 @@ describe('AdminController',function(){
 	});
 	//this must be fill  be fill 
 	it('should be able to create new tournament with Addtournament()', function () {
-		$httpBackend.expectPOST('').respond(201, '');
+		$httpBackend.expectPOST('/api/tournament/create').respond(201, '');
     	$scope.Addtournament();
     	$httpBackend.flush();
 	});

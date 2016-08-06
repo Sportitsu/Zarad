@@ -51,7 +51,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data: tournament,
-      url:''
+      url:'/api/tournament/create'
     }).then(function (resp) {
       return resp.data;
     });
