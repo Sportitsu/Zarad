@@ -7,13 +7,7 @@ var app = express();
 
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
-mongoose.connect(config.mongoURI[app.settings.env],function(err){
-	if(err){
-		console.log('Error Connecting to the database. ' + err);
-	} else {
-		console.log('Connected to Database ' + config.mongoURI[app.settings.env]);
-	}
-});
+mongoose.connect('mongodb://zarad1993:yarabakri1204@ds145415.mlab.com:45415/heroku_1h02s8mf');
 
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
