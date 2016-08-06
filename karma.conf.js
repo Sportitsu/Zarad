@@ -17,13 +17,14 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'client/lib/angular/angular.js',
-      'client/lib/angular-mocks/angular-mocks.js',
-      'client/lib/angular-route/angular-route.js',
-      'client/app.js',
-      'client/app/**/*.js',
-      'client/app/auth/auth.js',
-      'client/app/services/services.js',
+      'www/lib/angular/angular.js',
+      'www/lib/angular-mocks/angular-mocks.js',
+      'www/lib/angular-route/angular-route.js',
+      'www/ionic/js/angular/angular.js',
+      'www/app.js',
+      'www/app/**/*.js',
+      'www/app/auth/auth.js',
+      'www/app/services/services.js',
       'test/front-end/clientSpec.js',
       'test/front-end/adminspec.js',
       'test/front-end/routingSpec.js'

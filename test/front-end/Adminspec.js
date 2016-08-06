@@ -1,3 +1,68 @@
+describe('Controller: ListLibrariesController', function() {
+  var scope, restService, $location;
+});
+var mockRestService = {};
+beforeEach(function() {
+  var mockRestService = {};
+  module('zarad', function($provide) {
+    $provide.value('restService', mockRestService);
+  });
+
+  inject(function($q) {
+    mockRestService.data = [
+      {
+        username: 0,
+        password:"2222",
+        country:"jordan",
+        clubName: 'Angular'
+      },
+      {
+       username: 1,
+        password:"1111",
+        country:"jordan",
+        clubName: 'Angular2'
+      }
+    ];
+
+    mockRestService.getAll = function() {
+      var defer = $q.defer();
+
+      defer.resolve(this.data);
+
+      return defer.promise;
+    };
+
+    mockRestService.Addclub = function(password,country,clubName) {
+      var defer = $q.defer();
+
+      var id = this.data.length;
+
+      var club = {
+        username: 1,
+        password:"1111",
+        country:password,
+        clubName: clubName
+      };
+
+      this.data.push(item);
+      defer.resolve(item);
+
+      return defer.promise;
+    };
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+////////////////////////////
 
 'use strict';
 describe('AdminController',function(){
@@ -69,6 +134,21 @@ describe('AdminController',function(){
 	
 
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*angular.module('MyAppMocks',[]).
   factory('Admin', function(){

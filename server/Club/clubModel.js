@@ -48,7 +48,4 @@ Club.comparePassword = function(candidatePassword, savedPassword, res, cb){
   });
 };
 
-
-var Club = mongoose.model('Club',clubSchema);
-
 module.exports = Club;
