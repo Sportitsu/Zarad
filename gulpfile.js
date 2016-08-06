@@ -7,6 +7,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -53,8 +54,21 @@ gulp.task('git-check', function(done) {
   done();
 });
 
+
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
+})
+
+
+gulp.task('combine', function(){
+       gulp.src([ './www/app.js','./www/app/**/*.js'])
+             .pipe(concat('fontEndConcat.js'))
+             .pipe(uglify())
+             .pipe(gulp.dest('./www/dist/'));
+       gulp.src(['./www/lib/**/*.js', './www/ionic/**/*.js'])
+           .pipe(concat('libraries.js'))
+           .pipe(gulp.dest('./www/dist'));
+      return 'done';
 })

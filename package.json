@@ -26,6 +26,8 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "gulp-jshint": "^2.0.1",
+    "gulp-minify": "0.0.14",
+    "gulp-uglify": "^2.0.0",
     "gulp-util": "^2.2.14",
     "istanbul": "^0.4.4",
     "jshint": "^2.9.2",
