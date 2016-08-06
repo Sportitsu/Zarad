@@ -9,7 +9,7 @@ angular.module('zarad.admin',['ionic'])
   $scope.Addclub =function(){
   	Admin.Addclub($scope.club)
    .then(function (res) {
-       console.log(res);
+    console.log(res);
       })
   }
   //add tournament function
@@ -20,4 +20,5 @@ angular.module('zarad.admin',['ionic'])
       })
 
   }
+  $scope.Adminsignin=function(){}
 })
