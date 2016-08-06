@@ -1,7 +1,23 @@
 node_modules
-client/lib
+www/client/lib
 ._*
 db/
 npm-debug.log
 coverage/
 
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+node_modules/
+platforms/
+plugins/
+bower_components/
+
+.tmp/
+www/
+.sass-cache
+*.DS_Store
+*.log
+
+app/scripts/bundle.js
+app/scripts/bundle.js.map

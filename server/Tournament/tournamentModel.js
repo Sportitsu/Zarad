@@ -1,16 +1,14 @@
 var mongoose = require('mongoose');
-var bcrypt = require('bcrypt-nodejs');
-var SALT_WORK_FACTOR = 10;
 
 var Schema = mongoose.Schema;
 
 var tournamentSchema = new Schema ({
-	name : {type : String},
-	Date : {type : Date},
-	place : {type : String},
-	organizer : {type : String},
-	details : {type :  String},
-	poster : {type : String}
+	name : {type : String , required : true},
+	Date : {type : String , required : true},
+	place : {type : String , required : true},
+	organizer : {type : String , required : true},
+	details : {type :  String , required : true},
+	poster : {type : String , required : true}
 });
 
 var Tournament = mongoose.model('Tournament',tournamentSchema);

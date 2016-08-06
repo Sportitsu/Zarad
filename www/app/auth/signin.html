@@ -1,0 +1,17 @@
+<h1 class="padding">LOGIN</h1>
+<div class="list">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">First Name</span>
+    <input type="text" placeholder="First Name" ng-model='user.username'>
+  </label>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Last Name</span>
+    <input type="text" placeholder="Last Name" ng-model='user.password'>
+  </label>
+</div>
+
+<ion-list>
+  <ion-checkbox ng-model="user.type" value="player">Player</ion-checkbox>
+  <ion-checkbox ng-model="user.type" value="club">Club</ion-checkbox>
+  <button ng-click="signin()">signin</button>
+</ion-list>

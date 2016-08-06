@@ -10,7 +10,8 @@ var adminSchema = new Schema ({
 	password : {type: String, required : true},
 	firstName : {type: String, required : true},
 	lastName : {type: String, required : true},
-	email : {type: String, required : true}
+	email : {type: String, required : true},
+  salt : { type : String}
 });
 
 adminSchema.pre('save', function (next) {

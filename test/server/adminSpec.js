@@ -17,7 +17,7 @@ var clubController = require('../../server/Club/clubController');
 describe('Admin Test Database', function(done){
 
 		Admin.collection.drop();
-
+		var testAdmin;
 		beforeEach(function(done){
 			var newAdmin = new Admin({
 				'username' : 'admin-memf',
@@ -29,6 +29,14 @@ describe('Admin Test Database', function(done){
 			newAdmin.save(function(err,savedUser){
 				done();
 			})
+			testAdmin = new Admin({
+				'username' : 'super',
+			    'password' : '123', 
+			    'firstName' : 'Iron' ,
+			    'lastName' : 'Man',
+			    'email' : 'ironman@avengers.com'
+			});
+
 		});
 
 		afterEach(function(done){
@@ -36,44 +44,34 @@ describe('Admin Test Database', function(done){
 			done();
 		});
 
-		it('should be an object with keys and values', function(done){
-			var testAdmin = new Admin({
-				'username' : 'super',
-			    'password' : '123', 
-			    'firstName' : 'Iron' ,
-			    'lastName' : 'Man',
-			    'email' : 'ironman@avengers.com'
-			});
-			testAdmin.save(function(error,data){	
-				 chai.request(server)
-				 		.get('/api/admin/x/'+ data.username)
+		var getAdmin = function(get, expectation){
+			chai.request(server)
+				 		.get(get)
 						.set('Accept','application/json')
-						.end(function(err, res){
-							expect(res.status).to.be.equal(200);
-							expect(res.body).to.have.property('username');
-							expect(res.body.username).to.not.equal(null);
-							expect(res.body.username).to.be.equal('super');
-							expect(res.body.password).to.be.equal(undefined);
-							expect(res.body).to.have.property('firstName');
-							expect(res.body.firstName).to.not.equal(null);
-							expect(res.body).to.have.property('lastName');
-							expect(res.body.lastName).to.not.equal(null);
-							expect(res.body).to.have.property('email');
-							expect(res.body.email).to.not.equal(null);
-							done();
-						});
+						.end(expectation);
+		}
+
+		it('should be an object with keys and values', function(done){
+			testAdmin.save(function(error,data){	
+				 getAdmin('/api/admin/x/' + data.username, function(err,res){
+						expect(res.status).to.be.equal(200);
+						expect(res.body).to.have.property('username');
+						expect(res.body.username).to.not.equal(null);
+						expect(res.body.username).to.be.equal('super');
+						expect(res.body.password).to.be.equal(undefined);
+						expect(res.body).to.have.property('firstName');
+						expect(res.body.firstName).to.not.equal(null);
+						expect(res.body).to.have.property('lastName');
+						expect(res.body.lastName).to.not.equal(null);
+						expect(res.body).to.have.property('email');
+						expect(res.body.email).to.not.equal(null);
+						done();
+				 })
 			})
 		});
 
 
 		it('should fail when sending wrong username' , function(done){
-			var testAdmin = new Admin({
-				'username' : 'super',
-			    'password' : '123', 
-			    'firstName' : 'Iron' ,
-			    'lastName' : 'Man',
-			    'email' : 'ironman@avengers.com'
-			});
 			chai.request(server)
 				   .get('/api/admin/x/dont' )
 				   .set('Accept' , 'application/json')

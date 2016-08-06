@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="zarad">
+<head>
+	<title>signin</title>
+	<link rel="stylesheet" href="ionic/css/ionic.css">
+	
+</head>
+<body>
+
+<ion-header-bar class="bar bar-header bar-calm">
+ <ion-title>Zarad</ion-title>
+</ion-header-bar>
+  <div class="tabs-striped tabs-top tabs-calm">
+    <div class="tabs">
+      <a class="tab-item active" href="#/signin">
+        <i class="icon ion-home">Home</i>
+      </a>
+      <a class="tab-item" href="#/profile">
+        <i class="icon ion-person">Profile</i>
+      </a>
+      <a class="tab-item" href="#/">
+        <i class="icon ion-trophy">Tournments</i>
+      </a>
+    </div>
+  </div>
+
+<ion-view class="padding">
+	<ion-content >
+			  <div ng-view>
+			  </div>
+	</ion-content>
+</ion-view>
+
+<div class="bar bar-footer bar-calm">
+  <div class="title">contact info</div>
+</div>
+
+ <script src="ionic/js/ionic.bundle.js"></script>
+ <script src="./lib/angular/angular.js"></script>
+ <script type="lib/angular-mocks/angular-mocks.js"></script>
+ <script src="lib/angular-route/angular-route.js"></script>
+ <script src="app/Admin/AdminHome.js"></script>
+ <script src="app/auth/auth.js"></script>
+ <script src="app/club/club.js"></script>
+ <script src="app/services/services.js"></script>
+ <script src="app.js"></script>
+
+ </body>
+</html>
