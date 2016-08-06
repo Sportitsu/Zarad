@@ -1,3 +1,4 @@
+'use strict';
 var Admin = require('./adminModel.js');
 var jwt = require('jwt-simple');
 
@@ -13,14 +14,14 @@ module.exports = {
 					email : admin.email,
 					firstName : admin.firstName,
 					lastName : admin.lastName
-				})
+				});
 				res.status(200).send(returnAdmin);
 
 			} else {
         res.status(500).send('InCorrect');
       }
 
-		})
+		});
 	},
 	//Add new admin 
 
@@ -51,11 +52,11 @@ module.exports = {
             });
             res.status(201).send(returnAdmin);
           }
-        })
+        });
       } else {
         res.send(500,'Admin Already Exists');
       }
-    })
+    });
   },
   // Admin sign in function 
   signin : function (req,res) {
@@ -76,6 +77,6 @@ module.exports = {
           }
         });
       }
-    })
+    });
   }
-}
+};
