@@ -7,7 +7,7 @@
     "url": "https://github.com/Sportitsu/Zarad.git"
   },
   "engines": {
-    "node": ">=6.3.0"
+    "node": "0.10"
   },
   "contributors": [
     "Mohammad Al-Bakri <mohammad.albakri93@gmail.com>",
