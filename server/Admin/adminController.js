@@ -52,8 +52,6 @@ module.exports = {
             res.status(201).send(returnAdmin);
           }
         });
-      } else {
-        helpers.errorHandler("Admin Already Exists", req, res);
       }
     });
   },
@@ -63,7 +61,6 @@ module.exports = {
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
-<<<<<<< HEAD
         if(admin){
             Admin.comparePassword(password, admin.password, res, function(found){
                 if(found){
@@ -71,12 +68,12 @@ module.exports = {
                   res.setHeader('x-access-token',token);
                   res.json({token: token});
                 } else {
-                  helpers.errorHandler("Wrong Password", req,res)
+                  helpers.errorHandler('Wrong Password', req,res);
                 }
             });
         }else{
-          helpers.errorHandler("Admin Not Found", req, res);
+          helpers.errorHandler('Admin Not Found', req, res);
         }
-    })
+    });
   }
 };

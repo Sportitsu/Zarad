@@ -21,7 +21,7 @@ module.exports= {
 		User.find({})
 		.exec(function (error,users) {
 			if (users.length === 0) {
-				helpers.errorHandler('Empty Table', req, res)
+				helpers.errorHandler('Empty Table', req, res);
 			} else {
 				var newArr=[];
 				for (var i = 0; i < users.length; i++) {
@@ -67,7 +67,7 @@ module.exports= {
 			User.findOne({username: username})
 	    		.exec(function(error,user){
 			        if(user){
-			          helpers.errorHandler('User Already Exists', req, res)
+			          helpers.errorHandler('User Already Exists', req, res);
 				    } else {
 			    		Club.findOne({ clubName : req.body.club})
 				        	.exec(function(err, foundClub){
@@ -93,10 +93,10 @@ module.exports= {
 							                helpers.errorHandler(err, req, res);
 							            } else {
 							                res.status(201).send(newUser);
-							            };
+							            }
 							        });	
 				        		} else {
-				        			helpers.errorHandler("Club Not Found", req, res);
+				        			helpers.errorHandler('Club Not Found', req, res);
 				        		}
 				        	});
 	                }
@@ -108,18 +108,18 @@ module.exports= {
 		User.findOne({username  : req.body.username})
 			.exec(function(err , user){
 				if(user){
-					user.email = req.body.email || user.email, 
-					user.firstName = req.body.firstName || user.firstName,
-					user.lastName = req.body.lastName || user.lastName,
-					user.middleName = req.body.middleName || user.middleName,
-					user.age = req.body.age || user.age,
-					user.image = req.body.image || user.image,
-					user.country = req.body.country || user.country,
-					user.phone = req.body.phone || user.phone, 
-					user.club = req.body.club || user.club,
-					user.beltColor = req.body.beltColor || user.beltColor,
-					user.achievements = req.body.achievements || user.achievements ,
-					user.attendance = req.body.attendance || user.attendance
+					user.email = req.body.email || user.email; 
+					user.firstName = req.body.firstName || user.firstName;
+					user.lastName = req.body.lastName || user.lastName;
+					user.middleName = req.body.middleName || user.middleName;
+					user.age = req.body.age || user.age;
+					user.image = req.body.image || user.image;
+					user.country = req.body.country || user.country;
+					user.phone = req.body.phone || user.phone; 
+					user.club = req.body.club || user.club;
+					user.beltColor = req.body.beltColor || user.beltColor;
+					user.achievements = req.body.achievements || user.achievements;
+					user.attendance = req.body.attendance || user.attendance;
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
@@ -144,7 +144,7 @@ module.exports= {
 			if(data.result.n){
 				res.status(201).send('User Deleted');
 			} else {
-				helpers.errorHandler("Not Available", req, res);
+				helpers.errorHandler('Not Available', req, res);
 			}
 		});
 	}

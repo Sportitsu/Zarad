@@ -27,7 +27,7 @@ module.exports ={
 		Club.findOne({username : username})
 		.exec(function (error,club) {
 			if(club){
-				helpers.errorHandler("Club Already Exists", req, res);
+				helpers.errorHandler('Club Already Exists', req, res);
 				}else{
 				var newClub = new Club({
 					username : req.body.username,
@@ -47,8 +47,6 @@ module.exports ={
 						res.status(201).send(returnClub);
 					}
 				});
-			} else {
-				res.status(500).send('Club Already Exists');
 			}
 		});
 	},
@@ -57,7 +55,7 @@ module.exports ={
 		Club.find({})
 		.exec(function (error,clubs) {
 			if(clubs.length === 0){
-				helpers.errorHandler("Empty Table", req, res);
+				helpers.errorHandler('Empty Table', req, res);
 			}else{
 				var clubArray = [];
 				for (var i = 0; i < clubs.length; i++) {
@@ -85,11 +83,11 @@ module.exports ={
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
       			        } else {
-       				       helpers.errorHandler("Wrong Password", req, res);
+       				       helpers.errorHandler('Wrong Password', req, res);
                         }
                 });
 			}else{
-				helpers.errorHandler("User Does Not Exists", req, res)
+				helpers.errorHandler('User Does Not Exists', req, res);
 			}
 		});
 	},
@@ -102,7 +100,7 @@ module.exports ={
 			if(data.result.n){
 				res.status(201).send('Club Deleted');
 			}else{
-				helpers.errorHandler("Not Available", req, res);
+				helpers.errorHandler('Not Available', req, res);
 			}
 		});
 	},
@@ -117,7 +115,7 @@ module.exports ={
 					Club.findOne({ clubName : clubName})
 					.exec(function (error,clubTwo) {
 						if(clubTwo){
-							helpers.errorHandler("Club Name Already Exists", req, res);
+							helpers.errorHandler('Club Name Already Exists', req, res);
 						}else{
 							club.clubName = req.body.newClubName;
 						}
@@ -131,7 +129,7 @@ module.exports ={
 								res.status(201).send('Updated/n'+savedClub);
 							});
 						} else {
-							helpers.errorHandler("Wrong Entry", req, res);
+							helpers.errorHandler('Wrong Entry', req, res);
 						}
 					});
 				}
@@ -139,7 +137,7 @@ module.exports ={
 					res.status(201).send(savedClub);
 				});
 			}else{
-				helpers.errorHandler("Club Not Available", req, res);
+				helpers.errorHandler('Club Not Available', req, res);
 			}
 		});
 	}

@@ -6,7 +6,7 @@ module.exports = {
 		console.log(error);
 		next(error);
 	},
-	errorHandler : function(error, req, res, next){
+	errorHandler : function(error, req, res){
 		res.status(500).send(error);
 	},
 	decode : function(req, res, next){

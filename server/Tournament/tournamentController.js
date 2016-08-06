@@ -8,7 +8,7 @@ module.exports = {
 		Tournament.find({})
 		.exec(function (error, tournaments) {
 			if(tournaments.length === 0){
-				helpers.errorHandler("Empty Table", req, res);
+				helpers.errorHandler('Empty Table', req, res);
 			}else{
 				var tournamentsArray=[];
 				for (var i = 0; i < tournaments.length; i++) {
@@ -63,7 +63,7 @@ module.exports = {
 			if(data){
 				res.status(201).send('Tournament Deleted');
 			}else{
-				helpers.errorHandler("Not Available", req, res);			
+				helpers.errorHandler('Not Available', req, res);			
 			}
 		});
 	},
@@ -83,8 +83,8 @@ module.exports = {
 					res.status(201).send(saved);
 				});
 			}else{
-				helpers.errorHandler("Tournament Not Available", req, res);
+				helpers.errorHandler('Tournament Not Available', req, res);
 			}
 		});
 	}
-}
+};
