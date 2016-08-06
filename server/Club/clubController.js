@@ -1,3 +1,4 @@
+'use strict';
 var Club = require('./clubModel');
 var jwt = require('jwt-simple');
 
@@ -12,12 +13,12 @@ module.exports ={
 					username : club.username,
 					country : club.country,
 					clubName : club.clubName
-				})
+				});
 				res.status(200).send(returnClub);
 			}else{
-				res.status(500).send(error)
+				res.status(500).send(error);
 			}
-		})
+		});
 	},
 	// Add a new club
 	addClub : function(req,res){
@@ -39,21 +40,21 @@ module.exports ={
 							username : club.username,
 							country : club.country,
 							clubName : club.clubName
-						})
-						res.status(201).send(returnClub)
+						});
+						res.status(201).send(returnClub);
 					}
-				})
-			}else{
-				res.status(500).send("Club Already Exists");
+				});
+			} else {
+				res.status(500).send('Club Already Exists');
 			}
-		})
+		});
 	},
 	// fetch all clubs
 	getAllClubs : function (req, res){
 		Club.find({})
 		.exec(function (error,clubs) {
 			if(clubs.length === 0){
-				res.status(500).send("Empty Table");
+				res.status(500).send('Empty Table');
 			}else{
 				var clubArray = [];
 				for (var i = 0; i < clubs.length; i++) {
@@ -65,7 +66,7 @@ module.exports ={
 				}
 				res.status(200).send(clubArray);
 			}
-		})
+		});
 	},
 	// club sign in
 	signin : function (req,res) {
@@ -87,7 +88,7 @@ module.exports ={
                         }
                 });
 			}
-		})
+		});
 	},
 
 	// this function is to remove a club
@@ -96,18 +97,18 @@ module.exports ={
 		Club.findOne({ username : username }).remove()
 		.exec(function (error,data) {
 			if(data.result.n){
-				res.status(201).send("Club Deleted");
+				res.status(201).send('Club Deleted');
 			}else{
-				res.status(500).send("Not Available");
+				res.status(500).send('Not Available');
 			}
-		})
+		});
 	},
 	// this function is to modify the information of a club
 	clubEdit : function (req,res) {
 		Club.findOne({ username : req.body.username })
 		.exec(function (error, club) {
 			if(!club){
-				res.status(500).send("Club Not Available");
+				res.status(500).send('Club Not Available');
 			}else{
 				club.country = req.body.country || club.country;
 				if(req.body.newClubName){
@@ -115,11 +116,11 @@ module.exports ={
 					Club.findOne({ clubName : clubName})
 					.exec(function (error,clubTwo) {
 						if(clubTwo){
-							res.status(500).send("Club Name Already Exists");
+							res.status(500).send('Club Name Already Exists');
 						}else{
 							club.clubName = req.body.newClubName;
 						}
-					})
+					});
 				}
 				if(req.body.oldPassword){
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
@@ -127,16 +128,16 @@ module.exports ={
 							club.password = req.body.password;
 							club.save(function(error,savedClub){
 								res.status(201).send('Updated/n'+savedClub);
-							})
+							});
 						} else {
 							res.status(500).send('Wrong Entry');
 						}
-					})
+					});
 				}
 				club.save(function (error, savedClub) {
 					res.status(201).send(savedClub);
-				})
+				});
 			}
-		})
+		});
 	}
-}
+};
