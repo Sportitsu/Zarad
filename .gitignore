@@ -9,9 +9,12 @@ coverage/
 # http://git-scm.com/docs/gitignore
 
 node_modules/
+platforms
 platforms/ios
 plugins/
 bower_components/
+
+resources/
 
 .tmp/
 www/lib
