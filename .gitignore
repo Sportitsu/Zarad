@@ -1,6 +1,5 @@
 node_modules
 www/client/lib
-client/lib
 ._*
 db/
 npm-debug.log
@@ -10,7 +9,7 @@ coverage/
 # http://git-scm.com/docs/gitignore
 
 node_modules/
-platforms/
+platforms/ios
 plugins/
 bower_components/
 
