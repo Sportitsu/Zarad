@@ -4,7 +4,7 @@
   "private" : true,
   "respository": {
     "type": "git",
-    "url": "git://github.com/Sportitsu/Zarad.git"
+    "url": "https://github.com/Sportitsu/Zarad.git"
   },
   "engines": {
     "node": ">=6.3.0"
