@@ -4,15 +4,16 @@ angular.module('zarad.auth',['ionic'])
 	$scope.user={};
 	$scope.signup=function(){
 		Auth.signup().then(function(resp){
+			conosole.log(resp.data);
 		})
 	}
 	
 	$scope.signin =function(){
 	var url="";
-	if($scope.user.type=== 'player'){
+	if(!!$scope.user.player){
 		url="/api/user/signin"
 	}
-	else if($scope.user.type=== 'club'){
+	else if(!!$scope.user.club){
 		url="/api/club/signin"
 	}
   	Auth.signin($scope.user,url)

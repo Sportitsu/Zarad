@@ -11,7 +11,9 @@
 </div>
 
 <ion-list>
-  <ion-checkbox ng-model="user.type" value="player">Player</ion-checkbox>
-  <ion-checkbox ng-model="user.type" value="club">Club</ion-checkbox>
-  <button ng-click="signin()">signin</button>
+  <ion-checkbox id="player" ng-model="user.player" >Player</ion-checkbox>
+  <ion-checkbox id="club" ng-model="user.club" >Club</ion-checkbox>
+  <button class="button button-full button-outline button-calm icon-right ion-chevron-right" ng-click="signin()">
+  signin
+  </button>
 </ion-list>
