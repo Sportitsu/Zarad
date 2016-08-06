@@ -1,5 +1,6 @@
 node_modules
 www/client/lib
+client/lib
 ._*
 db/
 npm-debug.log
@@ -14,7 +15,7 @@ plugins/
 bower_components/
 
 .tmp/
-www/
+www/lib
 .sass-cache
 *.DS_Store
 *.log
