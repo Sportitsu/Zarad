@@ -8,6 +8,9 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
+var exec = require('child_process').exec;
+
+
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -71,4 +74,13 @@ gulp.task('combine', function(){
            .pipe(concat('libraries.js'))
            .pipe(gulp.dest('./www/dist'));
       return 'done';
+});
+
+
+gulp.task('test', function (cb) {
+  exec('npm test', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
 })
