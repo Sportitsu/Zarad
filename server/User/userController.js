@@ -1,3 +1,4 @@
+'use strict';
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
@@ -8,12 +9,11 @@ module.exports= {
 		User.findOne({username: req.params.username})
 		.exec(function(error,user){
 			if(user){
-
 				res.status(200).send(user);
 			}else{
 				res.status(500).send(error);
 			}
-		})
+		});
 	},
 	// adding a new user
 	getAllUsers :  function (req,res){
@@ -98,7 +98,7 @@ module.exports= {
 							            };
 							        });			        			
 				        		}
-				        	})
+				        	});
 	                }
 	      
 	    });
@@ -130,15 +130,15 @@ module.exports= {
 						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
 								user.password = req.body.password;
 								user.save(function(err, savedUser){
-									res.status(201).send('Updated \n' + savedUser)
-								})
-						})
+									res.status(201).send('Updated \n' + savedUser);
+								});
+						});
 					}
 					user.save(function(err, savedUser){
 						res.status(201).send(savedUser)	
 					});
 				}
-			})
+			});
 	}, 
 
 	deleteUser : function(req, res){
@@ -150,6 +150,6 @@ module.exports= {
 			} else {
 				res.status(500).send('Not Available');
 			}
-		})
+		});
 	}
 }
