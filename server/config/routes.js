@@ -1,3 +1,4 @@
+'use strict';
 // Require all the controller functions here 
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
@@ -6,7 +7,7 @@ var clubController = require('../Club/clubController');
 var tournamentController = require('../Tournament/tournamentController');
 
 // Waiting for database setup 
-module.exports = function(app,express){
+module.exports = function(app){
 	// Admin Page Routes
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/create', adminController.addAdmin);
@@ -45,4 +46,4 @@ module.exports = function(app,express){
     // send it through our custom error handler
     app.use(helpers.errorLogger);
     app.use(helpers.errorHandler);
-}
+};

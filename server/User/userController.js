@@ -1,3 +1,4 @@
+'use strict';
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
@@ -13,7 +14,7 @@ module.exports= {
 			}else{
 				helpers.errorHandler(error,req,res);
 			}
-		})
+		});
 	},
 	// adding a new user
 	getAllUsers :  function (req,res){
@@ -120,15 +121,15 @@ module.exports= {
 					user.achievements = req.body.achievements || user.achievements ,
 					user.attendance = req.body.attendance || user.attendance
 					if(req.body.oldPassword){
-						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
+						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
 								user.save(function(err, savedUser){
-									res.status(201).send('Updated \n' + savedUser)
-								})
-						})
+									res.status(201).send('Updated \n' + savedUser);
+								});
+						});
 					}
 					user.save(function(err, savedUser){
-						res.status(201).send(savedUser)	
+						res.status(201).send(savedUser);
 					});
 				} else {
 					helpers.errorHandler('User Not Available', req, res);
@@ -145,6 +146,6 @@ module.exports= {
 			} else {
 				helpers.errorHandler("Not Available", req, res);
 			}
-		})
+		});
 	}
-}
+};

@@ -1,3 +1,4 @@
+'use strict';
 var Admin = require('./adminModel.js');
 var jwt = require('jwt-simple');
 var helpers = require('../config/helpers');
@@ -14,12 +15,12 @@ module.exports = {
 					email : admin.email,
 					firstName : admin.firstName,
 					lastName : admin.lastName
-				})
+				});
 				res.status(200).send(returnAdmin);
 			} else {
         helpers.errorHandler('InCorrect',req,res);
       }
-		})
+		});
 	},
 	//Add new admin 
 	addAdmin: function (req, res) {
@@ -50,9 +51,11 @@ module.exports = {
             });
             res.status(201).send(returnAdmin);
           }
-        })
+        });
+      } else {
+        helpers.errorHandler("Admin Already Exists", req, res);
       }
-    })
+    });
   },
   // Admin sign in function 
   signin : function (req,res) {
@@ -60,6 +63,7 @@ module.exports = {
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
+<<<<<<< HEAD
         if(admin){
             Admin.comparePassword(password, admin.password, res, function(found){
                 if(found){
@@ -75,4 +79,4 @@ module.exports = {
         }
     })
   }
-}
+};

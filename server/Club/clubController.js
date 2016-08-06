@@ -1,3 +1,4 @@
+'use strict';
 var Club = require('./clubModel');
 var jwt = require('jwt-simple');
 var helpers = require('../config/helpers');
@@ -13,12 +14,12 @@ module.exports ={
 					username : club.username,
 					country : club.country,
 					clubName : club.clubName
-				})
+				});
 				res.status(200).send(returnClub);
 			}else{
 				helpers.errorHandler(error, req, res);
 			}
-		})
+		});
 	},
 	// Add a new club
 	addClub : function(req,res){
@@ -42,12 +43,14 @@ module.exports ={
 							username : club.username,
 							country : club.country,
 							clubName : club.clubName
-						})
-						res.status(201).send(returnClub)
+						});
+						res.status(201).send(returnClub);
 					}
-				})
+				});
+			} else {
+				res.status(500).send('Club Already Exists');
 			}
-		})
+		});
 	},
 	// fetch all clubs
 	getAllClubs : function (req, res){
@@ -66,7 +69,7 @@ module.exports ={
 				}
 				res.status(200).send(clubArray);
 			}
-		})
+		});
 	},
 	// club sign in
 	signin : function (req,res) {
@@ -88,7 +91,7 @@ module.exports ={
 			}else{
 				helpers.errorHandler("User Does Not Exists", req, res)
 			}
-		})
+		});
 	},
 
 	// this function is to remove a club
@@ -97,11 +100,11 @@ module.exports ={
 		Club.findOne({ username : username }).remove()
 		.exec(function (error,data) {
 			if(data.result.n){
-				res.status(201).send("Club Deleted");
+				res.status(201).send('Club Deleted');
 			}else{
 				helpers.errorHandler("Not Available", req, res);
 			}
-		})
+		});
 	},
 	// this function is to modify the information of a club
 	clubEdit : function (req,res) {
@@ -118,7 +121,7 @@ module.exports ={
 						}else{
 							club.clubName = req.body.newClubName;
 						}
-					})
+					});
 				}
 				if(req.body.oldPassword){
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
@@ -126,18 +129,18 @@ module.exports ={
 							club.password = req.body.password;
 							club.save(function(error,savedClub){
 								res.status(201).send('Updated/n'+savedClub);
-							})
+							});
 						} else {
 							helpers.errorHandler("Wrong Entry", req, res);
 						}
-					})
+					});
 				}
 				club.save(function (error, savedClub) {
 					res.status(201).send(savedClub);
-				})
+				});
 			}else{
 				helpers.errorHandler("Club Not Available", req, res);
 			}
 		});
 	}
-}
+};

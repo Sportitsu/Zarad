@@ -1,3 +1,4 @@
+'use strict';
 var Tournament = require('./tournamentModel');
 var helpers = require('../config/helpers');
 
@@ -22,7 +23,7 @@ module.exports = {
 				}
 				res.status(200).send(tournamentsArray);
 			}
-		})
+		});
 	},
 	// Add tournament function
 	addTournament : function (req, res) {
@@ -33,14 +34,14 @@ module.exports = {
 			organizer : req.body.organizer,
 			details : req.body.details,
 			poster : req.body.poster
-		})
+		});
 		newTournament.save(function(error, tournament){
 			if(error){
 				helpers.errorHandler(error, req, res);
 			}else{
 				res.status(201).send(tournament);
 			}
-		})
+		});
 	},
 	// function to fetch one tournament
 	getOne : function (req,res) {
@@ -52,7 +53,7 @@ module.exports = {
 			}else{
 				helpers.errorHandler(error, req, res);
 			}
-		})
+		});
 	},
 	// function to delete a tournament
 	tournamentRemove : function (req,res) {
@@ -64,7 +65,7 @@ module.exports = {
 			}else{
 				helpers.errorHandler("Not Available", req, res);			
 			}
-		})
+		});
 	},
 	// function to edit Trounament
 	tournamentEdit : function (req,res) {
@@ -80,7 +81,7 @@ module.exports = {
 				tournament.poster = req.body.poster || tournament.poster;
 				tournament.save(function(error,saved){
 					res.status(201).send(saved);
-				})
+				});
 			}else{
 				helpers.errorHandler("Tournament Not Available", req, res);
 			}
