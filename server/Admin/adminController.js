@@ -30,7 +30,9 @@ module.exports = {
     Admin.findOne({username: username})
     .exec(function(error,admin){
 
-       if(!admin){
+       if(admin){
+        res.send(500,'Admin Already Exists');
+      } else {
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
@@ -52,8 +54,6 @@ module.exports = {
             res.status(201).send(returnAdmin);
           }
         })
-      } else {
-        res.send(500,'Admin Already Exists');
       }
     })
   },
