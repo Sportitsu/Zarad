@@ -6,8 +6,6 @@ var app = express();
 
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
-
-mongoose.Promise = global.Promise;
 mongoose.connect(config.mongoURI[app.settings.env],function(err, res){
 	if(err){
 		console.log('Error Connecting to the database. ' + err);
