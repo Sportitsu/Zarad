@@ -1,6 +1,7 @@
 'use strict';
 var Club = require('./clubModel');
 var jwt = require('jwt-simple');
+var helpers = require('../config/helpers');
 
 module.exports ={
 	// fetch a club
@@ -16,7 +17,7 @@ module.exports ={
 				});
 				res.status(200).send(returnClub);
 			}else{
-				res.status(500).send(error);
+				helpers.errorHandler(error, req, res);
 			}
 		});
 	},
@@ -25,7 +26,9 @@ module.exports ={
 		var username = req.body.username;
 		Club.findOne({username : username})
 		.exec(function (error,club) {
-			if(!club){
+			if(club){
+				helpers.errorHandler('Club Already Exists', req, res);
+				}else{
 				var newClub = new Club({
 					username : req.body.username,
 					password : req.body.password,
@@ -34,7 +37,7 @@ module.exports ={
 				});
 				newClub.save(function (error,club) {
 					if(error){
-						res.status(500).send(error);
+						helpers.errorHandler(error, req, res);
 					}else{
 						var returnClub = new Club ({
 							username : club.username,
@@ -44,8 +47,6 @@ module.exports ={
 						res.status(201).send(returnClub);
 					}
 				});
-			} else {
-				res.status(500).send('Club Already Exists');
 			}
 		});
 	},
@@ -54,7 +55,7 @@ module.exports ={
 		Club.find({})
 		.exec(function (error,clubs) {
 			if(clubs.length === 0){
-				res.status(500).send('Empty Table');
+				helpers.errorHandler('Empty Table', req, res);
 			}else{
 				var clubArray = [];
 				for (var i = 0; i < clubs.length; i++) {
@@ -75,18 +76,18 @@ module.exports ={
 
 		Club.findOne({ username: username})
 		.exec(function (error,club) {
-			if(!club){
-				res.status(500).send(new Error('User does not exist'));
-			}else{
+			if(club){
 				Club.comparePassword(password,club.password, res, function(found){
-        		        if(!found){
-       				       res.status(500).send('Wrong Password');
-      			        } else {
-     			            var token = jwt.encode(club, 'secret');
+        		        if(found){
+        		        	var token = jwt.encode(club, 'secret');
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
+      			        } else {
+       				       helpers.errorHandler('Wrong Password', req, res);
                         }
                 });
+			}else{
+				helpers.errorHandler('User Does Not Exists', req, res);
 			}
 		});
 	},
@@ -99,7 +100,7 @@ module.exports ={
 			if(data.result.n){
 				res.status(201).send('Club Deleted');
 			}else{
-				res.status(500).send('Not Available');
+				helpers.errorHandler('Not Available', req, res);
 			}
 		});
 	},
@@ -107,16 +108,14 @@ module.exports ={
 	clubEdit : function (req,res) {
 		Club.findOne({ username : req.body.username })
 		.exec(function (error, club) {
-			if(!club){
-				res.status(500).send('Club Not Available');
-			}else{
+			if(club){
 				club.country = req.body.country || club.country;
 				if(req.body.newClubName){
 					var clubName = req.body.newClubName;
 					Club.findOne({ clubName : clubName})
 					.exec(function (error,clubTwo) {
 						if(clubTwo){
-							res.status(500).send('Club Name Already Exists');
+							helpers.errorHandler('Club Name Already Exists', req, res);
 						}else{
 							club.clubName = req.body.newClubName;
 						}
@@ -130,13 +129,15 @@ module.exports ={
 								res.status(201).send('Updated/n'+savedClub);
 							});
 						} else {
-							res.status(500).send('Wrong Entry');
+							helpers.errorHandler('Wrong Entry', req, res);
 						}
 					});
 				}
 				club.save(function (error, savedClub) {
 					res.status(201).send(savedClub);
 				});
+			}else{
+				helpers.errorHandler('Club Not Available', req, res);
 			}
 		});
 	}

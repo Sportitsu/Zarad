@@ -1,6 +1,7 @@
 'use strict';
 var Admin = require('./adminModel.js');
 var jwt = require('jwt-simple');
+var helpers = require('../config/helpers');
 
 module.exports = {
 	//fetch one admin
@@ -16,22 +17,20 @@ module.exports = {
 					lastName : admin.lastName
 				});
 				res.status(200).send(returnAdmin);
-
 			} else {
-        res.status(500).send('InCorrect');
+        helpers.errorHandler('InCorrect',req,res);
       }
-
 		});
 	},
 	//Add new admin 
-
 	addAdmin: function (req, res) {
-
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
 
-       if(!admin){
+       if(admin){
+        helpers.errorHandler('Admin Already Exists', req,res);
+      } else {
         var newAdmin = new Admin ({
           username: req.body.username,
           password: req.body.password,
@@ -42,7 +41,7 @@ module.exports = {
   
         newAdmin.save(function(err, newAdmin){
           if(err){
-            res.status(500).send(err);
+            helpers.errorHandler(err,req,res);
           } else {
             var returnAdmin = new Admin ({
               username : newAdmin.username,
@@ -53,8 +52,6 @@ module.exports = {
             res.status(201).send(returnAdmin);
           }
         });
-      } else {
-        res.send(500,'Admin Already Exists');
       }
     });
   },
@@ -64,19 +61,19 @@ module.exports = {
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
-      if(!admin){
-        res.status(500).send(new Error('Admin Not Found'));
-      }else{
-        Admin.comparePassword(password, admin.password, res, function(found){
-          if(!found){
-            res.status(500).send('Wrong Password');
-          } else {
-            var token = jwt.encode(admin, 'secret');
-            res.setHeader('x-access-token',token);
-            res.json({token: token});
-          }
-        });
-      }
+        if(admin){
+            Admin.comparePassword(password, admin.password, res, function(found){
+                if(found){
+                  var token = jwt.encode(admin, 'secret');
+                  res.setHeader('x-access-token',token);
+                  res.json({token: token});
+                } else {
+                  helpers.errorHandler('Wrong Password', req,res);
+                }
+            });
+        }else{
+          helpers.errorHandler('Admin Not Found', req, res);
+        }
     });
   }
 };
