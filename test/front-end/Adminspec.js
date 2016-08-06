@@ -1,4 +1,4 @@
-describe('Controller: ListLibrariesController', function() {
+/*describe('Controller: ListLibrariesController', function() {
   var scope, restService, $location;
 });
 var mockRestService = {};
@@ -51,7 +51,7 @@ beforeEach(function() {
     };
   });
 });
-
+*/
 
 
 
