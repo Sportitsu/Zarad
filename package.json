@@ -15,6 +15,10 @@
     "Fatima Hamami <en.f.h90@gmail.com>",
     "Elham Rababha <elham_rababah@yahoo.com>"
   ],
+
+  "bugs": {
+    "url": "https://github.com/Sportitsu/Zarad.git/issues"
+  },
   "scripts": {
     "start": "./node_modules/.bin/nodemon --ignore node_modules server/server.js",
     "postinstall" : "npm install -g bower; bower install",
