@@ -1,3 +1,4 @@
+'use strict';
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
@@ -8,12 +9,11 @@ module.exports= {
 		User.findOne({username: req.params.username})
 		.exec(function(error,user){
 			if(user){
-
 				res.status(200).send(user);
 			}else{
 				res.status(500).send(error);
 			}
-		})
+		});
 	},
 	// adding a new user
 	getAllUsers :  function (req,res){
@@ -95,10 +95,10 @@ module.exports= {
 							                res.status(500).send(err);
 							            } else {
 							                res.status(201).send(newUser);
-							            };
+							            }
 							        });			        			
 				        		}
-				        	})
+				        	});
 	                }
 	      
 	    });
@@ -114,31 +114,32 @@ module.exports= {
 				if(!user){
 					res.status(500).send('User not Available');
 				} else {
-					user.email = req.body.email || user.email, 
-					user.firstName = req.body.firstName || user.firstName,
-					user.lastName = req.body.lastName || user.lastName,
-					user.middleName = req.body.middleName || user.middleName,
-					user.age = req.body.age || user.age,
-					user.image = req.body.image || user.image,
-					user.country = req.body.country || user.country,
-					user.phone = req.body.phone || user.phone, 
-					user.club = req.body.club || user.club,
-					user.beltColor = req.body.beltColor || user.beltColor,
-					user.achievements = req.body.achievements || user.achievements ,
-					user.attendance = req.body.attendance || user.attendance
+					user.email = req.body.email || user.email ;
+					user.firstName = req.body.firstName || user.firstName;
+					user.lastName = req.body.lastName || user.lastName;
+					user.middleName = req.body.middleName || user.middleName;
+					user.age = req.body.age || user.age;
+					user.image = req.body.image || user.image;
+					user.country = req.body.country || user.country;
+					user.phone = req.body.phone || user.phone;
+					user.club = req.body.club || user.club;
+					user.beltColor = req.body.beltColor || user.beltColor;
+					user.achievements = req.body.achievements || user.achievements ;
+					user.attendance = req.body.attendance || user.attendance;
+
 					if(req.body.oldPassword){
-						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
+						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
 								user.save(function(err, savedUser){
-									res.status(201).send('Updated \n' + savedUser)
-								})
-						})
+									res.status(201).send('Updated \n' + savedUser);
+								});
+						});
 					}
 					user.save(function(err, savedUser){
-						res.status(201).send(savedUser)	
+						res.status(201).send(savedUser);
 					});
 				}
-			})
+			});
 	}, 
 
 	deleteUser : function(req, res){
@@ -150,6 +151,6 @@ module.exports= {
 			} else {
 				res.status(500).send('Not Available');
 			}
-		})
+		});
 	}
-}
+};

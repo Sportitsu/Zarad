@@ -1,13 +1,13 @@
+'use strict';
 var jwt = require('jwt-simple');
 
 module.exports = {
 	errorLogger : function(error, req, res, next){
-
 		console.log(error);
 		next(error);
 	},
-	errorHandler : function(error, req, res, next){
-		res.send(500,{error: error.message})
+	errorHandler : function(error, req, res){
+		res.send(500,{error: error.message});
 	},
 	decode : function(req, res, next){
 		var token = req.headers['x-access-token'];
@@ -28,4 +28,4 @@ module.exports = {
 		}
 
 	}
-}
+};

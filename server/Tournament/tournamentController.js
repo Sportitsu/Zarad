@@ -1,3 +1,4 @@
+'use strict';
 var Tournament = require('./tournamentModel');
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
 		Tournament.find({})
 		.exec(function (error, tournaments) {
 			if(tournaments.length === 0){
-				res.status(500).send("Empty Table");
+				res.status(500).send('Empty Table');
 			}else{
 				var tournamentsArray=[];
 				for (var i = 0; i < tournaments.length; i++) {
@@ -21,7 +22,7 @@ module.exports = {
 				}
 				res.status(200).send(tournamentsArray);
 			}
-		})
+		});
 	},
 	// Add tournament function
 	addTournament : function (req, res) {
@@ -32,14 +33,14 @@ module.exports = {
 			organizer : req.body.organizer,
 			details : req.body.details,
 			poster : req.body.poster
-		})
+		});
 		newTournament.save(function(error, tournament){
 			if(error){
 				res.status(500).send(error);
 			}else{
 				res.status(201).send(tournament);
 			}
-		})
+		});
 	},
 	// function to fetch one tournament
 	getOne : function (req,res) {
@@ -51,7 +52,7 @@ module.exports = {
 			}else{
 				res.status(500).send(error);
 			}
-		})
+		});
 	},
 	// function to delete a tournament
 	tournamentRemove : function (req,res) {
@@ -63,7 +64,7 @@ module.exports = {
 			}else{
 				res.status(500).send('Not Available');				
 			}
-		})
+		});
 	},
 	// function to edit Trounament
 	tournamentEdit : function (req,res) {
@@ -71,7 +72,7 @@ module.exports = {
 		Tournament.findOne({ _id : id })
 		.exec(function(error, tournament){
 			if(!tournament){
-				res.status(500).send("Tournament Not Available");
+				res.status(500).send('Tournament Not Available');
 			}else{
 				tournament.name = req.body.name || tournament.name;
 				tournament.Date = req.body.Date || tournament.Date;
@@ -82,9 +83,9 @@ module.exports = {
 
 				tournament.save(function(error,saved){
 					res.status(201).send(saved);
-				})
+				});
 			}
 
-			})
+			});
 		}
-}
+};
