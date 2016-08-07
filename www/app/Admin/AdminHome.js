@@ -1,9 +1,12 @@
+'use strict';
 angular.module('zarad.admin',['ionic'])
 
 .controller('AdminController',function($scope, $window, $location,Admin){
+
   $scope.admin={};
 	$scope.club = {};
   $scope.tournament = {};
+  $scope.user={};
 
   //admin signup
   $scope.signup=function(){
@@ -32,8 +35,10 @@ angular.module('zarad.admin',['ionic'])
 
   //add tournament function
   $scope.Addtournament =function(){
-    //Admin.Addtournament($scope.tournament)
-    //.then()
-
-  }
-})
+    Admin.Addtournament($scope.tournament)
+    .then(function (res) {
+       console.log(res);
+      });
+  };
+  $scope.Adminsignin=function(){};
+});
