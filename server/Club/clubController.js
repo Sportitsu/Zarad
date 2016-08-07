@@ -23,10 +23,9 @@ module.exports ={
 	},
 	// Add a new club
 	addClub : function(req,res){
-
-
+		
 		if(req.body.password && req.body.country && req.body.clubName){
-			req.body.username = req.body.username || getName(req.body.clubName);
+			req.body.username = req.body.username || helpers.getClubName(req.body.clubName);
 		} else {
 			helpers.errorHandler('Wrong set Up' , req,res);
 		}
@@ -149,12 +148,3 @@ module.exports ={
 		});
 	}
 };
-
-var getName = function(clubName){
-	var name = 'cl';
-	for(var i = 0; i < 4 ; i++){
-		name+= clubName[i]
-	}
-	name+= Math.floor(Math.random()*999);
-	return name;
-}

@@ -22,7 +22,8 @@ describe('User Test Database', function(done){
 			'username' : 'mohammad',
 		    'password' : 'testing', 
 		    'club' : 'DesertForce',
-		    'country' : 'Jordan'
+		    'country' : 'Jordan',
+		    'beltColor' : 'Purple'
 		});
 		newUser.save(function(err,savedUser){
 			done();
@@ -69,7 +70,9 @@ describe('User Test Database', function(done){
 		    'lastName' : 'Man',
 		    'club' : 'Makhai',
 		    'email' : 'ironman@avengers.com', 
-		    'country' : 'Jordan'
+		    'country' : 'Jordan',
+		    'beltColor' : 'Purple'
+
 		})
 		newUser.save(function(error , newUser){
 			chai.request(server)
@@ -131,7 +134,8 @@ describe('User Test Database', function(done){
 					'username' : 'Fighter',
 					'password' : 'fighting',
 					'club' : 'SourceMMA',
-					'country' : 'Jordan'
+					'country' : 'Jordan',
+					'beltColor' : 'Green'
 				})
 				.end(function(err, res){
 					expect(err).to.be.equal(null);
