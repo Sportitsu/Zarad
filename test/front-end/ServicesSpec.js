@@ -30,7 +30,7 @@ beforeEach(module('zarad'));
         clubName: "zarad jordan" };
 
       $httpBackend
-        .expect('POST','/api/clubregister')
+        .expect('POST','/api/club/register')
         .respond(201, {
         username:1,
         password:"1111",

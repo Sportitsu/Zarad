@@ -33,6 +33,7 @@ module.exports = function(config) {
       'www/app/**/*.js',
       'www/app/auth/auth.js',
       'www/app/services/services.js',
+      'www/app/profile/profile.js',
       'www/lib/angular-mocks/angular-mocks.js',
       'test/front-end/clientSpec.js',
       'test/front-end/adminspec.js',

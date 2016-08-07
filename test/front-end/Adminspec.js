@@ -53,7 +53,7 @@ describe('AdminController',function(){
 	});
 	// test if thier is areqest send to server // here we use fake reqest
 	it('should be able to create new Club with Addclub()', function () {
-		$httpBackend.expectPOST("/api/clubregister").respond(201, '');
+		$httpBackend.expectPOST("/api/club/register").respond(201, '');
     	$scope.Addclub();
     	$httpBackend.flush();
 	});

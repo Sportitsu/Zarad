@@ -4,6 +4,7 @@ angular.module('zarad',[
 	'zarad.admin',
 	'zarad.auth',
 	'zarad.club',
+	//'zarad.profile',
 	'ngRoute',
 	'ionic'
 ])
@@ -30,6 +31,14 @@ angular.module('zarad',[
 	.when('/club',{
 		templateUrl: 'app/club/club.html',
 		controller: 'clubController'
+	})
+	.when('/clubprofile',{
+		templateUrl: 'app/profile/clubprofile.html',
+		controller: 'profileController'
+	})
+	.when('/userprofile',{
+		templateUrl: 'app/profile/userprofile.html',
+		controller: 'profileController'
 	})
 	
 

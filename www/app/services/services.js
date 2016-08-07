@@ -40,7 +40,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data: club,
-      url:'/api/clubregister'
+      url:'/api/club/register'
     }).then(function (resp) {
       return resp.data;
     });

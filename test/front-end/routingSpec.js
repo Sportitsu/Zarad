@@ -26,6 +26,21 @@ describe('Routing',function(){
         expect($route.routes['/admin'].controller).to.equal('AdminController');
         expect($route.routes['/admin'].templateUrl).to.equal('app/admin/admin.html');
     });
+    it('Should have /club route, template, and controller', function () {
+        expect($route.routes['/club']).to.be.defined;
+        expect($route.routes['/club'].controller).to.equal('clubController');
+        expect($route.routes['/club'].templateUrl).to.equal('app/club/club.html');
+    });
+    it('Should have /clubprofile route, template, and controller', function () {
+        expect($route.routes['/clubprofile']).to.be.defined;
+        expect($route.routes['/clubprofile'].controller).to.equal('profileController');
+        expect($route.routes['/clubprofile'].templateUrl).to.equal('app/profile/clubprofile.html');
+    });
+     it('Should have /userprofile route, template, and controller', function () {
+        expect($route.routes['/userprofile']).to.be.defined;
+        expect($route.routes['/userprofile'].controller).to.equal('profileController');
+        expect($route.routes['/userprofile'].templateUrl).to.equal('app/profile/userprofile.html');
+    });
 
 
 
