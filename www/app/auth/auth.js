@@ -2,8 +2,11 @@ angular.module('zarad.auth',['ionic'])
 
 .controller('AuthController',function($scope , $window , Auth){
 	$scope.user={};
+	$scope.club={};
 	$scope.signup=function(){
-		Auth.signup().then(function(resp){
+		var data=$scope.club;
+		Auth.signup(data).then(function(resp){
+			console.log(data);
 		})
 	}
 	

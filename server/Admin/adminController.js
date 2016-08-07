@@ -29,7 +29,6 @@ module.exports = {
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
-
        if(!admin){
         var newAdmin = new Admin ({
           username: req.body.username,
