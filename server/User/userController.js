@@ -63,8 +63,12 @@ module.exports= {
             });
 	},
 	signup : function(req, res){
-		var username = req.body.username;
-			User.findOne({username: username})
+		if(req.body.beltColor && req.body.password && req.body.club && req.body.country){
+			req.body.username = req.body.username || helpers.getPlayerName(req.body.firstName);
+		} else {
+			helpers.errorHandler('Wrong set Up' , req,res);
+		}
+			User.findOne({username: req.body.username})
 	    		.exec(function(error,user){
 			        if(user){
 			          helpers.errorHandler('User Already Exists', req, res);
