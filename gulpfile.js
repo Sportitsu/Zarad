@@ -7,6 +7,8 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var jshint = require('gulp-jshint');
+var uglify = require('gulp-uglify');
+var exec = require('child_process').exec;
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -53,8 +55,37 @@ gulp.task('git-check', function(done) {
   done();
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dc48c8fd89ae526d2d9e1a2d44c5aac131b79425
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
+<<<<<<< HEAD
 })
+=======
+})
+
+
+gulp.task('combine', function(){
+       gulp.src([ './www/app.js','./www/app/**/*.js'])
+             .pipe(concat('fontEndConcat.js'))
+             .pipe(uglify())
+             .pipe(gulp.dest('./www/dist/'));
+       gulp.src(['./www/lib/**/*.js', './www/ionic/**/*.js'])
+           .pipe(concat('libraries.js'))
+           .pipe(gulp.dest('./www/dist'));
+      return 'done';
+});
+
+
+gulp.task('test', function (cb) {
+  exec('npm test', function (err, stdout, stderr) {
+    console.log(stdout);
+    console.log(stderr);
+    cb(err);
+  });
+})
+>>>>>>> dc48c8fd89ae526d2d9e1a2d44c5aac131b79425
