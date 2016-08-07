@@ -21,7 +21,6 @@ angular.module('zarad',[
 		templateUrl :'app/auth/signup.html',
 		controller : 'AuthController'
 	})
-
 	.when('/AdminMain',{
 		templateUrl :'app/Admin/AdminMain.html',
 		controller : 'AdminController'
@@ -46,7 +45,6 @@ angular.module('zarad',[
 		templateUrl: '/app/Admin/AddTournment.html',
 		controller: 'AdminController'
 	})
-	
 	.when('/clubprofile',{
 		templateUrl: 'app/profile/clubprofile.html',
 		controller: 'profileController'
