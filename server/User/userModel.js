@@ -16,7 +16,7 @@ var userSchema = new Schema ({
 	phone: { type: String },
 	Date: { type: Date, default: Date.now },
 	club: { type: String, required: true},
-	beltColor: { type: String },
+	beltColor: { type: String , required: true},
 	attendance : { type: Number },
 	achievements: Schema.Types.Mixed,
   country : { type : String , required : true },
