@@ -35,19 +35,43 @@ angular.module('zarad.services',[])
 	};
 })
 
+
 .factory('Admin', function ($http) {
+  var signin=function(admin){
+    return $http({
+      method:'POST',
+      url:'/api/admin/signin',
+      data:admin
+    })
+    .then(function(resp){
+       return resp.data;
+    });
+  }
+
+  var signup=function(admin){
+    return $http({
+      method:'POST',
+      url:'/api/admin/create',
+      data:admin
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  }
+
   //send club information to server
   var Addclub=function(club){
     return $http({
       method:'POST',
       data: club,
       url:'/api/club/register'
+
     }).then(function (resp) {
       return resp.data;
     });
+
   };
    //send club information to tournament
-
   var Addtournament=function(tournament){
     return $http({
       method:'POST',
@@ -59,6 +83,8 @@ angular.module('zarad.services',[])
   };
 
   return {
+    signin: signin,
+    signup: signup,
     Addclub: Addclub,
     Addtournament:Addtournament
   };

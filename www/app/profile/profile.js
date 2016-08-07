@@ -1,3 +1,4 @@
+
 'use strict';
 angular.module('zarad.profile',['ionic'])
 .controller('profileController',function($scope,Profile){
@@ -18,3 +19,4 @@ angular.module('zarad.profile',['ionic'])
 
  
 });
+

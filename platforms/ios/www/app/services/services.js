@@ -20,6 +20,7 @@ angular.module('zarad.services',[])
     if(user['type']==="player"){
       ObjUser["url"]='/api/user/signin'
     }
+<<<<<<< HEAD
      if(user['type']==="club"){
 
       ObjUser["url"]='/api/club/signin'
@@ -31,11 +32,25 @@ angular.module('zarad.services',[])
     });
   }
 =======
+=======
+     if(user['type']==="admin"){
+      ObjUser["url"]=''
+    }
+     if(user['type']==="club"){
+
+      ObjUser["url"]=''
+    }
+    return $http(ObjUser)
+    .then(function (resp) {
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
       return resp;
     });
   };
   
+<<<<<<< HEAD
 >>>>>>> 5188d08d33f631bf868f85cb736047a544adcb7f:platforms/ios/www/app/services/services.js
+=======
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -49,9 +64,14 @@ angular.module('zarad.services',[])
 
 .factory('Admin', function ($http, $location, $window) {
   //send club information to server
+<<<<<<< HEAD
   
   var Addclub=function(club){
      console.log(club)
+=======
+  var Addclub=function(club){
+    console.log(club)
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
     return $http({
       method:'POST',
       data: club,
@@ -61,7 +81,10 @@ angular.module('zarad.services',[])
    //send club information to tournament
 
   var Addtournament=function(tournament){
+<<<<<<< HEAD
     console.log(tournament)
+=======
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
     return $http({
       method:'POST',
       data: tournament,
@@ -69,6 +92,7 @@ angular.module('zarad.services',[])
     })
   };
 
+<<<<<<< HEAD
 var Adminsignin= function(admin){
  //console.log("dsads")
   return $http({
@@ -93,6 +117,11 @@ var Addadmin=function(newAdmin){
     Addtournament:Addtournament,
     Adminsignin:Adminsignin,
     Addadmin:Addadmin
+=======
+  return {
+    Addclub: Addclub,
+    Addtournament:Addtournament
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
   };
 })
 

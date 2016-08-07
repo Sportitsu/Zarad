@@ -1,4 +1,3 @@
-
 angular.module('zarad',[
 	'zarad.services',
 	'zarad.admin',
@@ -10,23 +9,42 @@ angular.module('zarad',[
 ])
 .config(function ($routeProvider , $httpProvider) {
 	$routeProvider
+	.when('/',{
+		templateUrl:'app/auth/home.html',
+		controller: 'AuthController'
+	})
 	.when('/signin', {
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
 	.when('/signup', {
-
 		templateUrl :'app/auth/signup.html',
 		controller : 'AuthController'
 	})
 
-	.when('/adminhome',{
-		templateUrl :'app/admin/adminhome.html',
+	.when('/AdminMain',{
+		templateUrl :'app/Admin/AdminMain.html',
 		controller : 'AdminController'
 	})
-	.when('/admin',{
-		templateUrl :'app/admin/admin.html',
+	.when('/AdminAction',{
+		templateUrl: 'app/Admin/AdminAction.html',
+		controller: 'AdminController'
+	})
+	.when('/AdminSignin',{
+		templateUrl: '/app/Admin/AdminSignin.html',
 		controller : 'AdminController'
+	})
+	.when('/AdminSignup',{
+		templateUrl: '/app/Admin/AdminSignup.html',
+		controller: 'AdminController'
+	})
+	.when('/AddClub',{
+		templateUrl: '/app/Admin/AddClub.html',
+		controller: 'AdminController'
+	})
+	.when('/AddTournment',{
+		templateUrl: '/app/Admin/AddTournment.html',
+		controller: 'AdminController'
 	})
 	.when('/club',{
 		templateUrl: 'app/club/club.html',
@@ -39,9 +57,9 @@ angular.module('zarad',[
 	.when('/userprofile',{
 		templateUrl: 'app/profile/userprofile.html',
 		controller: 'profileController'
+
 	})
 	
-
 	$httpProvider.interceptors.push('AttachTokens');
 })
 .factory('AttachTokens',function ($window){
