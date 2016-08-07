@@ -5,13 +5,15 @@
     <input type="text" placeholder="First Name" ng-model='user.username'>
   </label>
   <label class="item item-input item-floating-label">
-    <span class="input-label">Last Name</span>
-    <input type="text" placeholder="Last Name" ng-model='user.password'>
+    <span class="input-label">Password</span>
+    <input type="password" placeholder="Last Name" ng-model='user.password'>
   </label>
 </div>
 
 <ion-list>
-  <ion-checkbox ng-model="user.type" value="player">Player</ion-checkbox>
-  <ion-checkbox ng-model="user.type" value="club">Club</ion-checkbox>
-  <button ng-click="signin()">signin</button>
+  <ion-checkbox id="player" ng-model="user.player" >Player</ion-checkbox>
+  <ion-checkbox id="club" ng-model="user.club" >Club</ion-checkbox>
 </ion-list>
+  <button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="signin()">
+  signin
+  </button>

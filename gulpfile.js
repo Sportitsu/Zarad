@@ -11,7 +11,6 @@ var uglify = require('gulp-uglify');
 var exec = require('child_process').exec;
 
 
-
 var paths = {
   sass: ['./scss/**/*.scss'],
   lint: ['./www/app/**/*.js','./server/**/*.js']
@@ -57,11 +56,15 @@ gulp.task('git-check', function(done) {
   done();
 });
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 30abc015b741fde7e8b872ff46a91f67d22cd9cd
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
+<<<<<<< HEAD
 })
 
 
@@ -84,3 +87,6 @@ gulp.task('test', function (cb) {
     cb(err);
   });
 })
+=======
+})
+>>>>>>> 30abc015b741fde7e8b872ff46a91f67d22cd9cd

@@ -1,5 +1,4 @@
 'use strict';
-// TODO DELETE ADMIN 
 // Require all the controller functions here 
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
