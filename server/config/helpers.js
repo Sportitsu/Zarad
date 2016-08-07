@@ -2,6 +2,25 @@
 var jwt = require('jwt-simple');
 
 module.exports = {
+
+	getClubName : function(clubName){
+		var name = 'cl';
+		for(var i = 0; i < 4 ; i++){
+			name+= clubName[i]
+		}
+		name+= Math.floor(Math.random()*999);
+		return name;
+	},
+
+	getPlayerName : function(playerName){
+		var name = 'pl';
+		for(var i = 0; i < 4 ; i++){
+			name+= clubName[i]
+		}
+		name+= Math.floor(Math.random()*999);
+		return name;	
+	},
+
 	errorLogger : function(error, req, res, next){
 		console.log(error);
 		next(error);
