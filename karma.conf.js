@@ -12,24 +12,31 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 
 
-    frameworks: ['mocha','chai'],
+    frameworks: ['mocha','chai','sinon'],
 
 
     // list of files / patterns to load in the browser
     files: [
       'www/lib/angular/angular.js',
-      'www/lib/angular-mocks/angular-mocks.js',
       'www/lib/angular-route/angular-route.js',
       'www/ionic/js/angular/angular.js',
+      'www/lib/ionic/js/ionic.js',
+      'www/lib/ionic/js/ionic-angular.js',
+      'www/lib/ionic/js/ionic.bundle.js',
+      'www/lib/angular-mocks/angular-mocks.js',
       'www/app.js',
       'www/app/**/*.js',
       'www/app/auth/auth.js',
       'www/app/services/services.js',
+      'www/app/profile/profile.js',
       'test/front-end/clientSpec.js',
-      'test/front-end/Adminspec.js',
-      'test/front-end/routingSpec.js'
+      'test/front-end/adminspec.js',
+      'test/front-end/routingSpec.js',
+      'test/front-end/ServicesSpec.js'
     ],
 
+
+    
 
     // list of files to exclude
     exclude: [

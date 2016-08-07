@@ -4,6 +4,15 @@ angular.module('zarad.admin',[])
 
 	$scope.club = {};
   $scope.tournament = {};
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  $scope.user={};
+
+
+=======
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
 
   //add club function
   $scope.Addclub =function(){
@@ -16,4 +25,24 @@ angular.module('zarad.admin',[])
     //.then()
 
   }
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+  $scope.Adminsignin =function(){
+    console.log($scope.user)
+    Admin.Adminsignin($scope.user)
+    .then(function(data){
+    $location.path('/admin');
+    }).catch(function(error){
+      console.error(error);
+    })
+  }
+       
+$scope.Addadmin =function(){
+    //console.log($scope.user)
+    Admin.Addadmin($scope.user)
+}
+=======
+>>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
 })

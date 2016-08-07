@@ -1,4 +1,3 @@
-
 'use strict';
 describe('AdminController',function(){
 	var  $scope, $rootScope, $window,$location,Admin,createController,$httpBackend;
@@ -33,28 +32,39 @@ describe('AdminController',function(){
 	it('should have a Addclub method',function(){
 		expect($scope.Addclub).to.be.a('function');
 	});
+  
+
 	it('should have a Addtournament method',function(){
 		expect($scope.Addtournament).to.be.a('function');
+	});
+	xit('should have a Adminsignin method',function(){
+		expect($scope.Adminsignin).to.be.a('function');
 	});
 	//test if the property in  scope
 	it('should have a club property on the $scope', function () {
 		expect($scope.club).to.be.an('object');
 	});
-
+	xit('should have a user property on the $scope', function () {
+		expect($scope.user).to.be.an('object');
+	});
 	it('should have a tournament property on the $scope', function () {
 		expect($scope.tournament).to.be.an('object');
 	});
 	// test if thier is areqest send to server // here we use fake reqest
 	it('should be able to create new Club with Addclub()', function () {
-		$httpBackend.expectPOST("/api/clubregister").respond(201, '');
+		$httpBackend.expectPOST("/api/club/register").respond(201, '');
     	$scope.Addclub();
+    	$httpBackend.flush();
+	});
+	xit('should be able to create new admin with Adminsignin()', function () {
+		$httpBackend.expectPOST("/api/admin/signin").respond(201, '');
+    	$scope.Adminsignin();
     	$httpBackend.flush();
 	});
 	//this must be fill  be fill 
 	it('should be able to create new tournament with Addtournament()', function () {
-		$httpBackend.expectPOST('').respond(201, '');
+		$httpBackend.expectPOST('/api/tournament/create').respond(201, '');
     	$scope.Addtournament();
     	$httpBackend.flush();
 	});
-	
-})
+});

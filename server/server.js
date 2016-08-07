@@ -1,13 +1,22 @@
 'use strict';
 var mongoose = require('mongoose');
 var express = require('express');
-var config = require('./_config');
+// var config = require('./_config');
 
 var app = express();
-
+var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
 
+// mongoose.connect(config.mongoURI[app.settings.env],function(err){
+// 	if(err){
+// 		console.log('Error Connecting to the database. ' + err);
+// 	} else {
+// 		console.log('Connected to Database ' + config.mongoURI[app.settings.env]);
+// 	}
+// });
+
+mongoose.connect(MONGO_URI);
 
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
