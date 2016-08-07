@@ -51,6 +51,7 @@ angular.module('zarad',[
 		templateUrl: 'app/profile/clubprofile.html',
 		controller: 'profileController'
 	})
+
 	.when('/userprofile',{
 		templateUrl: 'app/profile/userprofile.html',
 		controller: 'profileController'
