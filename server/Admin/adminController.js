@@ -52,8 +52,6 @@ module.exports = {
             res.status(201).send(returnAdmin);
           }
         });
-      } else {
-        res.send(500,'Admin Already Exists');
       }
     });
   },

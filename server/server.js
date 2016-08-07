@@ -7,7 +7,7 @@ var app = express();
 var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
-
+mongoose.connect(MONGO_URI);
 // mongoose.connect(config.mongoURI[app.settings.env],function(err){
 // 	if(err){
 // 		console.log('Error Connecting to the database. ' + err);
