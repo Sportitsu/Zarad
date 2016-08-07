@@ -77,5 +77,19 @@ angular.module('zarad.services',[])
   };
   return{
     AddUser : AddUser
+  }
+})
+.factory('Profile', function ($http, $location, $window) {
+  var getClub=function(){
+    return $http({
+      method: 'GET',
+      url: '/api/club/x/:username'
+    }).then(function(resp){
+      return resp.data;
+    })
+  };
+  return {
+    getClub:getClub
   };
 });
+
