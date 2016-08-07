@@ -55,23 +55,23 @@ gulp.task('git-check', function(done) {
   done();
 });
 
-<<<<<<< HEAD
-=======
 
->>>>>>> dc48c8fd89ae526d2d9e1a2d44c5aac131b79425
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
-<<<<<<< HEAD
-})
-=======
 })
 
 
 gulp.task('combine', function(){
-       gulp.src([ './www/app.js','./www/app/**/*.js'])
-             .pipe(concat('fontEndConcat.js'))
+       gulp.src([ './www/services/services.js',
+                  './www/app/Admin/AdminHome.js.js',
+                  './www/app/auth/auth.js',
+                  './www/club/club.js',
+                  './www/profile/profile.js',
+                  './www/app.js'
+        ])
+             .pipe(concat('app.min.js'))
              .pipe(uglify())
              .pipe(gulp.dest('./www/dist/'));
        gulp.src(['./www/lib/**/*.js', './www/ionic/**/*.js'])
@@ -88,4 +88,3 @@ gulp.task('test', function (cb) {
     cb(err);
   });
 })
->>>>>>> dc48c8fd89ae526d2d9e1a2d44c5aac131b79425
