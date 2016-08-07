@@ -1,7 +1,7 @@
 'use strict';
 var mongoose = require('mongoose');
 var express = require('express');
-var config = require('./_config');
+// var config = require('./_config');
 
 var app = express();
 var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';

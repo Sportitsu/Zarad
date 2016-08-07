@@ -10,7 +10,6 @@ var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var exec = require('child_process').exec;
 
-
 var paths = {
   sass: ['./scss/**/*.scss'],
   lint: ['./www/app/**/*.js','./server/**/*.js']
@@ -56,21 +55,23 @@ gulp.task('git-check', function(done) {
   done();
 });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 30abc015b741fde7e8b872ff46a91f67d22cd9cd
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
-<<<<<<< HEAD
+
 })
 
 
 gulp.task('combine', function(){
-       gulp.src([ './www/app.js','./www/app/**/*.js'])
-             .pipe(concat('fontEndConcat.js'))
+       gulp.src([ './www/services/services.js',
+                  './www/app/Admin/AdminHome.js.js',
+                  './www/app/auth/auth.js',
+                  './www/club/club.js',
+                  './www/profile/profile.js',
+                  './www/app.js'
+        ])
+             .pipe(concat('app.min.js'))
              .pipe(uglify())
              .pipe(gulp.dest('./www/dist/'));
        gulp.src(['./www/lib/**/*.js', './www/ionic/**/*.js'])
@@ -87,6 +88,3 @@ gulp.task('test', function (cb) {
     cb(err);
   });
 })
-=======
-})
->>>>>>> 30abc015b741fde7e8b872ff46a91f67d22cd9cd
