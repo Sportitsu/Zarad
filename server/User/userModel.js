@@ -20,6 +20,10 @@ var userSchema = new Schema ({
 	attendance : { type: Number },
 	achievements: Schema.Types.Mixed,
   country : { type : String , required : true },
+  membership : { type : Number, required : true } ,
+  valid : { type : Boolean , default : true },
+  subscription : { type : Number , default : 1 },
+  resub : { type : Boolean , default : false}
   salt : { type : String}
 });
 
