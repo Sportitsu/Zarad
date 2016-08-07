@@ -21,6 +21,7 @@ angular.module('zarad',[
 		templateUrl :'app/auth/signup.html',
 		controller : 'AuthController'
 	})
+
 	.when('/AdminMain',{
 		templateUrl :'app/Admin/AdminMain.html',
 		controller : 'AdminController'
@@ -49,9 +50,14 @@ angular.module('zarad',[
 		templateUrl: 'app/club/club.html',
 		controller: 'clubController'
 	})
-	.when('/clubProfile',{
-		templateUrl:'app/profile/clubProfile.html',
-		controller:'profileController'
+	.when('/clubprofile',{
+		templateUrl: 'app/profile/clubprofile.html',
+		controller: 'profileController'
+	})
+	.when('/userprofile',{
+		templateUrl: 'app/profile/userprofile.html',
+		controller: 'profileController'
+
 	})
 	
 	$httpProvider.interceptors.push('AttachTokens');
