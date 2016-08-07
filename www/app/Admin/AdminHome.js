@@ -2,7 +2,6 @@
 angular.module('zarad.admin',['ionic'])
 
 .controller('AdminController',function($scope, $window, $location,Admin){
-
   $scope.admin={};
 	$scope.club = {};
   $scope.tournament = {};
@@ -30,8 +29,8 @@ angular.module('zarad.admin',['ionic'])
   	.then(function(resp){
       console.log(resp.data);
       $location.path('/clubProfile');
-    })
-  }
+    });
+  };
 
   //add tournament function
   $scope.Addtournament =function(){
@@ -40,5 +39,4 @@ angular.module('zarad.admin',['ionic'])
        console.log(res);
       });
   };
-  $scope.Adminsignin=function(){};
 });

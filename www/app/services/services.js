@@ -34,8 +34,6 @@ angular.module('zarad.services',[])
 		isAuth : isAuth
 	};
 })
-
-
 .factory('Admin', function ($http) {
   var signin=function(admin){
     return $http({
@@ -58,18 +56,16 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   }
-
   //send club information to server
   var Addclub=function(club){
     return $http({
       method:'POST',
       data: club,
       url:'/api/club/register'
-
-    }).then(function (resp) {
-      return resp.data;
-    });
-
+    })
+    .then(function(resp){
+      return resp;
+    })
   };
    //send club information to tournament
   var Addtournament=function(tournament){
@@ -81,7 +77,6 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
-
   return {
     signin: signin,
     signup: signup,

@@ -35,13 +35,13 @@ beforeEach(module('zarad'));
         username:1,
         password:"1111",
         country:'jordan',
-        clubName: 'zarad jordan'
+        clubName: "zarad jordan"
         });
 
       Admin.Addclub(club).then(function (resp) {
       	
         //expect(resp.status).to.equal(201);
-        expect(resp.clubName).to.equal('zarad jordan');
+        expect(resp.clubName).to.equal("zarad jordan");
       });
 
       $httpBackend.flush();
@@ -83,14 +83,6 @@ beforeEach(module('zarad'));
 
       $httpBackend.flush();
     });
-
-
-
-
-
-})
-
-
-
-})
+  });
+});
 

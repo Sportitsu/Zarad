@@ -4,12 +4,12 @@ angular.module('zarad.auth',['ionic'])
 	$scope.user={};
 	$scope.club={};
 	$scope.signup=function(){
+		var data=$scope.club;
+		Auth.signup(data).then(function(resp){
+			console.log(data);
+		})
+	}
 
-		Auth.signup().then(function(resp){
-			console.log(resp);
-		});
-	};
-	
 	$scope.signin =function(){
 	var url='';
 	if($scope.user.type=== 'player'){
@@ -17,7 +17,6 @@ angular.module('zarad.auth',['ionic'])
 	}
 	else if($scope.user.type=== 'club'){
 		url='/api/club/signin';
-
 	}
   	Auth.signin($scope.user,url)
   	.then(function(data){
@@ -26,4 +25,4 @@ angular.module('zarad.auth',['ionic'])
   		console.error(error);
   	});
   };
-});
+})
