@@ -12,11 +12,10 @@ module.exports = function(app){
 	// Admin Page Routes
 	app.post('/api/admin/create', adminController.addAdmin);
 	app.post('/api/admin/signin', adminController.signin);
-<<<<<<< HEAD
+
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
-=======
+
 	// TODO DELETE ADMIN 
->>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
 	// *************************** //	
 	
 	//Tournament Page Routes
