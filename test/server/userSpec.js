@@ -64,7 +64,7 @@ describe('User Test Database', function(done){
 
 	it('should get one user when username is passed in route' , function(done){
 		var newUser = new User({
-			'username' : 'super',
+			'username' : 'testing',
 		    'password' : '123', 
 		    'firstName' : 'Iron' ,
 		    'lastName' : 'Man',
@@ -79,7 +79,7 @@ describe('User Test Database', function(done){
 				.get('/api/user/x/'+ newUser.username)
 				.end(function(err, res){
 					expect(res.status).to.be.equal(200);
-					expect(res.body.username).to.be.equal('super');
+					expect(res.body.username).to.be.equal('testing');
 					expect(res.body).to.have.property('username');
 					expect(res.body).to.have.property('firstName');
 					expect(res.body).to.have.property('lastName');
@@ -131,13 +131,14 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'Fighter',
 					'password' : 'fighting',
 					'club' : 'SourceMMA',
 					'country' : 'Jordan',
-					'beltColor' : 'Green'
+					'beltColor' : 'Green',
+					'firstName' : 'fatima'
 				})
 				.end(function(err, res){
+					console.log(res.body.username);
 					expect(err).to.be.equal(null);
 					expect(res.status).to.be.equal(201);
 					expect(res.body.country).to.be.equal('Jordan');
@@ -157,7 +158,6 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'ahmad',
 					'password' : 'ahmad',
 					'club' : 'makhai'
 				})
@@ -178,7 +178,6 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'Other' , 
 					'password' : 'testing' , 
 					'club' : 'SourceMMA'
 				})
