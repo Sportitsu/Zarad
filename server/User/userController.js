@@ -1,6 +1,8 @@
+'use strict';
 var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
+var helpers = require('../config/helpers');
 
 module.exports= {
 	// fetching a user based on the user name
@@ -8,19 +10,18 @@ module.exports= {
 		User.findOne({username: req.params.username})
 		.exec(function(error,user){
 			if(user){
-
 				res.status(200).send(user);
 			}else{
-				res.status(500).send(error);
+				helpers.errorHandler(error,req,res);
 			}
-		})
+		});
 	},
 	// adding a new user
 	getAllUsers :  function (req,res){
 		User.find({})
 		.exec(function (error,users) {
 			if (users.length === 0) {
-				res.status(500).send('Empty Table');
+				helpers.errorHandler('Empty Table', req, res);
 			} else {
 				var newArr=[];
 				for (var i = 0; i < users.length; i++) {
@@ -46,18 +47,18 @@ module.exports= {
 		var password = req.body.password;
 		User.findOne({username: username})
       		.exec(function (error, user) {
-       			if (!user) {
-     		 	    res.status(500).send(new Error('User does not exist'));
-    		    } else {
-       			    User.comparePassword(password,user.password, res, function(found){
-        		        if(!found){
-       				       res.status(500).send('Wrong Password');
-      			        } else {
-     			            var token = jwt.encode(user, 'secret');
+       			if (user) {
+     		 	      User.comparePassword(password,user.password, res, function(found){
+        		        if(found){
+       				       var token = jwt.encode(user, 'secret');
          			        res.setHeader('x-access-token',token);
                             res.json({token: token});
+      			        } else {
+       				       helpers.errorHandler('Wrong Password', req, res);
                         }
                     });
+    		    } else {
+     		 	    helpers.errorHandler('User Does Not Exist', req, res);
                 }
             });
 	},
@@ -66,15 +67,12 @@ module.exports= {
 			User.findOne({username: username})
 	    		.exec(function(error,user){
 			        if(user){
-			          res.status(500).send('User Already Exists');
+			          helpers.errorHandler('User Already Exists', req, res);
 				    } else {
 			    		Club.findOne({ clubName : req.body.club})
-
 				        	.exec(function(err, foundClub){
-				        		if(!foundClub){
-				        			res.status(500).send('Club Not Found');
-				        		} else {
-							        var newUser = new User ({
+				        		if(foundClub){
+				        			var newUser = new User ({
 							            username: req.body.username,
 						  	            password: req.body.password,
 							            email: req.body.email,
@@ -92,53 +90,51 @@ module.exports= {
 							        });				        			
 							        newUser.save(function(err, newUser){
 							            if(err){
-							                res.status(500).send(err);
+							                helpers.errorHandler(err, req, res);
 							            } else {
 							                res.status(201).send(newUser);
-							            };
-							        });			        			
+							            }
+							        });	
+				        		} else {
+				        			helpers.errorHandler('Club Not Found', req, res);
 				        		}
-				        	})
+				        	});
 	                }
-	      
 	    });
 
 	},
 
-
-
-
 	editProfile : function(req,res){
 		User.findOne({username  : req.body.username})
 			.exec(function(err , user){
-				if(!user){
-					res.status(500).send('User not Available');
-				} else {
-					user.email = req.body.email || user.email, 
-					user.firstName = req.body.firstName || user.firstName,
-					user.lastName = req.body.lastName || user.lastName,
-					user.middleName = req.body.middleName || user.middleName,
-					user.age = req.body.age || user.age,
-					user.image = req.body.image || user.image,
-					user.country = req.body.country || user.country,
-					user.phone = req.body.phone || user.phone, 
-					user.club = req.body.club || user.club,
-					user.beltColor = req.body.beltColor || user.beltColor,
-					user.achievements = req.body.achievements || user.achievements ,
-					user.attendance = req.body.attendance || user.attendance
+				if(user){
+					user.email = req.body.email || user.email; 
+					user.firstName = req.body.firstName || user.firstName;
+					user.lastName = req.body.lastName || user.lastName;
+					user.middleName = req.body.middleName || user.middleName;
+					user.age = req.body.age || user.age;
+					user.image = req.body.image || user.image;
+					user.country = req.body.country || user.country;
+					user.phone = req.body.phone || user.phone; 
+					user.club = req.body.club || user.club;
+					user.beltColor = req.body.beltColor || user.beltColor;
+					user.achievements = req.body.achievements || user.achievements;
+					user.attendance = req.body.attendance || user.attendance;
 					if(req.body.oldPassword){
-						User.comparePassword(req.body.oldPassword , user.password , res , function(found){
+						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
 								user.save(function(err, savedUser){
-									res.status(201).send('Updated \n' + savedUser)
-								})
-						})
+									res.status(201).send('Updated \n' + savedUser);
+								});
+						});
 					}
 					user.save(function(err, savedUser){
-						res.status(201).send(savedUser)	
+						res.status(201).send(savedUser);
 					});
+				} else {
+					helpers.errorHandler('User Not Available', req, res);
 				}
-			})
+			});
 	}, 
 
 	deleteUser : function(req, res){
@@ -148,8 +144,8 @@ module.exports= {
 			if(data.result.n){
 				res.status(201).send('User Deleted');
 			} else {
-				res.status(500).send('Not Available');
+				helpers.errorHandler('Not Available', req, res);
 			}
-		})
+		});
 	}
-}
+};
