@@ -1,19 +1,20 @@
+'use strict';
 angular.module('zarad.auth',['ionic'])
-
-.controller('AuthController',function($scope , $window , Auth){
+.controller('AuthController',function($scope ,$location, $window , Auth){
 	$scope.user={};
 	$scope.signup=function(){
 		Auth.signup().then(function(resp){
-		})
-	}
+			console.log(resp);
+		});
+	};
 	
 	$scope.signin =function(){
-	var url="";
+	var url='';
 	if($scope.user.type=== 'player'){
-		url="/api/user/signin"
+		url='/api/user/signin';
 	}
 	else if($scope.user.type=== 'club'){
-		url="/api/club/signin"
+		url='/api/club/signin';
 	}
   	Auth.signin($scope.user,url)
   	.then(function(data){
@@ -21,6 +22,6 @@ angular.module('zarad.auth',['ionic'])
 		$location.path(data.path);
   	}).catch(function(error){
   		console.error(error);
-  	})
-  }
+  	});
+  };
 });

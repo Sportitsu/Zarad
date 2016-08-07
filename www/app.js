@@ -4,7 +4,7 @@ angular.module('zarad',[
 	'zarad.admin',
 	'zarad.auth',
 	'zarad.club',
-	//'zarad.profile',
+	'zarad.profile',
 	'ngRoute',
 	'ionic'
 ])
