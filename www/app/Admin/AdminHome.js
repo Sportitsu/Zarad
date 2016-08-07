@@ -1,3 +1,4 @@
+'use strict';
 angular.module('zarad.admin',['ionic'])
 
 .controller('AdminController',function($scope, $window, $location,Admin){
@@ -10,16 +11,16 @@ angular.module('zarad.admin',['ionic'])
     Admin.signup($scope.admin).then(function(resp){
       console.log(resp);
       $location.path('/AdminSignin');
-    })
-  }
+    });
+  };
 
   //admin sign in
   $scope.signin=function(){
     Admin.signin($scope.admin).then(function(resp){
       console.log(resp);
-      $location.path('/AdminAction')
-    })
-  }
+      $location.path('/AdminAction');
+    });
+  };
 
   //add club function
   $scope.Addclub =function(){
@@ -27,13 +28,12 @@ angular.module('zarad.admin',['ionic'])
   	.then(function(resp){
       console.log(resp.data);
       $location.path('/clubProfile');
-    })
-  }
+    });
+  };
 
   //add tournament function
   $scope.Addtournament =function(){
     //Admin.Addtournament($scope.tournament)
     //.then()
-
-  }
-})
+  };
+});
