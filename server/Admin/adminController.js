@@ -27,7 +27,6 @@ module.exports = {
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
-
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
       } else {

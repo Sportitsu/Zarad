@@ -1,33 +1,59 @@
-
 angular.module('zarad',[
 	'zarad.services',
 	'zarad.admin',
 	'zarad.auth',
 	'zarad.club',
+	'zarad.profile',
 	'ngRoute',
 	'ionic'
 ])
 .config(function ($routeProvider , $httpProvider) {
 	$routeProvider
+	.when('/',{
+		templateUrl:'app/auth/home.html',
+		controller: 'AuthController'
+	})
 	.when('/signin', {
 		templateUrl :'app/auth/signin.html',
 		controller : 'AuthController'
 	})
 	.when('/signup', {
-
 		templateUrl :'app/auth/signup.html',
 		controller : 'AuthController'
 	})
-	.when('/AdminHome',{
-		templateUrl :'app/Admin/AdminHome.html',
+	.when('/AdminMain',{
+		templateUrl :'app/Admin/AdminMain.html',
 		controller : 'AdminController'
+	})
+	.when('/AdminAction',{
+		templateUrl: 'app/Admin/AdminAction.html',
+		controller: 'AdminController'
+	})
+	.when('/AdminSignin',{
+		templateUrl: '/app/Admin/AdminSignin.html',
+		controller : 'AdminController'
+	})
+	.when('/AdminSignup',{
+		templateUrl: '/app/Admin/AdminSignup.html',
+		controller: 'AdminController'
+	})
+	.when('/AddClub',{
+		templateUrl: '/app/Admin/AddClub.html',
+		controller: 'AdminController'
+	})
+	.when('/AddTournment',{
+		templateUrl: '/app/Admin/AddTournment.html',
+		controller: 'AdminController'
 	})
 	.when('/club',{
 		templateUrl: 'app/club/club.html',
 		controller: 'clubController'
 	})
+	.when('/clubProfile',{
+		templateUrl:'app/profile/clubProfile.html',
+		controller:'profileController'
+	})
 	
-
 	$httpProvider.interceptors.push('AttachTokens');
 })
 .factory('AttachTokens',function ($window){
