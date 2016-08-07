@@ -75,12 +75,12 @@ describe('Club Test Database', function(done){
 		chai.request(server)
 			.post('/api/club/register')
 			.send({
-				'username' : '103948', 
 				'password' : 'catchmeifyoucan',
 				'clubName' : 'Desert-Force', 
 				'country' : 'Jordan'
 			})
 			.end(function(err, res){
+				console.log(res.body);
 				expect(res.status).to.be.equal(201);
 				expect(res.body).to.have.property('username');
 				expect(res.body).to.have.property('clubName');
@@ -91,16 +91,17 @@ describe('Club Test Database', function(done){
 
 	it('should respond with error 500 when user exists', function(done){
 		var newClub = new Club({
-				'username' : 'fighteX',
+				'username' : 'clfig230',
 				'password' : 'iShouldNotWork',
 				'clubName' : 'BlaBla' ,
 				'country'  : 'Jordan'
 		})
 		newClub.save(function(err , savedClub){
+			console.log(savedClub);
 			chai.request(server)
 				.post('/api/club/register')
 				.send({
-					'username' : 'fighteX',
+					'username' : savedClub.username,
 					'password' : 'iShouldNotWork',
 					'clubName' : 'BlaBla' ,
 					'country'  : 'Jordan'
