@@ -91,5 +91,25 @@ module.exports = {
         helpers.errorHandler('Admin Not Found', req, res);
       }
     });
+  },
+
+  getAdmins : function (req,res) {
+      Admin.find({})
+      .exec(function (error, admins) {
+          if (admins.length === 0) {
+            helpers.errorHandler('No Admins Found', req, res);
+          }else{
+            var adminsArr = [];
+            for (var i = 0; i < admins.length; i++) {
+              var adminObj={};
+              adminObj.username = admins[i].username;
+              adminObj.email = admins[i].email;
+              adminObj.firstName = admins[i].firstName;
+              adminObj.lastName = admins[i].lastName;
+              adminsArr.push(adminObj);
+            }
+            res.status(200).send(adminsArr);
+          }
+      });
   }
 };
