@@ -37,11 +37,11 @@ beforeEach(module('zarad'));
         country:'jordan',
         clubName: "zarad jordan"
         });
+      
 
       Admin.Addclub(club).then(function (resp) {
-      	
-        //expect(resp.status).to.equal(201);
-        expect(resp.clubName).to.equal("zarad jordan");
+        expect(resp.status).to.equal(201);
+        expect(resp.data.clubName).to.equal("zarad jordan");
       });
 
       $httpBackend.flush();
@@ -76,7 +76,6 @@ beforeEach(module('zarad'));
         });
 
       Admin.Addtournament(tournament ).then(function (resp) {
-      	console.log(resp)
         //expect(resp.status).to.equal(201);
         expect(resp.name).to.equal('cup');
       });
@@ -84,5 +83,44 @@ beforeEach(module('zarad'));
       $httpBackend.flush();
     });
   });
+
+
+  
+ describe('Profile Factory', function () {
+  var $httpBackend, Profile;
+
+   beforeEach(inject(function (_$httpBackend_, _Profile_) {
+      $httpBackend = _$httpBackend_;
+      Profile = _Profile_;
+    }));
+
+   it('should exist', function () {
+      expect(Profile).to.exist;
+    });
+
+   it('should have a method `getClub`', function () {
+      expect(Profile.getClub).to.be.a('function');
+    });
+
+    it('should get club with `getClub`', function () {
+       var club = {
+        username:1,
+        password:"1111",
+        country:"jordan",
+        clubName: "zarad jordan" };
+
+      $httpBackend.expect('GET', '/api/club/x/1').respond(club);
+
+      Profile.getClub(1).then(function (Profile) {
+        expect(Profile.data).to.deep.equal(club);
+      });
+
+      $httpBackend.flush();
+    });
+
+  
+  });
+
+
 });
 
