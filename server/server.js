@@ -14,6 +14,7 @@ var port = process.env.PORT || 8000;
 // 		console.log('Connected to Database ' + config.mongoURI[app.settings.env]);
 // 	}
 // });
+
 mongoose.connect(MONGO_URI);
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);

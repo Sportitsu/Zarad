@@ -23,10 +23,16 @@ module.exports = {
 		});
 	},
 	//Add new admin 
-	addAdmin: function (req, res) {
+
+
+	addAdmin: function (req, res) { 
+
     var username=req.body.username;
+    // var username="1"
+    // console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
+
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
       } else {
@@ -37,7 +43,6 @@ module.exports = {
           firstName: req.body.firstName,
           lastName: req.body.lastName
         });
-  
         newAdmin.save(function(err, newAdmin){
           if(err){
             helpers.errorHandler(err,req,res);
@@ -52,6 +57,7 @@ module.exports = {
           }
         });
       }
+
     });
   },
   // Admin sign in function 

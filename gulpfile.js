@@ -55,11 +55,11 @@ gulp.task('git-check', function(done) {
   done();
 });
 
+
 gulp.task('lint', function(){
   return gulp.src(['./www/app/**/*.js','./server/**/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
-
 })
 
 
