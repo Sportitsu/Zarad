@@ -49,7 +49,9 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
-		User.findOne({username: username})
+		var key;
+		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		User.findOne({[key]: username})
       		.exec(function (error, user) {
        			if (user) {
      		 	      User.comparePassword(password,user.password, res, function(found){
