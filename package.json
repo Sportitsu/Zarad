@@ -41,6 +41,7 @@
     "karma-coverage": "^1.1.1",
     "mocha": "^3.0.0",
     "shelljs": "^0.3.0",
+    "sinon": "^1.17.5",
     "time": "^0.11.4"
   },
   "dependencies": {
