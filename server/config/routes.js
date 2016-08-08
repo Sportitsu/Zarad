@@ -13,7 +13,7 @@ module.exports = function(app){
 	app.post('/api/admin/create', adminController.addAdmin);
 	app.post('/api/admin/signin', adminController.signin);
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
-	// TODO DELETE ADMIN 
+	app.post('/api/admin/delete', adminController.adminRemove);
 	// *************************** //	
 	
 	//Tournament Page Routes
