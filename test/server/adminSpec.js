@@ -218,6 +218,27 @@ describe('Admin Test Database', function(done){
 				.end(function (err,res) {
 					expect(res.status).to.be.equal(500);
 					done();
+				});
+		});
+
+		it('shuold get all admins', function(done){
+			chai.request(server)
+				.get('/api/admin/admins')
+				.end(function (err,res) {
+					expect(res.status).to.be.equal(200);
+					expect(res.body.length).to.not.be.equal(0);
+					done();
+				})
+		})
+
+		it('should return 500 when there is no admins', function(done){
+			Admin.collection.drop();
+			chai.request(server)
+				.get('/api/admin/admins')
+				.end(function (err,res) {
+					expect(res.status).to.be.equal(500);
+					expect(Object.keys(res.body).length).to.be.equal(0);
+					done();
 				})
 		})
 
