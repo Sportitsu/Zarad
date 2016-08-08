@@ -14,6 +14,7 @@ module.exports = function(app){
 	app.post('/api/admin/signin', adminController.signin);
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
 	app.post('/api/admin/delete', adminController.adminRemove);
+	app.get('/api/admin/admins', adminController.getAdmins);
 	// *************************** //	
 	
 	//Tournament Page Routes
