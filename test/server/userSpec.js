@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+var sinon = require('sinon');
 var expect = require ('chai').expect;
 var path = require('path')
 var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
@@ -11,8 +12,9 @@ var User = require('../../server/User/userModel');
 var Club = require('../../server/Club/clubModel');
 var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
+var time = require('time');
 
-
+var clock;
 describe('User Test Database', function(done){
 
 	User.collection.drop();
@@ -23,12 +25,13 @@ describe('User Test Database', function(done){
 		    'password' : 'testing', 
 		    'club' : 'DesertForce',
 		    'country' : 'Jordan',
-		    'beltColor' : 'Purple'
+		    'beltColor' : 'Purple',
+		    'membership' : 1
 		});
 		newUser.save(function(err,savedUser){
 			done();
 
-		})
+		});	
 	});
 
 
@@ -71,7 +74,8 @@ describe('User Test Database', function(done){
 		    'club' : 'Makhai',
 		    'email' : 'ironman@avengers.com', 
 		    'country' : 'Jordan',
-		    'beltColor' : 'Purple'
+		    'beltColor' : 'Purple',
+		    'membership' : 1
 
 		})
 		newUser.save(function(error , newUser){
@@ -135,10 +139,10 @@ describe('User Test Database', function(done){
 					'club' : 'SourceMMA',
 					'country' : 'Jordan',
 					'beltColor' : 'Green',
-					'firstName' : 'fatima'
+					'firstName' : 'fatima',
+					'membership' : 1
 				})
 				.end(function(err, res){
-					console.log(res.body.username);
 					expect(err).to.be.equal(null);
 					expect(res.status).to.be.equal(201);
 					expect(res.body.country).to.be.equal('Jordan');
@@ -345,4 +349,108 @@ describe('User Test Database', function(done){
 				})
 		})
 	});
+
+	describe('Resubscribe members' , function(done){
+
+		beforeEach(function(done){
+			var date = Date.now() -  28 * (24 * 60 * 60 * 1000);
+			var newUser = new User({
+				'username' : 'Mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : true ,
+				'subscription' : date
+			});
+			newUser.save();
+			done();
+		});
+		afterEach(function(done){
+			User.collection.drop();
+			done();
+		});
+
+		it('should handle errors when sending a wrong username', function(done){
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'mihyajrdsoij',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should fail if there is a user with missing subscription key', function(done){
+			var newUser = new User({
+				'username' : 'mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : true 
+			});
+			newUser.save();
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'mihyar',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					expect(res.body.resub).to.be.equal(undefined);
+					done();
+				})
+		})
+
+		it('should renew subscription if already subscribed and add the remaining days', function(done){
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'Mihyar',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.body.resub).to.be.equal(false);
+					expect(res.status).to.be.equal(201);
+					done();
+				})
+		});
+
+		it('should renew subscription', function(done){
+			var newUser = new User({
+				'username' : 'mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : false
+			})
+			newUser.save();
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username': 'mihyar',
+					'membership' : 1
+				})
+				.end(function(err ,res){
+					expect(res.body.valid).to.be.equal(true);
+					expect(res.status).to.be.equal(201);
+					expect(typeof res.body.subscription).to.be.equal('number');
+					done();
+				})
+		})
+	})
 });	
+
+
