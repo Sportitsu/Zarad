@@ -80,5 +80,16 @@ module.exports = {
           helpers.errorHandler('Admin Not Found', req, res);
         }
     });
+  },
+  adminRemove : function (req,res) {
+    var username = req.body.username;
+    Admin.findOne({ username : username}).remove()
+    .exec(function (error, admin) {
+      if(admin.result.n){
+        res.status(201).send('Admin deleted');
+      }else{
+        helpers.errorHandler('Admin Not Found', req, res);
+      }
+    });
   }
 };
