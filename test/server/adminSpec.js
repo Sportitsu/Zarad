@@ -189,6 +189,36 @@ describe('Admin Test Database', function(done){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
+		});
+
+		it('should delete admin when given a user name', function (done) {
+			chai.request(server)
+				.post('/api/admin/delete')
+				.send({
+					"username" : "admin-memf"
+				})
+				.end(function (err,res) {
+					expect(res.status).to.be.equal(201);
+					chai.request(server)
+						.get('/api/admin/x/admin-memf')
+						.end(function (err,res) {
+							expect(res.status).to.be.equal(500);
+							expect(res.body.username).to.be.equal(undefined);
+							done();
+						})
+				})
+		});
+
+		it('should return error when given wrong admin name', function (done){
+			chai.request(server)
+				.post('/api/admin/delete')
+				.send({
+					"username" : "klajhdhdkj"
+				})
+				.end(function (err,res) {
+					expect(res.status).to.be.equal(500);
+					done();
+				})
 		})
 
 	});
