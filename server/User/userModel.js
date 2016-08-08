@@ -8,22 +8,22 @@ var Schema = mongoose.Schema;
 var userSchema = new Schema ({
 	username : { type: String, required: true, index : {unique: true}},
 	password : { type: String, required: true},
-	email: { type: String },
+	email: { type: String , index : {unique : true}},
 	firstName: { type: String},
 	lastName: { type: String },
   middleName : { type : String },
   age : { type : Number},
 	phone: { type: String },
-	Date: { type: Date, default: Date.now },
+	Date: { type: Date, default: Date.now() },
 	club: { type: String, required: true},
 	beltColor: { type: String , required: true},
 	attendance : { type: Number },
 	achievements: Schema.Types.Mixed,
   country : { type : String , required : true },
-  membership : { type : Number, required : true } ,
+  membership : { type : Number, required : true , default : 1 },
   valid : { type : Boolean , default : true },
-  subscription : { type : Number , default : 1 },
-  resub : { type : Boolean , default : false}
+  subscription : { type : Number },
+  resub : { type : Boolean , default : false},
   salt : { type : String}
 });
 
