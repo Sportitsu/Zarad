@@ -33,6 +33,9 @@ describe('AuthController',function(){
 	it('should have a user property on the $scope', function () {
 		expect($scope.user).to.be.an('object')
 	});
+	it('should have a club property on the $scope', function () {
+		expect($scope.club).to.be.an('object');
+		});
 
 	xit('should store token in localStorage after signin',function(){
 		var token = 'sjj232hwjhr3urw90rof';
@@ -41,4 +44,21 @@ describe('AuthController',function(){
 	    $httpBackend.flush();
 	    expect($window.localStorage.getItem('com.zarad')).to.equal(token);
 	})
+
+	it('should be able to create new user with signup()', function () {
+	 	$httpBackend.expectPOST("/api/user/signup").respond(201, '');
+	 	$scope.signup();
+	 	$httpBackend.flush();
+
+	});
+	xit('should be able  sign user with signin()', function () {
+		$httpBackend.expectPOST("/api/user/signin").respond(201, '');
+      	$scope.signin();
+      	$httpBackend.flush();
+    });
+    xit('should be able  sign club with signin()', function () {
+    	$httpBackend.expectPOST("/api/club/signin").respond(201, '');
+      	$scope.signin();
+      	$httpBackend.flush();
+  });
 });

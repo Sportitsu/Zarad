@@ -21,6 +21,8 @@ angular.module('zarad.services',[])
       ObjUser["url"]='/api/user/signin'
     }
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
      if(user['type']==="club"){
 
       ObjUser["url"]='/api/club/signin'
@@ -33,6 +35,7 @@ angular.module('zarad.services',[])
   }
 =======
 =======
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
      if(user['type']==="admin"){
       ObjUser["url"]=''
     }
@@ -42,15 +45,21 @@ angular.module('zarad.services',[])
     }
     return $http(ObjUser)
     .then(function (resp) {
+<<<<<<< HEAD
+=======
 >>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
       return resp;
     });
   };
   
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 >>>>>>> 5188d08d33f631bf868f85cb736047a544adcb7f:platforms/ios/www/app/services/services.js
 =======
 >>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -65,6 +74,10 @@ angular.module('zarad.services',[])
 .factory('Admin', function ($http, $location, $window) {
   //send club information to server
 <<<<<<< HEAD
+  var Addclub=function(club){
+    console.log(club)
+=======
+<<<<<<< HEAD
   
   var Addclub=function(club){
      console.log(club)
@@ -72,6 +85,7 @@ angular.module('zarad.services',[])
   var Addclub=function(club){
     console.log(club)
 >>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
     return $http({
       method:'POST',
       data: club,
@@ -82,9 +96,12 @@ angular.module('zarad.services',[])
 
   var Addtournament=function(tournament){
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
     console.log(tournament)
 =======
 >>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
     return $http({
       method:'POST',
       data: tournament,
@@ -92,6 +109,11 @@ angular.module('zarad.services',[])
     })
   };
 
+<<<<<<< HEAD
+  return {
+    Addclub: Addclub,
+    Addtournament:Addtournament
+=======
 <<<<<<< HEAD
 var Adminsignin= function(admin){
  //console.log("dsads")
@@ -122,6 +144,7 @@ var Addadmin=function(newAdmin){
     Addclub: Addclub,
     Addtournament:Addtournament
 >>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
+>>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
   };
 })
 
