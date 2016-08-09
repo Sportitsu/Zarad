@@ -1,12 +1,16 @@
 var User = require('./../User/userModel');
 var mongoose = require('mongoose');
 var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
+
 mongoose.connect(MONGO_URI);
 var threeDays = 259200000;
 var oneMonth  = 2592000000;
 User.find({}).exec(function(err, users){
 	for(var i = 0 ; i < users.length; i++){
 			var isFinished = users[i].subscription + ( oneMonth * users[i].membership);
+			console.log('This is ' + users[i].username + ' :\n');
+			console.log('His due date is ' + isFinished);
+			console.log('His comparison with now is  ' + (isFinished - Date.now()));
 			if(isFinished - Date.now() < threeDays && isFinished - Date.now() > -1){
 				users[i].resub = true;
 			} else if(isFinished - Date.now() > 0){
@@ -18,3 +22,4 @@ User.find({}).exec(function(err, users){
 			 users[i].save();
 	}
 });
+process.exit();
