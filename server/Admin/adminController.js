@@ -28,8 +28,6 @@ module.exports = {
 	addAdmin: function (req, res) { 
 
     var username=req.body.username;
-    // var username="1"
-    // console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
 
@@ -62,10 +60,12 @@ module.exports = {
   },
   // Admin sign in function 
   signin : function (req,res) {
+
     var username = req.body.username;
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
+      
         if(admin){
             Admin.comparePassword(password, admin.password, res, function(found){
                 if(found){
