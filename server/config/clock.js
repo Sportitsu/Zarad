@@ -1,3 +1,4 @@
+'use strict';
 var User = require('./../User/userModel');
 var mongoose = require('mongoose');
 var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
