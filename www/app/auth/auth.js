@@ -6,21 +6,24 @@ angular.module('zarad.auth',['ionic'])
 	$scope.signup=function(){
 		var data=$scope.club;
 		Auth.signup(data).then(function(resp){
+			$window.localStorage.setItem('com.zarad', resp.token);
 			console.log(data);
 		})
 	}
 
-	$scope.signin =function(){
+  $scope.signin =function(){
 	var url='';
-	if($scope.user.type=== 'player'){
+	if(!!$scope.user.player){
 		url='/api/user/signin';
 	}
-	else if($scope.user.type=== 'club'){
+	else if(!!$scope.user.club){
 		url='/api/club/signin';
 	}
   	Auth.signin($scope.user,url)
-  	.then(function(data){
-		console.log(data);
+  	.then(function(resp){
+  			//$window.localStorage.setItem('com.zarad', resp.token);
+		console.log(resp);
+		$location.path()
   	}).catch(function(error){
   		console.error(error);
   	});

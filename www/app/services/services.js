@@ -13,14 +13,14 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
+    console.log("signin",user,url)
     return $http({
       method:'POST',
       url: url,
       data:user
     })
     .then(function(resp,err){
-      console.log(err);
-      return resp;
+      return resp.data;
     }); 
   };
   
@@ -35,7 +35,9 @@ angular.module('zarad.services',[])
 	};
 })
 .factory('Admin', function ($http) {
+
   var signin=function(admin){
+    console.log(admin)
     return $http({
       method:'POST',
       url:'/api/admin/signin',
@@ -89,7 +91,7 @@ angular.module('zarad.services',[])
   var AddUser=function(user){
     return $http({
       method: 'POST',
-      url : '/api/club/register',
+      url : '/api/user/signup',
       data:user
     })
     .then(function(resp){
@@ -100,14 +102,18 @@ angular.module('zarad.services',[])
     AddUser : AddUser
   }
 })
-.factory('Profile', function ($http, $location, $window) {
-  var getClub=function(){
+.factory('Profile', function ($http, $location) {
+  var getClub=function(username){
+  
     return $http({
       method: 'GET',
-      url: '/api/club/x/:username'
+      url: '/api/club/x/'+username
+      
     }).then(function(resp){
-      return resp.data;
+      console.log(resp);
+      return resp;
     })
+  //}
   };
   return {
     getClub:getClub
