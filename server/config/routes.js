@@ -12,10 +12,9 @@ module.exports = function(app){
 	// Admin Page Routes
 	app.post('/api/admin/create', adminController.addAdmin);
 	app.post('/api/admin/signin', adminController.signin);
-
 	app.get('/api/admin/x/:username' ,adminController.getAdmin);
-
-	// TODO DELETE ADMIN 
+	app.post('/api/admin/delete', adminController.adminRemove);
+	app.get('/api/admin/admins', adminController.getAdmins);
 	// *************************** //	
 	
 	//Tournament Page Routes
@@ -45,6 +44,7 @@ module.exports = function(app){
 	app.get('/api/users', userController.getAllUsers);
 	app.post('/api/user/signin' , userController.signin);
 	app.post('/api/user/signup', userController.signup);
+	app.post('/api/user/resub' , userController.resub);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler

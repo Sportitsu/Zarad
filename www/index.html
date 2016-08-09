@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="zarad">
+<html>
 <head>
 	<title>signin</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
 	<link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
-	
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body>
+<body ng-app="zarad" >
 
 <ion-header-bar class="bar bar-header bar-calm">
  <ion-title>Zarad</ion-title>
@@ -25,9 +26,10 @@
     </div>
   </div>
 
+
 <ion-view class="padding">
-	<ion-content >
-			  <div ng-view>
+  <ion-content>
+			  <div ng-view="">
 			  </div>
 	</ion-content>
 </ion-view>

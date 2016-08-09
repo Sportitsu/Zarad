@@ -17,7 +17,8 @@ angular.module('zarad.admin',['ionic'])
 
   //admin sign in
   $scope.signin=function(){
-    Admin.signin($scope.admin).then(function(resp){
+    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
+    .then(function(resp){
       console.log(resp);
       $location.path('/AdminAction')
     })

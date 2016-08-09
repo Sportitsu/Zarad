@@ -1,4 +1,5 @@
 process.env.NODE_ENV = 'test';
+var sinon = require('sinon');
 var expect = require ('chai').expect;
 var path = require('path')
 var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
@@ -11,8 +12,9 @@ var User = require('../../server/User/userModel');
 var Club = require('../../server/Club/clubModel');
 var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
+var time = require('time');
 
-
+var clock;
 describe('User Test Database', function(done){
 
 	User.collection.drop();
@@ -22,12 +24,14 @@ describe('User Test Database', function(done){
 			'username' : 'mohammad',
 		    'password' : 'testing', 
 		    'club' : 'DesertForce',
-		    'country' : 'Jordan'
+		    'country' : 'Jordan',
+		    'beltColor' : 'Purple',
+		    'membership' : 1
 		});
 		newUser.save(function(err,savedUser){
 			done();
 
-		})
+		});	
 	});
 
 
@@ -63,20 +67,23 @@ describe('User Test Database', function(done){
 
 	it('should get one user when username is passed in route' , function(done){
 		var newUser = new User({
-			'username' : 'super',
+			'username' : 'testing',
 		    'password' : '123', 
 		    'firstName' : 'Iron' ,
 		    'lastName' : 'Man',
 		    'club' : 'Makhai',
 		    'email' : 'ironman@avengers.com', 
-		    'country' : 'Jordan'
+		    'country' : 'Jordan',
+		    'beltColor' : 'Purple',
+		    'membership' : 1
+
 		})
 		newUser.save(function(error , newUser){
 			chai.request(server)
 				.get('/api/user/x/'+ newUser.username)
 				.end(function(err, res){
 					expect(res.status).to.be.equal(200);
-					expect(res.body.username).to.be.equal('super');
+					expect(res.body.username).to.be.equal('testing');
 					expect(res.body).to.have.property('username');
 					expect(res.body).to.have.property('firstName');
 					expect(res.body).to.have.property('lastName');
@@ -128,10 +135,12 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'Fighter',
 					'password' : 'fighting',
 					'club' : 'SourceMMA',
-					'country' : 'Jordan'
+					'country' : 'Jordan',
+					'beltColor' : 'Green',
+					'firstName' : 'fatima',
+					'membership' : 1
 				})
 				.end(function(err, res){
 					expect(err).to.be.equal(null);
@@ -153,7 +162,6 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'ahmad',
 					'password' : 'ahmad',
 					'club' : 'makhai'
 				})
@@ -174,7 +182,6 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signup')
 				.send({
-					'username' : 'Other' , 
 					'password' : 'testing' , 
 					'club' : 'SourceMMA'
 				})
@@ -342,4 +349,108 @@ describe('User Test Database', function(done){
 				})
 		})
 	});
+
+	describe('Resubscribe members' , function(done){
+
+		beforeEach(function(done){
+			var date = Date.now() -  28 * (24 * 60 * 60 * 1000);
+			var newUser = new User({
+				'username' : 'Mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : true ,
+				'subscription' : date
+			});
+			newUser.save();
+			done();
+		});
+		afterEach(function(done){
+			User.collection.drop();
+			done();
+		});
+
+		it('should handle errors when sending a wrong username', function(done){
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'mihyajrdsoij',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+		});
+
+		it('should fail if there is a user with missing subscription key', function(done){
+			var newUser = new User({
+				'username' : 'mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : true 
+			});
+			newUser.save();
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'mihyar',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					expect(res.body.resub).to.be.equal(undefined);
+					done();
+				})
+		})
+
+		it('should renew subscription if already subscribed and add the remaining days', function(done){
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username' : 'Mihyar',
+					'membership' : 1
+				})
+				.end(function(err, res){
+					expect(res.body.resub).to.be.equal(false);
+					expect(res.status).to.be.equal(201);
+					done();
+				})
+		});
+
+		it('should renew subscription', function(done){
+			var newUser = new User({
+				'username' : 'mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'resub' : true ,
+				'valid' : false
+			})
+			newUser.save();
+			chai.request(server)
+				.post('/api/user/resub')
+				.send({
+					'username': 'mihyar',
+					'membership' : 1
+				})
+				.end(function(err ,res){
+					expect(res.body.valid).to.be.equal(true);
+					expect(res.status).to.be.equal(201);
+					expect(typeof res.body.subscription).to.be.equal('number');
+					done();
+				})
+		})
+	})
 });	
+
+
