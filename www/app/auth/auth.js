@@ -1,26 +1,21 @@
 'use strict';
-angular.module('zarad.auth',['ionic'])
+angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth){
 	$scope.user={};
-	$scope.club={};
-	$scope.signup=function(){
-		var data=$scope.club;
-		Auth.signup(data).then(function(resp){
-			console.log(data);
-		})
-	}
 
 	$scope.signin =function(){
 	var url='';
-	if($scope.user.type=== 'player'){
+	if(!!$scope.user.player){
 		url='/api/user/signin';
 	}
-	else if($scope.user.type=== 'club'){
+	else if(!!$scope.user.club){
 		url='/api/club/signin';
 	}
   	Auth.signin($scope.user,url)
-  	.then(function(data){
-		console.log(data);
+  	.then(function(resp){
+		$window.localStorage.setItem('com.zarad', resp.token);
+		$window.localStorage.setItem('com.user', resp.user);
+		$location.path('/AdminMain')
   	}).catch(function(error){
   		console.error(error);
   	});

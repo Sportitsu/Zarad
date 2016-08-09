@@ -52,7 +52,9 @@ module.exports= {
         		        if(found){
        				       var token = jwt.encode(user, 'secret');
          			        res.setHeader('x-access-token',token);
-                            res.json({token: token});
+         			        //modified the response to send the username
+         			        //to save it in local stoarge to be accessed late
+                            res.json({token: token,user: username});
       			        } else {
        				       helpers.errorHandler('Wrong Password', req, res);
                         }

@@ -1,17 +1,22 @@
 <!DOCTYPE html>
-<html ng-app="zarad">
+<html ng-init="show=false">
 <head>
-	<title>signin</title>
+	<title>Zarad</title>
 	<link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
-	
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
-<body>
+<body ng-app="zarad" ng-controller="parentController">
 
+<!-- app header here -->
 <ion-header-bar class="bar bar-header bar-calm">
  <ion-title>Zarad</ion-title>
+ <button class="button button-icon icon ion-navicon"></button>
+ <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
 </ion-header-bar>
-  <div class="tabs-striped tabs-top tabs-calm">
+
+<!-- viewing tabs of the web app -->
+<div class="tabs-striped tabs-top tabs-calm">
     <div class="tabs">
       <a class="tab-item active" href="#/signin">
         <i class="icon ion-home"></i>
@@ -23,29 +28,35 @@
         <i class="icon ion-trophy"></i>
       </a>
     </div>
-  </div>
+</div>
 
-<ion-view class="padding">
-	<ion-content >
-			  <div ng-view>
-			  </div>
-	</ion-content>
-</ion-view>
+<!-- other html pages content rendering will be here -->
+<ion-nav-view>
+  <ion-view>
+    <ion-content>
+    <!-- rendering other html pages will be here -->
+    </ion-content>
+  </ion-view>
+</ion-nav-view>
 
-<!-- <div class="bar bar-footer bar-calm">
+<!-- footer of the page is here -->
+<div class="bar bar-footer bar-calm">
   <div class="title">contact info</div>
 </div>
- -->
+
  <script src="ionic/js/ionic.bundle.js"></script>
  <script src="./lib/angular/angular.js"></script>
+ <script type="../node_modules/angular-slider.js"></script>
  <script type="lib/angular-mocks/angular-mocks.js"></script>
+ <!-- installed route using this bower install angular-ui-router -->
  <script src="lib/angular-route/angular-route.js"></script>
- <script src="app/Admin/AdminHome.js"></script>
- <script src="app/auth/auth.js"></script>
- <script src="app/club/club.js"></script>
- <script src="app/profile/profile.js"></script>
- <script src="app/services/services.js"></script>
- <script src="app/profile/profile.js"></script>
+ <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+
+ <script src="js/controller/index.js"></script>
+ <script src="js/controller/AdminHome.js"></script>
+ <script src="js/controller/auth.js"></script>
+ <script src="js/controller/club.js"></script>
+ <script src="js/services/services.js"></script>
  <script src="app.js"></script>
  </body>
 </html>
