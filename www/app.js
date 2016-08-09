@@ -9,12 +9,7 @@ angular.module('zarad',[
 ])
 .config(function ($routeProvider , $httpProvider) {
 
-	$httpProvider.defaults.transformRequest = function(data) {        
-	    if (data === undefined) { return data; } 
-	    return $.param(data);
-	};
-	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-	
+
 	$routeProvider
 	.when('/',{
 		templateUrl:'app/auth/home.html',
@@ -64,6 +59,11 @@ angular.module('zarad',[
 	})
 	
 	$httpProvider.interceptors.push('AttachTokens');
+	$httpProvider.defaults.transformRequest = function(data) {        
+	    if (data === undefined) { return data; } 
+	    return $.param(data);
+	};
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 })
 .factory('AttachTokens',function ($window){
 	var attach = {
@@ -72,7 +72,6 @@ angular.module('zarad',[
 			if(jwt){
 				object.headers['x-access-token']= jwt;
 			}
-			object.headers['Allow-Control-Allow-Origin']= '*';
 			return object;
 		}
 	};
@@ -80,8 +79,8 @@ angular.module('zarad',[
 })
 .run(function($rootScope, $location , Auth){
 	$rootScope.$on('$routeChangeStart',function(evt,next,current){
-		//if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-		//	$location.path('/signin');
-		//}
+		if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+			$location.path('/signin');
+		}
 	});
 });
