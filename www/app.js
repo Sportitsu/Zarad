@@ -47,9 +47,10 @@ angular.module('zarad',[
 		templateUrl: '/app/Admin/AddTournment.html',
 		controller: 'AdminController'
 	})
-	.when('/clubprofile',{
+	.when('/clubprofile/:username',{
 		templateUrl: 'app/profile/clubprofile.html',
-		controller: 'profileController'
+		controller: 'profileController',
+		
 	})
 
 	.when('/userprofile',{

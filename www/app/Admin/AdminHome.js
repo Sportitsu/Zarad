@@ -29,7 +29,7 @@ angular.module('zarad.admin',['ionic'])
   	Admin.Addclub($scope.club)
   	.then(function(resp){
       console.log(resp.data);
-      $location.path('/clubProfile');
+      $location.path('/clubprofile/'+resp.data.username);
     });
   };
 
