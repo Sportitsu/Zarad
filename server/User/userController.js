@@ -40,6 +40,10 @@ module.exports= {
 					newObject.valid = users[i].valid;
 					newObject.resub = users[i].resub;
 					newObject.subscription = users[i].subscription;
+					newObject.membership = users[i].membership;
+					newObject.country = users[i].country;
+					newObject.age = users[i].age;
+					newObject.middleName = users[i].middleName || 'N/A';
 					newArr.push(newObject);
 				}
 				res.status(200).json(newArr);
