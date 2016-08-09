@@ -85,8 +85,7 @@ module.exports ={
 	signin : function (req,res) {
 		var username = req.body.username;
 		var password = req.body.password;
-		var key;
-		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		Club.findOne({ [key] : username})
 		.exec(function (error,club) {
 			if(club){
