@@ -94,7 +94,9 @@ module.exports ={
         		        if(found){
         		        	var token = jwt.encode(club, 'secret');
          			        res.setHeader('x-access-token',token);
-                            res.json({token: token});
+         			         //modified the response to send the clubname
+         			        //to save it in local storage to be accessed late
+                            res.json({token: token, user: club.clubName});
       			        } else {
        				       helpers.errorHandler('Wrong Password', req, res);
                         }

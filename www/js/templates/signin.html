@@ -1,0 +1,18 @@
+<h1 class="padding">LOGIN</h1>
+<div class="list">
+  <label class="item item-input item-stacked-label">
+    <span class="input-label">First Name</span>
+    <input type="text" placeholder="Enter First Name" ng-model='user.username'>
+  </label>
+   <label class="item item-input item-stacked-label">
+    <span class="input-label">Password</span>
+    <input type="password" placeholder="Enter Password" ng-model='user.password'>
+  </label>
+</div>
+<ion-list>
+  <ion-radio id="player" ng-model="user.player" >Player</ion-radio>
+  <ion-radio id="club" ng-model="user.club" >Club</ion-radio>
+</ion-list>
+<button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="signin()">
+  signin
+</button>

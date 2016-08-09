@@ -20,8 +20,6 @@ app.use(function(req, res, next) {
 
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
-
-
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
 require('./config/routes.js')(app, express);
