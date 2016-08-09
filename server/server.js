@@ -3,18 +3,25 @@ var mongoose = require('mongoose');
 var express = require('express');
 // var config = require('./_config');
 
+var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
+
+mongoose.connect(MONGO_URI);
+
 var app = express();
+
 app.use(function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Origin', "*");
+    res.header('Access-Control-Allow-Methods', 'GET,POST,OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Content-Type,Accept');
     next();
 });
-var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
+
+
+
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
 
-mongoose.connect(MONGO_URI);
+
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
 require('./config/routes.js')(app, express);

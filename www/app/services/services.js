@@ -35,15 +35,17 @@ angular.module('zarad.services',[])
 	};
 })
 .factory('Admin', function ($http) {
-  var signin=function(admin){
+
+  var signin = function(admin){
     return $http({
-      method:'POST',
-      url:'/api/admin/signin',
-      data:admin
-    })
-    .then(function(resp){
-       return resp.data;
-    });
+      url: 'http://zarad.herokuapp.com/api/admin/signin',
+      method: "POST",
+      data:  admin
+      }).success(function (data, status, headers, config) {
+          console.log(data);
+      }).error(function (data, status, headers, config) {
+          console.log(data);
+      });
   }
 
   var signup=function(admin){

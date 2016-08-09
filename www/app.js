@@ -8,6 +8,13 @@ angular.module('zarad',[
 	'ionic'
 ])
 .config(function ($routeProvider , $httpProvider) {
+
+	$httpProvider.defaults.transformRequest = function(data) {        
+	    if (data === undefined) { return data; } 
+	    return $.param(data);
+	};
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+	
 	$routeProvider
 	.when('/',{
 		templateUrl:'app/auth/home.html',
