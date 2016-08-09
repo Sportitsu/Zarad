@@ -2,7 +2,7 @@ var CronJob = require('cron').CronJob;
 var User = require('./../User/userModel');
 
 module.exports = {
-	job : new CronJob('00 00 00 * * *', function(){
+	job : new CronJob('00 27 5 * * *', function(){
 		var threeDays = 259200000;
 		var oneMonth  = 2592000000;
 		User.find({}).exec(function(err, users){
