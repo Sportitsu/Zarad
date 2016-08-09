@@ -118,5 +118,20 @@ angular.module('zarad.services',[])
   return {
     getClub:getClub
   };
-});
-
+})
+.factory('Tournament',function($http){
+  var AddTournament=function(tournament){
+    console.log(tournament)
+    return $http({
+     method:'POST',
+     url:'/api/tournament/create',
+     data:tournament
+    })
+    .then(function(resp){
+       return resp.data;
+    });
+  }
+  return{
+    AddTournament:AddTournament
+  }
+})

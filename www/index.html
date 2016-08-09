@@ -10,14 +10,14 @@
 
 
 <ion-side-menus>
-  <!-- Left menu -->
-
   <ion-side-menu side="left">
-  <li>Left menu</li>
+  <li>
+    <a class="tab-item active" href="#/signin">
+        <i class="icon ion-home"></i>
+      </a>
+  </li>
   </ion-side-menu>
-
   <ion-side-menu-content>
-  <!-- Main content, usually <ion-nav-view> -->
   <li class="bar bar-header bar-calm">Zarad</li>
   <div class="tabs-striped tabs-top tabs-calm">
     <div class="tabs">
@@ -32,18 +32,15 @@
       </a>
     </div>
   </div>
+
   <ion-view class="padding">
   <ion-content>
-        <div ng-view="">
-        </div>
+  <div ng-view="">
+  </div>
   </ion-content>
-</ion-view>
-
+  </ion-view>
   </ion-side-menu-content>
-
-  
-
-</ion-side-menus>
+  </ion-side-menus>
 
 <script >
 function ContentController($scope, $ionicSideMenuDelegate) {
@@ -52,21 +49,6 @@ function ContentController($scope, $ionicSideMenuDelegate) {
   };
 }
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <div class="bar bar-footer bar-calm">
   <div class="title">contact info</div>
 </div>
@@ -80,7 +62,7 @@ function ContentController($scope, $ionicSideMenuDelegate) {
  <script src="app/club/club.js"></script>
  <script src="app/profile/profile.js"></script>
  <script src="app/services/services.js"></script>
- <script src="app/profile/profile.js"></script>
+ <script src="app/Tournament/Tournament.js"></script>
  <script src="app.js"></script>
  </body>
 </html>

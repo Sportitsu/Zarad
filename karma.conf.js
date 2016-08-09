@@ -29,6 +29,7 @@ module.exports = function(config) {
       'www/app/auth/auth.js',
       'www/app/services/services.js',
       'www/app/profile/profile.js',
+      'www/app/Tournament/Tournament.js',
       'test/front-end/clientSpec.js',
       'test/front-end/Adminspec.js',
       'test/front-end/routingSpec.js',

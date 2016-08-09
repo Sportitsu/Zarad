@@ -3,6 +3,7 @@ angular.module('zarad',[
 	'zarad.admin',
 	'zarad.auth',
 	'zarad.club',
+	'zarad.tournament',
 	'zarad.profile',
 	'ngRoute',
 	'ionic'
@@ -43,7 +44,7 @@ angular.module('zarad',[
 	})
 	.when('/AddTournment',{
 		templateUrl: '/app/Admin/AddTournment.html',
-		controller: 'AdminController'
+		controller: 'TournamentController'
 	})
 	.when('/clubprofile/:username',{
 		templateUrl: 'app/profile/clubprofile.html',
@@ -56,6 +57,7 @@ angular.module('zarad',[
 		controller: 'profileController'
 
 	})
+
 	
 	$httpProvider.interceptors.push('AttachTokens');
 })
