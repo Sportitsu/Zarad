@@ -10,10 +10,12 @@ module.exports ={
 		Club.findOne({username : username})
 		.exec(function (error,club) {
 			if(club){
+				console.log(club);
 				var returnClub = new Club ({
 					username : club.username,
 					country : club.country,
-					clubName : club.clubName
+					clubName : club.clubName,
+					email : club.email
 				});
 				res.status(200).send(returnClub);
 			}else{
@@ -23,8 +25,14 @@ module.exports ={
 	},
 	// Add a new club
 	addClub : function(req,res){
-		var username = req.body.username;
-		Club.findOne({username : username})
+		console.log(req.body);
+		if(req.body.password && req.body.country && req.body.clubName){
+			req.body.username = req.body.username || helpers.getClubName(req.body.clubName);
+		} else {
+			helpers.errorHandler('Wrong set Up' , req,res);
+		}
+
+		Club.findOne({username : req.body.username})
 		.exec(function (error,club) {
 			if(club){
 				helpers.errorHandler('Club Already Exists', req, res);
@@ -33,7 +41,8 @@ module.exports ={
 					username : req.body.username,
 					password : req.body.password,
 					country  : req.body.country,
-					clubName : req.body.clubName
+					clubName : req.body.clubName,
+					email : req.body.email
 				});
 				newClub.save(function (error,club) {
 					if(error){
@@ -42,7 +51,8 @@ module.exports ={
 						var returnClub = new Club ({
 							username : club.username,
 							country : club.country,
-							clubName : club.clubName
+							clubName : club.clubName,
+							email : club.email
 						});
 						res.status(201).send(returnClub);
 					}
@@ -63,6 +73,7 @@ module.exports ={
 					clubObj.username = clubs[i].username;
 					clubObj.country = clubs[i].country;
 					clubObj.clubName = clubs[i].clubName;
+					clubObj.email = clubs[i].email;
 					clubArray.push(clubObj);
 				}
 				res.status(200).send(clubArray);
@@ -70,18 +81,22 @@ module.exports ={
 		});
 	},
 	// club sign in
+	// we want it to take an email or username
 	signin : function (req,res) {
 		var username = req.body.username;
 		var password = req.body.password;
-
-		Club.findOne({ username: username})
+		var key;
+		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		Club.findOne({ [key] : username})
 		.exec(function (error,club) {
 			if(club){
 				Club.comparePassword(password,club.password, res, function(found){
         		        if(found){
         		        	var token = jwt.encode(club, 'secret');
          			        res.setHeader('x-access-token',token);
-                            res.json({token: token});
+         			         //modified the response to send the clubname
+         			        //to save it in local storage to be accessed late
+                            res.json({token: token, user: club.clubName});
       			        } else {
        				       helpers.errorHandler('Wrong Password', req, res);
                         }

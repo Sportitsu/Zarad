@@ -28,11 +28,8 @@ module.exports = {
 	addAdmin: function (req, res) { 
 
     var username=req.body.username;
-    // var username="1"
-    // console.log("fsgf")
     Admin.findOne({username: username})
     .exec(function(error,admin){
-    
 
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
@@ -63,18 +60,19 @@ module.exports = {
   },
   // Admin sign in function 
   signin : function (req,res) {
-    //var username = req.body.username;
-    //var password = req.body.password;
-     var username = req.body.username;  
+    var username = req.body.username;
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
+      
         if(admin){
             Admin.comparePassword(password, admin.password, res, function(found){
                 if(found){
                   var token = jwt.encode(admin, 'secret');
                   res.setHeader('x-access-token',token);
-                  res.json({token: token});
+                   //modified the response to send the username
+                   //to save it in local stoarage to be accessed late
+                  res.json({token: token,user:admin.username});
                 } else {
                   helpers.errorHandler('Wrong Password', req,res);
                 }
@@ -83,5 +81,36 @@ module.exports = {
           helpers.errorHandler('Admin Not Found', req, res);
         }
     });
+  },
+  adminRemove : function (req,res) {
+    var username = req.body.username;
+    Admin.findOne({ username : username}).remove()
+    .exec(function (error, admin) {
+      if(admin.result.n){
+        res.status(201).send('Admin deleted');
+      }else{
+        helpers.errorHandler('Admin Not Found', req, res);
+      }
+    });
+  },
+
+  getAdmins : function (req,res) {
+      Admin.find({})
+      .exec(function (error, admins) {
+          if (admins.length === 0) {
+            helpers.errorHandler('No Admins Found', req, res);
+          }else{
+            var adminsArr = [];
+            for (var i = 0; i < admins.length; i++) {
+              var adminObj={};
+              adminObj.username = admins[i].username;
+              adminObj.email = admins[i].email;
+              adminObj.firstName = admins[i].firstName;
+              adminObj.lastName = admins[i].lastName;
+              adminsArr.push(adminObj);
+            }
+            res.status(200).send(adminsArr);
+          }
+      });
   }
 };

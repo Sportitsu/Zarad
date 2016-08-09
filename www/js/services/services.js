@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.services',[])
 
-.factory('Auth',function($http,$window){
+.factory('Auth',function($http,$window,$location){
 	var signup=function(data){
 		return $http({
 			method: 'POST',
@@ -13,17 +13,20 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
-    console.log("signin",user,url)
     return $http({
       method:'POST',
       url: url,
       data:user
     })
-    .then(function(resp,err){
+    .then(function(resp){
       return resp.data;
     }); 
   };
   
+  var signout=function(){
+    $window.localStorage.removeItem('com.zarad');
+    $location.path('/');
+  }
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -31,16 +34,15 @@ angular.module('zarad.services',[])
 	return{
 		signup : signup,
 		signin : signin,
-		isAuth : isAuth
+		isAuth : isAuth,
+    signout : signout
 	};
 })
 .factory('Admin', function ($http) {
-
   var signin=function(admin){
-    console.log(admin)
     return $http({
       method:'POST',
-      url:'/api/admin/signin',
+      url:'http://zarad.herokuapp.com/api/admin/signin',
       data:admin
     })
     .then(function(resp){
@@ -66,7 +68,7 @@ angular.module('zarad.services',[])
       url:'/api/club/register'
     })
     .then(function(resp){
-      return resp;
+      return resp.data;
     })
   };
    //send club information to tournament
@@ -91,7 +93,7 @@ angular.module('zarad.services',[])
   var AddUser=function(user){
     return $http({
       method: 'POST',
-      url : '/api/user/signup',
+      url : '/api/club/register',
       data:user
     })
     .then(function(resp){
@@ -102,18 +104,14 @@ angular.module('zarad.services',[])
     AddUser : AddUser
   }
 })
-.factory('Profile', function ($http, $location) {
-  var getClub=function(username){
-  
+.factory('Profile', function ($http, $location, $window) {
+  var getClub=function(){
     return $http({
       method: 'GET',
-      url: '/api/club/x/'+username
-      
+      url: '/api/club/x/:username'
     }).then(function(resp){
-      console.log(resp);
-      return resp;
+      return resp.data;
     })
-  //}
   };
   return {
     getClub:getClub

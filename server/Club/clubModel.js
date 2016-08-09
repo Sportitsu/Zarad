@@ -9,6 +9,7 @@ var Schema = mongoose.Schema;
 var clubSchema = new Schema ({
 	username : {type : String, required : true, index : {unique : true} },
 	password : {type : String, required : true },
+  email    : {type : String , index : { unique : true}},
 	country  : {type : String, required : true },
 	clubName : {type : String, required : true, index : { unique : true } },
   salt : { type : String}
