@@ -42,7 +42,7 @@ angular.module('zarad.services',[])
   var signin=function(admin){
     return $http({
       method:'POST',
-      url:'/api/admin/signin',
+      url:'http://zarad.herokuapp.com/api/admin/signin',
       data:admin
     })
     .then(function(resp){

@@ -3,27 +3,23 @@ var mongoose = require('mongoose');
 var express = require('express');
 // var config = require('./_config');
 
-var app = express();
-app.use(function(req, res, next) {
-   res.header('Access-Control-Allow-Origin', '*');
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-   res.header('Access-Control-Allow-Headers', 'Content-Type,Accept');
-   next();
-});
 var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
-// connect to mongoDB database
-var port = process.env.PORT || 8000;
-
-// mongoose.connect(config.mongoURI[app.settings.env],function(err){
-// 	if(err){
-// 		console.log('Error Connecting to the database. ' + err);
-// 	} else {
-// 		console.log('Connected to Database ' + config.mongoURI[app.settings.env]);
-// 	}
-// });
 
 mongoose.connect(MONGO_URI);
 
+var app = express();
+
+app.use(function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+	res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization, Access-Control-Allow-Origin, Access-Control-Allow-Headers');
+	next();
+});
+
+
+
+// connect to mongoDB database
+var port = process.env.PORT || 8000;
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);
 require('./config/routes.js')(app, express);

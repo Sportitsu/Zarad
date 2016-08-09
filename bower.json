@@ -1,6 +1,6 @@
 {
 	"name": "zarad",
-	"version" : "0.0.0",
+	"version" : "1.0.0",
 	"authors" : [
     "Mohammad Al-Bakri <mohammad.albakri93@gmail.com>",
     "Mihyar Almaslama <eng.mihyear@gmail.com>",
@@ -23,6 +23,6 @@
 		"ionic": "driftyco/ionic-bower#1.3.1"
 	},
 	"resolutions": {
-  		"angular": "~1.3.16"
+  		"angular": "~1.5.*"
 	}
 }

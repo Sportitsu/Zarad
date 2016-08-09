@@ -32,7 +32,11 @@ module.exports = function(config) {
       'test/front-end/clientSpec.js',
       'test/front-end/Adminspec.js',
       'test/front-end/routingSpec.js',
-      'test/front-end/ServicesSpec.js'
+      'test/front-end/ServicesSpec.js',
+      //'test/front-end/profileSpec.js',
+      'test/front-end/clubSpec.js'
+      
+
     ],
 
 
