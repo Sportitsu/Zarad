@@ -8,9 +8,17 @@
 </head>
 <body>
 
-<ion-header-bar class="bar bar-header bar-calm">
- <ion-title>Zarad</ion-title>
-</ion-header-bar>
+
+<ion-side-menus>
+  <!-- Left menu -->
+
+  <ion-side-menu side="left">
+  <li>Left menu</li>
+  </ion-side-menu>
+
+  <ion-side-menu-content>
+  <!-- Main content, usually <ion-nav-view> -->
+  <li class="bar bar-header bar-calm">Zarad</li>
   <div class="tabs-striped tabs-top tabs-calm">
     <div class="tabs">
       <a class="tab-item active" href="#/signin">
@@ -24,13 +32,40 @@
       </a>
     </div>
   </div>
-
-<ion-view class="padding">
-	<ion-content >
-			  <div ng-view>
-			  </div>
-	</ion-content>
+  <ion-view class="padding">
+  <ion-content>
+        <div ng-view="">
+        </div>
+  </ion-content>
 </ion-view>
+
+  </ion-side-menu-content>
+
+  
+
+</ion-side-menus>
+
+<script >
+function ContentController($scope, $ionicSideMenuDelegate) {
+  $scope.toggleLeft = function() {
+    $ionicSideMenuDelegate.toggleLeft();
+  };
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <!-- <div class="bar bar-footer bar-calm">
   <div class="title">contact info</div>
