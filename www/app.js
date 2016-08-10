@@ -4,8 +4,7 @@ var app = angular.module('zarad', [
 	'zarad.admin',
 	'zarad.club',
 	'zarad.tournament',
-	'ngRoute',
-	'ionic',
+	'zarad.services',
 	'zarad.index',
 	'ui.router'
 	]);
@@ -56,12 +55,25 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	url:'/AddTournment',
         	templateUrl:'js/templates/AddTournment.html',
         	controller:'TournamentController'
+
         })
+        .state('AllTournament',{
+            url:'/AllTournament',
+            templateUrl:'js/templates/AllTournament.html',
+            controller:'TournamentController'
+            
+        }) .state('Edittournament',{
+            url:'/Edittournament',
+            templateUrl:'js/templates/Edittournament.html',
+            controller:'TournamentController'
+            
+        })
+       
        
 
         $urlRouterProvider.otherwise('/');
 	
-	$httpProvider.interceptors.push('AttachTokens');
+	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
 	    return $.param(data);

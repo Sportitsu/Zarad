@@ -1,4 +1,14 @@
-<h1 class="padding">Add Tournament</h1>
+<div class="list">
+  <label class="item item-input item-floating-label">
+    <span class="input-label">Tournament Name</span>
+    <input type="text" placeholder="Tournament Name" ng-model='tournament.search'>
+</div>
+  <button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="SearchAboutTournament()">
+  search
+</button>
+
+
+
 <div class="list">
   <label class="item item-input item-floating-label">
     <span class="input-label">Tournament Name</span>
@@ -17,15 +27,18 @@
     <input type="text" placeholder="Tournament organizer" ng-model='tournament.organizer'>
   </label>
   <label class="item item-input item-floating-label">
-    <span class="input-label">Tournament time</span>
-    <input type="text" placeholder="Tournament time" ng-model='tournament.time'>
+    <span class="input-label">Tournament Date</span>
+    <input type="text" placeholder="Tournament Date" ng-model='tournament.Date'>
   </label>
   <label class="item item-input item-floating-label">
     <span class="input-label">Tournament poster</span>
     <input type="text" placeholder="Tournament poster" ng-model='tournament.poster'>
   </label>
 </script>
-</div>
-  <button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="AddTournament()">
-  Add Tournament
+
+  <button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="EditTournament()">
+  Edit Tournament
 </button>
+ <button class="button button-full button-outline button-stable icon-right ion-chevron-right" ng-click="DeleteTournament()">
+  Delete Tournament
+ </button>

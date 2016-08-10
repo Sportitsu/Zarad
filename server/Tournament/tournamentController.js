@@ -5,13 +5,15 @@ var helpers = require('../config/helpers');
 module.exports = {
 	// fetch all tournaments function
 	getAll : function (req,res) {
+		console.log("fsd")
 		Tournament.find({})
 		.exec(function (error, tournaments) {
 			if(tournaments.length === 0){
 				helpers.errorHandler('Empty Table', req, res);
 			}else{
-				var tournamentsArray=[];
+				/*var tournamentsArray=[];
 				for (var i = 0; i < tournaments.length; i++) {
+					console.log(tournaments[0])
 					var tournamentObj ={};
 					tournamentObj.name = tournaments[i].name;
 					tournamentObj.Date = tournaments[i].Date;
@@ -19,9 +21,11 @@ module.exports = {
 					tournamentObj.organizer = tournaments[i].organizer;
 					tournamentObj.details = tournaments[i].details;
 					tournamentObj.poster = tournaments[i].poster;
-					tournamentsArray.push(tournamentObj);
-				}
-				res.status(200).send(tournamentsArray);
+					tournamentObj._id = tournaments[i]._id;
+					tournamentsArray.push(tournaments[i]);
+
+				}*/
+				res.status(200).send(tournaments);
 			}
 		});
 	},
@@ -69,10 +73,11 @@ module.exports = {
 	},
 	// function to edit Trounament
 	tournamentEdit : function (req,res) {
-		var id = req.body.id;
-		Tournament.findOne({ _id : id })
+		//var id = req.body.id;
+		Tournament.findOne({ name : name })
 		.exec(function(error, tournament){
 			if(tournament){
+				console.log()
 				tournament.name = req.body.name || tournament.name;
 				tournament.Date = req.body.Date || tournament.Date;
 				tournament.place = req.body.place || tournament.place;
