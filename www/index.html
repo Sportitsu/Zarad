@@ -9,51 +9,56 @@
 </head>
 <body ng-app="zarad" ng-controller="parentController">
 <!-- app header here -->
-<ion-header-bar class="bar bar-header bar-calm">
- <ion-title>Zarad</ion-title>
- <button class="button button-icon icon ion-navicon"></button>
- <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
-</ion-header-bar>
 
-<!-- viewing tabs of the web app -->
-<div class="tabs-striped tabs-top tabs-calm">
-    <div class="tabs">
-      <a class="tab-item active" href="#/signin">
-        <i class="icon ion-home"></i>
-      </a>
-      <a class="tab-item" href="#/profile">
-        <i class="icon ion-person"></i>
-      </a>
-      <a class="tab-item" href="#/">
-        <i class="icon ion-trophy"></i>
-      </a>
+
+
+<ion-view>
+  <ion-header-bar class="bar bar-header bar-calm">
+   <ion-title>Zarad</ion-title>
+   <button class="button button-icon icon ion-navicon"></button>
+   <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
+  </ion-header-bar>
+
+  <!-- viewing tabs of the web app -->
+
+    <div class="tabs-striped tabs-top tabs-calm">
+        <div class="tabs">
+          <a class="tab-item active" href="#/signin">
+            <i class="icon ion-home"></i>
+          </a>
+          <a class="tab-item" href="#/profile">
+            <i class="icon ion-person"></i>
+          </a>
+          <a class="tab-item" href="#/">
+            <i class="icon ion-trophy"></i>
+          </a>
+        </div>
     </div>
-</div>
 
-<!-- other html pages content rendering will be here -->
-<ion-nav-view class="has-header  has-tabs-top has-subfooter">
-  <ion-view class="padding">
-    <ion-content >
-    <!-- rendering other html pages will be here -->
-    </ion-content>
-  </ion-view>
-</ion-nav-view>
-
+  <!-- other html pages content rendering will be here -->
+  <ion-nav-view class="has-header has-tabs-top has-subfooter">
+    <ion-view class="padding">
+      <ion-content >
+      <!-- rendering other html pages will be here -->
+      </ion-content>
+    </ion-view>
+  </ion-nav-view>
+</ion-view>
 <!-- footer of the page is here -->
-<div class="bar bar-footer bar-calm">
-  <div class="title">contact info</div>
-</div>
+
 
  <script src="ionic/js/ionic.bundle.js"></script>
  <script src="./lib/angular/angular.js"></script>
  <script type="../node_modules/angular-slider.js"></script>
  <script type="lib/angular-mocks/angular-mocks.js"></script>
  <!-- installed route using this bower install angular-ui-router -->
+
+
  <script src="lib/angular-route/angular-route.js"></script>
  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
- 
  <script src="js/services/services.js"></script>
  <script src="js/controller/index.js"></script>
+ <script src="js/controller/userProfile.js"></script>
  <script src="js/controller/AdminHome.js"></script>
  <script src="js/controller/auth.js"></script>
  <script src="js/controller/club.js"></script>
