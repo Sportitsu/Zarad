@@ -1,0 +1,11 @@
+<div>
+	<label><h3>Select Admin: </h3></label>
+	<select ng-model="adminSelect">
+		<option ng-repeat="admin in admins.data" value="{{admin.username}}">
+			{{admin.username}}
+		</option>
+	</select>
+</div>
+<div>
+	<button ng-click="deleteAdmin()">Remove</button>
+</div>
