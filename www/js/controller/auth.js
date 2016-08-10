@@ -1,8 +1,8 @@
 'use strict';
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup){
-	$scope.user={};
 
+     $scope.user={};
 	 $scope.showAlert = function(type, tx) {
 	   var alertPopup = $ionicPopup.alert({
 	     title: type,
@@ -31,6 +31,8 @@ angular.module('zarad.auth',[])
 		else if(!!$scope.user.club){
 			url='http://zarad.herokuapp.com/api/club/signin';
 		}
+
+
 		if(url){
 		  	Auth.signin($scope.user,url)
 		  	.then(function(resp){
