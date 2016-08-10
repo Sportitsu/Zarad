@@ -8,7 +8,8 @@ var app = angular.module('zarad', [
 	'zarad.profile',
 	'zarad.services',
 	'ui.router',
-    'ngAnimate'
+    'ngAnimate',
+    'ngRoute'
 	]);
 
 app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
@@ -70,39 +71,18 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         })
 
 
+
+
         $urlRouterProvider.otherwise('/');
 	
 	// $httpProvider.interceptors.push('AttachTokens');
-
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
 	    return $.param(data);
 	};
 	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 })
-.factory('AttachTokens',function ($window){
-	var attach = {
-		request: function(object){
-			var jwt = $window.localStorage.getItem('com.zarad');
-			if(jwt){
-				object.headers['x-access-token']= jwt;
-			}
-			return object;
-		}
-	};
-	return attach;
-})
-.run(function($rootScope, $location , Auth, $ionicPlatform){
-	$rootScope.$on('$routeChangeStart',function(evt,next,current){
-    if(Auth.isAuth()){
-        $location.path('/').replace();
-    }
-		if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-			$location.path('/signin');
-		} 
-        // TODO when user is signed in and going to sign in
-        // page then redirect to his profile or home page
-	});
+.run(function($rootScope, $state, $location , Auth, $ionicPlatform){
  $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -118,4 +98,22 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
       StatusBar.styleDefault();
     }
   });
+  $rootScope.$on('$locationChangeStart', function (evt, next, current) {
+    if (!Auth.isAuth()) {
+      $location.path('/signin')
+    }
+  })
+
+})
+.factory('AttachTokens',function ($window){
+    var attach = {
+        request: function(object){
+            var jwt = $window.localStorage.getItem('com.zarad');
+            if(jwt){
+                object.headers['x-access-token']= jwt;
+            }
+            return object;
+        }
+    };
+    return attach;
 });
