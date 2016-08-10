@@ -1,8 +1,69 @@
-<ion-popover-view>
-    <ion-header-bar>
-      <h1 class="title">My Popover Title</h1>
-    </ion-header-bar>
-    <ion-content>
-      Hello!
-    </ion-content>
-</ion-popover-view>
+<ion-view>
+ <!-- <ion-scroll delegate-handle="taskScroll" direction="y"> -->
+	<div>
+		username : <h4>{{data.username}}</h4>
+		Belt : <h4>{{data.beltColor}}</h4>
+		Email : <h4>{{data.email}}</h4>
+		Country : <h4>{{data.country}}</h4>
+		Club Name : <h4>{{data.club}}</h4>
+		Age :  <h4>{{data.age}}</h4>
+		Phone : <h4>{{data.phone}}</h4>
+		First Name :  <h4>{{data.firstName}}</h4>
+		Last Name : <h4>{{data.lastName}}</h4>
+	</div> 
+	<ion-checkbox ng-change="edit()" ng-model="isChecked" ng-value="true">Edit Profile</ion-checkbox>
+	<ul ng-show="flag" >
+	    <input type="text" placeholder="First Name" ng-model="user.firstName"></input> 
+	   	<input type="text" placeholder="Last Name" ng-model="user.lastName"></input>
+	    <input type="number" placeholder="Number" ng-model="user.phone" ></input>
+	    <input type="email" placeholder="Email Input" ng-model="user.country"></input>
+	    <input type="password" placeholder="Old Password Input" ng-model="user.oldPassword"></input>
+	    <input type="password" placeholder="New Password Input" ng-model="user.password"></input>	  	  
+		<button ng-click="showConfirm()">Finished Editing</button>
+	</ul>
+  <!-- </ion-scroll> -->
+</ion-view>
+
+
+
+
+
+
+
+
+
+<!-- <label class="item item-input item-stacked-label">
+		<span class="input-label">textarea label</span>
+		<textarea placeholder="yyy" rows="8" cols="10"></textarea>
+	</label> -->
+
+
+<!-- 
+ <div class="tabs-striped tabs-top tabs-calm">
+        <div class="tabs">
+          <a class="tab-item active" href="#/signin">
+            <i class="icon ion-home"></i>
+          </a>
+          <a class="tab-item" href="#/userprofile/">
+            <i class="icon ion-person"></i>
+          </a>
+          <a class="tab-item" href="#/">
+            <i class="icon ion-trophy"></i>
+          </a>
+        </div>
+    </div> -->
+
+
+<!-- <ion-slide-box on-slide-changed="slideHasChanged($index)" ng-show="flag">
+	  <ion-slide>
+	    <div class="box blue"><h1>{{data.username}}</h1></div>
+	    <img src="https://www.creativefreedom.co.uk/wp-content/uploads/2013/03/00-android-4-0_icons.png">
+	  </ion-slide>
+
+	  <ion-slide>
+	    <div class="box yellow"><h1>YELLOW</h1></div>
+	  </ion-slide>
+	  <ion-slide>
+	    <div class="box pink"><h1>PINK</h1></div>
+	  </ion-slide>
+</ion-slide-box>
