@@ -4,7 +4,6 @@ var app = angular.module('zarad', [
 	'zarad.admin',
 	'zarad.club',
 	'zarad.tournament',
-	'zarad.profile',
 	'ngRoute',
 	'ionic',
 	'zarad.index',
@@ -16,8 +15,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
    $httpProvider.defaults.headers.common = {};
    $httpProvider.defaults.headers.put = {};
    $httpProvider.defaults.headers.patch = {};
-
-	
 
     $stateProvider
         .state('/', {
@@ -58,13 +55,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         .state('addtournment',{
         	url:'/AddTournment',
         	templateUrl:'js/templates/AddTournment.html',
-        	controller:'AdminController'
+        	controller:'TournamentController'
         })
-        .state('profile',{
-        	url:'/clubprofile/:username',
-        	templateUrl:'js/templates/clubprofile.html',
-        	controller:'profileController'
-        })
+       
 
         $urlRouterProvider.otherwise('/');
 	
