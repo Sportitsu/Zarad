@@ -7,7 +7,8 @@ var app = angular.module('zarad', [
 	'zarad.index',
 	'zarad.profile',
 	'zarad.services',
-	'ui.router'
+	'ui.router',
+    'ngAnimate'
 	]);
 
 app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
@@ -72,7 +73,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         $urlRouterProvider.otherwise('/');
 	
 	// $httpProvider.interceptors.push('AttachTokens');
-    
+
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
 	    return $.param(data);
@@ -93,9 +94,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 })
 .run(function($rootScope, $location , Auth, $ionicPlatform){
 	$rootScope.$on('$routeChangeStart',function(evt,next,current){
+    if(Auth.isAuth()){
+        $location.path('/').replace();
+    }
 		if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
 			$location.path('/signin');
-		}
+		} 
         // TODO when user is signed in and going to sign in
         // page then redirect to his profile or home page
 	});
