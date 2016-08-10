@@ -13,8 +13,7 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
-    console.log(user);
-    console.log(url);
+
     return $http({
       method:'POST',
       url: url,
@@ -22,8 +21,6 @@ angular.module('zarad.services',[])
     })
     .then(function(resp){
       return resp.data;
-    },function(error){
-      return error;
     }); 
   };
   

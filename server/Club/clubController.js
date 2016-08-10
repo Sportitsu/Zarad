@@ -101,7 +101,7 @@ module.exports ={
                         }
                 });
 			}else{
-				helpers.errorHandler('User Does Not Exists', req, res);
+				helpers.errorHandler('Club Does Not Exists', req, res);
 			}
 		});
 	},
