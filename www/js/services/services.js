@@ -25,6 +25,7 @@ angular.module('zarad.services',[])
   };
   
   var signout=function(){
+    $window.localStorage.removeItem('com.user');
     $window.localStorage.removeItem('com.zarad');
     $location.path('/');
   }
@@ -119,8 +120,33 @@ angular.module('zarad.services',[])
   }
 })
 .factory('User', function($http){
-  
- return {
+  var getUser = function(name){
+    return $http({
+      method : 'GET' ,
+      url : 'http://zarad.herokuapp.com/api/user/x/' + name
+    }).success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return response.data;
+    });
+  };
 
+  var editProfile = function(user){
+    return $http({
+      method : 'POST' ,
+      url : 'http://zarad.herokuapp.com/api/user/editProfile',
+      data : user
+    })
+    .success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return response.data;
+    })
+  }
+ return {
+   getUser : getUser,
+   editProfile : editProfile
  }
 })
