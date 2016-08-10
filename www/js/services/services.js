@@ -13,6 +13,8 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
+    console.log(user);
+    console.log(url);
     return $http({
       method:'POST',
       url: url,
@@ -20,6 +22,8 @@ angular.module('zarad.services',[])
     })
     .then(function(resp){
       return resp.data;
+    },function(error){
+      return error;
     }); 
   };
   
@@ -91,8 +95,7 @@ angular.module('zarad.services',[])
     Addtournament:Addtournament
   };
 })
-
-.factory('club',function($http){
+.factory('Club',function($http){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -103,11 +106,7 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
-  return{
-    AddUser : AddUser
-  }
-})
-.factory('Profile', function ($http, $location, $window) {
+
   var getClub=function(){
     return $http({
       method: 'GET',
@@ -116,8 +115,15 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
-  return {
-    getClub:getClub
-  };
-});
 
+  return{
+    AddUser : AddUser,
+    getClub:getClub
+  }
+})
+.factory('User', function($http){
+  
+ return {
+
+ }
+})

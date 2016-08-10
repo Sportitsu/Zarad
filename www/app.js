@@ -61,11 +61,14 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl:'js/templates/clubprofile.html',
         	controller:'profileController'
         })
+        .state('userProfile',{
+            url : '/'
+        })
 
 
         $urlRouterProvider.otherwise('/');
 	
-	$httpProvider.interceptors.push('AttachTokens');
+	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
 	    return $.param(data);
@@ -75,7 +78,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 .factory('AttachTokens',function ($window){
 	var attach = {
 		request: function(object){
-			var jwt= $window.localStorage.getItem('com.zarad');
+			var jwt = $window.localStorage.getItem('com.zarad');
 			if(jwt){
 				object.headers['x-access-token']= jwt;
 			}
