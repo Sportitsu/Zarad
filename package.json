@@ -29,6 +29,7 @@
     "bower": "latest",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
+    "cron": "^1.1.0",
     "gulp-jshint": "^2.0.1",
     "gulp-minify": "0.0.14",
     "gulp-uglify": "^2.0.0",
@@ -43,6 +44,7 @@
     "sinon": "^1.17.5"
   },
   "dependencies": {
+    "angular-slider": "^0.2.3",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.4.3",
     "express": "^4.4.5",

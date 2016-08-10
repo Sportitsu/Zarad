@@ -30,7 +30,6 @@ module.exports = {
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
-    
 
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
@@ -61,7 +60,6 @@ module.exports = {
   },
   // Admin sign in function 
   signin : function (req,res) {
-
     var username = req.body.username;
     var password = req.body.password;
     Admin.findOne({ username : username })
@@ -72,7 +70,9 @@ module.exports = {
                 if(found){
                   var token = jwt.encode(admin, 'secret');
                   res.setHeader('x-access-token',token);
-                  res.json({token: token});
+                   //modified the response to send the username
+                   //to save it in local stoarage to be accessed late
+                  res.json({token: token,user:admin.username});
                 } else {
                   helpers.errorHandler('Wrong Password', req,res);
                 }

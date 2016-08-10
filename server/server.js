@@ -7,6 +7,7 @@ var MONGO_URI = process.env.MONGODB_URI || 'mongodb://localhost/node-test';
 
 mongoose.connect(MONGO_URI);
 
+
 var app = express();
 
 app.use(function(req, res, next) {
@@ -20,7 +21,6 @@ app.use(function(req, res, next) {
 
 // connect to mongoDB database
 var port = process.env.PORT || 8000;
-
 
 // configure server with all routing plus middleware
 require('./config/middleware.js')(app,express);

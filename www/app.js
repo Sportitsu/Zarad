@@ -1,63 +1,69 @@
-angular.module('zarad',[
-	'zarad.services',
-	'zarad.admin',
+var app = angular.module('zarad', [
+	'ionic',
 	'zarad.auth',
+	'zarad.admin',
 	'zarad.club',
+	'zarad.index',
 	'zarad.profile',
-	'ngRoute',
-	'ionic'
-])
-.config(function ($routeProvider , $httpProvider) {
+	'zarad.services',
+	'ui.router'
+	]);
+
+app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+   
+   $httpProvider.defaults.headers.common = {};
+   $httpProvider.defaults.headers.put = {};
+   $httpProvider.defaults.headers.patch = {};
+
+    $stateProvider
+        .state('/', {
+        	url: '/',
+		    templateUrl: 'js/templates/home.html',
+		    controller:'AuthController'
+        })
+        .state('signin', {
+            url:'/signin',
+            templateUrl : 'js/templates/signin.html',
+            controller:'AuthController'
+        })
+        .state('adminmain',{
+        	url:'/AdminMain',
+        	templateUrl:'js/templates/AdminMain.html',
+        	controller:'AdminController'
+        })
+        .state('adminsign',{
+        	url:'/AdminSignin',
+        	templateUrl:'js/templates/AdminSignin.html',
+        	controller:'AdminController'
+        })
+        .state('adminsignup',{
+        	url:'/AdminSignup',
+        	templateUrl:'/js/templates/AdminSignup.html',
+        	controller:'AdminController'
+        })
+        .state('adminaction',{
+        	url:'/AdminAction',
+        	templateUrl: 'js/templates/AdminAction.html',
+        	controller: 'AdminController'
+        })
+        .state('addclub',{
+        	url:'/AddClub',
+        	templateUrl:'js/templates/AddClub.html',
+        	controller:'AdminController'
+        })
+        .state('addtournment',{
+        	url:'/AddTournment',
+        	templateUrl:'js/templates/AddTournment.html',
+        	controller:'AdminController'
+        })
+        .state('profile',{
+        	url:'/clubprofile/:username',
+        	templateUrl:'js/templates/clubprofile.html',
+        	controller:'profileController'
+        })
 
 
-	$routeProvider
-	.when('/',{
-		templateUrl:'app/auth/home.html',
-		controller: 'AuthController'
-	})
-	.when('/signin', {
-		templateUrl :'app/auth/signin.html',
-		controller : 'AuthController'
-	})
-	.when('/signup', {
-		templateUrl :'app/auth/signup.html',
-		controller : 'AuthController'
-	})
-	.when('/AdminMain',{
-		templateUrl :'app/Admin/AdminMain.html',
-		controller : 'AdminController'
-	})
-	.when('/AdminAction',{
-		templateUrl: 'app/Admin/AdminAction.html',
-		controller: 'AdminController'
-	})
-	.when('/AdminSignin',{
-		templateUrl: '/app/Admin/AdminSignin.html',
-		controller : 'AdminController'
-	})
-	.when('/AdminSignup',{
-		templateUrl: '/app/Admin/AdminSignup.html',
-		controller: 'AdminController'
-	})
-	.when('/AddClub',{
-		templateUrl: '/app/Admin/AddClub.html',
-		controller: 'AdminController'
-	})
-	.when('/AddTournment',{
-		templateUrl: '/app/Admin/AddTournment.html',
-		controller: 'AdminController'
-	})
-	.when('/clubprofile/:username',{
-		templateUrl: 'app/profile/clubprofile.html',
-		controller: 'profileController',
-		
-	})
-
-	.when('/userprofile',{
-		templateUrl: 'app/profile/userprofile.html',
-		controller: 'profileController'
-
-	})
+        $urlRouterProvider.otherwise('/');
 	
 	$httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
@@ -83,20 +89,22 @@ angular.module('zarad',[
 		if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
 			$location.path('/signin');
 		}
+        // TODO when user is signed in and going to sign in
+        // page then redirect to his profile or home page
 	});
-	$ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+ // $ionicPlatform.ready(function() {
+ //    if(window.cordova && window.cordova.plugins.Keyboard) {
+ //      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+ //      // for form inputs)
+ //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
 
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+ //      // Don't remove this line unless you know what you are doing. It stops the viewport
+ //      // from snapping when text inputs are focused. Ionic handles this internally for
+ //      // a much nicer keyboard experience.
+ //      cordova.plugins.Keyboard.disableScroll(true);
+ //    }
+ //    if(window.StatusBar) {
+ //      StatusBar.styleDefault();
+ //    }
+ //  });
 });

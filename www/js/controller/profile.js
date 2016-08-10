@@ -15,4 +15,4 @@ angular.module('zarad.profile',['ionic'])
 		})
 		}
 		$scope.getClub();
-	});
+});
