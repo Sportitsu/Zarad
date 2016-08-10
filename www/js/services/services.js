@@ -53,7 +53,7 @@ angular.module('zarad.services',[])
   var signup=function(admin){
     return $http({
       method:'POST',
-      url:'/api/admin/create',
+      url:'http://zarad.herokuapp.com/api/admin/create',
       data:admin
     })
     .then(function(resp){
@@ -65,7 +65,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data: club,
-      url:'/api/club/register'
+      url:'http://zarad.herokuapp.com/api/club/register'
     })
     .then(function(resp){
       return resp.data;
@@ -76,7 +76,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data: tournament,
-      url:'/api/tournament/create'
+      url:'http://zarad.herokuapp.com/api/tournament/create'
     }).then(function (resp) {
       return resp.data;
     });
