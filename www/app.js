@@ -99,8 +99,13 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     }
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
-    if (!Auth.isAuth()) {
-      $location.path('/signin')
+    if(Auth.isAuth() && (next === 'http://localhost:8000/#/signin'|| next === 'http://zarad.herokuapp.com/#/AdminMain')){
+        $state.go('/');
+    }
+    if(next === 'http://localhost:8000/#/AdminMain' || next === 'http://zarad.herokuapp.com/#/AdminMain'){
+        $state.go('adminmain');
+    } else if(!Auth.isAuth()) {
+        $state.go('signin');
     }
   })
 
