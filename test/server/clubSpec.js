@@ -75,7 +75,6 @@ describe('Club Test Database', function(done){
 		chai.request(server)
 			.post('/api/club/register')
 			.send({
-				'username' : '103948', 
 				'password' : 'catchmeifyoucan',
 				'clubName' : 'Desert-Force', 
 				'country' : 'Jordan'
@@ -91,7 +90,7 @@ describe('Club Test Database', function(done){
 
 	it('should respond with error 500 when user exists', function(done){
 		var newClub = new Club({
-				'username' : 'fighteX',
+				'username' : 'clfig230',
 				'password' : 'iShouldNotWork',
 				'clubName' : 'BlaBla' ,
 				'country'  : 'Jordan'
@@ -100,7 +99,7 @@ describe('Club Test Database', function(done){
 			chai.request(server)
 				.post('/api/club/register')
 				.send({
-					'username' : 'fighteX',
+					'username' : savedClub.username,
 					'password' : 'iShouldNotWork',
 					'clubName' : 'BlaBla' ,
 					'country'  : 'Jordan'

@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.services',[])
 
-.factory('Auth',function($http,$window){
+.factory('Auth',function($http,$window,$location){
 	var signup=function(data){
 		return $http({
 			method: 'POST',
@@ -19,11 +19,15 @@ angular.module('zarad.services',[])
       url: url,
       data:user
     })
-    .then(function(resp,err){
+    .then(function(resp){
       return resp.data;
     }); 
   };
   
+  var signout=function(){
+    $window.localStorage.removeItem('com.zarad');
+    $location.path('/');
+  }
  	var isAuth = function () {
     	return !!$window.localStorage.getItem('com.zarad');
   	};
@@ -31,7 +35,8 @@ angular.module('zarad.services',[])
 	return{
 		signup : signup,
 		signin : signin,
-		isAuth : isAuth
+		isAuth : isAuth,
+    signout : signout
 	};
 })
 .factory('Admin', function ($http) {
@@ -40,7 +45,7 @@ angular.module('zarad.services',[])
     console.log(admin)
     return $http({
       method:'POST',
-      url:'/api/admin/signin',
+      url:'http://zarad.herokuapp.com/api/admin/signin',
       data:admin
     })
     .then(function(resp){
@@ -66,7 +71,7 @@ angular.module('zarad.services',[])
       url:'/api/club/register'
     })
     .then(function(resp){
-      return resp;
+      return resp.data;
     })
   };
    //send club information to tournament

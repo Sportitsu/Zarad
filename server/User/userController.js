@@ -4,6 +4,7 @@ var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
 var helpers = require('../config/helpers');
 
+
 module.exports= {
 	// fetching a user based on the user name
 	getUser: function(req,res){
@@ -36,6 +37,13 @@ module.exports= {
 					newObject.beltColor = users[i].beltColor;
 					newObject.attendenc = users[i].attendenc;
 					newObject.achievements = users[i].achievements;
+					newObject.valid = users[i].valid;
+					newObject.resub = users[i].resub;
+					newObject.subscription = users[i].subscription;
+					newObject.membership = users[i].membership;
+					newObject.country = users[i].country;
+					newObject.age = users[i].age;
+					newObject.middleName = users[i].middleName || 'N/A';
 					newArr.push(newObject);
 				}
 				res.status(200).json(newArr);
@@ -45,14 +53,18 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
-		User.findOne({username: username})
+		var key;
+		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		User.findOne({[key]: username})
       		.exec(function (error, user) {
        			if (user) {
      		 	      User.comparePassword(password,user.password, res, function(found){
         		        if(found){
        				       var token = jwt.encode(user, 'secret');
          			        res.setHeader('x-access-token',token);
-                            res.json({token: token});
+         			        //modified the response to send the username
+         			        //to save it in local stoarge to be accessed late
+                            res.json({token: token,user: username});
       			        } else {
        				       helpers.errorHandler('Wrong Password', req, res);
                         }
@@ -63,8 +75,12 @@ module.exports= {
             });
 	},
 	signup : function(req, res){
-		var username = req.body.username;
-			User.findOne({username: username})
+		if(req.body.beltColor && req.body.password && req.body.club && req.body.country){
+			req.body.username = req.body.username || helpers.getPlayerName(req.body.firstName);
+		} else {
+			helpers.errorHandler('Wrong set Up' , req, res);
+		}
+			User.findOne({username: req.body.username})
 	    		.exec(function(error,user){
 			        if(user){
 			          helpers.errorHandler('User Already Exists', req, res);
@@ -86,8 +102,10 @@ module.exports= {
 						   	            club : req.body.club,
 						   	            beltColor : req.body.beltColor,
 						   	            attendance : req.body.attendance || 0,
-						   	            achievements : req.body.achievements
-							        });				        			
+						   	            achievements : req.body.achievements,
+						   	            membership : req.body.membership || 1,
+						   	            subscription : req.body.subscription || Date.now()
+							        });				   		
 							        newUser.save(function(err, newUser){
 							            if(err){
 							                helpers.errorHandler(err, req, res);
@@ -147,5 +165,35 @@ module.exports= {
 				helpers.errorHandler('Not Available', req, res);
 			}
 		});
+	},
+
+	resub : function(req,res){
+		var username = req.body.username;
+		User.findOne({username : username})
+			.exec(function(err, user){
+				if(user){
+					if(user.valid){
+						var isFinished = user.subscription + ((30 * 24 * 60 * 60 * 1000) * user.membership);
+						var remaining = isFinished - Date.now();
+						user.subscription = (Date.now() + remaining);
+						user.resub = false;
+						user.membership = req.body.membership;
+					} else {
+						user.subscription = Date.now();
+						user.membership = req.body.membership;
+						user.resub = false;
+						user.valid = true;
+					}
+					user.save(function(err, saved){
+						if(saved){
+							res.status(201).send(saved);
+						} else {
+							helpers.errorHandler('Not Saved', req, res);		
+						}
+					});
+				} else {
+					helpers.errorHandler('Not Available', req, res);
+				}
+			});
 	}
 };

@@ -1,65 +1,79 @@
-angular.module('zarad',[
-	'zarad.services',
-	'zarad.admin',
+var app = angular.module('zarad', [
+	'ionic',
 	'zarad.auth',
+	'zarad.admin',
 	'zarad.club',
 	'zarad.tournament',
 	'zarad.profile',
 	'ngRoute',
-	'ionic'
-])
-.config(function ($routeProvider , $httpProvider) {
-	$routeProvider
-	.when('/',{
-		templateUrl:'app/auth/home.html',
-		controller: 'AuthController'
-	})
-	.when('/signin', {
-		templateUrl :'app/auth/signin.html',
-		controller : 'AuthController'
-	})
-	.when('/signup', {
-		templateUrl :'app/auth/signup.html',
-		controller : 'AuthController'
-	})
-	.when('/AdminMain',{
-		templateUrl :'app/Admin/AdminMain.html',
-		controller : 'AdminController'
-	})
-	.when('/AdminAction',{
-		templateUrl: 'app/Admin/AdminAction.html',
-		controller: 'AdminController'
-	})
-	.when('/AdminSignin',{
-		templateUrl: '/app/Admin/AdminSignin.html',
-		controller : 'AdminController'
-	})
-	.when('/AdminSignup',{
-		templateUrl: '/app/Admin/AdminSignup.html',
-		controller: 'AdminController'
-	})
-	.when('/AddClub',{
-		templateUrl: '/app/Admin/AddClub.html',
-		controller: 'AdminController'
-	})
-	.when('/AddTournment',{
-		templateUrl: '/app/Admin/AddTournment.html',
-		controller: 'TournamentController'
-	})
-	.when('/clubprofile/:username',{
-		templateUrl: 'app/profile/clubprofile.html',
-		controller: 'profileController',
-		
-	})
+	'ionic',
+	'zarad.index',
+	'ui.router'
+	]);
 
-	.when('/userprofile',{
-		templateUrl: 'app/profile/userprofile.html',
-		controller: 'profileController'
-
-	})
+app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+   
+   $httpProvider.defaults.headers.common = {};
+   $httpProvider.defaults.headers.put = {};
+   $httpProvider.defaults.headers.patch = {};
 
 	
+
+    $stateProvider
+        .state('/', {
+        	url: '/',
+		    templateUrl: 'js/templates/home.html',
+		    controller:'AuthController'
+        })
+        .state('signin', {
+            url:'/signin',
+            templateUrl : 'js/templates/signin.html',
+            controller:'AuthController'
+        })
+        .state('adminmain',{
+        	url:'/AdminMain',
+        	templateUrl:'js/templates/AdminMain.html',
+        	controller:'AdminController'
+        })
+        .state('adminsign',{
+        	url:'/AdminSignin',
+        	templateUrl:'js/templates/AdminSignin.html',
+        	controller:'AdminController'
+        })
+        .state('adminsignup',{
+        	url:'/AdminSignup',
+        	templateUrl:'/js/templates/AdminSignup.html',
+        	controller:'AdminController'
+        })
+        .state('adminaction',{
+        	url:'/AdminAction',
+        	templateUrl: 'js/templates/AdminAction.html',
+        	controller: 'AdminController'
+        })
+        .state('addclub',{
+        	url:'/AddClub',
+        	templateUrl:'js/templates/AddClub.html',
+        	controller:'AdminController'
+        })
+        .state('addtournment',{
+        	url:'/AddTournment',
+        	templateUrl:'js/templates/AddTournment.html',
+        	controller:'AdminController'
+        })
+        .state('profile',{
+        	url:'/clubprofile/:username',
+        	templateUrl:'js/templates/clubprofile.html',
+        	controller:'profileController'
+        })
+
+        $urlRouterProvider.otherwise('/');
+	
 	$httpProvider.interceptors.push('AttachTokens');
+	$httpProvider.defaults.transformRequest = function(data) {        
+	    if (data === undefined) { return data; } 
+	    return $.param(data);
+	};
+	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 })
 .factory('AttachTokens',function ($window){
 	var attach = {
@@ -68,7 +82,6 @@ angular.module('zarad',[
 			if(jwt){
 				object.headers['x-access-token']= jwt;
 			}
-			object.headers['Allow-Control-Allow-Origin']= '*';
 			return object;
 		}
 	};
@@ -76,8 +89,8 @@ angular.module('zarad',[
 })
 .run(function($rootScope, $location , Auth){
 	$rootScope.$on('$routeChangeStart',function(evt,next,current){
-		//if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
-		//	$location.path('/signin');
-		//}
+		if(next.$$route && next.$$route.authenticate && !Auth.isAuth()) {
+			$location.path('/signin');
+		}
 	});
 });

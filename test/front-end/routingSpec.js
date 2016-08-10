@@ -56,8 +56,8 @@ describe('Routing',function(){
         expect($route.routes['/AddTournment']).to.be.defined;
         expect($route.routes['/AddTournment'].controller).to.equal('AdminController');
         expect($route.routes['/AddTournment'].templateUrl).to.equal('/app/Admin/AddTournment.html');
-        
     });
+    
     xit('Should have /clubprofile route, template, and controller', function () {
         expect($route.routes['/clubprofile']).to.be.defined;
         expect($route.routes['/clubprofile'].controller).to.equal('profileController');
