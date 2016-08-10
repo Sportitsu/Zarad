@@ -12,9 +12,7 @@ var User = require('../../server/User/userModel');
 var Club = require('../../server/Club/clubModel');
 var userController = require('../../server/User/userController');
 var clubController = require('../../server/Club/clubController');
-var time = require('time');
 
-var clock;
 describe('User Test Database', function(done){
 
 	User.collection.drop();

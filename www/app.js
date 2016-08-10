@@ -56,15 +56,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl:'js/templates/AddTournment.html',
         	controller:'AdminController'
         })
-        .state('profile',{
-        	url:'/clubprofile/:username',
-        	templateUrl:'js/templates/clubprofile.html',
-        	controller:'profileController'
+        .state('AdminRemove', {
+            url : '/RemoveAdmin',
+            templateUrl : 'js/templates/removeAdmin.html',
+            controller : 'AdminController'
         })
 
         $urlRouterProvider.otherwise('/');
 	
-	$httpProvider.interceptors.push('AttachTokens');
+	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
 	    return $.param(data);
