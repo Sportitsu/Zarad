@@ -1,28 +1,29 @@
 {
-	"name": "zarad",
-	"version" : "1.0.0",
-	"authors" : [
+  "name": "zarad",
+  "version": "1.0.0",
+  "authors": [
     "Mohammad Al-Bakri <mohammad.albakri93@gmail.com>",
     "Mihyar Almaslama <eng.mihyear@gmail.com>",
     "Fatima Hamami <en.f.h90@gmail.com>",
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
-	"ignore" : [
-		"**/.*",
-		"node_modules",
-		"bower_components",
-		"www/client/lib"
-	],
-	"dependencies": {
-		"angular": "latest",
-		"ngCordova": "~0.1.26-alpha",
-		"angular-route" : "~1.3.16",
-		"angular-mocks" : "~1.3.16"
-	},
-	"devDependencies" : {
-		"ionic": "driftyco/ionic-bower#1.3.1"
-	},
-	"resolutions": {
-  		"angular": "~1.5.*"
-	}
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "www/client/lib"
+  ],
+  "dependencies": {
+    "angular": "latest",
+    "ngCordova": "~0.1.26-alpha",
+    "angular-route": "~1.3.16",
+    "angular-mocks": "~1.3.16"
+  },
+  "devDependencies": {
+    "ionic": "driftyco/ionic-bower#1.3.1",
+    "platform.js": "platform#^1.3.1"
+  },
+  "resolutions": {
+    "angular": "~1.5.*"
+  }
 }
