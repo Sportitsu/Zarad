@@ -3,7 +3,7 @@ var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
 var helpers = require('../config/helpers');
-
+var clubController = require('../Club/clubController.js');
 
 module.exports= {
 	// fetching a user based on the user name
@@ -53,15 +53,9 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
-<<<<<<< HEAD
 		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
-		User.findOne({[key]: username})
-=======
-		var key;
-		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		if(username.charAt(0)==='c' && username.charAt(1)==='l'){
 			User.findOne({[key]: username})
->>>>>>> f7c03f483d625cf216d7faeadb4a35cab9c7788b
       		.exec(function (error, user) {
       		    Club.findOne({clubName : user.club}).exec(function(err,club){
       		    	if(club){
