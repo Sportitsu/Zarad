@@ -39,7 +39,6 @@ angular.module('zarad.auth',[])
 	$scope.signin =function(){
   	Auth.signin($scope.user)
   	.then(function(resp){
-      console.log(resp)
      //save the token and username in local stoarage to distinguish signed in users
 		$window.localStorage.setItem('com.zarad', resp.token);
 		$window.localStorage.setItem('com.user', resp.user);
