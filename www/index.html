@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
 </head>
-<body ng-app="zarad" ng-controller="parentController">
+<body ng-app="zarad">
 <!-- app header here -->
 <ion-header-bar class="bar bar-header bar-dark">
  <ion-title>Zarad</ion-title>
@@ -14,34 +14,20 @@
  <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
 </ion-header-bar>
 
->>>>>>> f7c03f483d625cf216d7faeadb4a35cab9c7788b
 <!-- other html pages content rendering will be here -->
-<ion-nav-view class="has-header">
-  <ion-view>
-    <ion-content>
-    <!-- rendering other html pages will be here -->
-    </ion-content>
-  </ion-view>
-</ion-nav-view>
 
 <ion-view>
   <ion-header-bar class="bar bar-header bar-calm">
    <ion-title style="text-align:center">Zarad</ion-title>
    <button class="button button-icon icon ion-navicon"></button>
    <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
-</ion-header-bar>
-
+  </ion-header-bar>
   <!-- viewing tabs of the web app -->
-
-   
-
   <!-- other html pages content rendering will be here -->
   <ion-nav-view class="has-header has-tabs-top has-subfooter">
-    <ion-view class="padding">
       <ion-content>
       <!-- rendering other html pages will be here -->
       </ion-content>
-    </ion-view>
   </ion-nav-view>
 </ion-view>
 <!-- footer of the page is here -->
