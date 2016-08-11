@@ -56,21 +56,27 @@ module.exports= {
 		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		User.findOne({[key]: username})
       		.exec(function (error, user) {
-       			if (user) {
-     		 	      User.comparePassword(password,user.password, res, function(found){
-        		        if(found){
-       				       var token = jwt.encode(user, 'secret');
-         			        res.setHeader('x-access-token',token);
-         			        //modified the response to send the username
-         			        //to save it in local stoarge to be accessed late
-                            res.json({token:token,user: username});
-      			        } else {
-       				       helpers.errorHandler('Wrong Password', req, res);
-                        }
-                    });
-    		    } else {
-     		 	    helpers.errorHandler('User Does Not Exist', req, res);
-                }
+      		    Club.findOne({clubName : user.club}).exec(function(err,club){
+      		    	if(club){
+		       			if (user) {
+		     		 	      User.comparePassword(password,user.password, res, function(found){
+		        		        if(found){
+		       				       var token = jwt.encode(user, 'secret');
+		         			        res.setHeader('x-access-token',token);
+		         			        //modified the response to send the username
+		         			        //to save it in local stoarge to be accessed late
+		                            res.json({token:token,user: username});
+		      			        } else {
+		       				       helpers.errorHandler('Wrong Password', req, res);
+		                        }
+		                    });
+		    		    } else {
+		     		 	    helpers.errorHandler('User Does Not Exist', req, res);
+		                }
+      		    	} else {
+      		    		helpers.errorHandler('Club No longer Exists', req, res);
+      		    	}
+      		    })
             });
 	},
 	signup : function(req, res){
