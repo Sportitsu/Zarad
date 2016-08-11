@@ -54,7 +54,7 @@ module.exports= {
 		var username = req.body.username;
 		var password = req.body.password;
 		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
-		if(username.charAt(0)==='c' && username.charAt(1)==='l'){
+		if(username.charAt(0)==='p' && username.charAt(1)==='l'){
 			User.findOne({[key]: username})
       		.exec(function (error, user) {
       		    Club.findOne({clubName : user.club}).exec(function(err,club){
@@ -79,7 +79,7 @@ module.exports= {
       		    	}
       		    })
             });
-		}else if(username.charAt(0)==='p' && username.charAt(1)=== 'l'){
+		}else if(username.charAt(0)==='c' && username.charAt(1)=== 'l'){
 			clubController.signin(req,res);
 		}
 	},
