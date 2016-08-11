@@ -13,6 +13,7 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
+    console.log("signin",user,url)
     return $http({
       method:'POST',
       url: url,
@@ -39,7 +40,9 @@ angular.module('zarad.services',[])
 	};
 })
 .factory('Admin', function ($http) {
+
   var signin=function(admin){
+    console.log(admin)
     return $http({
       method:'POST',
       url:'http://zarad.herokuapp.com/api/admin/signin',
@@ -71,16 +74,6 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
-   //send club information to tournament
-  var Addtournament=function(tournament){
-    return $http({
-      method:'POST',
-      data: tournament,
-      url:'http://zarad.herokuapp.com/api/tournament/create'
-    }).then(function (resp) {
-      return resp.data;
-    });
-  };
   //get all registered Admins
   var getAdmins = function () {
     return $http({
@@ -106,7 +99,6 @@ angular.module('zarad.services',[])
     signin: signin,
     signup: signup,
     Addclub: Addclub,
-    Addtournament:Addtournament,
     getAdmins : getAdmins,
     deleteAdmin : deleteAdmin
   };
@@ -127,17 +119,65 @@ angular.module('zarad.services',[])
     AddUser : AddUser
   }
 })
-.factory('Profile', function ($http, $location, $window) {
-  var getClub=function(){
+
+.factory('Tournament',function($http){
+  var AddTournament=function(tournament){
     return $http({
-      method: 'GET',
-      url: 'http://zarad.herokuapp.com/api/club/x/:username'
+     method:'POST',
+     url:'/api/tournament/create',
+     data:tournament
+    })
+    .then(function(resp){
+       return resp;
+    });
+  }
+
+  var getAllTournament=function(){
+    return $http({
+      method:'GET',
+      url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
+      
+    }).then(function(resp){
+      return resp;
+    })
+  }
+  var SearchAboutTournament=function(Tournament){
+    return $http({
+      method:'GET',
+      url: 'http://zarad.herokuapp.com/api/tournament/x/'+Tournament
+      
     }).then(function(resp){
       return resp.data;
     })
-  };
-  return {
-    getClub:getClub
-  };
-});
 
+  }
+  var EditTournament=function(Tournament){
+   
+    return $http({
+      method:'POST',
+      data:Tournament,
+      url: 'http://zarad.herokuapp.com/api/tournament/edit'
+      
+    }).then(function(resp){
+      return resp.data;
+    })
+  }
+  var DeleteTournament=function(Tournament){
+    console.log(Tournament)
+    return $http({
+      method:'POST',
+      data:Tournament,
+      url: 'http://zarad.herokuapp.com/api/tournament/delete'
+      
+    }).then(function(resp){
+      return resp.data;
+    })
+  }
+  return{
+    AddTournament:AddTournament,
+    getAllTournament:getAllTournament,
+    SearchAboutTournament:SearchAboutTournament,
+    EditTournament:EditTournament,
+    DeleteTournament:DeleteTournament
+  }
+})
