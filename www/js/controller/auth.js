@@ -1,6 +1,7 @@
 'use strict';
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup, $timeout){
+	console.log(1);
 	$scope.user={};
 	$scope.showPopup = function() {
    //custom popup to show login box
