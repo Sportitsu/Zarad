@@ -104,12 +104,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     }
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
-    if(Auth.isAuth() && (next === 'http://localhost:8000/#/signin'|| next === 'http://zarad.herokuapp.com/#/AdminMain')){
-        $state.go('/');
-    }
-    if(next === 'http://localhost:8000/#/AdminMain' || next === 'http://zarad.herokuapp.com/#/AdminMain'){
-        $state.go('adminmain');
-    } else if(!Auth.isAuth()) {
+    if((next !== 'http://localhost:8101/#/AdminMain' || next === 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
         $state.go('signin');
     }
   })
