@@ -82,7 +82,7 @@ angular.module('zarad.services',[])
     })
     .then(function (resp) {
       return resp.data;
-    })
+    });
   };
   //remove selected admin
   var deleteAdmin = function (username) {
@@ -135,7 +135,7 @@ angular.module('zarad.services',[])
   var getAllTournament=function(){
     return $http({
       method:'GET',
-      url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
+      url: '/api/tournament/tournaments'
       
     }).then(function(resp){
       return resp;
@@ -144,35 +144,34 @@ angular.module('zarad.services',[])
   var SearchAboutTournament=function(Tournament){
     return $http({
       method:'GET',
-      url: 'http://zarad.herokuapp.com/api/tournament/x/'+Tournament
-      
-    }).then(function(resp){
-      return resp.data;
+      url: '/api/tournament/x/'+Tournament
     })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
 
-  }
   var EditTournament=function(Tournament){
-   
     return $http({
       method:'POST',
       data:Tournament,
-      url: 'http://zarad.herokuapp.com/api/tournament/edit'
+      url: '/api/tournament/edit'
       
     }).then(function(resp){
       return resp.data;
-    })
-  }
+    });
+  };
   var DeleteTournament=function(Tournament){
-    console.log(Tournament)
     return $http({
       method:'POST',
       data:Tournament,
-      url: 'http://zarad.herokuapp.com/api/tournament/delete'
+      url: '/api/tournament/delete'
       
-    }).then(function(resp){
-      return resp.data;
     })
-  }
+    .then(function(resp){
+      return resp.data;
+    });
+  };
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,

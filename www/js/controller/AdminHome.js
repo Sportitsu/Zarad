@@ -29,24 +29,14 @@ angular.module('zarad.admin',[])
   $scope.Addclub =function(){
   	Admin.Addclub($scope.club)
   	.then(function(resp){
-      console.log(resp.data);
       $location.path('/clubprofile/'+resp.data.username);
     });
-  };
-
-  //add tournament function
-  $scope.Addtournament =function(){
-    Admin.Addtournament($scope.tournament)
-    .then(function (res) {
-       console.log(res);
-      });
   };
 
   //get a list of all admins
   $scope.getAdmins =function () {
     Admin.getAdmins()
     .then(function (admins) {
-      console.log(admins);
       $scope.admins.data = admins;
     });
   };
@@ -54,10 +44,9 @@ angular.module('zarad.admin',[])
 
   //delete admin function
   $scope.deleteAdmin = function () {
-    console.log($scope.adminSelect);
     Admin.deleteAdmin({username:$scope.adminSelect})
     .then(function (admin) {
-      console.log(admin)
+      $scope.getAdmins();
     });
   };
 });
