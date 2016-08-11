@@ -1,29 +1,17 @@
-<ion-view>
- <!-- <ion-scroll delegate-handle="taskScroll" direction="y"> -->
-	<div>
-		username : <h4>{{data.username}}</h4>
-		Belt : <h4>{{data.beltColor}}</h4>
-		Email : <h4>{{data.email}}</h4>
-		Country : <h4>{{data.country}}</h4>
-		Club Name : <h4>{{data.club}}</h4>
-		Age :  <h4>{{data.age}}</h4>
-		Phone : <h4>{{data.phone}}</h4>
-		First Name :  <h4>{{data.firstName}}</h4>
-		Last Name : <h4>{{data.lastName}}</h4>
-	</div> 
-	<ion-checkbox ng-change="edit()" ng-model="isChecked" ng-value="true">Edit Profile</ion-checkbox>
-	<ul ng-show="flag" >
-	    <input type="text" placeholder="First Name" ng-model="user.firstName"></input> 
-	   	<input type="text" placeholder="Last Name" ng-model="user.lastName"></input>
-	    <input type="number" placeholder="Number" ng-model="user.phone" ></input>
-	    <input type="email" placeholder="Email Input" ng-model="user.country"></input>
-	    <input type="password" placeholder="Old Password Input" ng-model="user.oldPassword"></input>
-	    <input type="password" placeholder="New Password Input" ng-model="user.password"></input>	  	  
-		<button ng-click="showConfirm()">Finished Editing</button>
-	</ul>
-  <!-- </ion-scroll	> -->
-</ion-view>
+ <ion-tabs class="tabs-icon-top tabs-dark">
+        <ion-tab title="Profile" icon="ion-home" href="#/userprofile/home">
+          <ion-nav-view name="profile-tab"></ion-nav-view>
+        </ion-tab>
+        
+        <ion-tab title="About" icon="ion-person" href="#/userprofile/about">
+          <ion-nav-view name="about-tab"></ion-nav-view>
+        </ion-tab>
 
+        <ion-tab title="Contact" icon="ion-ios-world" href="#/userprofile/club">
+          <ion-nav-view name="club-tab"></ion-nav-view>
+        </ion-tab>
+
+  </ion-tabs>
 
 
 
