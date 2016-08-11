@@ -62,11 +62,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
             
-        }) .state('Edittournament',{
+        })
+        .state('Edittournament',{
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
             controller:'TournamentController'
-            
+        })
         .state('AdminRemove', {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
