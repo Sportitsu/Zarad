@@ -14,6 +14,7 @@ var userSchema = new Schema ({
   membership : { type : Number, required : true , default : 1 },
   email: { type: String , index : {unique : true}},
   firstName: { type: String},
+  image : {type : String},
   lastName: { type: String },
   middleName : { type : String },
   age : { type : Number},
