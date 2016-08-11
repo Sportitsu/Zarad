@@ -25,17 +25,18 @@ module.exports = function(config) {
       'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
       'www/app.js',
-      'www/app/auth/auth.js',
-      'www/app/services/services.js',
-      'www/app/profile/profile.js',
-      'www/app/Tournament/Tournament.js',
-      'www/app/Admin/AdminHome.js',
+      "www/js/**/*.js",
+      'www/js/controller/auth.js',
+      'www/js/services/services.js',
+      'www/js/controller/profile.js',
+      'www/js/controller/Tournament.js',
+      'www/js/controller/AdminHome.js',
       'test/front-end/clientSpec.js',
-      'test/front-end/Adminspec.js',
-      'test/front-end/routingSpec.js',
-      'test/front-end/ServicesSpec.js',
+      //'test/front-end/Adminspec.js',
+      //'test/front-end/routingSpec.js',
+      //'test/front-end/ServicesSpec.js',
       //'test/front-end/profileSpec.js',
-      'test/front-end/clubSpec.js'
+      //'test/front-end/clubSpec.js'
       
 
     ],
@@ -51,7 +52,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'client/app/**/*.js' : 'coverage'
+        'www/js/*.js' : 'coverage'
     },
 
 

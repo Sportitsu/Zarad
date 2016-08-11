@@ -31,10 +31,16 @@ angular.module('zarad.tournament',['ionic'])
 		})
 	}
 	$scope.EditTournament=function(){
-		//console.log($scope.tournament)
 		Tournament.EditTournament($scope.tournament).
 		then(function(tournament){
 			console.log(tournament)
 		})
 	}
+	$scope.DeleteTournament=function(){
+		Tournament.DeleteTournament($scope.tournament.search)
+		.then(function(resp){
+			console.log(resp)
+		})
+	}
+
 })
