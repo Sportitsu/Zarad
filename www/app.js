@@ -66,7 +66,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
             controller:'TournamentController'
-            
+        })
         .state('AdminRemove', {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
