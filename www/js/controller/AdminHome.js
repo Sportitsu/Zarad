@@ -57,7 +57,7 @@ angular.module('zarad.admin',[])
     console.log($scope.adminSelect);
     Admin.deleteAdmin({username:$scope.adminSelect})
     .then(function (admin) {
-      console.log(admin)
+      $scope.getAdmins();
     });
   };
 });
