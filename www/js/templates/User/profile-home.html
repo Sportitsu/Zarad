@@ -1,5 +1,6 @@
 <ion-view view-title="Home">
         <ion-content class="padding">
+        <div class= "col text-right icon ion-edit button-dark" ng-click="showPopup()"></div>
           <div>
            <div ng-if="data.firstName">First Name :  <h4>{{data.firstName}}</h4></div>
            <div ng-if="data.lastName"> Last Name : <h4>{{data.lastName}}</h4></div>
@@ -10,7 +11,7 @@
            <div ng-if="data.age"> Age :  <h4>{{data.age}}</h4></div>
            <div ng-if="data.phone"> Phone : <h4>{{data.phone}}</h4></div>
           </div> 
-          <label class="icon icon-left ion-edit button-dark bt" ng-click="showPopup()"></label>
+          
         </ion-content>
 </ion-view>
 <!-- <ion-view view-title="Home">
