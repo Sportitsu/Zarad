@@ -61,7 +61,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-            
         })
         .state('Edittournament',{
             url:'/Edittournament',
@@ -72,9 +71,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
             controller : 'AdminController'
-        })
-       
-       
+
+        }) 
 
         $urlRouterProvider.otherwise('/');
 	

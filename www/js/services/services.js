@@ -16,7 +16,7 @@ angular.module('zarad.services',[])
     console.log("signin",user,url)
     return $http({
       method:'POST',
-      url: url,
+      url: "http://zarad.herokuapp.com/api/user/signin",
       data:user
     })
     .then(function(resp){
@@ -82,7 +82,7 @@ angular.module('zarad.services',[])
     })
     .then(function (resp) {
       return resp.data;
-    })
+    });
   };
   //remove selected admin
   var deleteAdmin = function (username) {
@@ -136,23 +136,22 @@ angular.module('zarad.services',[])
     return $http({
       method:'GET',
       url: '/api/tournament/tournaments'
-      
     }).then(function(resp){
       return resp;
     })
   }
+ 
   var SearchAboutTournament=function(Tournament){
     return $http({
       method:'GET',
       url: '/api/tournament/x/'+Tournament
-      
-    }).then(function(resp){
-      return resp.data;
     })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
 
-  }
   var EditTournament=function(Tournament){
-   
     return $http({
       method:'POST',
       data:Tournament,
@@ -163,16 +162,15 @@ angular.module('zarad.services',[])
     })
   }
   var DeleteTournament=function(Tournament){
-    console.log(Tournament)
     return $http({
       method:'POST',
       data:Tournament,
       url: '/api/tournament/delete'
-      
     }).then(function(resp){
       return resp.data;
     })
   }
+
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,

@@ -2,7 +2,6 @@
 angular.module('zarad.tournament',['ionic'])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
-	
 	$scope.AllTournament={}
 	//To add Tournament information 
 	$scope.AddTournament=function(){
@@ -22,6 +21,7 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 
 	//To get one  Tournament data
+
 	$scope.SearchAboutTournament=function(){
 		
 		Tournament.SearchAboutTournament($scope.tournament.search)
@@ -67,5 +67,7 @@ angular.module('zarad.tournament',['ionic'])
 		$scope.tournament.poster=" ";
 	}
 
+
+	
 
 })
