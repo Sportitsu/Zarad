@@ -1,5 +1,6 @@
 'use strict'
 describe('Routing',function(){
+
     var $route;
     beforeEach(module('zarad'));
     beforeEach(inject(function($injector){
@@ -44,16 +45,17 @@ describe('Routing',function(){
     });
     
     it('Should have /AddClub route, template, and controller', function () {
+
         expect($route.routes['/AddClub']).to.be.defined;
         expect($route.routes['/AddClub'].controller).to.equal('AdminController');
         expect($route.routes['/AddClub'].templateUrl).to.equal('/app/Admin/AddClub.html');
+
     });
     
     it('Should have /AddTournment route, template, and controller', function () {
         expect($route.routes['/AddTournment']).to.be.defined;
         expect($route.routes['/AddTournment'].controller).to.equal('AdminController');
         expect($route.routes['/AddTournment'].templateUrl).to.equal('/app/Admin/AddTournment.html');
-
     });
     
     xit('Should have /clubprofile route, template, and controller', function () {
