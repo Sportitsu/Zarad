@@ -12,10 +12,10 @@ angular.module('zarad.services',[])
 			return resp.data;
 		});
   };
-  var signin = function (user,url) {
+  var signin = function (user) {
     return $http({
       method:'POST',
-      url: url,
+      url: "http://zarad.herokuapp.com/api/user/signin",
       data:user
     })
     .then(function(resp){

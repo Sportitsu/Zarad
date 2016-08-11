@@ -1,19 +1,23 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
+
 <html>
 <head>
-	<title>Zarad</title>
-  
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
 </head>
 <body ng-app="zarad" ng-controller="parentController">
 <!-- app header here -->
+<ion-header-bar class="bar bar-header bar-dark">
+ <ion-title>Zarad</ion-title>
+ <button class="button button-icon icon ion-navicon"></button>
+ <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
+</ion-header-bar>
 
-
+>>>>>>> f7c03f483d625cf216d7faeadb4a35cab9c7788b
 <!-- other html pages content rendering will be here -->
-<ion-nav-view class="has-header has-tabs-top">
-  <ion-view class="padding">
+<ion-nav-view class="has-header">
+  <ion-view>
     <ion-content>
     <!-- rendering other html pages will be here -->
     </ion-content>
@@ -44,8 +48,13 @@
 
 
  <script src="ionic/js/ionic.bundle.js"></script>
+<<<<<<< HEAD
  <script src="lib/angular/angular.js"></script>
  <script src="lib/angular-route/angular-route.js"></script>
+=======
+ <script src="./lib/angular/angular.js"></script>
+ <!-- installed route using this bower install angular-ui-router --> 
+>>>>>>> f7c03f483d625cf216d7faeadb4a35cab9c7788b
  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
  <!-- <script src="lib/angular-slider/slider.js"></script> -->
  <script src="lib/jquery/dist/jquery.min.js"></script>
