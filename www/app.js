@@ -70,15 +70,19 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             templateUrl:'js/templates/Edittournament.html',
             controller:'TournamentController'
         })
-        // .state('profile',{
-        // 	url:'/clubprofile/:username',
-        // 	templateUrl:'js/templates/clubprofile.html',
-        // 	controller:'profileController'
-        // })
         .state('userProfile',{
-            url : '/userprofile/:user',
+            url : '/userprofile',
             templateUrl : 'js/templates/User/userProfile.html',
-            controller : 'UserProfileController'
+            absract : true
+        })
+        .state('userProfile.home', {
+          url: "/home",
+          views: {
+            'home-tab': {
+              templateUrl: 'js/templates/User/profile-home.html',
+              controller: 'UserProfileController'
+            }
+          }
         })
         .state('AdminRemove', {
             url : '/RemoveAdmin',
@@ -86,7 +90,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller : 'AdminController'
         }) 
         
-        $urlRouterProvider.otherwise('/');
+        // $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
@@ -112,7 +116,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
     if((next !== 'http://localhost:8101/#/AdminMain' || next === 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
-        $state.go('signin');
+        $state.go('/');
     }
   })
   
