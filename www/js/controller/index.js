@@ -3,6 +3,10 @@ angular.module('zarad.index',['ionic'])
 	//this controller was made for index html page to show and hide logout button
 	//depending on user saved token in the localstoarge.
 	//signout function
+	$scope.initialize = function(){
+		$scope.show();
+	}
+	console.log('Hello World');
 	$scope.logout=function(){
 		Auth.signout();
 		$scope.show();
@@ -20,4 +24,5 @@ angular.module('zarad.index',['ionic'])
 	$window.setInterval(function(){
 		$scope.show();
 	},10000)
+	$scope.initialize();
 })

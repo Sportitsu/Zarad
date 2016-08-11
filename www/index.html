@@ -1,5 +1,4 @@
- <!DOCTYPE html>
-
+<!DOCTYPE html>
 <html>
 <head>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
@@ -8,18 +7,16 @@
 </head>
 <body ng-app="zarad">
 <!-- app header here -->
-<ion-header-bar class="bar bar-header bar-dark">
- <ion-title>Zarad</ion-title>
- <button class="button button-icon icon ion-navicon"></button>
- <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
-</ion-header-bar>
+
 
 <!-- other html pages content rendering will be here -->
 
-<ion-view>
-   <ion-title style="text-align:center">Zarad</ion-title>
+
+  <ion-header-bar class="bar bar-header bar-dark" ng-controller="parentController">
+   <ion-title>Zarad</ion-title>
    <button class="button button-icon icon ion-navicon"></button>
-   <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
+   <button style="color:white" class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
+  </ion-header-bar>
   <!-- viewing tabs of the web app -->
   <!-- other html pages content rendering will be here -->
   <ion-nav-view class="has-header has-tabs-top has-subfooter">
@@ -27,7 +24,7 @@
       <!-- rendering other html pages will be here -->
       </ion-content>
   </ion-nav-view>
-</ion-view>
+
 <!-- footer of the page is here -->
 
 
