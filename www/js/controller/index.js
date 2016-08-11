@@ -6,7 +6,6 @@ angular.module('zarad.index',['ionic'])
 	$scope.initialize = function(){
 		$scope.show();
 	}
-	console.log('Hello World');
 	$scope.logout=function(){
 		Auth.signout();
 		$scope.show();
