@@ -1,26 +1,16 @@
 <ion-view view-title="Home">
         <ion-content class="padding">
           <div>
-            username : <h4>{{data.username}}</h4>
-            Belt : <h4>{{data.beltColor}}</h4>
-            Email : <h4>{{data.email}}</h4>
-            Country : <h4>{{data.country}}</h4>
-            Club Name : <h4>{{data.club}}</h4>
-            Age :  <h4>{{data.age}}</h4>
-            Phone : <h4>{{data.phone}}</h4>
-            First Name :  <h4>{{data.firstName}}</h4>
-            Last Name : <h4>{{data.lastName}}</h4>
+           <div ng-if="data.firstName">First Name :  <h4>{{data.firstName}}</h4></div>
+           <div ng-if="data.lastName"> Last Name : <h4>{{data.lastName}}</h4></div>
+           <div ng-if="data.beltColor"> Belt : <h4>{{data.beltColor}}</h4></div>
+           <div ng-if="data.email"> Email : <h4>{{data.email}}</h4></div>
+           <div ng-if="data.country">Country : <h4>{{data.country}}</h4></div>
+           <div ng-if="data.club"> Club Name : <h4>{{data.club}}</h4></div>
+           <div ng-if="data.age"> Age :  <h4>{{data.age}}</h4></div>
+           <div ng-if="data.phone"> Phone : <h4>{{data.phone}}</h4></div>
           </div> 
-          <ion-checkbox ng-change="edit()" ng-model="isChecked" ng-value="true">Edit Profile</ion-checkbox>
-          <ul ng-show="flag" >
-              <input type="text" placeholder="First Name" ng-model="user.firstName"></input> 
-              <input type="text" placeholder="Last Name" ng-model="user.lastName"></input>
-              <input type="number" placeholder="Number" ng-model="user.phone" ></input>
-              <input type="email" placeholder="Email Input" ng-model="user.country"></input>
-              <input type="password" placeholder="Old Password Input" ng-model="user.oldPassword"></input>
-              <input type="password" placeholder="New Password Input" ng-model="user.password"></input>       
-            <button ng-click="showConfirm()">Finished Editing</button>
-          </ul> 
+          <label class="icon icon-left ion-edit button-dark bt" ng-click="showPopup()"></label>
         </ion-content>
 </ion-view>
 <!-- <ion-view view-title="Home">
