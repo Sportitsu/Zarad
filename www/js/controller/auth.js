@@ -42,7 +42,8 @@ angular.module('zarad.auth',[])
      //save the token and username in local stoarage to distinguish signed in users
 		$window.localStorage.setItem('com.zarad', resp.token);
 		$window.localStorage.setItem('com.user', resp.user);
-		$location.path('/userprofile/'+resp.user);
+		$location.path('/userprofile');
+		console.log(Auth.isAuth());
   	}).catch(function(error){
   		console.error(error);
   	});
