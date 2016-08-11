@@ -45,7 +45,7 @@ angular.module('zarad.admin',[])
   $scope.getAdmins =function () {
     Admin.getAdmins()
     .then(function (admins) {
-      console.log(admins);
+      // console.log(admins);
       $scope.admins.data = admins;
     });
   };

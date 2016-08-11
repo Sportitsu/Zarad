@@ -8,7 +8,6 @@ var app = angular.module('zarad', [
 	'zarad.profile',
 	'zarad.services',
 	'ui.router',
-    'ngAnimate',
     'ngRoute'
 	]);
 
@@ -107,6 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         $state.go('signin');
     }
   })
+  
 
 })
 .factory('AttachTokens',function ($window){

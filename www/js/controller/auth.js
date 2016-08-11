@@ -1,6 +1,7 @@
 'use strict';
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup){
+	console.log(1);
 
      $scope.user={};
 	 $scope.showAlert = function(type, tx) {

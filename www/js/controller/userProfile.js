@@ -5,6 +5,24 @@ angular.module('zarad.user',['ionic'])
  $scope.data = {};
  $scope.flag = false;
 
+ $scope.initialize = function(){
+  console.log(1);
+ }
+
+ $scope.initialize();
+
+  $scope.showAlert = function() {
+     var alertPopup = $ionicPopup.alert({
+       title: 'Please Renew Your Subscription',
+       text : 'Contact your gym as soon as possible'
+
+   });
+     alertPopup.then(function(res) {
+       // console.log('Thank you for helping us fix that ' + type);
+     });
+   };
+
+
   $scope.showConfirm = function() {
    var confirmPopup = $ionicPopup.confirm({
      title: 'Are you sure of your edit',
@@ -31,18 +49,20 @@ angular.module('zarad.user',['ionic'])
   });
 
   $timeout(function () {
-    $ionicLoading.hide();
-	 console.log($window.localStorage.getItem('com.zarad'));
+   $ionicLoading.hide();
 	 User.getUser($window.localStorage.getItem('com.user'))
 	 	.then(function(data){
+      console.log(data);
 	 		$scope.data = data.data;
-	 		console.log(data.data);
 	 	})
 	 	.catch(function(error){
 	 		console.log(error);
 	 	});
   }, 1000);
 
+  if(!$scope.data.valid){
+        $scope.showAlert();
+  }
 
  $scope.edit = function(){
   if($scope.isChecked){
@@ -61,7 +81,7 @@ angular.module('zarad.user',['ionic'])
  		.catch(function(error){
  			console.log(error);
  		})
-	$state.go($state.current, {}, {reload: true});
+	// $state.go($state.current, {}, {reload: true});
  }
 
 })
