@@ -99,7 +99,7 @@ module.exports = {
 
   getAdmins : function (req,res) {
       Admin.find({})
-      .exec(function (error, admins) {
+      .exec(function (error, admins){
           if (admins.length === 0) {
             helpers.errorHandler('No Admins Found', req, res);
           }else{
@@ -110,6 +110,7 @@ module.exports = {
               adminObj.email = admins[i].email;
               adminObj.firstName = admins[i].firstName;
               adminObj.lastName = admins[i].lastName;
+              adminObj._id = admins[i]._id;
               adminsArr.push(adminObj);
             }
             res.status(200).send(adminsArr);

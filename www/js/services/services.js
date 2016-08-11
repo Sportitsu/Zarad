@@ -5,7 +5,7 @@ angular.module('zarad.services',[])
 	var signup=function(data){
 		return $http({
 			method: 'POST',
-			url :'api/user/signup',
+			url :'http://zarad.herokuapp.com/api/user/signup',
 			data: data
 		})
 		.then(function(resp){
@@ -62,25 +62,45 @@ angular.module('zarad.services',[])
     .then(function(resp){
       return resp.data;
     })
-  }
+  };
   //send club information to server
   var Addclub=function(club){
     return $http({
       method:'POST',
       data: club,
-      url:'/api/club/register'
+      url:'http://zarad.herokuapp.com/api/club/register'
     })
     .then(function(resp){
       return resp.data;
     })
   };
-   //send club information to tournament
-  
+  //get all registered Admins
+  var getAdmins = function () {
+    return $http({
+      method : 'GET',
+      url : 'http://zarad.herokuapp.com/api/admin/admins'
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  };
+  //remove selected admin
+  var deleteAdmin = function (username) {
+    return $http({
+      method : 'POST',
+      url : 'http://zarad.herokuapp.com/api/admin/delete',
+      data : username
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  }
   return {
     signin: signin,
     signup: signup,
     Addclub: Addclub,
-    
+    getAdmins : getAdmins,
+    deleteAdmin : deleteAdmin
   };
 })
 
@@ -88,7 +108,7 @@ angular.module('zarad.services',[])
   var AddUser=function(user){
     return $http({
       method: 'POST',
-      url : '/api/user/signup',
+      url : 'http://zarad.herokuapp.com/api/club/register',
       data:user
     })
     .then(function(resp){
@@ -99,23 +119,7 @@ angular.module('zarad.services',[])
     AddUser : AddUser
   }
 })
-.factory('Profile', function ($http, $location) {
-  var getClub=function(username){
-  
-    return $http({
-      method: 'GET',
-      url: '/api/club/x/'+username
-      
-    }).then(function(resp){
-      console.log(resp);
-      return resp;
-    })
-  //}
-  };
-  return {
-    getClub:getClub
-  };
-})
+
 .factory('Tournament',function($http){
   var AddTournament=function(tournament){
     return $http({
