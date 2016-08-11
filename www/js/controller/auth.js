@@ -2,7 +2,6 @@
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup){
 	console.log(1);
-
      $scope.user={};
 	 $scope.showAlert = function(type, tx) {
 	   var alertPopup = $ionicPopup.alert({
@@ -27,13 +26,12 @@ angular.module('zarad.auth',[])
 
 		var url='';
 		if(!!$scope.user.player){
-			url='http://zarad.herokuapp.com/api/user/signin';
+			url='https://zarad.herokuapp.com/api/user/signin';
 		}
 		else if(!!$scope.user.club){
-			url='http://zarad.herokuapp.com/api/club/signin';
+			url='https://zarad.herokuapp.com/api/club/signin';
 		}
-
-
+		
 		if(url){
 		  	Auth.signin($scope.user,url)
 		  	.then(function(resp){
