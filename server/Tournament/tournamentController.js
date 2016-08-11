@@ -10,18 +10,8 @@ module.exports = {
 			if(tournaments.length === 0){
 				helpers.errorHandler('Empty Table', req, res);
 			}else{
-				var tournamentsArray=[];
-				for (var i = 0; i < tournaments.length; i++) {
-					var tournamentObj ={};
-					tournamentObj.name = tournaments[i].name;
-					tournamentObj.Date = tournaments[i].Date;
-					tournamentObj.place = tournaments[i].place;
-					tournamentObj.organizer = tournaments[i].organizer;
-					tournamentObj.details = tournaments[i].details;
-					tournamentObj.poster = tournaments[i].poster;
-					tournamentsArray.push(tournamentObj);
-				}
-				res.status(200).send(tournamentsArray);
+			
+				res.status(200).send(tournaments);
 			}
 		});
 	},
@@ -57,8 +47,8 @@ module.exports = {
 	},
 	// function to delete a tournament
 	tournamentRemove : function (req,res) {
-		var id = req.body.id;
-		Tournament.findOne({ _id : id }).remove()
+		
+		Tournament.findOne({ name : req.body.name }).remove()
 		.exec(function(error, data){
 			if(data){
 				res.status(201).send('Tournament Deleted');
@@ -69,8 +59,8 @@ module.exports = {
 	},
 	// function to edit Trounament
 	tournamentEdit : function (req,res) {
-		var id = req.body.id;
-		Tournament.findOne({ _id : id })
+	
+		Tournament.findOne({ name : req.body.name })
 		.exec(function(error, tournament){
 			if(tournament){
 				tournament.name = req.body.name || tournament.name;

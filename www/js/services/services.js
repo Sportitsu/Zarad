@@ -13,7 +13,6 @@ angular.module('zarad.services',[])
 		});
   };
   var signin = function (user,url) {
-
     return $http({
       method:'POST',
       url: url,
@@ -76,16 +75,6 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
-   //send club information to tournament
-  var Addtournament=function(tournament){
-    return $http({
-      method:'POST',
-      data: tournament,
-      url:'http://zarad.herokuapp.com/api/tournament/create'
-    }).then(function (resp) {
-      return resp.data;
-    });
-  };
   //get all registered Admins
   var getAdmins = function () {
     return $http({
@@ -94,7 +83,7 @@ angular.module('zarad.services',[])
     })
     .then(function (resp) {
       return resp.data;
-    })
+    });
   };
   //remove selected admin
   var deleteAdmin = function (username) {
@@ -111,7 +100,6 @@ angular.module('zarad.services',[])
     signin: signin,
     signup: signup,
     Addclub: Addclub,
-    Addtournament:Addtournament,
     getAdmins : getAdmins,
     deleteAdmin : deleteAdmin
   };
@@ -129,14 +117,9 @@ angular.module('zarad.services',[])
   };
 
   var getClub=function(){
-    return $http({
-      method: 'GET',
-      url: 'http://zarad.herokuapp.com/api/club/x/:username'
-    }).then(function(resp){
-      return resp.data;
-    })
-  };
-
+    // TODO
+  }
+  
   return{
     AddUser : AddUser,
     getClub:getClub
@@ -172,4 +155,64 @@ angular.module('zarad.services',[])
    getUser : getUser,
    editProfile : editProfile
  }
+})
+.factory('Tournament',function($http){
+  var AddTournament=function(tournament){
+    return $http({
+     method:'POST',
+     url:'/api/tournament/create',
+     data:tournament
+    })
+    .then(function(resp){
+       return resp;
+    });
+  }
+
+  var getAllTournament=function(){
+    return $http({
+      method:'GET',
+      url: '/api/tournament/tournaments'
+      
+    }).then(function(resp){
+      return resp;
+    })
+  }
+  var SearchAboutTournament=function(Tournament){
+    return $http({
+      method:'GET',
+      url: '/api/tournament/x/'+Tournament
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var EditTournament=function(Tournament){
+    return $http({
+      method:'POST',
+      data:Tournament,
+      url: '/api/tournament/edit'
+      
+    }).then(function(resp){
+      return resp.data;
+    });
+  };
+  var DeleteTournament=function(Tournament){
+    return $http({
+      method:'POST',
+      data:Tournament,
+      url: '/api/tournament/delete'
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+  return{
+    AddTournament:AddTournament,
+    getAllTournament:getAllTournament,
+    SearchAboutTournament:SearchAboutTournament,
+    EditTournament:EditTournament,
+    DeleteTournament:DeleteTournament
+  }
 })

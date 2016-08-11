@@ -4,11 +4,11 @@ var app = angular.module('zarad', [
 	'zarad.auth',
 	'zarad.admin',
 	'zarad.club',
-	'zarad.index',
-	'zarad.profile',
+	'zarad.tournament',
 	'zarad.services',
-	'ui.router',
     'ngRoute'
+	'zarad.index',
+	'ui.router'
 	]);
 
 app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
@@ -56,7 +56,19 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         .state('addtournment',{
         	url:'/AddTournment',
         	templateUrl:'js/templates/AddTournment.html',
-        	controller:'AdminController'
+        	controller:'TournamentController'
+
+        })
+        .state('AllTournament',{
+            url:'/AllTournament',
+            templateUrl:'js/templates/AllTournament.html',
+            controller:'TournamentController'
+            
+        }) 
+        .state('Edittournament',{
+            url:'/Edittournament',
+            templateUrl:'js/templates/Edittournament.html',
+            controller:'TournamentController'
         })
         // .state('profile',{
         // 	url:'/clubprofile/:username',
@@ -72,11 +84,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
             controller : 'AdminController'
-        })
-
-
-
-
+        }) 
+        
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
