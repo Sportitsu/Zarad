@@ -1,7 +1,6 @@
 'use strict';
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup, $timeout){
-	console.log(1);
 	$scope.user={};
 	$scope.showPopup = function() {
    //custom popup to show login box
@@ -43,7 +42,7 @@ angular.module('zarad.auth',[])
      //save the token and username in local stoarage to distinguish signed in users
 		$window.localStorage.setItem('com.zarad', resp.token);
 		$window.localStorage.setItem('com.user', resp.user);
-		$location.path('/AdminMain')
+		$location.path('/userprofile/'+resp.user);
   	}).catch(function(error){
   		console.error(error);
   	});
