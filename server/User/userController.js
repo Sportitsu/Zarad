@@ -55,7 +55,8 @@ module.exports= {
 		var password = req.body.password;
 		var key;
 		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
-		User.findOne({[key]: username})
+		if(username.charAt(0)==='c' && username.charAt(1)==='l'){
+			User.findOne({[key]: username})
       		.exec(function (error, user) {
        			if (user) {
      		 	      User.comparePassword(password,user.password, res, function(found){
@@ -73,6 +74,9 @@ module.exports= {
      		 	    helpers.errorHandler('User Does Not Exist', req, res);
                 }
             });
+		}else if(username.charAt(0)==='p' && username.charAt(1)=== 'l'){
+			clubController.signin(req,res);
+		}
 	},
 	signup : function(req, res){
 		if(req.body.beltColor && req.body.password && req.body.club && req.body.country){
