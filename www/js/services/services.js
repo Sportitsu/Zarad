@@ -124,7 +124,7 @@ angular.module('zarad.services',[])
   var AddTournament=function(tournament){
     return $http({
      method:'POST',
-     url:'/api/tournament/create',
+     url:'http://zarad.herokuapp.com/api/tournament/create',
      data:tournament
     })
     .then(function(resp){
@@ -135,7 +135,7 @@ angular.module('zarad.services',[])
   var getAllTournament=function(){
     return $http({
       method:'GET',
-      url: '/api/tournament/tournaments'
+      url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
       
     }).then(function(resp){
       return resp;
@@ -144,7 +144,7 @@ angular.module('zarad.services',[])
   var SearchAboutTournament=function(Tournament){
     return $http({
       method:'GET',
-      url: '/api/tournament/x/'+Tournament
+      url: 'http://zarad.herokuapp.com/api/tournament/x/'+Tournament
     })
     .then(function(resp){
       return resp.data;
@@ -155,7 +155,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data:Tournament,
-      url: '/api/tournament/edit'
+      url: 'http://zarad.herokuapp.com/api/tournament/edit'
       
     }).then(function(resp){
       return resp.data;
@@ -165,7 +165,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data:Tournament,
-      url: '/api/tournament/delete'
+      url: 'http://zarad.herokuapp.com/api/tournament/delete'
       
     })
     .then(function(resp){

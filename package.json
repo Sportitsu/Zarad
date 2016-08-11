@@ -63,5 +63,9 @@
     "q": "^1.4.1",
     "request": "^2.74.0",
     "sinon": "^1.17.5"
-  }
+  },
+  "cordovaPlugins": [],
+  "cordovaPlatforms": [
+    "android"
+  ]
 }

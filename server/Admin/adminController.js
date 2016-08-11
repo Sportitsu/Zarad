@@ -61,9 +61,7 @@ module.exports = {
   },
   // Admin sign in function 
   signin : function (req,res) {
-    //var username = req.body.username;
-    //var password = req.body.password;
-     var username = req.body.username;  
+    var username = req.body.username;  
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
