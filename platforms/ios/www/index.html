@@ -1,57 +1,67 @@
 <!DOCTYPE html>
-<html ng-app="zarad">
+<html>
 <head>
-	<title>signin</title>
-	<link rel="stylesheet" href="ionic/css/ionic.css">
-	
+	<title>Zarad</title>
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <link rel="stylesheet" href="ionic/css/ionic.css">
+  <link rel="stylesheet" href="styles/css/ionic-modifi.css">
 </head>
-<body>
-<h1>Zaraaaaaad</h1>
- <a href="#signin">signin</a>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD:client/index.html
- <div ng-view>
- </div>
+<body ng-app="zarad" ng-controller="parentController" class="platform-ios platform-cordova platform-webview">
+<!-- app header here -->
 
-=======
-=======
->>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
->>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
- <a href="#AdminHome">AdminHome</a>
- <a href="#signup">signup</a>
- <a href="#club">club</a>
- <!-- <view>
- <ion-header-bar class="bar bar-header bar-calm">
- 	<h1 class="title">zzaraad</h1>
- 	<button class="button">
- 		<i class="icon ion-refresh"></i>
- 	</button> 
- </ion-header-bar>
- 	<ion-content>
- 		<div ng-view>
- 		</div>
- 	</ion-content>
-</view> -->
-<div ng-view>
- 		</div>
+
+<!-- other html pages content rendering will be here -->
+<ion-nav-view class="has-header has-tabs-top">
+  <ion-view class="padding">
+    <ion-content>
+    <!-- rendering other html pages will be here -->
+    </ion-content>
+  </ion-view>
+</ion-nav-view>
+
+<ion-view>
+  <ion-header-bar class="bar bar-header bar-calm">
+   <ion-title style="text-align:center">Zarad</ion-title>
+   <button class="button button-icon icon ion-navicon"></button>
+   <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
+  </ion-header-bar>
+
+  <!-- viewing tabs of the web app -->
+
+   
+
+  <!-- other html pages content rendering will be here -->
+  <ion-nav-view class="has-header has-tabs-top has-subfooter">
+    <ion-view class="padding">
+    <!--   <ion-content>
+      rendering other html pages will be here
+      </ion-content> -->
+    </ion-view>
+  </ion-nav-view>
+</ion-view>
+<!-- footer of the page is here -->
+
+
  <script src="ionic/js/ionic.bundle.js"></script>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> 5188d08d33f631bf868f85cb736047a544adcb7f:platforms/ios/www/index.html
-=======
->>>>>>> 3e0815cb5dff795cb2508fd447f0d9471d409d17
->>>>>>> 9b966bbbf968c4d42b90468c898ede8fcf71797a
  <script src="./lib/angular/angular.js"></script>
+ <script type="../node_modules/angular-slider.js"></script>
  <script type="lib/angular-mocks/angular-mocks.js"></script>
- <script src="lib/angular-route/angular-route.js"></script>
- <script src="app/Admin/AdminHome.js"></script>
- <script src="app/auth/auth.js"></script>
- <script src="app/club/club.js"></script>
- <script src="app/services/services.js"></script>
- <script src="app.js"></script>
+ <script type="lib/angular-animate/angular-animate.js"></script>
+ 
+ <!-- installed route using this bower install angular-ui-router -->
 
+
+ <script src="lib/angular-route/angular-route.js"></script>
+ <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+ <script src="js/services/services.js"></script>
+ <script src="js/controller/index.js"></script>
+ <script src="js/controller/userProfile.js"></script>
+ <script src="js/controller/AdminHome.js"></script>
+ <script src="js/controller/auth.js"></script>
+ <script src="js/controller/club.js"></script>
+ <script src="js/controller/profile.js"></script>
+ <script src="app.js"></script>
  </body>
 </html>
