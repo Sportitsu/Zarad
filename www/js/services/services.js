@@ -24,6 +24,7 @@ angular.module('zarad.services',[])
   };
   
   var signout=function(){
+    $window.localStorage.removeItem('com.user');
     $window.localStorage.removeItem('com.zarad');
     $location.path('/');
   }
@@ -40,16 +41,17 @@ angular.module('zarad.services',[])
 })
 .factory('Admin', function ($http) {
 
-  var signin=function(admin){
-    console.log(admin)
+
+  var signin = function(admin){
     return $http({
-      method:'POST',
-      url:'http://zarad.herokuapp.com/api/admin/signin',
-      data:admin
-    })
-    .then(function(resp){
-       return resp.data;
-    });
+      url: 'http://zarad.herokuapp.com/api/admin/signin',
+      method: "POST",
+      data:  admin
+      }).success(function (data, status, headers, config) {
+          console.log(data);
+      }).error(function (data, status, headers, config) {
+          console.log(data);
+      });
   }
 
   var signup=function(admin){
@@ -102,8 +104,7 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-
-.factory('club',function($http){
+.factory('Club',function($http){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -114,11 +115,47 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
+
+  var getClub=function(){
+    // TODO
+  }
+  
   return{
-    AddUser : AddUser
+    AddUser : AddUser,
+    getClub:getClub
   }
 })
+.factory('User', function($http){
+  var getUser = function(name){
+    return $http({
+      method : 'GET' ,
+      url : 'http://zarad.herokuapp.com/api/user/x/' + name
+    }).success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return response.data;
+    });
+  };
 
+  var editProfile = function(user){
+    return $http({
+      method : 'POST' ,
+      url : 'http://zarad.herokuapp.com/api/user/editProfile',
+      data : user
+    })
+    .success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return response.data;
+    })
+  }
+ return {
+   getUser : getUser,
+   editProfile : editProfile
+ }
+})
 .factory('Tournament',function($http){
   var AddTournament=function(tournament){
     return $http({

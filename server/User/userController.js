@@ -3,7 +3,7 @@ var User = require('./userModel.js');
 var jwt = require('jwt-simple');
 var Club = require('../Club/clubModel.js');
 var helpers = require('../config/helpers');
-
+var clubController = require('../Club/clubController.js');
 
 module.exports= {
 	// fetching a user based on the user name
@@ -53,28 +53,33 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
-		var key;
-		req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
-		if(username.charAt(0)==='c' && username.charAt(1)==='l'){
+		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		if(username.charAt(0)==='p' && username.charAt(1)==='l'){
 			User.findOne({[key]: username})
       		.exec(function (error, user) {
-       			if (user) {
-     		 	      User.comparePassword(password,user.password, res, function(found){
-        		        if(found){
-       				       var token = jwt.encode(user, 'secret');
-         			        res.setHeader('x-access-token',token);
-         			        //modified the response to send the username
-         			        //to save it in local stoarge to be accessed late
-                            res.json({token: token,user: username});
-      			        } else {
-       				       helpers.errorHandler('Wrong Password', req, res);
-                        }
-                    });
-    		    } else {
-     		 	    helpers.errorHandler('User Does Not Exist', req, res);
-                }
+      		    Club.findOne({clubName : user.club}).exec(function(err,club){
+      		    	if(club){
+		       			if (user) {
+		     		 	      User.comparePassword(password,user.password, res, function(found){
+		        		        if(found){
+		       				       var token = jwt.encode(user, 'secret');
+		         			        res.setHeader('x-access-token',token);
+		         			        //modified the response to send the username
+		         			        //to save it in local stoarge to be accessed late
+		                            res.json({token:token,user: username});
+		      			        } else {
+		       				       helpers.errorHandler('Wrong Password', req, res);
+		                        }
+		                    });
+		    		    } else {
+		     		 	    helpers.errorHandler('User Does Not Exist', req, res);
+		                }
+      		    	} else {
+      		    		helpers.errorHandler('Club No longer Exists', req, res);
+      		    	}
+      		    })
             });
-		}else if(username.charAt(0)==='p' && username.charAt(1)=== 'l'){
+		}else if(username.charAt(0)==='c' && username.charAt(1)=== 'l'){
 			clubController.signin(req,res);
 		}
 	},
