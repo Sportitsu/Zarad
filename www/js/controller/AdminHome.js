@@ -17,11 +17,10 @@ angular.module('zarad.admin',[])
 
   //admin sign in
   $scope.signin=function(){
-    Admin.signin($scope.admin).then(function(resp){
-      //save the token and admin name in local stoarage to distinguish signed in users
-      $window.localStorage.setItem('com.zarad', resp.token);
-      $window.localStorage.setItem('com.user', resp.user);
-       $location.path('/AdminAction')
+    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
+    .then(function(resp){
+      console.log(resp);
+      $location.path('/AdminAction')
     })
   };
 

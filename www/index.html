@@ -1,48 +1,46 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Zarad</title>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">
 </head>
-<body ng-app="zarad" ng-controller="parentController">
-<html>
-<head>
-  <!-- <link rel="icon" href="data:;base64,iVBORw0KGgo="> -->
-  <link rel="stylesheet" href="ionic/css/ionic.css">
-  <link rel="stylesheet" href="styles/css/ionic-modifi.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-</head>
-<body ng-app="zarad" ng-controller="parentController">
-
+<body ng-app="zarad">
 <!-- app header here -->
-<ion-header-bar class="bar bar-header bar-dark">
- <ion-title>Zarad</ion-title>
- <button class="button button-icon icon ion-navicon"></button>
- <button class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
-</ion-header-bar>
 
 <!-- other html pages content rendering will be here -->
-<ion-nav-view class="has-header">
-  <ion-view>
-    <ion-content>
-    <!-- rendering other html pages will be here -->
-    </ion-content>
-  </ion-view>
-</ion-nav-view>
+  <!-- viewing tabs of the web app -->
+  <!-- other html pages content rendering will be here -->
+  <ion-nav-view>
+      <!-- <ion-content>
+      rendering other html pages will be here
+      </ion-content> -->
+  </ion-nav-view>
+
+<!-- footer of the page is here -->
 
 
  <script src="ionic/js/ionic.bundle.js"></script>
+ <script src="lib/angular/angular.js"></script>
+ <script src="lib/angular-route/angular-route.js"></script>
  <script src="./lib/angular/angular.js"></script>
  <!-- installed route using this bower install angular-ui-router --> 
  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+ <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+ <!-- <script src="lib/angular-slider/slider.js"></script> -->
+ <script src="lib/jquery/dist/jquery.min.js"></script>
  
+ <!-- installed route using this bower install angular-ui-router -->
+
+ <!-- <script type="lib/angular-mocks/angular-mocks.js"></script> -->
  <script src="js/services/services.js"></script>
  <script src="js/controller/index.js"></script>
+ <script src="js/controller/User/userProfile.js"></script>
  <script src="js/controller/AdminHome.js"></script>
  <script src="js/controller/auth.js"></script>
  <script src="js/controller/club.js"></script>
+ <script src="js/controller/profile.js"></script>
  <script src="js/controller/tournament.js"></script>
  <script src="app.js"></script>
  </body>
