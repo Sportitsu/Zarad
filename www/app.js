@@ -84,11 +84,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
-        })
-        .state('AdminRemove', {
-            url : '/RemoveAdmin',
-            templateUrl : 'js/templates/removeAdmin.html',
-            controller : 'AdminController'
         }) 
         
         $urlRouterProvider.otherwise('/');
