@@ -1,0 +1,41 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Edit Profile</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form ng-submit="confirm()">
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" placeholder="Edit First Name" ng-model="user.firstName" ng-value="data.firstName" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" placeholder="Edit Last Name" ng-model="user.lastName" ng-value="data.lastName">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" placeholder="Change Email" ng-model="user.email" ng-value="data.email" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Phone</span>
+          <input type="text" placeholder="Change Phone Number" ng-model="user.phone" ng-value="data.phone" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Age</span>
+          <input type="text" placeholder="Edit Age" ng-model="user.age" ng-value="data.age" >
+        </label> 
+        <label class = "col text-right button button-stable" ng-click="showPassWord()">Change Password</label>
+        <button class="button button-block button-positive" type="submit">Finished Edit</button>
+        </label>
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>
