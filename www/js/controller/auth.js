@@ -1,6 +1,6 @@
 'use strict';
 angular.module('zarad.auth',[])
-.controller('AuthController',function($scope ,$location, $window , Auth, $ionicPopup, $timeout){
+.controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout){
 	$scope.user={};
 	$scope.showPopup = function() {
    //custom popup to show login box
@@ -29,7 +29,7 @@ angular.module('zarad.auth',[])
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!', res);
+     console.log('Tapped!');
    });
    $timeout(function() {
       myPopup.close(); //close the popup after 1 minute
@@ -40,9 +40,15 @@ angular.module('zarad.auth',[])
   	Auth.signin($scope.user)
   	.then(function(resp){
      //save the token and username in local stoarage to distinguish signed in users
-		$window.localStorage.setItem('com.zarad', resp.token);
-		$window.localStorage.setItem('com.user', resp.user);
-		$location.path('/userprofile');
+     User.getUser(resp.user)
+     .then(function(response){
+  		$window.localStorage.setItem('com.zarad', resp.token);
+  		window.localStorage['user'] = angular.toJson(response.data);
+  		$location.path('/userprofile');
+     })
+     .catch(function(error){
+      console.log(error);
+     })
 		console.log(Auth.isAuth());
   	}).catch(function(error){
   		console.error(error);
