@@ -25,13 +25,6 @@ angular.module('zarad.admin',[])
     })
   };
 
-  $scope.removeAdmin = function () {
-    Admin.deleteAdmin({username:$scope.adminSelect.value})
-          .then(function (admin) {
-            $scope.getAdmins();
-    });
-  }
-
   //add club function
   $scope.Addclub =function(){
   	Admin.Addclub($scope.club)
@@ -65,7 +58,11 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-           $scope.removeAdmin();
+           // $scope.removeAdmin();
+           Admin.deleteAdmin({username:$scope.adminSelect.value})
+          .then(function (admin) {
+            $scope.getAdmins();
+          });
          }
        },
      ]
