@@ -56,7 +56,7 @@ angular.module('zarad.admin',[])
     var myPopup = $ionicPopup.show({
     template: '<select ng-model="adminSelect.value"><option ng-repeat="admin in admins.data">{{admin.username}}</option></select>',
     title: '<p>Enter Admin UserName to delete</p>',
-     subTitle: 'Please fill all the fields',
+     subTitle: 'Please select Admin from the list',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
