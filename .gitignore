@@ -4,6 +4,8 @@ db/
 npm-debug.log
 coverage/
 
+Ionic-Material-master/
+
 # Specifies intentionally untracked files to ignore when using Git
 # http://git-scm.com/docs/gitignore
 
