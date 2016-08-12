@@ -1,12 +1,13 @@
 'use strict';
 angular.module('zarad.admin',[])
 
-.controller('AdminController',function($scope, $window, $location,Admin, $state){
+.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout){
   $scope.admin={};
 	$scope.club = {};
   $scope.tournament = {};
   $scope.user={};
   $scope.admins={};
+  $scope.adminSelect={};
 
   //admin signup
   $scope.signup=function(){
@@ -24,6 +25,14 @@ angular.module('zarad.admin',[])
        $location.path('/AdminAction')
     })
   };
+
+  $scope.removeAdmin = function () {
+    console.log($scope.adminSelect)
+    Admin.deleteAdmin({username:$scope.adminSelect.value})
+          .then(function (admin) {
+            $scope.getAdmins();
+    });
+  }
 
   //add club function
   $scope.Addclub =function(){
@@ -44,9 +53,30 @@ angular.module('zarad.admin',[])
 
   //delete admin function
   $scope.deleteAdmin = function () {
-    Admin.deleteAdmin({username:$scope.adminSelect})
-    .then(function (admin) {
-      $scope.getAdmins();
-    });
+    
+    var myPopup = $ionicPopup.show({
+    template: '<select ng-model="adminSelect.value"><option ng-repeat="admin in admins.data">{{admin.username}}</option></select>',
+    title: '<p>Enter Admin UserName to delete</p>',
+     subTitle: 'Please fill all the fields',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Remove Admin</b>',
+         type: 'button button-outline icon icon-left ion-trash-a button-dark bt',
+         onTap: function(e) {
+           $scope.removeAdmin();
+         }
+       },
+     ]
+   });
+   myPopup.then(function(res) {
+     console.log('Tapped!', res);
+   });
+   $timeout(function() {
+      myPopup.close(); //close the popup after 1 minute
+   }, 60000);
   };
 });
