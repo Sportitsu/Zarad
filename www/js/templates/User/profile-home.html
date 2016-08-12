@@ -1,0 +1,19 @@
+<ion-view view-title="Home">
+      <ion-content ng-class="{expanded:$scope.isExpanded}">
+        <div class="hero slide-up" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div>
+                <h3><a class="light" style="color:white">{{data.firstName}}</a></h3>
+                <h4>{{data.club}}</h4>
+            </div>
+        </div>
+          <div>
+           <div ng-if="data.beltColor"> Belt : <h4>{{data.beltColor}}</h4></div>
+           <div ng-if="data.email"> Email : <h4>{{data.email}}</h4></div>
+           <div ng-if="data.country">Country : <h4>{{data.country}}</h4></div>
+           <div ng-if="data.club"> Club Name : <h4>{{data.club}}</h4></div>
+           <div ng-if="data.age"> Age :  <h4>{{data.age}}</h4></div>
+           <div ng-if="data.phone"> Phone : <h4>{{data.phone}}</h4></div>
+          </div> 
+        </ion-content>
+</ion-view>
