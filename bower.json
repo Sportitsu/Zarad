@@ -24,6 +24,9 @@
     "platform.js": "platform#^1.3.1"
   },
   "resolutions": {
-    "angular": "~1.3.5"
+    "angular": ">= 1.0.8",
+    "ionic": "1.3.1",
+    "angular-animate": "1.3.13",
+    "angular-sanitize": "1.3.13"
   }
 }
