@@ -33,12 +33,9 @@ angular.module('zarad.user',['ionic'])
         })
    },3000)
 
-       // Set Header
-    // $scope.$parent.showHeader();
-    // $scope.$parent.clearFabs();
+       // Set Header    
     $scope.isExpanded = false;
-    // $scope.$parent.setExpanded(false);
-    // $scope.$parent.setHeaderFab(false);
+
 
     // Set Motion
     $timeout(function() {
@@ -51,7 +48,7 @@ angular.module('zarad.user',['ionic'])
         ionicMaterialMotion.fadeSlideInRight({
             startVelocity: 3000
         });
-    }, 700);
+    }, 500);
 
     // Set Ink
     ionicMaterialInk.displayEffect();
