@@ -9,13 +9,6 @@ angular.module('zarad.admin',[])
   $scope.admins={};
   $scope.adminSelect={};
 
-  //admin signup
-  $scope.signup=function(){
-    Admin.signup($scope.admin).then(function(resp){
-      $location.path('/AdminSignin');
-    })
-  };
-
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
@@ -45,7 +38,7 @@ angular.module('zarad.admin',[])
   //delete admin function
   $scope.deleteAdmin = function () {
     
-    var myPopup = $ionicPopup.show({
+    var remove = $ionicPopup.show({
     template: '<select ng-model="adminSelect.value"><option ng-repeat="admin in admins.data">{{admin.username}}</option></select>',
     title: '<p>Enter Admin UserName to delete</p>',
      subTitle: 'Please select Admin from the list',
@@ -58,7 +51,6 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-           // $scope.removeAdmin();
            Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
             $scope.getAdmins();
@@ -67,11 +59,41 @@ angular.module('zarad.admin',[])
        },
      ]
    });
-   myPopup.then(function(res) {
+   remove.then(function(res) {
      console.log('Tapped!', res);
    });
    $timeout(function() {
-      myPopup.close(); //close the popup after 1 minute
+      remove.close(); //close the popup after 1 minute
    }, 60000);
   };
+  //Register a new Admin
+  $scope.registerAdmin = function () {
+
+    var register = $ionicPopup.show({
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Username" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Admin Password" ng-model="admin.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Email" ng-model="admin.email"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin FirstName" ng-model="admin.firstName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin LastName" ng-model="admin.lastName"></label>',
+    title: '<p>Enter Admin UserName to delete</p>',
+     subTitle: 'Please select Admin from the list',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Register</b>',
+         type: 'button button-balanced icon icon-left ion-person-add',
+         onTap: function(e) {
+           Admin.signup($scope.admin).then(function(resp){
+           $location.path('/AdminSignin');
+          });
+         }
+       },
+     ]
+   });
+   register.then(function(res) {
+     console.log('Tapped!', res);
+   });
+   $timeout(function() {
+      register.close(); //close the popup after 1 minute
+   }, 60000);
+  }
 });
