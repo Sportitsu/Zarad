@@ -1,5 +1,6 @@
 var app = angular.module('zarad', [
 	'ionic',
+    'ionic-material',
     'zarad.user',
 	'zarad.auth',
 	'zarad.admin',
@@ -90,7 +91,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller : 'AdminController'
         }) 
         
-        // $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
