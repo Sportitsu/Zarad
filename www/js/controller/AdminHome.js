@@ -26,7 +26,6 @@ angular.module('zarad.admin',[])
   };
 
   $scope.removeAdmin = function () {
-    console.log($scope.adminSelect)
     Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
             $scope.getAdmins();
@@ -63,8 +62,8 @@ angular.module('zarad.admin',[])
        type: 'button button-outline icon icon-left ion-close-round button-dark bt',
         },
        {
-         text: '<b>Remove Admin</b>',
-         type: 'button button-outline icon icon-left ion-trash-a button-dark bt',
+         text: '<b>Remove</b>',
+         type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
            $scope.removeAdmin();
          }
