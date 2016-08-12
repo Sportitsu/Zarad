@@ -15,7 +15,7 @@ angular.module('zarad.index',['ionic'])
 	// Show the action sheet
 	var hideSheet = $ionicActionSheet.show({
 	 buttons: [
-	   { text: '<span>Edit Profile</span>' },
+	   { text: '<span>Edit</span>' },
 	   { text: '<span>Logout</span>'}
 	 ],
 	 titleText: '<code>Action Menu</code>',
