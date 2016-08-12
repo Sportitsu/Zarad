@@ -5,7 +5,24 @@ angular.module('zarad.index',['ionic'])
 	//signout function
 	$scope.user = {};
 	$scope.data = JSON.parse(window.localStorage.user)
-	
+// Gets the Date of Today to Use in Membership Action PopUp	
+var objToday = new Date(),
+  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+  dayOfWeek = weekday[objToday.getDay()],
+  domEnder = function() { var a = objToday; if (/1/.test(parseInt((a + "").charAt(0)))) return "th"; a = parseInt((a + "").charAt(1)); return 1 == a ? "st" : 2 == a ? "nd" : 3 == a ? "rd" : "th" }(),
+  dayOfMonth = today + ( objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+  months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+  curMonth = months[objToday.getMonth()],
+  curYear = objToday.getFullYear(),
+  curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
+  curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+  curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
+  curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+var today = dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
+
+
+	console.log($scope.data.resub);
+
 	if($scope.data.beltColor.toLowerCase() !== 'white'){
 		$scope.initColor = 'white';
 	} else {
@@ -16,7 +33,8 @@ angular.module('zarad.index',['ionic'])
 	var hideSheet = $ionicActionSheet.show({
 	 buttons: [
 	   { text: '<span>Edit</span>' },
-	   { text: '<span>Logout</span>'}
+	   { text: '<span>Logout</span>'},
+	   { text: '<span>Membership</span>'}
 	 ],
 	 titleText: '<code>Action Menu</code>',
 	 cancelText: '<b>Cancel</b>',
@@ -27,12 +45,19 @@ angular.module('zarad.index',['ionic'])
 	   if(index === 0 ){
 		    $scope.modal.show();
 		    hideSheet();
-	   } else {
+	   } else if(index===1){
 			$scope.logout();
 			hideSheet();
+	   } else {
+	   	    $scope.showDate();
+	   	    hideSheet();
 	   }
 	 }
 	});
+	};
+
+	$scope.showDate = function(){
+		console.log('TO DO THIS FUNCTION');
 	};
 	
 	$scope.logout=function(){
@@ -98,3 +123,6 @@ angular.module('zarad.index',['ionic'])
 	    }, 500);
 	 }
 })
+
+
+
