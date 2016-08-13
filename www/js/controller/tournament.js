@@ -1,5 +1,5 @@
 'use strict';
-angular.module('zarad.tournament',['ionic'])
+angular.module('zarad.tournament',[])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
 	//$scope.tournament={};

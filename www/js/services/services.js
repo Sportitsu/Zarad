@@ -116,13 +116,22 @@ angular.module('zarad.services',[])
     });
   };
 
-  var getClub=function(){
-    // TODO
+  var getClub=function(username){
+    return $http({
+      method:'GET',
+      url:"/api/club/x/:"+username
+    })
+    .success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return response.data;
+    })
   }
   
   return{
     AddUser : AddUser,
-    getClub:getClub
+    getClub: getClub
   }
 })
 .factory('User', function($http){
@@ -134,7 +143,7 @@ angular.module('zarad.services',[])
       return response.data;
     })
     .error(function(data){
-      return response.data;
+      return data;
     });
   };
 
