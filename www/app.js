@@ -54,7 +54,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-        })
+            
+        }) 
         .state('Edittournament',{
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
@@ -73,14 +74,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
-
-        })
-        .state('AdminRemove', {
-            url : '/RemoveAdmin',
-            templateUrl : 'js/templates/removeAdmin.html',
-            controller : 'AdminController'
-
         }) 
+        
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
