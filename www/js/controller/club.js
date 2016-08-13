@@ -1,20 +1,14 @@
 'use strict';
-angular.module('zarad.club',[])
-.controller('clubController',function($scope,Club){
+angular.module('zarad.club',['ionic'])
+.controller('clubController',function($scope,club){
 	$scope.clubUser={};
 	$scope.AddUser=function(){
 		var data=$scope.clubUser;
-		Club.AddUser(data).then(function(resp){
+		club.AddUser(data).then(function(resp){
 			console.log(resp.data);
 		});
 	};
 	$scope.editClub=function(){
 		
 	};
-	$scope.getClub=function(){
-		var username=$window.localStorage.getItem('user');
-		Club.getClub(username).then(function(resp){
-			console.log(resp);
-		})
-	}
 });
