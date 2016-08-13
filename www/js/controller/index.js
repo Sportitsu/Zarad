@@ -20,8 +20,19 @@ angular.module('zarad.index',['ionic'])
 	  curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 	var today = dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
 
-
-	console.log($scope.data.resub);
+	for(var i = 0; i < $scope.data.achievements.length; i++){
+		if($scope.data.achievements[i].place === 1 ){
+			console.log('Been Here');
+			$scope.data.achievements[i].place = 'First Place';
+		} else 	if($scope.data.achievements[i].place === 2 ){
+			console.log('And here');
+			$scope.data.achievements[i].place = 'Second Place';
+		} else 	if($scope.data.achievements[i].place === 3 ){
+			$scope.data.achievements[i].place = 'Third Place';
+		}
+	}
+	console.log($scope.data.achievements);
+	
 
 	if($scope.data.beltColor.toLowerCase() !== 'white'){
 		$scope.initColor = 'white';
@@ -62,7 +73,7 @@ angular.module('zarad.index',['ionic'])
 			willFinish = willFinish.substr(0,16);
 		var myPopup =  $ionicPopup.alert({
 			title : '<b style="color:red">' +today + '</b>',
-			template : 'Your membership ends on <b style="color:red">' + willFinish + '</b>'
+			template : 'Your membership ends in <b style="color:red">' + willFinish + '</b>'
 		});
 
 		myPopup.then(function(res){

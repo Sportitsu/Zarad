@@ -67,7 +67,7 @@ module.exports= {
 			         			        res.setHeader('x-access-token',token);
 			         			        //modified the response to send the username
 			         			        //to save it in local stoarge to be accessed late
-			                            res.json({token:token,user: username});
+			                            res.json({token:token,user: user});
 			      			        } else {
 			       				       helpers.errorHandler('Wrong Password', req, res);
 			                        }
@@ -83,7 +83,7 @@ module.exports= {
 			 	    helpers.errorHandler('User Does Not Exist', req, res);
       			}
             });
-		}else if(username.charAt(0)==='C' && username.charAt(1)=== 'l'){
+		}else if(username.charAt(0) ==='C' && username.charAt(1)=== 'l'){
 			clubController.signin(req,res);
 		}
 	},
