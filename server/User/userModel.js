@@ -21,7 +21,7 @@ var userSchema = new Schema ({
   phone: { type: String },
   Date: { type: Date, default: Date.now() },
   attendance : { type: Number },
-  achievements: { type : Array},
+  achievements: Schema.Types.Mixed,
   valid : { type : Boolean , default : true },
   subscription : { type : Number },
   resub : { type : Boolean , default : false},
