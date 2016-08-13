@@ -5,7 +5,7 @@ angular.module('zarad.index',['ionic'])
 	//signout function
 	$scope.user = {};
 	$scope.data = JSON.parse(window.localStorage.user)
-// Gets the Date of Today to Use in Membership Action PopUp	
+	// Gets the Date of Today to Use in Membership Action PopUp	
 	var objToday = new Date(),
 	  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
 	  dayOfWeek = weekday[objToday.getDay()],
@@ -57,7 +57,17 @@ angular.module('zarad.index',['ionic'])
 	};
 
 	$scope.showDate = function(){
-		console.log('TO DO THIS FUNCTION');
+			var willFinish = new Date($scope.data.subscription+((30*24*60*60*1000)*$scope.data.membership));
+			willFinish+='';
+			willFinish = willFinish.substr(0,16);
+		var myPopup =  $ionicPopup.alert({
+			title : '<b style="color:red">' +today + '</b>',
+			template : 'Your membership ends in <b style="color:red">' + willFinish + '</b>'
+		});
+
+		myPopup.then(function(res){
+			console.log('Done');
+		})
 	};
 	
 	$scope.logout=function(){
