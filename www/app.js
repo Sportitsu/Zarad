@@ -116,11 +116,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     }
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
-    if((next !== 'http://localhost:8100/#/AdminMain' || next === 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
-         $state.go('/');
-    }
-  })
-  
+    var flag = Auth.isAuth();
+    
+    if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
+        $state.go('/');
+    };
+  })  
 
 })
 .factory('AttachTokens',function ($window){

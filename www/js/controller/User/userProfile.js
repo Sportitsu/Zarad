@@ -4,6 +4,16 @@ angular.module('zarad.user',['ionic'])
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
 
+
+
+ if($scope.data.resub){
+  setTimeout(function(){
+   setInterval(function(){
+    $('#resubscribe').fadeToggle();
+   },2000)
+  },1000);
+ }
+ 
  $scope.test = function(){
   console.log('test');
  }
