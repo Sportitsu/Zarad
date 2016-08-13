@@ -201,7 +201,7 @@ describe('User Test Database', function(done){
 			chai.request(server)
 				.post('/api/user/signin')
 				.send({
-					'username' :'amNotAvailable'
+					'username' :'PlNotAvailable'
 				})
 				.end(function(err, res){
 					expect(err).to.not.equal(null);
@@ -211,30 +211,51 @@ describe('User Test Database', function(done){
 		});
 
 		it('should give access tokens when signin in', function(done){
-			chai.request(server)
-				.post('/api/user/signin')
-				.send({
-					'username' : 'mohammad', 
-					'password' : 'testing'
-				})
-				.end(function(err, res){
-					expect(res.body.token).to.not.equal(undefined);
-					expect(res.body).to.have.property('token');
-					done();
-				})
+			var extraUser = new User({
+				"username" : "Plmoha823",
+				"password" : "test", 
+				"beltColor" : "purple" ,
+				"country" : "Jordan" ,
+				"email" : "never",
+				"club" : "SourceMMA" 
+			})
+			extraUser.save(function(err, savedUser){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' : 'Plmoha823' , 
+						'password' : 'test'
+					})
+					.end(function(err, res){
+						expect(res.body.token).to.not.equal(undefined);
+						expect(res.body).to.have.property('token');
+						done();
+					})
+			})
 		});
 
 		it('should return 500 ERROR if password is incorrect', function(done){
-			chai.request(server)
-				.post('/api/user/signin')
-				.send({
-					'username' : 'mohammad', 
-					'password' : 'notme'
-				})
-				.end(function(err, res){
-					expect(res.status).to.be.equal(500);
-					done();
-				})
+			var extraUser = new User({
+				"username" : "Plmoha823",
+				"password" : "test", 
+				"beltColor" : "purple" ,
+				"country" : "Jordan" ,
+				"email" : "never",
+				"club" : "SourceMMA" 
+			})
+
+			extraUser.save(function(err, savedUser){
+				chai.request(server)
+					.post('/api/user/signin')
+					.send({
+						'username' : 'Plmoha823', 
+						'password' : 'notme'
+					})
+					.end(function(err, res){
+						expect(res.status).to.be.equal(500);
+						done();
+					})
+			})
 		})
 		
 	})
