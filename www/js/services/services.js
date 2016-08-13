@@ -41,7 +41,6 @@ angular.module('zarad.services',[])
 })
 .factory('Admin', function ($http) {
 
-
   var signin = function(admin){
     return $http({
       url: 'http://zarad.herokuapp.com/api/admin/signin',
@@ -54,7 +53,7 @@ angular.module('zarad.services',[])
       });
   }
 
-  var signup=function(admin){
+  var signup = function(admin){
     return $http({
       method:'POST',
       url:'http://zarad.herokuapp.com/api/admin/create',
@@ -64,17 +63,7 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
-  //send club information to server
-  var Addclub=function(club){
-    return $http({
-      method:'POST',
-      data: club,
-      url:'http://zarad.herokuapp.com/api/club/register'
-    })
-    .then(function(resp){
-      return resp.data;
-    })
-  };
+
   //get all registered Admins
   var getAdmins = function () {
     return $http({
@@ -99,7 +88,6 @@ angular.module('zarad.services',[])
   return {
     signin: signin,
     signup: signup,
-    Addclub: Addclub,
     getAdmins : getAdmins,
     deleteAdmin : deleteAdmin
   };
@@ -118,11 +106,36 @@ angular.module('zarad.services',[])
 
   var getClub=function(){
     // TODO
-  }
+  };
+
+    //send club information to server
+  var Addclub=function(club){
+    return $http({
+      method:'POST',
+      data: club,
+      url:'http://zarad.herokuapp.com/api/club/register'
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  };
+
+  var removeClub = function (club) {
+    return $http({
+      method : 'POST',
+      data : club,
+      url : 'http://zarad.herokuapp.com/api/club/delete'
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  };
   
   return{
     AddUser : AddUser,
-    getClub:getClub
+    getClub:getClub,
+    Addclub : Addclub,
+    removeClub : removeClub
   }
 })
 .factory('User', function($http){
@@ -160,7 +173,7 @@ angular.module('zarad.services',[])
   var AddTournament=function(tournament){
     return $http({
      method:'POST',
-     url:'/api/tournament/create',
+     url:'http://zarad.herokuapp.com/api/tournament/create',
      data:tournament
     })
     .then(function(resp){
@@ -180,7 +193,7 @@ angular.module('zarad.services',[])
   var SearchAboutTournament=function(Tournament){
     return $http({
       method:'GET',
-      url: '/api/tournament/x/'+Tournament
+      url: 'http://zarad.herokuapp.com/api/tournament/x/'+Tournament
     })
     .then(function(resp){
       return resp.data;
