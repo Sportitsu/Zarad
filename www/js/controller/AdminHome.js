@@ -17,14 +17,6 @@ angular.module('zarad.admin',[])
     })
   };
 
-  //add club function
-  // $scope.Addclub =function(){
-  // 	Club.Addclub($scope.club)
-  // 	.then(function(resp){
-  //     $location.path('/clubprofile/'+resp.data.username);
-  //   });
-  // };
-
   //get a list of all admins
   $scope.getAdmins =function () {
     Admin.getAdmins()
@@ -118,13 +110,15 @@ angular.module('zarad.admin',[])
      buttons: [
        { text: 'Cancel',
        type: 'button button-outline icon icon-left ion-close-round button-dark bt',
-        },
-       {
+        },{
          text: '<b>Create</b>',
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
-            $location.path('/clubprofile/'+resp.username);
+            var alertPopup = $ionicPopup.alert({
+             title: 'Your User Name is:'+resp.username,
+             template: '{{resp.username}}'
+              });
           });
          }
        },
