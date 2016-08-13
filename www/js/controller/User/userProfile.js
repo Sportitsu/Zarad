@@ -3,8 +3,17 @@ angular.module('zarad.user',['ionic'])
  function($scope, $ionicPopup, Auth, $location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
+ $scope.achievements = $scope.data.achievements;
+  for(var i = 0; i < $scope.achievements.length; i++){
 
-
+    if($scope.achievements[i].place === '1' ){
+      $scope.achievements[i].place = 'First Place ';
+    } else  if($scope.achievements[i].place === '2' ){
+      $scope.achievements[i].place = 'Second Place ';
+    } else  if($scope.achievements[i].place === '3' ){
+      $scope.achievements[i].place = 'Third Place ';
+    }
+  }
 
  if($scope.data.resub){
   setTimeout(function(){
@@ -33,8 +42,8 @@ angular.module('zarad.user',['ionic'])
    setInterval(function(){
     User.getUser($scope.data.username)
         .then(function(response){
-          $scope.data = response.data;
           if(JSON.stringify(response.data) !== window.localStorage.user){
+            $scope.data = response.data;
             window.localStorage.user = angular.toJson(response.data);
           }
         })
