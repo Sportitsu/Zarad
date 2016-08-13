@@ -1,13 +1,13 @@
 describe('clubController',function(){
   var  $scope, $rootScope, $window,$location,club,createController,$httpBackend;
-  beforeEach(module('zarad'))
+ 
   beforeEach(inject(function($injector){
        
     $rootScope=$injector.get('$rootScope');
     $window=$injector.get('$window');
     $location=$injector.get('$location');
     $httpBackend=$injector.get('$httpBackend')
-    club=$injector.get('club');
+    club=$injector.get('Club');
     $scope=$rootScope.$new();
     
     var $controller=$injector.get('$controller');

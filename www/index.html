@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,8 +7,33 @@
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
   <link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">
 </head>
-<body ng-app="zarad">
+<body ng-app="zarad" ng-controller="parentController">
+<html>
+<head>
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+  <!-- <link rel="icon" href="data:;base64,iVBORw0KGgo="> -->
+  <link rel="stylesheet" href="ionic/css/ionic.css">
+  <link rel="stylesheet" href="styles/css/ionic-modifi.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+</head>
+<body ng-app="zarad" ng-controller="parentController">
+
 <!-- app header here -->
+
+<!-- viewing tabs of the web app -->
+<div class="tabs-striped tabs-top tabs-calm">
+    <div class="tabs">
+      <a class="tab-item active" href="#/signin">
+        <i class="icon ion-home"></i>
+      </a>
+      <a class="tab-item" href="#/profile">
+        <i class="icon ion-person"></i>
+      </a>
+      <a class="tab-item" href="#/AllTournament">
+        <i class="icon ion-trophy"></i>
+      </a>
+    </div>
+</div>
 
 <!-- other html pages content rendering will be here -->
   <!-- viewing tabs of the web app -->
@@ -18,9 +44,14 @@
       </ion-content> -->
   </ion-nav-view>
 
+
+
  <script src="ionic/js/ionic.bundle.js"></script>
- <script src="lib/angular/angular.min.js"></script>
+ <script src="./lib/angular/angular.js"></script>
+ <script type="lib/angular-mocks/angular-mocks.js"></script>
+ <!-- installed route using this bower install angular-ui-router -->
  <script src="lib/angular-route/angular-route.js"></script>
+
  <!-- installed route using this bower install angular-ui-router --> 
  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
  <script src="lib/ionic-material/dist/ionic.material.min.js"></script>

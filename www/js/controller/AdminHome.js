@@ -75,6 +75,30 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+  //Register a new Admin
+  $scope.registerAdmin = function () {
+
+    var register = $ionicPopup.show({
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Username" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Admin Password" ng-model="admin.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Email" ng-model="admin.email"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin FirstName" ng-model="admin.firstName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin LastName" ng-model="admin.lastName"></label>',
+    title: '<p>Enter Admin UserName to delete</p>',
+     subTitle: 'Please select Admin from the list',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Register</b>',
+         type: 'button button-balanced icon icon-left ion-person-add',
+         onTap: function(e) {
+           Admin.signup($scope.admin).then(function(resp){
+           $location.path('/AdminSignin');
+          });
+         }
+       },
+     ]
+   });
+  };
   // Delete existing club 
   $scope.removeClub = function () {
 

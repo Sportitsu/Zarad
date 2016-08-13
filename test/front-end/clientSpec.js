@@ -39,7 +39,7 @@ describe('AuthController',function(){
 
 	xit('should store token in localStorage after signin',function(){
 		var token = 'sjj232hwjhr3urw90rof';
-	    $httpBackend.expectPOST('/api/user/signin').respond({token: token});
+	    $httpBackend.expectPOST('http://zarad.herokuapp.com/api/user/signin').respond({token: token});
 	    $scope.signin();
 	    $httpBackend.flush();
 	    expect($window.localStorage.getItem('com.zarad')).to.equal(token);
@@ -52,7 +52,7 @@ describe('AuthController',function(){
 
 	});
 	it('should be able  sign user with signin()', function () {
-		$httpBackend.expectPOST("/api/user/signin").respond(201, '');
+		$httpBackend.expectPOST("http://zarad.herokuapp.com/api/user/signin").respond(201, '');
       	$scope.signin();
       	$httpBackend.flush();
     });

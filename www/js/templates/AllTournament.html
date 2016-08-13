@@ -1,9 +1,8 @@
-
+<ion-scroll scrollX="true">
 <div class="list" >
 
  <ul class="list" ng-repeat="tournament in AllTournament.data">
     <li class="item">
-   
      <img src='{{tournament.poster}}'/><br>
       Name:{{tournament.name}}<br>
       Place:{{tournament.place}}<br>
@@ -12,6 +11,6 @@
       More details:{{tournament.details}}<br>
       id:{{tournament._id}}
     </li>
-   
  </ul>
  <div>
+</ion-scroll>
