@@ -1,13 +1,13 @@
 var app = angular.module('zarad', [
 	'ionic',
-    'ionic-material',
-    'zarad.user',
+  'ionic-material',
+  'zarad.user',
 	'zarad.auth',
 	'zarad.admin',
 	'zarad.club',
 	'zarad.tournament',
 	'zarad.services',
-    'ngRoute',
+  'ngRoute',
 	'zarad.index',
 	'ui.router'
 	]);
@@ -75,12 +75,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           }
 
         })
-        .state('AdminRemove', {
-            url : '/RemoveAdmin',
-            templateUrl : 'js/templates/removeAdmin.html',
-            controller : 'AdminController'
-
-        }) 
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
