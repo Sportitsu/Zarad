@@ -19,6 +19,11 @@ module.exports = function(config) {
     files: [
       'www/lib/angular/angular.js',
       'www/lib/angular-ui-router/release/angular-ui-router.js',
+      'www/lib/angular-route/angular-route.js',
+      'www/ionic/js/angular/angular.js',
+      'www/lib/ionic/js/ionic.js',
+      'www/lib/ionic/js/ionic-angular.js',
+      'www/lib/ionic/js/ionic.bundle.js',
       'www/lib/angular-mocks/angular-mocks.js',
       'www/app.js',
       "www/js/**/*.js",
@@ -27,7 +32,8 @@ module.exports = function(config) {
       'www/js/services/services.js',
       'www/js/controller/profile.js',
       'www/js/controller/Tournament.js',
-      'www/js/controller/AdminHome.js'
+      'www/js/controller/AdminHome.js',
+      'test/front-end/Adminspec.js'
       //'test/front-end/Adminspec.js',
       //'test/front-end/routingSpec.js',
       //'test/front-end/ServicesSpec.js',

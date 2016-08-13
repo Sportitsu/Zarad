@@ -54,7 +54,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-        })
+            
+        }) 
         .state('Edittournament',{
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
@@ -73,8 +74,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
-
-        })
+        }) 
+        
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
