@@ -1,6 +1,6 @@
 // TOD
-
-describe('parentController',function(){
+describe('Profile index',function(){
+  var baseUrl = 'http://zarad.herokuapp.com';
   var  $scope, $rootScope, $window,$location,club,createController,$httpBackend;
   beforeEach(module('zarad'))
   beforeEach(inject(function($injector){

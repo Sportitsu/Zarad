@@ -110,7 +110,7 @@ describe('Tournaments DataBase', function(done){
 			})
 	});
 
-	it('should delete a tournament when passed the right id key', function(done){
+	it('should delete a tournament when passed the right name key', function(done){
 		var newTour = new Tournament({
 			'name' : 'San Fransisco Elite Tournament' ,
 			'Date' : 'Test' , 
@@ -123,7 +123,7 @@ describe('Tournaments DataBase', function(done){
 			chai.request(server)
 				.post('/api/tournament/delete')
 				.send({
-					'id' : savedTour._id
+					'name' : savedTour.name
 				})
 				.end(function(err ,res){
 					expect(res.status).to.be.equal(201);
@@ -132,11 +132,11 @@ describe('Tournaments DataBase', function(done){
 		})
 	});
 
-	it('should handle error when passing wrong id for deletion', function(done){
+	it('should handle error when passing wrong name for deletion', function(done){
 		chai.request(server)
 			.post('/api/tournament/delete')
 			.send({
-				'id' : '23984'
+				'name' : '2349'
 			})
 			.end(function(err , res){
 				expect(res.status).to.be.equal(500);
@@ -156,7 +156,7 @@ describe('Tournaments DataBase', function(done){
 			})
 	});
 
-	it('should edit tournament when passed the right id key', function(done){
+	it('should edit tournament when passed the right name key', function(done){
 		var newTour = new Tournament({
 			'name' : 'San Fransisco Elite Tournament' ,
 			'Date' : 'Test' , 
@@ -169,12 +169,12 @@ describe('Tournaments DataBase', function(done){
 			chai.request(server)
 				.post('/api/tournament/edit')
 				.send({
-					'id' : savedTour._id,
-					'name' : 'AbuDhabi_World_Professional_Championship'
+					'name' : 'San Fransisco Elite Tournament',
+					'place' : 'RebootKamp'
 				})
 				.end(function(err, res){
 					expect(res.status).to.be.equal(201);
-					expect(res.body.name).to.be.equal('AbuDhabi_World_Professional_Championship');
+					expect(res.body.place).to.be.equal('RebootKamp');
 					expect(res.body).to.have.property('name');
 					done();
 				})
