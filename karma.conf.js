@@ -21,8 +21,18 @@ module.exports = function(config) {
       'www/lib/angular-ui-router/release/angular-ui-router.js',
       'www/lib/angular-mocks/angular-mocks.js',
       'www/app.js',
-      'www/js/**/*.js',
-      'test/front-end/indexSpec.js'
+      "www/js/**/*.js",
+      'www/js/controller/index.js',
+      'www/js/controller/auth.js',
+      'www/js/services/services.js',
+      'www/js/controller/profile.js',
+      'www/js/controller/Tournament.js',
+      'www/js/controller/AdminHome.js'
+      //'test/front-end/Adminspec.js',
+      //'test/front-end/routingSpec.js',
+      //'test/front-end/ServicesSpec.js',
+      //'test/front-end/profileSpec.js',
+      //'test/front-end/clubSpec.js'
     ],
 
 
