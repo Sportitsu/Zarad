@@ -5,35 +5,29 @@ module.exports = function(config) {
   config.set({
 
     // base path that will be used to resolve all patterns (eg. files, exclude)
-    basePath: '',
+    basePath: './',
 
 
     // frameworks to use
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 
 
-    frameworks: ['jasmine'],
+    frameworks: ['mocha','chai','sinon'],
 
 
     // list of files / patterns to load in the browser
     files: [
       'www/lib/angular/angular.js',
-      'www/lib/angular-ui-router/release/angular-ui-router.js',
       'www/lib/angular-mocks/angular-mocks.js',
+      'www/lib/angular-route/angular-route.js',
+      'www/ionic/js/angular/angular.js',
+      'www/lib/ionic/js/ionic.js',
+      'www/lib/ionic/js/ionic-angular.js',
+      'www/lib/ionic/js/ionic.bundle.js',
       'www/app.js',
       "www/js/**/*.js",
-      'www/js/controller/index.js',
-      'www/js/controller/auth.js',
-      'www/js/services/services.js',
-      'www/js/controller/profile.js',
-      'www/js/controller/Tournament.js',
-      'www/js/controller/AdminHome.js'
-      //'test/front-end/Adminspec.js',
-      //'test/front-end/routingSpec.js',
-      //'test/front-end/ServicesSpec.js',
-      //'test/front-end/profileSpec.js',
-      //'test/front-end/clubSpec.js'
-    ],
+      'test/front-end/*.js'
+      ],
 
 
     
@@ -53,13 +47,13 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec','coverage'],
+    reporters: ['progress','coverage'],
 
-    // coverageReporter : {
-    //   type : 'html',
-    //   dir : 'coverage/',
-    //   file : 'coverage.txt'
-    // },
+    coverageReporter : {
+      type : 'html',
+      dir : 'coverage/',
+      file : 'coverage.txt'
+    },
     // web server port
     port: 9876,
 
@@ -79,7 +73,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
