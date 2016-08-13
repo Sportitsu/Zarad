@@ -105,18 +105,10 @@ angular.module('zarad.services',[])
     });
   };
 
-  var getClub=function(username){
-    return $http({
-      method:'GET',
-      url:"/api/club/x/:"+username
-    })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return response.data;
-    })
-  }
+  var getClub=function(){
+    // TODO
+  };
+
     //send club information to server
   var Addclub=function(club){
     return $http({
@@ -156,7 +148,7 @@ angular.module('zarad.services',[])
       return response.data;
     })
     .error(function(data){
-      return data;
+      return response.data;
     });
   };
 
