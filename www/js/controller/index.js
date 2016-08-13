@@ -62,7 +62,7 @@ angular.module('zarad.index',['ionic'])
 			willFinish = willFinish.substr(0,16);
 		var myPopup =  $ionicPopup.alert({
 			title : '<b style="color:red">' +today + '</b>',
-			template : 'Your membership ends in <b style="color:red">' + willFinish + '</b>'
+			template : 'Your membership ends on <b style="color:red">' + willFinish + '</b>'
 		});
 
 		myPopup.then(function(res){
