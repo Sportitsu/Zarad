@@ -39,20 +39,10 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl:'js/templates/AdminSignin.html',
         	controller:'AdminController'
         })
-        .state('adminsignup',{
-        	url:'/AdminSignup',
-        	templateUrl:'/js/templates/AdminSignup.html',
-        	controller:'AdminController'
-        })
         .state('adminaction',{
         	url:'/AdminAction',
         	templateUrl: 'js/templates/AdminAction.html',
         	controller: 'AdminController'
-        })
-        .state('addclub',{
-        	url:'/AddClub',
-        	templateUrl:'js/templates/AddClub.html',
-        	controller:'AdminController'
         })
         .state('addtournment',{
         	url:'/AddTournment',
@@ -83,6 +73,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
+
         })
         .state('AdminRemove', {
             url : '/RemoveAdmin',
