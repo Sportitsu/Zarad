@@ -1,4 +1,4 @@
-angular.module('zarad.index',[])
+angular.module('zarad.index',['ionic'])
 .controller('parentController',function($scope, $ionicModal, $ionicPopup, $state, $timeout, $ionicActionSheet, $window, Auth, User){
 	//this controller was made for index html page to show and hide logout button
 	//depending on user saved token in the localstoarge.
