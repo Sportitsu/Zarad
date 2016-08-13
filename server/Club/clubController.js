@@ -10,7 +10,6 @@ module.exports ={
 		Club.findOne({username : username})
 		.exec(function (error,club) {
 			if(club){
-				console.log(club);
 				var returnClub = new Club ({
 					username : club.username,
 					country : club.country,
@@ -25,7 +24,6 @@ module.exports ={
 	},
 	// Add a new club
 	addClub : function(req,res){
-		console.log(req.body);
 		if(req.body.password && req.body.country && req.body.clubName){
 			req.body.username = req.body.username || helpers.getClubName(req.body.clubName);
 		} else {
@@ -85,8 +83,8 @@ module.exports ={
 	signin : function (req,res) {
 		var username = req.body.username;
 		var password = req.body.password;
-		var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
-		Club.findOne({ [key] : username})
+		// var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
+		Club.findOne({ username : username})
 		.exec(function (error,club) {
 			if(club){
 				Club.comparePassword(password,club.password, res, function(found){

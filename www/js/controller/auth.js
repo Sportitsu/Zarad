@@ -49,7 +49,6 @@ angular.module('zarad.auth',[])
      .catch(function(error){
       console.log(error);
      })
-		console.log(Auth.isAuth());
   	}).catch(function(error){
   		console.error(error);
   	});

@@ -4,19 +4,12 @@
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
+  <link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">
 </head>
 <body ng-app="zarad" class="platform-ios platform-cordova platform-webview">
 <!-- app header here -->
 
-
 <!-- other html pages content rendering will be here -->
-
-
-  <ion-header-bar class="bar bar-header bar-dark" ng-controller="parentController">
-   <ion-title>Zarad</ion-title>
-   <button class="button button-icon icon ion-navicon"></button>
-   <button style="color:white" class="button button-icon icon-right ion-log-out" ng-show="show()" ng-click="logout()">logout</button>
-  </ion-header-bar>
   <!-- viewing tabs of the web app -->
   <!-- other html pages content rendering will be here -->
   <ion-nav-view>
@@ -34,6 +27,7 @@
  <script src="./lib/angular/angular.js"></script>
  <!-- installed route using this bower install angular-ui-router --> 
  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+ <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
  <!-- <script src="lib/angular-slider/slider.js"></script> -->
  <script src="lib/jquery/dist/jquery.min.js"></script>
  

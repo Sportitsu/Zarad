@@ -7,13 +7,27 @@
                 <h4>{{data.club}}</h4>
             </div>
         </div>
-          <div>
-           <div ng-if="data.beltColor"> Belt : <h4>{{data.beltColor}}</h4></div>
-           <div ng-if="data.email"> Email : <h4>{{data.email}}</h4></div>
-           <div ng-if="data.country">Country : <h4>{{data.country}}</h4></div>
-           <div ng-if="data.club"> Club Name : <h4>{{data.club}}</h4></div>
-           <div ng-if="data.age"> Age :  <h4>{{data.age}}</h4></div>
-           <div ng-if="data.phone"> Phone : <h4>{{data.phone}}</h4></div>
-          </div> 
+        <div class="animate-fade-slide-in-right">
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/jon-snow.jpg">
+                <h2>Jon Snow</h2>
+                <p>Da illest illegitimate</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/sansa.jpg">
+                <h2>Sansa Stark</h2>
+                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
+                <img src="img/tyrion.jpg">
+                <h2>Tyrion Lannister</h2>
+                <p>B.A.M.F. imp</p>
+                <i class="icon ion-chatbubble muted"></i>
+            </a>
+              <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
+        </div>
         </ion-content>
 </ion-view>

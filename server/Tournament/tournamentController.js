@@ -47,10 +47,9 @@ module.exports = {
 	},
 	// function to delete a tournament
 	tournamentRemove : function (req,res) {
-		
 		Tournament.findOne({ name : req.body.name }).remove()
 		.exec(function(error, data){
-			if(data){
+			if(data.result.n){
 				res.status(201).send('Tournament Deleted');
 			}else{
 				helpers.errorHandler('Not Available', req, res);			
