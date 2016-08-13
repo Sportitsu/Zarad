@@ -23,7 +23,7 @@ angular.module('zarad.tournament',['ionic'])
 	//To get one  Tournament data
 
 	$scope.SearchAboutTournament=function(){
-		
+		console.log($scope.tournament.search)
 		Tournament.SearchAboutTournament($scope.tournament.search)
 		.then(function(tournament){
 			if(tournament !=="Not Found"){
