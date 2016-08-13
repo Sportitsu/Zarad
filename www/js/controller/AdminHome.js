@@ -13,14 +13,13 @@ angular.module('zarad.admin',[])
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
-      console.log(resp);
       $location.path('/AdminAction')
     })
   };
 
   //add club function
   $scope.Addclub =function(){
-  	Admin.Addclub($scope.club)
+  	Club.Addclub($scope.club)
   	.then(function(resp){
       $location.path('/clubprofile/'+resp.data.username);
     });
@@ -59,12 +58,6 @@ angular.module('zarad.admin',[])
        },
      ]
    });
-   remove.then(function(res) {
-     console.log('Tapped!', res);
-   });
-   $timeout(function() {
-      remove.close(); //close the popup after 1 minute
-   }, 60000);
   };
   //Register a new Admin
   $scope.registerAdmin = function () {
@@ -89,11 +82,30 @@ angular.module('zarad.admin',[])
        },
      ]
    });
-   register.then(function(res) {
-     console.log('Tapped!', res);
+  };
+  // Delete existing club 
+  $scope.removeClub = function () {
+
+    var remove = $ionicPopup.show({
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Username" ng-model="club.username"></label>',
+    title: '<p>Enter Club UserName to delete</p>',
+     subTitle: 'Please Enter Club Username',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Remove</b>',
+         type: 'button button-assertive icon icon-left ion-trash-a',
+         onTap: function(e) {
+           Club.removeClub({username : username}).then(function (resp) {
+             $location.path('/AdminAction');
+           });
+          });
+         }
+       },
+     ]
    });
-   $timeout(function() {
-      register.close(); //close the popup after 1 minute
-   }, 60000);
-  }
+  };
 });
