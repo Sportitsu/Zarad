@@ -17,6 +17,7 @@ angular.module('zarad.admin',[])
     })
   };
 
+
   //get a list of all admins
   $scope.getAdmins =function () {
     Admin.getAdmins()
