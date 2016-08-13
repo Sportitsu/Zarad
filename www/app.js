@@ -7,7 +7,6 @@ var app = angular.module('zarad', [
 	'zarad.club',
 	'zarad.tournament',
 	'zarad.services',
-    'ngRoute',
 	'zarad.index',
 	'ui.router'
 	]);
@@ -79,8 +78,18 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
             controller : 'AdminController'
+<<<<<<< HEAD
+        })
+        .state('clubprofile',{
+            url:'/clubProfile',
+            templateUrl: 'js/templates/club/clubProfile.html',
+            controller: 'clubController'
+        })
+        
+=======
 
         }) 
+>>>>>>> 209c4b1ca196ac4f6859e9653955a2c1f1bbcec4
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
@@ -109,8 +118,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     var flag = Auth.isAuth();
     
     if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
-        $state.go('/');
+      //  $state.go('/');
     };
+<<<<<<< HEAD
+  })  
+
+=======
 
     // if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
     //     $state.go('/');
@@ -118,6 +131,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     //     $state.go('/AdminMain');
     // }
   })
+>>>>>>> 209c4b1ca196ac4f6859e9653955a2c1f1bbcec4
 })
 .factory('AttachTokens',function ($window){
     var attach = {
