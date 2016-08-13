@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.admin',[])
 
-.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout){
+.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club){
   $scope.admin={};
 	$scope.club = {};
   $scope.tournament = {};
@@ -99,10 +99,9 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-           Club.removeClub({username : username}).then(function (resp) {
+           Club.removeClub({username : $scope.club.username}).then(function (resp) {
              $location.path('/AdminAction');
            });
-          });
          }
        },
      ]
