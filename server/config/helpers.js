@@ -3,20 +3,20 @@ var jwt = require('jwt-simple');
 
 module.exports = {
 	getClubName : function(clubName){
-		var name = 'cl';
+		var name = 'Cl';
 		for(var i = 0; i < 4 ; i++){
 			if(clubName[i]){
-				name+= clubName[i];	
+				name+= clubName[i].toLowerCase();	
 			}
 		}
 		name+= Math.floor(Math.random()*999);
 		return name;
 	},
 	getPlayerName : function(playerName){
-		var name = 'pl';
+		var name = 'Pl';
 		for(var i = 0; i < 4 ; i++){
 			if(playerName[i]){
-				name+= playerName[i];
+				name+= playerName[i].toLowerCase();
 			}
 		}
 		name+= Math.floor(Math.random()*999);
