@@ -18,12 +18,12 @@ angular.module('zarad.admin',[])
   };
 
   //add club function
-  $scope.Addclub =function(){
-  	Club.Addclub($scope.club)
-  	.then(function(resp){
-      $location.path('/clubprofile/'+resp.data.username);
-    });
-  };
+  // $scope.Addclub =function(){
+  // 	Club.Addclub($scope.club)
+  // 	.then(function(resp){
+  //     $location.path('/clubprofile/'+resp.data.username);
+  //   });
+  // };
 
   //get a list of all admins
   $scope.getAdmins =function () {
@@ -107,4 +107,28 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+  // Create new Club
+  $scope.Addclub = function () {
+
+    var Create = $ionicPopup.show({
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Club Password" ng-model="club.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Name" ng-model="club.clubName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Country" ng-model="club.country"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="email" placeholder="Email" ng-model="club.email"></label>',
+    title: '<p>Creating New Club</p>',
+     subTitle: 'Please fill the following fields',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Create</b>',
+         type: 'button button-balanced icon icon-left ion-plus-circled',
+         onTap: function(e) {
+          Club.Addclub($scope.club).then(function (resp) {
+            $location.path('/clubprofile/'+resp.username);
+          });
+         }
+       },
+     ]
+   });
+  }
 });
