@@ -8,26 +8,22 @@
             </div>
         </div>
         <div class="animate-fade-slide-in-right">
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="img/jon-snow.jpg">
-                <h2>Jon Snow</h2>
-                <p>Da illest illegitimate</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="img/sansa.jpg">
-                <h2>Sansa Stark</h2>
-                <p>&amp; Joffrey <strike>sitting</strike> sat in a tree</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-            <a ui-sref="app.friends" class="item item-avatar item-icon-right">
-                <img src="img/tyrion.jpg">
-                <h2>Tyrion Lannister</h2>
-                <p>B.A.M.F. imp</p>
-                <i class="icon ion-chatbubble muted"></i>
-            </a>
-              <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
+            <div class="item item-left">
+                <h2>Attendance</h2>
+                <p>{{data.attendance}}</p>
+                <ion-icon ios="logo-apple" md="logo-android"></ion-icon>
+                <h2>Member Since</h2>
+                <p>{{data.Date.substr(0,10)}}</p>
+                <h2>Belt Color</h2>
+                <p>{{data.beltColor}}</p>
+                <h2>Medals</h2>
+                <ul ng-repeat ="medal in achievements track by $index">
+                  <i class="icon logo-apple custom-icon"></i>
+                    <ion-row>
+                        <span>{{medal.place}}</span>{{medal.name}}
+                    </ion-row>
+            </div>
+            <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
         </div>
         </ion-content>
 </ion-view>
