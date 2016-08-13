@@ -21,14 +21,42 @@
 
 ## Usage
 
-> app is now being running online through :
+> app is now running online through :
 [here](zara.herokuapp.com)
 
+>to run the app locally:
+```sh
+ionic serve 
+```
+>to run the app on phone platforms
+```sh
+ionic serve --lab
+```
+
+## Running Test
+-run front end test
+```sh
+npm run karma
+```
+
+-run back end test with coverage
+```sh
+npm test
+```
+
+-run front end cover test
+```sh
+npm run cover
+```
+## styling guide
+```sh
+gulp
+```
 ## Requirements
 
 - Node 6.3.x
 - mongoDB 4.1.0
-
+- ionic 1.3.1
 
 ## Development
 
@@ -37,6 +65,7 @@
 From within the root directory:
 
 ```sh
+npm install -g ionic
 npm install
 ```
 
