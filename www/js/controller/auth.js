@@ -43,20 +43,21 @@ angular.module('zarad.auth',[])
   	Auth.signin($scope.user)
   	.then(function(resp){
      //save the token and username in local stoarage to distinguish signed in users
-     if(resp.user.indexOf('Cl' > -1)){
-      window.localStorage['user'] = angular.toJson(resp.user);
-      $location.path('/clubProfile')
-     }else{
+     if(resp.user.indexOf('Cl') > -1){
+       console.log('Signed In');
+     } else {
        User.getUser(resp.user)
        .then(function(response){
     		$window.localStorage.setItem('com.zarad', resp.token);
     		window.localStorage['user'] = angular.toJson(response.data);
-    		$location.path('/userProfile');
+    		$location.path('/userprofile');
        })
-    	.catch(function(error){
-    		console.error(error);
-    	});
-    }
-  })
-}
-});
+       .catch(function(error){
+        console.log(error);
+       })
+     }
+  	}).catch(function(error){
+  		console.error(error);
+  	});
+  };
+})

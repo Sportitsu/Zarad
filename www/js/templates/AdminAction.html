@@ -2,21 +2,20 @@
 <center><h1>Admin Control Panel</h1></center>
 
 <div align="middle">
-<a href="/#AddClub" class="button button-outline  button-full button-stable">
+<!-- <a href="/#AddClub" class="button button-outline  button-full button-stable">
 	Add Club</a>
-	
-<a href="/#DeleteClub" class="button button-outline  button-full button-stable">
-	Delete Club</a>
-	
+	<BR> -->
+<p><button ng-click="Addclub()" class="button icon icon-left ion-plus-circled">Create Club</button></p>	
+<p><button ng-click="removeClub()" class="button button-assertive icon icon-left ion-trash-a">Remove Club</button></p>
+
 <a href="/#AddTournment" class="button button-outline  button-full button-stable">
 	Add Tournment</a>
-
+	<BR>
 <a href="/#Edittournament" class="button button-outline  button-full button-stable">
 	Edit Tournment / Remove Tournament</a>
+	<BR>
 
-<a href="/#AdminSignup" class="button button-outline  button-full button-stable">
-	Register New Admin</a>
+<p><button ng-click="registerAdmin()" class="button icon icon-left ion-person-add"> Register New Admin</button></p>
 
-<a href="/#RemoveAdmin" class="button button-outline  button-full button-stable">
-	Remove Admin</a>
+<button ng-click="deleteAdmin()" class="button button-assertive icon icon-left ion-trash-a"> Remove Admin</button>
 </div>

@@ -38,20 +38,10 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl:'js/templates/AdminSignin.html',
         	controller:'AdminController'
         })
-        .state('adminsignup',{
-        	url:'/AdminSignup',
-        	templateUrl:'/js/templates/AdminSignup.html',
-        	controller:'AdminController'
-        })
         .state('adminaction',{
         	url:'/AdminAction',
         	templateUrl: 'js/templates/AdminAction.html',
         	controller: 'AdminController'
-        })
-        .state('addclub',{
-        	url:'/AddClub',
-        	templateUrl:'js/templates/AddClub.html',
-        	controller:'AdminController'
         })
         .state('addtournment',{
         	url:'/AddTournment',
@@ -63,8 +53,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-            
-        }) 
+        })
         .state('Edittournament',{
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
@@ -83,11 +72,13 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
+
         })
         .state('AdminRemove', {
             url : '/RemoveAdmin',
             templateUrl : 'js/templates/removeAdmin.html',
             controller : 'AdminController'
+<<<<<<< HEAD
         })
         .state('clubprofile',{
             url:'/clubProfile',
@@ -95,6 +86,10 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller: 'clubController'
         })
         
+=======
+
+        }) 
+>>>>>>> 209c4b1ca196ac4f6859e9653955a2c1f1bbcec4
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
@@ -125,8 +120,18 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
       //  $state.go('/');
     };
+<<<<<<< HEAD
   })  
 
+=======
+
+    // if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
+    //     $state.go('/');
+    // } else {
+    //     $state.go('/AdminMain');
+    // }
+  })
+>>>>>>> 209c4b1ca196ac4f6859e9653955a2c1f1bbcec4
 })
 .factory('AttachTokens',function ($window){
     var attach = {

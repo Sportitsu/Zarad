@@ -2,6 +2,7 @@
 describe('AdminController',function(){
   var  $scope, $rootScope, $window,$location,Admin,createController,$httpBackend,$state;
   beforeEach(module('zarad'))
+
   beforeEach(inject(function($injector){
        
     $rootScope=$injector.get('$rootScope');
