@@ -54,7 +54,7 @@ angular.module('zarad.services',[])
       });
   }
 
-  var signup=function(admin){
+  var signup = function(admin){
     return $http({
       method:'POST',
       url:'http://zarad.herokuapp.com/api/admin/create',
@@ -64,17 +64,7 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
-  //send club information to server
-  var Addclub=function(club){
-    return $http({
-      method:'POST',
-      data: club,
-      url:'http://zarad.herokuapp.com/api/club/register'
-    })
-    .then(function(resp){
-      return resp.data;
-    })
-  };
+
   //get all registered Admins
   var getAdmins = function () {
     return $http({
@@ -99,7 +89,6 @@ angular.module('zarad.services',[])
   return {
     signin: signin,
     signup: signup,
-    Addclub: Addclub,
     getAdmins : getAdmins,
     deleteAdmin : deleteAdmin
   };
@@ -118,11 +107,24 @@ angular.module('zarad.services',[])
 
   var getClub=function(){
     // TODO
-  }
+  };
+
+    //send club information to server
+  var Addclub=function(club){
+    return $http({
+      method:'POST',
+      data: club,
+      url:'http://zarad.herokuapp.com/api/club/register'
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  };
   
   return{
     AddUser : AddUser,
-    getClub:getClub
+    getClub:getClub,
+    Addclub : Addclub
   }
 })
 .factory('User', function($http){
