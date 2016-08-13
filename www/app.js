@@ -121,15 +121,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
         $state.go('/');
     };
-
-
-    // if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
-    //     $state.go('/');
-    // } else {
-    //     $state.go('/AdminMain');
-    // }
-  })
-  
+  })  
 
 })
 .factory('AttachTokens',function ($window){
