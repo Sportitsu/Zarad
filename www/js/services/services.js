@@ -41,7 +41,6 @@ angular.module('zarad.services',[])
 })
 .factory('Admin', function ($http) {
 
-
   var signin = function(admin){
     return $http({
       url: 'http://zarad.herokuapp.com/api/admin/signin',
@@ -120,11 +119,23 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
+
+  var removeClub = function (club) {
+    return $http({
+      method : 'POST',
+      data : club,
+      url : 'http://zarad.herokuapp.com/api/club/delete'
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  };
   
   return{
     AddUser : AddUser,
     getClub:getClub,
-    Addclub : Addclub
+    Addclub : Addclub,
+    removeClub : removeClub
   }
 })
 .factory('User', function($http){
