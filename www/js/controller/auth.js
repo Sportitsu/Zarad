@@ -45,6 +45,7 @@ angular.module('zarad.auth',[])
      //save the token and username in local stoarage to distinguish signed in users
      if(resp.user.indexOf('Cl') > -1){
        console.log('Signed In');
+       $location.path('/clubProfile');
      } else {
        User.getUser(resp.user)
        .then(function(response){

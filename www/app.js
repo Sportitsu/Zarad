@@ -53,7 +53,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-        })
+            
+        }) 
         .state('Edittournament',{
             url:'/Edittournament',
             templateUrl:'js/templates/Edittournament.html',
@@ -77,9 +78,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/clubProfile',
             templateUrl: 'js/templates/club/clubProfile.html',
             controller: 'clubController'
-        })
-
-    $urlRouterProvider.otherwise('/');
+        })        
+        $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
 	    if (data === undefined) { return data; } 
@@ -110,11 +110,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
       //  $state.go('/');
     };
   })  
-    // if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()){
-    //     $state.go('/');
-    // } else {
-    //     $state.go('/AdminMain');
-    // }
 })
 .factory('AttachTokens',function ($window){
     var attach = {
