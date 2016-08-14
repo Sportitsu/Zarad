@@ -10,11 +10,13 @@ angular.module('zarad.admin',[])
   $scope.adminSelect={};
   $scope.clubs = {};
   $scope.clubSelect={};
+  $scope.adminUsername = $window.localStorage.getItem('admin');
 
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
+      $window.localStorage.setItem('admin',resp.user);
       $location.path('/AdminAction')
     })
   };
