@@ -34,6 +34,7 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.EditTournament=function(){
 		Tournament.EditTournament($scope.tournament).
 		then(function(tournament){
+			$scope.Empty();
 			console.log(tournament)
 		})
 	}
@@ -41,8 +42,19 @@ angular.module('zarad.tournament',['ionic'])
 		console.log($scope.tournament.search)
 		Tournament.DeleteTournament({name:$scope.tournament.search})
 		.then(function(resp){
+			$scope.Empty();
+ 			$scope.tournament.search=" "
 			console.log(resp)
 		})
 	}
+	//To make the input filed empty
+ 	$scope.Empty=function(){
+ 		$scope.tournament.name=" ";
+ 	 	$scope.tournament.place=" ";
+ 		$scope.tournament.details=" ";
+ 		$scope.tournament.organizer=" ";
+ 		$scope.tournament.Date=" ";
+ 		$scope.tournament.poster=" ";
+ 	}
 
 })
