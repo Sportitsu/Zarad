@@ -1,11 +1,11 @@
-angular.module('zarad.index',['ionic'])
+angular.module('zarad.index',[])
 .controller('parentController',function($scope, $ionicModal, $ionicPopup, $state, $timeout, $ionicActionSheet, $window, Auth, User){
 	//this controller was made for index html page to show and hide logout button
 	//depending on user saved token in the localstoarge.
 	//signout function
 	$scope.user = {};
 	$scope.data = JSON.parse(window.localStorage.user)
-// Gets the Date of Today to Use in Membership Action PopUp	
+	// Gets the Date of Today to Use in Membership Action PopUp	
 	var objToday = new Date(),
 	  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
 	  dayOfWeek = weekday[objToday.getDay()],
@@ -19,9 +19,6 @@ angular.module('zarad.index',['ionic'])
 	  curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
 	  curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 	var today = dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
-
-
-	console.log($scope.data.resub);
 
 	if($scope.data.beltColor.toLowerCase() !== 'white'){
 		$scope.initColor = 'white';
@@ -57,7 +54,17 @@ angular.module('zarad.index',['ionic'])
 	};
 
 	$scope.showDate = function(){
-		console.log('TO DO THIS FUNCTION');
+			var willFinish = new Date($scope.data.subscription+((30*24*60*60*1000)*$scope.data.membership));
+			willFinish+='';
+			willFinish = willFinish.substr(0,16);
+		var myPopup =  $ionicPopup.alert({
+			title : '<b style="color:red">' +today + '</b>',
+			template : 'Your membership ends in <b style="color:red">' + willFinish + '</b>'
+		});
+
+		myPopup.then(function(res){
+			console.log('Done');
+		})
 	};
 	
 	$scope.logout=function(){

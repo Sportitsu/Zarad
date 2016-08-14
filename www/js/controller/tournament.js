@@ -1,8 +1,7 @@
 'use strict';
-angular.module('zarad.tournament',['ionic'])
+angular.module('zarad.tournament',[])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
-	//$scope.tournament={};
 	$scope.AllTournament={}
 	$scope.AddTournament=function(){
 		
@@ -23,7 +22,6 @@ angular.module('zarad.tournament',['ionic'])
 			$location.path('/AllTournament');
 		})
 	}
-
 
 	$scope.getAllTournament=function(){
 		Tournament.getAllTournament()
@@ -55,7 +53,6 @@ angular.module('zarad.tournament',['ionic'])
 		})
 	}
 	$scope.DeleteTournament=function(){
-		console.log($scope.tournament.search)
 		Tournament.DeleteTournament({name:$scope.tournament.search})
 		.then(function(resp){
 			$scope.Empty();
