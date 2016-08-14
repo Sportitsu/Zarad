@@ -1,16 +1,8 @@
 'use strict';
-angular.module('zarad.tournament',['ionic'])
+angular.module('zarad.tournament',[])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
-	//$scope.tournament={};
 	$scope.AllTournament={}
-	$scope.AddTournament=function(){
-		Tournament.AddTournament($scope.tournament)
-		.then(function(resp){
-			$scope.getAllTournament();
-			$location.path('/AllTournament');
-		})
-	}
 	$scope.getAllTournament=function(){
 		Tournament.getAllTournament()
 		.then(function(AllTournament){
@@ -20,29 +12,42 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 
 	$scope.SearchAboutTournament=function(){
-		
+		$scope.massage=" ";
 		Tournament.SearchAboutTournament($scope.tournament.search)
 		.then(function(tournament){
-			$scope.tournament.name=tournament.name;
-			$scope.tournament.place=tournament.place;
-			$scope.tournament.details=tournament.details;
-			$scope.tournament.organizer=tournament.organizer;
-			$scope.tournament.Date=tournament.Date
-			$scope.tournament.poster=tournament.poster
+ 				$scope.tournament.name=tournament.data.name;
+ 				$scope.tournament.place=tournament.data.place;
+ 				$scope.tournament.details=tournament.data.details;
+ 				$scope.tournament.organizer=tournament.data.organizer;
+ 				$scope.tournament.Date=tournament.data.Date;
+ 				$scope.tournament.poster=tournament.data.poster;
+		}).catch(function(error){
+			$scope.massage="Tournament Not Found";
 		})
 	}
 	$scope.EditTournament=function(){
 		Tournament.EditTournament($scope.tournament).
 		then(function(tournament){
+			$scope.Empty();
 			console.log(tournament)
 		})
 	}
 	$scope.DeleteTournament=function(){
-		console.log($scope.tournament.search)
 		Tournament.DeleteTournament({name:$scope.tournament.search})
 		.then(function(resp){
+			$scope.Empty();
+ 			$scope.tournament.search=" "
 			console.log(resp)
 		})
 	}
+	//To make the input filed empty
+ 	$scope.Empty=function(){
+ 		$scope.tournament.name=" ";
+ 	 	$scope.tournament.place=" ";
+ 		$scope.tournament.details=" ";
+ 		$scope.tournament.organizer=" ";
+ 		$scope.tournament.Date=" ";
+ 		$scope.tournament.poster=" ";
+ 	}
 
 })

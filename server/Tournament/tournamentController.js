@@ -41,7 +41,7 @@ module.exports = {
 			if(tournament){
 				res.status(200).send(tournament);
 			}else{
-				helpers.errorHandler(error, req, res);
+				res.status(500).send("Not Found");
 			}
 		});
 	},
