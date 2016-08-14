@@ -44,6 +44,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
            Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
+            $scope.adminSelect = '';
             $scope.getAdmins();
           });
          }
@@ -68,30 +69,7 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
-           $location.path('/AdminSignin');
-          });
-         }
-       },
-     ]
-   });
-  };
-  //Register a new Admin
-  $scope.registerAdmin = function () {
-
-    var register = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Username" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Admin Password" ng-model="admin.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Email" ng-model="admin.email"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin FirstName" ng-model="admin.firstName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin LastName" ng-model="admin.lastName"></label>',
-    title: '<p>Enter Admin UserName to delete</p>',
-     subTitle: 'Please select Admin from the list',
-     scope: $scope,
-     buttons: [
-       { text: 'Cancel',
-       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
-        },
-       {
-         text: '<b>Register</b>',
-         type: 'button button-balanced icon icon-left ion-person-add',
-         onTap: function(e) {
-           Admin.signup($scope.admin).then(function(resp){
+            $scope.admin = '';
            $location.path('/AdminSignin');
           });
          }
@@ -116,7 +94,10 @@ angular.module('zarad.admin',[])
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
            Club.removeClub({username : $scope.club.username}).then(function (resp) {
-             $location.path('/AdminAction');
+            $scope.club.username = '';
+            var alertPopup = $ionicPopup.alert({
+              title : resp
+            });
            });
          }
        },
@@ -139,9 +120,9 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
+            $scope.club = '';
             var alertPopup = $ionicPopup.alert({
              title: 'Your User Name is:'+resp.username
-             // template: '{{resp.username}}'
               });
           });
          }
@@ -166,6 +147,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.AddTournament($scope.tournament)
           .then(function (resp) {
+            $scope.tournament = '';
             $location.path('/AllTournament');
           })
          }
@@ -191,6 +173,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.DeleteTournament({name:$scope.tournament.name})
           .then(function (resp) {
+            $scope.tournament.name = '';
             var alertPopup = $ionicPopup.alert({
               title : resp
             });
