@@ -9,6 +9,7 @@ angular.module('zarad.admin',[])
   $scope.admins={};
   $scope.adminSelect={};
   $scope.clubs = {};
+  $scope.clubSelect={};
 
   //admin sign in
   $scope.signin=function(){
@@ -91,9 +92,10 @@ angular.module('zarad.admin',[])
   $scope.removeClub = function () {
 
     var remove = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Username" ng-model="club.username"></label>',
-    title: '<p>Enter Club UserName to delete</p>',
-     subTitle: 'Please Enter Club Username',
+    // template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Username" ng-model="club.username"></label>',
+    template : '<select ng-model="clubSelect.value"><option ng-repeat="club in clubs.data">{{club.username}}  {{club.clubName}}</option></select>',
+    title: '<p>Please select Club to delete</p>',
+     subTitle: 'Please select Club Username',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
@@ -103,7 +105,7 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-           Club.removeClub({username : $scope.club.username}).then(function (resp) {
+           Club.removeClub({username : $scope.clubSelect.value.split(" ")[0]}).then(function (resp) {
             $scope.club.username = '';
             var alertPopup = $ionicPopup.alert({
               title : resp
