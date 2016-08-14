@@ -2,7 +2,7 @@
       <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
             <div class="content">
-                <div class="avatar" style="background-image: url('img/daenerys.jpg');"></div>
+                <div class="avatar" ng-click="showOptions()" style="background-image: url('{{data.image}}');"></div>
                 <h3><a class="light" style="color:white">{{data.firstName}}</a></h3>
                 <h4>{{data.club}}</h4>
             </div>
