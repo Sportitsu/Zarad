@@ -68,7 +68,13 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'UserProfileController'
             }
           }
-        }) 
+        })
+        
+        // .state('clubprofile',{
+        //     url:'/clubProfile',
+        //     templateUrl: 'js/templates/club/clubProfile.html',
+        //     controller: 'clubController'
+        // })
         
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
@@ -98,7 +104,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     var flag = Auth.isAuth();
     
     if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
-        $state.go('/');
+     //   $state.go('/');
     };
   })  
 
