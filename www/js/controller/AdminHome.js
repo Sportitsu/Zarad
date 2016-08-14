@@ -92,7 +92,6 @@ angular.module('zarad.admin',[])
   $scope.removeClub = function () {
 
     var remove = $ionicPopup.show({
-    // template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Username" ng-model="club.username"></label>',
     template : '<select ng-model="clubSelect.value"><option ng-repeat="club in clubs.data">{{club.username}}  {{club.clubName}}</option></select>',
     title: '<p>Please select Club to delete</p>',
      subTitle: 'Please select Club Username',
@@ -107,6 +106,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
            Club.removeClub({username : $scope.clubSelect.value.split(" ")[0]}).then(function (resp) {
             $scope.club.username = '';
+            $scope.getClubs();
             var alertPopup = $ionicPopup.alert({
               title : resp
             });
