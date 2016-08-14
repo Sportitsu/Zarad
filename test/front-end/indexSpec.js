@@ -1,39 +1,32 @@
-// TOD
-describe('Profile index',function(){
+
+'use strict';
+
+describe('Services',function(){
   var baseUrl = 'http://zarad.herokuapp.com';
-  var  $scope, $rootScope, $window,$location,club,createController,$httpBackend;
-  beforeEach(module('zarad'))
-  beforeEach(inject(function($injector){
-       
-    $rootScope=$injector.get('$rootScope');
-    $window=$injector.get('$window');
-    $location=$injector.get('$location');
-    $httpBackend=$injector.get('$httpBackend')
-    club=$injector.get('club');
-    $scope=$rootScope.$new();
-    
-    var $controller=$injector.get('$controller');
-        
-    createController = function(){
-      return $controller('parentController',{
-        $scope: $scope,
-        $window: $window,
-        $location : $location,
-        club : club
-      });
-    };
+  
+  beforeEach(angular.mock.module('zarad.services'));
 
-       createController();
-  }));
-
-  afterEach(function () {
+  afterEach(inject(function ($httpBackend) {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
-     });
-  
+  }));
 
-  it('should have a AddUser method',function(){
-    expect($scope.AddUser).to.be.a('function');
-  });
+  describe('User Factory', function(){
+    var $httpBackend, User;
+
+    beforeEach(inject(function(_$httpBackend_, _User_) {
+      User = _User_;
+      $httpBackend = _$httpBackend_;
+    }));
+
+    it('User factory should exist', function() {
+      expect(User).toBeDefined();
+    });
+
+    it('should exist', function() {
+      expect(User.getUsersdfdf).toBeDefined();
+    });
+
+  })
 
 });
