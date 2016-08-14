@@ -32,14 +32,6 @@ angular.module('zarad.tournament',[])
 			console.log(tournament)
 		})
 	}
-	$scope.DeleteTournament=function(){
-		Tournament.DeleteTournament({name:$scope.tournament.search})
-		.then(function(resp){
-			$scope.Empty();
- 			$scope.tournament.search=" "
-			console.log(resp)
-		})
-	}
 	//To make the input filed empty
  	$scope.Empty=function(){
  		$scope.tournament.name=" ";
