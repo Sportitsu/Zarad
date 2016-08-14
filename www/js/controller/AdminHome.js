@@ -140,8 +140,8 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
             var alertPopup = $ionicPopup.alert({
-             title: 'Your User Name is:'+resp.username,
-             template: '{{resp.username}}'
+             title: 'Your User Name is:'+resp.username
+             // template: '{{resp.username}}'
               });
           });
          }
@@ -168,6 +168,33 @@ angular.module('zarad.admin',[])
           .then(function (resp) {
             $location.path('/AllTournament');
           })
+         }
+       },
+     ]
+   });
+  };
+  // Remove tournament 
+  $scope.removeTournament = function () {
+
+    var remove = $ionicPopup.show({
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label>',
+    title: '<p>Enter Tournament Name to delete</p>',
+     subTitle: 'Please Enter Tournament Name',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Remove</b>',
+         type: 'button button-assertive icon icon-left ion-trash-a',
+         onTap: function(e) {
+          Tournament.DeleteTournament({name:$scope.tournament.name})
+          .then(function (resp) {
+            var alertPopup = $ionicPopup.alert({
+              title : resp
+            });
+          });
          }
        },
      ]
