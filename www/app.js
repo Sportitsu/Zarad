@@ -3,6 +3,7 @@ var app = angular.module('zarad', [
   'ionic-material',
   'zarad.user',
 	'zarad.auth',
+  // 'ionic-pullup',
 	'zarad.admin',
 	'zarad.club',
 	'zarad.tournament',
