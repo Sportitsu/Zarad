@@ -18,28 +18,32 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       'www/lib/angular/angular.js',
-      'www/lib/angular-mocks/angular-mocks.js',
-      'www/lib/angular-route/angular-route.js',
-      'www/ionic/js/ionic.bundle.js',
-      'www/lib/angular-ui-router/release/angular-ui-router.js',
+      'www/ionic/js/angular/angular.js',
       'www/lib/ionic/js/ionic.js',
       'www/lib/ionic/js/ionic-angular.js',
+      'www/lib/ionic/js/ionic.bundle.js',
+      'www/lib/angular-mocks/angular-mocks.js',
+      'www/ionic/js/ionic.bundle.js',
+      'www/lib/angular-ui-router/release/angular-ui-router.js',
+      'www/lib/ionic-material/dist/ionic.material.min.js',
+      'www/lib/ionic/js/ionic.js',
+      'www/lib/ionic/js/ionic.bundle.js',
       'www/app.js',
-      "www/js/**/*.js",
+      'www/js/services/services.js',
       'www/js/controller/index.js',
       'www/js/controller/auth.js',
-      'www/js/services/services.js',
       'www/js/controller/profile.js',
+      'www/js/controller/club.js',
+      'www/js/controller/user/userProfile.js',
+      'www/js/controller/AdminHome.js',
+      'www/js/templates/**.html',
       'www/js/controller/Tournament.js',
       'www/js/controller/AdminHome.js',
-      'test/front-end/Adminspec.js'
-      //'test/front-end/Adminspec.js',
+      'test/front-end/Adminspec.js',
       //'test/front-end/routingSpec.js',
       //'test/front-end/ServicesSpec.js',
       //'test/front-end/profileSpec.js',
-      //'test/front-end/clubSpec.js'
-      
-
+      'test/front-end/clubSpec.js'
     ],
 
 

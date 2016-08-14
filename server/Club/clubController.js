@@ -93,7 +93,7 @@ module.exports ={
          			        res.setHeader('x-access-token',token);
          			         //modified the response to send the clubname
          			        //to save it in local storage to be accessed late
-                            res.json({token: token, user: club.clubName});
+                            res.json({token: token, user: club.username});
       			        } else {
        				       helpers.errorHandler('Wrong Password', req, res);
                         }
