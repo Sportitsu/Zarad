@@ -1,18 +1,14 @@
-<div>
-<center><h1>Admin Control Panel</h1></center>
-<div align="middle">
-<p><button ng-click="Addclub()" class="button icon icon-left ion-plus-circled">Create Club</button></p>	
-<p><button ng-click="removeClub()" class="button button-assertive icon icon-left ion-trash-a">Remove Club</button></p>
-
-<!-- <a href="/#AddTournment" class="button button-outline  button-full button-stable">
-	Add Tournment</a>
-	<BR> -->
-<p><button ng-click="addTournament()" class="button button icon icon-left ion-plus-circled">Add Tournament</button></p>
-<a href="/#Edittournament" class="button button-outline  button-full button-stable">
-	Edit Tournment / Remove Tournament</a>
-	<BR>
-
-<p><button ng-click="registerAdmin()" class="button icon icon-left ion-person-add"> Register New Admin</button></p>
-
-<button ng-click="deleteAdmin()" class="button button-assertive icon icon-left ion-trash-a"> Remove Admin</button>
-</div>
+<ion-scroll scrollX="true">
+	<div>
+		<center><h1>Admin Control Panel, Welcome {{adminUsername}}</h1></center>
+			<div align="middle">
+			<p><button ng-click="Addclub()" class="button icon icon-left ion-plus-circled">Create Club</button></p>	
+			<p><button ng-click="removeClub()" class="button button-assertive icon icon-left ion-trash-a">Remove Club</button></p>
+			<p><button ng-click="addTournament()" class="button button icon icon-left ion-plus-circled">Add Tournament</button></p>
+			<p><button ng-click="removeTournament()" class="button button-assertive icon icon-left ion-trash-a">Remove Tournament</button></p>
+			<p><button ng-click="editTournament()" class="button icon icon-left ion-edit">Edit Tournament</button></p>
+			<p><button ng-click="registerAdmin()" class="button icon icon-left ion-person-add"> Register New Admin</button></p>
+			<p><button ng-click="deleteAdmin()" class="button button-assertive icon icon-left ion-trash-a"> Remove Admin</button></p>
+		</div>
+	</div>
+</ion-scroll>
