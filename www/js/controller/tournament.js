@@ -5,12 +5,26 @@ angular.module('zarad.tournament',['ionic'])
 	//$scope.tournament={};
 	$scope.AllTournament={}
 	$scope.AddTournament=function(){
+		
+		var fileBt=$('<input>').attr('type','file');
+		fileBt.on('change',()=>{
+		var file=fileBt[0].files[0];
+		var reader=new FileReader();
+		reader.addEventListener('load',()=>{
+			var imgData=reader.result.slice(23);
+			console.log("sdfds",imgData)
+		})
+		})
+		fileBt.click();
+		//$scope.uploadToIMGUR('e5483dd45cb276b',)
 		Tournament.AddTournament($scope.tournament)
 		.then(function(resp){
 			$scope.getAllTournament();
 			$location.path('/AllTournament');
 		})
 	}
+
+
 	$scope.getAllTournament=function(){
 		Tournament.getAllTournament()
 		.then(function(AllTournament){
@@ -59,4 +73,43 @@ angular.module('zarad.tournament',['ionic'])
  		$scope.tournament.poster=" ";
  	}
 
+ 	$scope.uploadToIMGUR = function(client_id, imgData, callback) {
+
+	$.ajax({
+		url: 'https://api.imgur.com/3/image',
+		headers: {
+			'Authorization': 'Client-ID ' + client_id,
+			'Accept': 'application/json'
+		},
+		type: 'POST',
+		data: {
+			'image': imgData,
+			'type': 'base64'
+		},
+		success: function success(res) {
+
+			if (callback) {
+				callback(res.data);
+			}
+		}
+	});
+};
+
 })
+
+var fileBt = $('<input>').attr('type','file');
+		fileBt.on('change', () => {
+			var file = fileBt[0].files[0];
+			var reader = new FileReader();
+			reader.addEventListener('load', ()=>{
+				var imgData = reader.result.slice(23);
+				// sending the decoded image to IMGUR to get a link for that image
+				uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
+					$scope.user.image = result.link;
+					$scope.changedFlag = true;
+				});
+			})
+			// using the reader to decode the image to base64
+			reader.readAsDataURL(file);
+		})
+		fileBt.click();
