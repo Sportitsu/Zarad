@@ -1,7 +1,7 @@
 var app = angular.module('zarad', [
 	'ionic',
-    'ionic-material',
-    'zarad.user',
+  'ionic-material',
+  'zarad.user',
 	'zarad.auth',
 	'zarad.admin',
 	'zarad.club',
@@ -72,7 +72,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/clubProfile',
             templateUrl: 'js/templates/club/clubProfile.html',
             controller: 'clubController'
-        })        
+        })     
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        

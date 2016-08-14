@@ -44,13 +44,14 @@ angular.module('zarad.auth',[])
   	.then(function(resp){
      //save the token and username in local stoarage to distinguish signed in users
      if(resp.user.indexOf('Cl') > -1){
-       console.log('Signed In');
-       $location.path('/clubProfile');
+        $window.localStorage.setItem('com.zarad', resp.token);
+        $window.localStorage.setItem('user',resp.user);
+        $location.path('/clubProfile');
      } else {
        User.getUser(resp.user)
        .then(function(response){
     		$window.localStorage.setItem('com.zarad', resp.token);
-    		window.localStorage['user'] = angular.toJson(response.data);
+    		$window.localStorage['user'] = angular.toJson(response.data);
     		$location.path('/userprofile');
        })
        .catch(function(error){

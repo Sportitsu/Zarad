@@ -1,6 +1,6 @@
 'use strict';
 angular.module('zarad.club',[])
-.controller('clubController',function($scope,Club){
+.controller('clubController',function($scope,$window,Club){
 	$scope.clubUser={};
 	$scope.AddUser=function(){
 		var data=$scope.clubUser;
@@ -17,4 +17,5 @@ angular.module('zarad.club',[])
 			console.log(resp);
 		})
 	}
+	$scope.getClub();
 });
