@@ -166,8 +166,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.AddTournament($scope.tournament)
           .then(function (resp) {
-            console.log(resp);
-            $location.path('/AllTournament')
+            $location.path('/AllTournament');
           })
          }
        },
