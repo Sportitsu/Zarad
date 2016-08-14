@@ -204,7 +204,7 @@ angular.module('zarad.services',[])
       url: 'http://zarad.herokuapp.com/api/tournament/x/'+Tournament
     })
     .then(function(resp){
-      return resp.data;
+      return resp;
     });
   };
 
