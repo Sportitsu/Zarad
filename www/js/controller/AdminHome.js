@@ -10,6 +10,8 @@ angular.module('zarad.admin',[])
   $scope.adminSelect={};
   $scope.clubs = {};
   $scope.clubSelect={};
+  $scope.tournaments={};
+  $scope.tournamentSelect={};
   $scope.adminUsername = $window.localStorage.getItem('admin');
 
   //admin sign in
@@ -36,8 +38,17 @@ angular.module('zarad.admin',[])
       $scope.clubs.data = clubs;
     });
   };
+
+  //get all Tournaments
+  $scope.getTournaments = function () {
+    Tournament.getAllTournament()
+    .then(function (tournaments) {
+      $scope.tournaments.data = tournaments;
+    });
+  };
   $scope.getAdmins();
   $scope.getClubs();
+  $scope.getTournaments();
 
   //delete admin function
   $scope.deleteAdmin = function () {
@@ -173,9 +184,9 @@ angular.module('zarad.admin',[])
   $scope.removeTournament = function () {
 
     var remove = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label>',
-    title: '<p>Enter Tournament Name to delete</p>',
-     subTitle: 'Please Enter Tournament Name',
+    template :'<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select>',
+    title: '<p>Please Select Tournament Name to delete</p>',
+     subTitle: 'Please Tournament Name from the list',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
@@ -185,9 +196,9 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-          Tournament.DeleteTournament({name:$scope.tournament.name})
+          Tournament.DeleteTournament({name:$scope.tournamentSelect.value})
           .then(function (resp) {
-            $scope.tournament.name = '';
+            $scope.getTournaments();
             var alertPopup = $ionicPopup.alert({
               title : resp
             });
