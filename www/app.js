@@ -74,11 +74,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           }
 
         })
-        .state('AdminRemove', {
-            url : '/RemoveAdmin',
-            templateUrl : 'js/templates/removeAdmin.html',
-            controller : 'AdminController'
-        })
+        
         .state('clubprofile',{
             url:'/clubProfile',
             templateUrl: 'js/templates/club/clubProfile.html',
