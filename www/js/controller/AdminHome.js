@@ -8,6 +8,7 @@ angular.module('zarad.admin',[])
   $scope.user={};
   $scope.admins={};
   $scope.adminSelect={};
+  $scope.clubs = {};
 
   //admin sign in
   $scope.signin=function(){
@@ -24,7 +25,16 @@ angular.module('zarad.admin',[])
       $scope.admins.data = admins;
     });
   };
+
+  //get a list of all clubs 
+  $scope.getClubs = function () {
+    Club.getClubs()
+    .then(function (clubs) {
+      $scope.clubs.data = clubs;
+    });
+  };
   $scope.getAdmins();
+  $scope.getClubs();
 
   //delete admin function
   $scope.deleteAdmin = function () {
@@ -182,5 +192,10 @@ angular.module('zarad.admin',[])
        },
      ]
    });
+  };
+  // Edit tournament function 
+  $scope.editTournament = function () {
+
+
   };
 });
