@@ -1,5 +1,5 @@
 'use strict';
-angular.module('zarad.profile',[])
+angular.module('zarad.profile',['ionic'])
 .controller('profileController',function($scope,Profile, $routeParams){
 	//$scope,$window,profile
 	//var user= $window.localStorage.getItem("com.Zarad")	

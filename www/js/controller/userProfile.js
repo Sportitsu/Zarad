@@ -1,4 +1,4 @@
-angular.module('zarad.user',[])
+angular.module('zarad.user',['ionic'])
 .controller('UserProfileController',
  function($scope, $ionicPopup, $state, Auth, $location, $window, $ionicPlatform, User, $ionicLoading, $timeout){
  $scope.user = {};
