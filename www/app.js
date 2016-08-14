@@ -44,12 +44,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl: 'js/templates/AdminAction.html',
         	controller: 'AdminController'
         })
-        .state('addtournment',{
-        	url:'/AddTournment',
-        	templateUrl:'js/templates/AddTournment.html',
-        	controller:'TournamentController'
-
-        })
         .state('AllTournament',{
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
