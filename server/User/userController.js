@@ -67,7 +67,7 @@ module.exports= {
 			         			        res.setHeader('x-access-token',token);
 			         			        //modified the response to send the username
 			         			        //to save it in local stoarge to be accessed late
-			                            res.json({token:token,user: user});
+			                            res.json({token:token, user: username});
 			      			        } else {
 			       				       helpers.errorHandler('Wrong Password', req, res);
 			                        }
