@@ -1,16 +1,17 @@
 angular.module('zarad.user',['ionic'])
 .controller('UserProfileController',
- function($scope, $ionicPopup, Auth, $cordovaCamera, $ionicLoading,$location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
+ function($scope, $ionicPopup, Auth, $cordovaCamera, $ionicModal, $ionicLoading,$location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
+
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
  $scope.achievements = $scope.data.achievements;
+ 
   for(var i = 0; i < $scope.achievements.length; i++){
-
     if($scope.achievements[i].place === '1' ){
       $scope.achievements[i].place = 'First Place ';
-    } else  if($scope.achievements[i].place === '2' ){
+    } else if($scope.achievements[i].place === '2' ){
       $scope.achievements[i].place = 'Second Place ';
-    } else  if($scope.achievements[i].place === '3' ){
+    } else if($scope.achievements[i].place === '3' ){
       $scope.achievements[i].place = 'Third Place ';
     }
   }
@@ -36,26 +37,41 @@ angular.module('zarad.user',['ionic'])
     })
   };
 
-    var uploadToIMGUR = function(client_id, imgData, callback) {
-        $.ajax({
-          url: 'https://api.imgur.com/3/image',
-          headers: {
-            'Authorization': 'Client-ID ' + 'e5483dd45cb276b',
-            'Accept': 'application/json'
-          },
-          type: 'POST',
-          data: {
-            'image': imgData,
-            'type': 'base64'
-          },
-          success: function success(res) {
 
-            if (callback) {
-              callback(res.data);
-            }
-          }
-        });
-      };
+
+  $ionicModal.fromTemplateUrl('js/templates/User/profile-fullImage.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+  $scope.biggerImage = function(){
+    $scope.modal.show();
+  }
+  $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  
+  var uploadToIMGUR = function(client_id, imgData, callback) {
+    $.ajax({
+      url: 'https://api.imgur.com/3/image',
+      headers: {
+        'Authorization': 'Client-ID ' + 'e5483dd45cb276b',
+        'Accept': 'application/json'
+      },
+      type: 'POST',
+      data: {
+        'image': imgData,
+        'type': 'base64'
+      },
+      success: function success(res) {
+
+        if (callback) {
+          callback(res.data);
+        }
+      }
+    });
+  };
 
  $scope.takePhoto = function(source){
     var options = {
@@ -87,7 +103,6 @@ angular.module('zarad.user',['ionic'])
                             alert(error);
                           })
                     })
-                    // $scope.image = imageData;
     });
  }
 
