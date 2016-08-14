@@ -169,12 +169,56 @@ angular.module('zarad.services',[])
       return response.data;
     })
     .error(function(data){
+      return data;
+    })
+  };
+
+  var getUsers = function(){
+    return $http({
+      method : 'GET' ,
+      url : 'http://zarad.herokuapp.com/api/users'
+    })
+    .success(function(response){
       return response.data;
+    })
+    .error(function(data){
+      return data;
+    })
+  };
+
+  var resubUser = function(data){
+    return $http({
+      method : 'POST' , 
+      url : 'http://zarad.herokuapp.com/api/user/resub',
+      data : data
+    })
+    .success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return data;
+    })
+  };
+
+  var deleteUser = function(data){
+    return $http({
+      method : 'POST' , 
+      url : 'http://zarad.herokuapp.com/api/user/delete',
+      data : data
+    })
+    .success(function(response){
+      return response.data;
+    })
+    .error(function(data){
+      return data;
     })
   }
  return {
    getUser : getUser,
-   editProfile : editProfile
+   editProfile : editProfile,
+   getUsers : getUsers,
+   resubUser : resubUser,
+   deleteUser : deleteUser
  }
 })
 .factory('Tournament',function($http){
