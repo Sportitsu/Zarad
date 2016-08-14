@@ -67,6 +67,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           views: {
             'home-tab': {
               templateUrl: 'js/templates/User/profile-home.html',
+              controller: 'UserHomeController'
+            }
+          }
+        })
+        .state('userProfile.profile',{
+          url: "/profile",
+          views: {
+            'profile-tab': {
+              templateUrl: 'js/templates/User/profile-home.html',
               controller: 'UserProfileController'
             }
           }

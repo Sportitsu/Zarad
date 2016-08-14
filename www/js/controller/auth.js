@@ -52,7 +52,7 @@ angular.module('zarad.auth',[])
        .then(function(response){
     		$window.localStorage.setItem('com.zarad', resp.token);
     		window.localStorage['user'] = angular.toJson(response.data);
-    		$location.path('/userprofile');
+    		$location.path('/userprofile/profile');
        })
        .catch(function(error){
         console.log(error);
