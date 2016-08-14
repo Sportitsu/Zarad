@@ -2,15 +2,7 @@
 angular.module('zarad.tournament',[])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
-	//$scope.tournament={};
 	$scope.AllTournament={}
-	$scope.AddTournament=function(){
-		Tournament.AddTournament($scope.tournament)
-		.then(function(resp){
-			$scope.getAllTournament();
-			$location.path('/AllTournament');
-		})
-	}
 	$scope.getAllTournament=function(){
 		Tournament.getAllTournament()
 		.then(function(AllTournament){
@@ -38,7 +30,6 @@ angular.module('zarad.tournament',[])
 		})
 	}
 	$scope.DeleteTournament=function(){
-		console.log($scope.tournament.search)
 		Tournament.DeleteTournament({name:$scope.tournament.search})
 		.then(function(resp){
 			console.log(resp)
