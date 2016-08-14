@@ -20,21 +20,17 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 
 	$scope.SearchAboutTournament=function(){
-		
+		$scope.massage=" ";
 		Tournament.SearchAboutTournament($scope.tournament.search)
 		.then(function(tournament){
-			console.log(tournament)
-			if(tournament !=="Not Found"){
- 				$scope.tournament.name=tournament.name;
- 				$scope.tournament.place=tournament.place;
- 				$scope.tournament.details=tournament.details;
- 				$scope.tournament.organizer=tournament.organizer;
- 				$scope.tournament.Date=tournament.Date;
- 				$scope.tournament.poster=tournament.poster;
- 			}
-			else{
- 				$scope.massage="Tournament Not Found";
- 			}
+ 				$scope.tournament.name=tournament.data.name;
+ 				$scope.tournament.place=tournament.data.place;
+ 				$scope.tournament.details=tournament.data.details;
+ 				$scope.tournament.organizer=tournament.data.organizer;
+ 				$scope.tournament.Date=tournament.data.Date;
+ 				$scope.tournament.poster=tournament.data.poster;
+		}).catch(function(error){
+			$scope.massage="Tournament Not Found";
 		})
 	}
 	$scope.EditTournament=function(){

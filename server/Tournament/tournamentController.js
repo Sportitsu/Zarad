@@ -41,7 +41,7 @@ module.exports = {
 			if(tournament){
 				res.status(200).send(tournament);
 			}else{
-				res.status(200).send("Not Found");
+				res.status(500).send("Not Found");
 			}
 		});
 	},
