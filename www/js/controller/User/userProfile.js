@@ -1,6 +1,6 @@
 angular.module('zarad.user',['ionic'])
 .controller('UserProfileController',
- function($scope, $ionicPopup, Auth, $location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
+ function($scope, $ionicPopup, Auth, $cordovaCamera, $ionicLoading,$location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
  $scope.achievements = $scope.data.achievements;
@@ -14,6 +14,84 @@ angular.module('zarad.user',['ionic'])
       $scope.achievements[i].place = 'Third Place ';
     }
   }
+
+  $scope.showOptions = function(){
+    var myPopup = $ionicPopup.show({
+      titleText : 'Please Select',
+      scope : $scope,
+      buttons : [
+         { text: '<h6>Camera</h6>' ,
+           type: 'button button-outline' ,
+           onTap : function(){
+            $scope.takePhoto({type : Camera.PictureSourceType.CAMERA })
+            console.log('Clicked On Camera');
+           } },
+      { text: '<h6>Photos</h6>',
+        type: 'button button-outline',
+        onTap : function(){
+          $scope.takePhoto({type : Camera.PictureSourceType.PHOTOLIBRARY })
+        }},
+        {text: 'exit'}
+      ]
+    })
+  };
+
+    var uploadToIMGUR = function(client_id, imgData, callback) {
+        $.ajax({
+          url: 'https://api.imgur.com/3/image',
+          headers: {
+            'Authorization': 'Client-ID ' + 'e5483dd45cb276b',
+            'Accept': 'application/json'
+          },
+          type: 'POST',
+          data: {
+            'image': imgData,
+            'type': 'base64'
+          },
+          success: function success(res) {
+
+            if (callback) {
+              callback(res.data);
+            }
+          }
+        });
+      };
+
+ $scope.takePhoto = function(source){
+    var options = {
+      quality : 50,
+      destinationType : Camera.DestinationType.DATA_URL,
+      sourceType : source.type ,
+      allowEdit: true ,
+      encodingType: Camera.EncodingType.JPEG,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctOrientation: true
+    }
+
+    $cordovaCamera.getPicture(options) 
+                  .then(function(imageData){
+                    uploadToIMGUR('',imageData, function(response){
+                      alert('this is one ' + response.link );
+                      var object = {
+                        username  : $scope.data.username ,
+                        image : response.link
+                      }
+                      $scope.data.image = response.link;
+                      User.editProfile(object)
+                          .then(function(response){
+                            alert('WhatsApp Guyss');
+                            $scope.data.image = response.image;
+                          })
+                          .catch(function(error){
+                            alert(error);
+                          })
+                    })
+                    // $scope.image = imageData;
+    });
+ }
+
+
 
  if($scope.data.resub){
   setTimeout(function(){
@@ -72,3 +150,5 @@ angular.module('zarad.user',['ionic'])
     // Set Ink
     ionicMaterialInk.displayEffect();
 })
+
+
