@@ -43,6 +43,7 @@ module.exports= {
 					newObject.membership = users[i].membership;
 					newObject.country = users[i].country;
 					newObject.age = users[i].age;
+					newObject.image=users[i].image;
 					newObject.middleName = users[i].middleName || 'N/A';
 					newArr.push(newObject);
 				}

@@ -13,16 +13,19 @@ angular.module('zarad.admin',[])
   $scope.tournaments={};
   $scope.tournamentSelect={};
   $scope.adminUsername = $window.localStorage.getItem('admin');
-
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
       $window.localStorage.setItem('admin',resp.user);
+      $window.localStorage.setItem('com.zarad',resp.token);
       $location.path('/AdminAction')
     })
   };
 
+  $scope.signout=function(){
+    Admin.signout();
+  }
   //get a list of all admins
   $scope.getAdmins =function () {
     Admin.getAdmins()

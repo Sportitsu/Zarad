@@ -74,6 +74,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/clubProfile',
             templateUrl: 'js/templates/club/clubProfile.html',
             controller: 'clubController'
+        })
+        .state('clubprofile.users', {
+          url: "/allUsers",
+          views: {
+            'users-tab': {
+              templateUrl: 'js/templates/club/allUsers.html',
+              controller: 'clubController'
+            }
+          }
         })     
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
@@ -100,17 +109,18 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     }
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
-    var flag = Auth.isAuth();
-    
-    if((next !== 'http://localhost:8100/#/AdminMain' || next !== 'http://zarad.herokuapp.com/#/AdminMain') && !Auth.isAuth()) {
-      //  $state.go('/');
-    };
+    if(next === 'http://localhost:8100/#/AdminAction' || next === 'http://zarad.herokuapp.com/#/AdminAction' ){
+      if(Auth.checkUser() !== 'admin'){
+        $location.path('/')
+      }
+    }
   })  
 })
 .factory('AttachTokens',function ($window){
     var attach = {
         request: function(object){
             var jwt = $window.localStorage.getItem('com.zarad');
+            
             if(jwt){
                 object.headers['x-access-token']= jwt;
             }
