@@ -1,6 +1,7 @@
 angular.module('zarad.user',['ionic'])
 .controller('UserProfileController',
  function($scope, $ionicPopup, Auth, $cordovaCamera, $ionicModal, $ionicLoading,$location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
+  console.log('User Profile js controller');
 
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
@@ -88,7 +89,6 @@ angular.module('zarad.user',['ionic'])
     $cordovaCamera.getPicture(options) 
                   .then(function(imageData){
                     uploadToIMGUR('',imageData, function(response){
-                      alert('this is one ' + response.link );
                       var object = {
                         username  : $scope.data.username ,
                         image : response.link
