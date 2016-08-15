@@ -16,6 +16,7 @@ module.exports ={
 					clubName : club.clubName,
 					email : club.email
 				});
+				console.log('club controller',returnClub)
 				res.status(200).send(returnClub);
 			}else{
 				helpers.errorHandler(error, req, res);
