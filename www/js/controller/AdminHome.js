@@ -59,6 +59,35 @@ angular.module('zarad.admin',[])
 
   };
 
+  //this is Admin log in pop up 
+  $scope.showPopup = function() {
+ //custom popup to show login box
+ var myPopup = $ionicPopup.show({
+  template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" id="n" placeholder="Enter First Name" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter your password" ng-model="admin.password"></label>',
+  title: '<p>Enter your login information</p>',
+   subTitle: 'Please fill all the fields',
+   scope: $scope,
+   buttons: [
+     { text: 'Cancel',
+     type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+      },
+     {
+       text: '<b>Login</b>',
+       type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
+       onTap: function(e) {
+
+         if (!$scope.admin.username || !$scope.admin.password) {
+           //don't allow the admin to close unless they fill the fields
+           e.preventDefault();
+         } else {
+           $scope.signin();
+         }
+       }
+     },
+   ]
+ });
+};
+
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
