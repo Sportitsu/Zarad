@@ -13,6 +13,7 @@ angular.module('zarad.admin',[])
   $scope.tournaments={};
   $scope.tournamentSelect={};
   $scope.adminUsername = $window.localStorage.getItem('admin');
+
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
@@ -49,6 +50,24 @@ angular.module('zarad.admin',[])
       $scope.tournaments.data = tournaments;
     });
   };
+
+  //search for a specific tournament
+  $scope.SearchAboutTournament=function(){
+    $scope.massage=" ";
+    Tournament.SearchAboutTournament($scope.tournamentSelect.value)
+    .then(function(tournament){
+      console.log(tournament);
+        $scope.tournament.name=tournament.data.name;
+        $scope.tournament.place=tournament.data.place;
+        $scope.tournament.details=tournament.data.details;
+        $scope.tournament.organizer=tournament.data.organizer;
+        $scope.tournament.Date=tournament.data.Date;
+        $scope.tournament.poster=tournament.data.poster;
+    }).catch(function(error){
+      $scope.massage="Tournament Not Found";
+    });
+  };
+
   $scope.getAdmins();
   $scope.getClubs();
   $scope.getTournaments();
@@ -162,7 +181,7 @@ angular.module('zarad.admin',[])
   $scope.addTournament = function () {
 
     var Create = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
     title: '<p>Creating New Club</p>',
      subTitle: 'Please fill the following fields',
      scope: $scope,
@@ -214,6 +233,28 @@ angular.module('zarad.admin',[])
   // Edit tournament function 
   $scope.editTournament = function () {
 
-
+<<<<<<< HEAD
+    var Edit = $ionicPopup.show({
+    template: '<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><button ng-click="SearchAboutTournament()">Get Data</button><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    title: '<p>Edit Existing Tournament</p>',
+     subTitle: 'Please select from below and click Get Data',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },{
+         text: '<b>Edit</b>',
+         type: 'button button-balanced icon icon-left ion-edit',
+         onTap: function(e) {
+          console.log($scope.tournament)
+          Tournament.EditTournament($scope.tournament)
+          .then(function (resp) {
+            $scope.tournament = '';
+            $location.path('/AllTournament');
+          });
+         }
+       },
+     ]
+   });
   };
 });

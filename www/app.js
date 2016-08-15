@@ -51,11 +51,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller:'TournamentController'
             
         }) 
-        .state('Edittournament',{
-            url:'/Edittournament',
-            templateUrl:'js/templates/Edittournament.html',
-            controller:'TournamentController'
-        })
         .state('userProfile',{
             url : '/userprofile',
             templateUrl : 'js/templates/User/userProfile.html',
@@ -72,14 +67,14 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         })
         .state('clubprofile',{
             url:'/clubProfile',
-            templateUrl: 'js/templates/club/clubProfile.html',
+            templateUrl: 'js/templates/Club/clubProfile.html',
             controller: 'clubController'
         })
         .state('clubprofile.users', {
           url: "/allUsers",
           views: {
             'users-tab': {
-              templateUrl: 'js/templates/club/allUsers.html',
+              templateUrl: 'js/templates/Club/allUsers.html',
               controller: 'clubController'
             }
           }

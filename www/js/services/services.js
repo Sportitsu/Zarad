@@ -33,14 +33,6 @@ angular.module('zarad.services',[])
   };
 
   var checkUser=function(){
-    // var user=$window.localStorage.getItem('user');
-    // if(user.indexOf('Cl') > -1 || user.indexOf('Pl') > -1){
-    //   return 'user';
-    // }else if(user.indexOf('Cl') === -1 || user.indexOf('Pl') === -1){
-    //   return 'admin';
-    // }else{
-    //   return '';
-    // }
     if(!!$window.localStorage.getItem('admin')){
       return 'admin';
     }
