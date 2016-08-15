@@ -233,7 +233,6 @@ angular.module('zarad.admin',[])
   // Edit tournament function 
   $scope.editTournament = function () {
 
-<<<<<<< HEAD
     var Edit = $ionicPopup.show({
     template: '<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><button ng-click="SearchAboutTournament()">Get Data</button><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
     title: '<p>Edit Existing Tournament</p>',
