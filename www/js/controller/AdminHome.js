@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('zarad.admin',[])
 
 .controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament){
@@ -8,6 +9,50 @@ angular.module('zarad.admin',[])
   $scope.user={};
   $scope.admins={};
   $scope.adminSelect={};
+
+ 
+  $scope.upload = function() {
+    //imgur id
+    var  IMGUR_CLIENT_ID = 'e5483dd45cb276b';
+    // upload to imgur function
+    var uploadToIMGUR = function(client_id, imgData, callback) {
+      $.ajax({
+        url: 'https://api.imgur.com/3/image',
+        headers: {
+          'Authorization': 'Client-ID ' + client_id,
+          'Accept': 'application/json'
+        },
+        type: 'POST',
+        data: {
+          'image': imgData,
+          'type': 'base64'
+        },
+        success: function success(res) {
+          if (callback) {
+            callback(res.data);
+          }
+        }
+      });
+    };
+    // git data from local machine and translate it to 64 base image
+     var fileBt = $('<input>').attr('type','file');
+     fileBt.on('change', () => {
+      var file = fileBt[0].files[0];
+      var reader = new FileReader();
+      reader.addEventListener('load', ()=>{
+        var imgData = reader.result.slice(23);
+        // sending the decoded image to IMGUR to get a link for that image
+        uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
+          $scope.tournament.poster = result.link;
+        });
+      })
+      // using the reader to decode the image to base64
+      reader.readAsDataURL(file);
+    })
+     fileBt.click();
+            
+
+  };
 
   //admin sign in
   $scope.signin=function(){
@@ -151,10 +196,13 @@ angular.module('zarad.admin',[])
   };
   // Create new tournament
   $scope.addTournament = function () {
+   
+
+
 
     var Create = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
-    title: '<p>Creating New Club</p>',
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
+    title: '<p>Creating New Tournament</p>',
      subTitle: 'Please fill the following fields',
      scope: $scope,
      buttons: [
@@ -174,3 +222,4 @@ angular.module('zarad.admin',[])
    });
   };
 });
+

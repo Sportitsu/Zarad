@@ -14,8 +14,9 @@ angular.module('zarad.tournament',[])
 			console.log("sdfds",imgData)
 		})
 		})
-		fileBt.click();
+		//fileBt.click();
 		//$scope.uploadToIMGUR('e5483dd45cb276b',)
+		console.log($scope.tournament);
 		Tournament.AddTournament($scope.tournament)
 		.then(function(resp){
 			$scope.getAllTournament();

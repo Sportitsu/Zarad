@@ -5,7 +5,9 @@
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
   <link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">
-  <script src="lib/s3-image-uploader/dist/image-uploader.min.js"></script>
+ 
+ 
+
 </head>
 <body ng-app="zarad">
 <!-- app header here -->
@@ -14,21 +16,27 @@
   <!-- viewing tabs of the web app -->
   <!-- other html pages content rendering will be here -->
   
-  <ion-nav-view>
-  <ion-scroll scrollX="true">
-      <!-- <ion-content>
-      rendering other html pages will be here
-      </ion-content> -->
-  </ion-scroll >
-  </ion-nav-view>
+ 
 
+<ion-nav-view>
+      <ion-content  >
+
+      </ion-content> 
+ 
+</ion-nav-view>
 
 
  <script src="ionic/js/ionic.bundle.js"></script>
  <script src="lib/angular-route/angular-route.js"></script>
  <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
+ <script src="lib/ionic-scroll-sista/dist/ionic.scroll.sista.js"></script>
  <script src="lib/jquery/dist/jquery.min.js"></script>
  <script src="js/controller/ng-cordova.min.js"></script>
+ <!-- <script src="lib/s3-image-uploader/dist/image-uploader.min.js"></script> -->
+ <script src="lib/aws-sdk/dist/aws-sdk.min.js"></script>
+ <script src="lib/s3-image-uploader/dist/image-uploader.bundle.min.js"></script>
+
+
  
  <!-- installed route using this bower install angular-ui-router -->
  <!-- <script type="lib/angular-mocks/angular-mocks.js"></script> -->
