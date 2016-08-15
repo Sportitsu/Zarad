@@ -7,6 +7,8 @@ var app = angular.module('zarad', [
 	'zarad.club',
 	'zarad.tournament',
 	'zarad.services',
+  'ngRoute',
+  'ngCordova',
 	'zarad.index',
 	'ui.router'
 	]);
@@ -81,7 +83,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'clubController'
             }
           }
-        })   
+        })     
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
@@ -107,10 +109,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     }
   });
   $rootScope.$on('$locationChangeStart', function (evt, next, current) {
-    console.log(Auth.checkUser())
     if(next === 'http://localhost:8100/#/AdminAction' || next === 'http://zarad.herokuapp.com/#/AdminAction' ){
       if(Auth.checkUser() !== 'admin'){
-        console.log('went')
         $location.path('/')
       }
     }
@@ -120,6 +120,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     var attach = {
         request: function(object){
             var jwt = $window.localStorage.getItem('com.zarad');
+            
             if(jwt){
                 object.headers['x-access-token']= jwt;
             }

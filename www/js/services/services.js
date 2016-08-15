@@ -64,11 +64,10 @@ angular.module('zarad.services',[])
       url: 'http://zarad.herokuapp.com/api/admin/signin',
       method: "POST",
       data:  admin
-      }).success(function (data, status, headers, config) {
-          console.log(data);
-      }).error(function (data, status, headers, config) {
-          console.log(data);
-      });
+      })
+    .then(function(resp){
+      return resp.data;
+    })
   }
 
   var signup = function(admin){
@@ -161,12 +160,25 @@ angular.module('zarad.services',[])
     .then(function (resp) {
       return resp.data;
     })
-  };  
+  };
+
+  // Get All Clubs
+  var getClubs = function () {
+    return $http({
+      method : 'GET',
+      url : 'http://zarad.herokuapp.com/api/clubs'
+    })
+    .then(function (resp) {
+      return resp.data;
+    })
+  };
+  
   return{
     AddUser : AddUser,
     getClub:getClub,
     Addclub : Addclub,
-    removeClub : removeClub
+    removeClub : removeClub,
+    getClubs : getClubs
   }
 })
 .factory('User', function($http){
@@ -232,7 +244,7 @@ angular.module('zarad.services',[])
       url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
       
     }).then(function(resp){
-      return resp;
+      return resp.data;
     })
   }
   var SearchAboutTournament=function(Tournament){

@@ -27,4 +27,5 @@ angular.module('zarad.club',[])
 		})
 	}
 	$scope.getUsers();
+	$scope.getClub();
 });
