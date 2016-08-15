@@ -194,12 +194,18 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+
+
+    $scope.Empty=function(){
+    $scope.tournament.name=" ";
+    $scope.tournament.place=" ";
+    $scope.tournament.details=" ";
+    $scope.tournament.organizer=" ";
+    $scope.tournament.Date=" ";
+    $scope.tournament.poster=" ";
+  }
   // Create new tournament
   $scope.addTournament = function () {
-   
-
-
-
     var Create = $ionicPopup.show({
     template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
     title: '<p>Creating New Tournament</p>',

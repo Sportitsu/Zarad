@@ -4,18 +4,6 @@ angular.module('zarad.tournament',[])
 .controller('TournamentController',function($scope, $window, $location,Tournament){
 	$scope.AllTournament={}
 	$scope.AddTournament=function(){
-		
-		var fileBt=$('<input>').attr('type','file');
-		fileBt.on('change',()=>{
-		var file=fileBt[0].files[0];
-		var reader=new FileReader();
-		reader.addEventListener('load',()=>{
-			var imgData=reader.result.slice(23);
-			console.log("sdfds",imgData)
-		})
-		})
-		//fileBt.click();
-		//$scope.uploadToIMGUR('e5483dd45cb276b',)
 		console.log($scope.tournament);
 		Tournament.AddTournament($scope.tournament)
 		.then(function(resp){
