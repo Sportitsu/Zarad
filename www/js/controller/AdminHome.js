@@ -80,6 +80,7 @@ angular.module('zarad.admin',[])
            //don't allow the admin to close unless they fill the fields
            e.preventDefault();
          } else {
+          $scope.admin='';
            $scope.signin();
          }
        }
@@ -130,7 +131,6 @@ angular.module('zarad.admin',[])
     $scope.massage=" ";
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
-      console.log(tournament);
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;
@@ -257,7 +257,7 @@ angular.module('zarad.admin',[])
   // Create new tournament
   $scope.addTournament = function () {
     var Create = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
     title: '<p>Creating New Tournament</p>',
      subTitle: 'Please fill the following fields',
      scope: $scope,
@@ -321,7 +321,6 @@ angular.module('zarad.admin',[])
          text: '<b>Edit</b>',
          type: 'button button-balanced icon icon-left ion-edit',
          onTap: function(e) {
-          console.log($scope.tournament)
           Tournament.EditTournament($scope.tournament)
           .then(function (resp) {
             $scope.tournament = '';
