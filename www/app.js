@@ -4,14 +4,16 @@ var app = angular.module('zarad', [
   'zarad.user',
 	'zarad.auth',
   // 'ionic-pullup',
-	'zarad.admin',
-	'zarad.club',
-	'zarad.tournament',
-	'zarad.services',
+  'zarad.admin',
+  'zarad.club',
+  'youtube-embed',
+  'zarad.tournament',
+  'zarad.services',
   'ngRoute',
   'ngCordova',
-	'zarad.index',
-	'ui.router',
+  'zarad.index',
+  'ui.router',
+  'zarad.videos'
   
 	]);
 
@@ -66,6 +68,15 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             'profile-tab': {
               templateUrl: 'js/templates/User/profile-page.html',
               controller: 'UserProfileController'
+            }
+          }
+        })
+        .state('userProfile.videos',{
+          url : '/videos',
+          views : {
+            'video-tab' : {
+              templateUrl : 'js/templates/User/profile-video.html',
+              controller : 'VideosController'
             }
           }
         })
