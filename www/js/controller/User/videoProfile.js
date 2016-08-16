@@ -1,5 +1,6 @@
 angular.module('zarad.videos', ['ionic'])
 .controller('VideosController', function($scope, User, Auth, $location, $http){
+	alert('This is supposed to be working');
 	$scope.playerVars = {
 	  rel: 0,
 	  showinfo: 0,
