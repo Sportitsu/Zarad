@@ -7,7 +7,6 @@ var app = angular.module('zarad', [
 	'zarad.club',
 	'zarad.tournament',
 	'zarad.services',
-  'ngRoute',
   'ngCordova',
 	'zarad.index',
 	'ui.router'
