@@ -12,7 +12,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 
 
-    frameworks: ['mocha'],
+    frameworks: ['mocha', 'chai'],
 
 
     // list of files / patterns to load in the browser
@@ -37,7 +37,6 @@ module.exports = function(config) {
       'www/js/controller/user/userProfile.js',
       'www/js/controller/AdminHome.js',
       'www/js/templates/**.html',
-      'www/js/controller/Tournament.js',
       'www/js/controller/AdminHome.js',
       'test/front-end/Adminspec.js',
       //'test/front-end/routingSpec.js',
@@ -90,7 +89,7 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode

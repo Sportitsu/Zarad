@@ -4,6 +4,7 @@ angular.module('zarad.club',[])
 	$scope.clubUser={};
 	$scope.clubUsers={};
 	$scope.club={};
+
 	$scope.getcolor=function(place){
 		console.log('enterd')
 		if(place=== 1){
@@ -29,7 +30,7 @@ angular.module('zarad.club',[])
 			console.log(resp.data.clubName);
 			$scope.club.data=resp.data;
 		})
-	}
+	};
 	$scope.getUsers=function(){
 		User.getAllUsers().then(function(resp){
 			console.log(resp.data);

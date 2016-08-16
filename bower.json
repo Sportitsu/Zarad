@@ -7,7 +7,6 @@
     "Fatima Hamami <en.f.h90@gmail.com>",
     "elham Rababha <elham_rababah@yahoo.com>"
   ],
-
   "ignore": [
     "**/.*",
     "node_modules",
