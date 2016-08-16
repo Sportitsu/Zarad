@@ -4,6 +4,16 @@ angular.module('zarad.club',[])
 	$scope.clubUser={};
 	$scope.clubUsers={};
 	$scope.club={};
+	$scope.getcolor=function(place){
+		console.log('enterd')
+		if(place=== 1){
+			return 'red';
+		}else if(place===2){
+			return 'blue';
+		}else if(place===3){
+			return 'black'
+		}
+	}
 	$scope.AddUser=function(){
 		var data=$scope.clubUser;
 		Club.AddUser(data).then(function(resp){

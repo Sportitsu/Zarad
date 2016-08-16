@@ -47,3 +47,15 @@ background-color: white;
     z-index: 2;
     position: relative;
 }
+
+.list >.ng-enter {
+    -webkit-animation: fadeInLeft 1s;
+    animation: fadeInLeft 1s;
+}
+.list > .ng-enter-stagger {
+  -webkit-animation-delay:200ms;
+  animation-delay:200ms;
+   -webkit-animation-duration:0;
+  animation-duration:0;
+}
+
