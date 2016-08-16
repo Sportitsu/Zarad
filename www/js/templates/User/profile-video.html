@@ -1,0 +1,18 @@
+<ion-view>
+  <ion-pane>
+    <ion-content>
+      <div class="list card" ng-repeat="video in videos">
+        <div class="item item-text-wrap">
+          <h2>{{video.snippet.title}}</h2>
+          <p>{{video.snippet.publishedAt | limitTo: 10}}</p>
+        </div>
+        <div class="item item-image">
+          <!-- <div class="embed-responsive embed-responsive-16by9"></div> -->
+          <div class="video-container">
+            <youtube-video  video-id="video.id.videoId" ></youtube-video>
+          </div>
+        </div>
+      </div>
+    </ion-content>
+  </ion-pane>
+</ion-view>
