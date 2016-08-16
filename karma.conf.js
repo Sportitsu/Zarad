@@ -30,7 +30,7 @@ module.exports = function(config) {
       'www/lib/ionic/js/ionic.bundle.js',
       'www/app.js',
       'www/js/**/*.js',
-      'test/front-end/Adminspec.js',
+      'test/front-end/AdminSpec.js',
       //'test/front-end/routingSpec.js',
       'test/front-end/ServicesSpec.js',
       //'test/front-end/profileSpec.js',
