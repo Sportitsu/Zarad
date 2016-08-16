@@ -8,15 +8,25 @@ angular.module('zarad.admin',[])
   $scope.user={};
   $scope.admins={};
   $scope.adminSelect={};
+  $scope.clubs = {};
+  $scope.clubSelect={};
+  $scope.tournaments={};
+  $scope.tournamentSelect={};
+  $scope.adminUsername = $window.localStorage.getItem('admin');
 
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
+      $window.localStorage.setItem('admin',resp.user);
+      $window.localStorage.setItem('com.zarad',resp.token);
       $location.path('/AdminAction')
     })
   };
 
+  $scope.signout=function(){
+    Admin.signout();
+  }
   //get a list of all admins
   $scope.getAdmins =function () {
     Admin.getAdmins()
@@ -24,7 +34,43 @@ angular.module('zarad.admin',[])
       $scope.admins.data = admins;
     });
   };
+
+  //get a list of all clubs 
+  $scope.getClubs = function () {
+    Club.getClubs()
+    .then(function (clubs) {
+      $scope.clubs.data = clubs;
+    });
+  };
+
+  //get all Tournaments
+  $scope.getTournaments = function () {
+    Tournament.getAllTournament()
+    .then(function (tournaments) {
+      $scope.tournaments.data = tournaments;
+    });
+  };
+
+  //search for a specific tournament
+  $scope.SearchAboutTournament=function(){
+    $scope.massage=" ";
+    Tournament.SearchAboutTournament($scope.tournamentSelect.value)
+    .then(function(tournament){
+      console.log(tournament);
+        $scope.tournament.name=tournament.data.name;
+        $scope.tournament.place=tournament.data.place;
+        $scope.tournament.details=tournament.data.details;
+        $scope.tournament.organizer=tournament.data.organizer;
+        $scope.tournament.Date=tournament.data.Date;
+        $scope.tournament.poster=tournament.data.poster;
+    }).catch(function(error){
+      $scope.massage="Tournament Not Found";
+    });
+  };
+
   $scope.getAdmins();
+  $scope.getClubs();
+  $scope.getTournaments();
 
   //delete admin function
   $scope.deleteAdmin = function () {
@@ -44,6 +90,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
            Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
+            $scope.adminSelect = '';
             $scope.getAdmins();
           });
          }
@@ -68,30 +115,7 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
-           $location.path('/AdminSignin');
-          });
-         }
-       },
-     ]
-   });
-  };
-  //Register a new Admin
-  $scope.registerAdmin = function () {
-
-    var register = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Username" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Admin Password" ng-model="admin.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Email" ng-model="admin.email"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin FirstName" ng-model="admin.firstName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin LastName" ng-model="admin.lastName"></label>',
-    title: '<p>Enter Admin UserName to delete</p>',
-     subTitle: 'Please select Admin from the list',
-     scope: $scope,
-     buttons: [
-       { text: 'Cancel',
-       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
-        },
-       {
-         text: '<b>Register</b>',
-         type: 'button button-balanced icon icon-left ion-person-add',
-         onTap: function(e) {
-           Admin.signup($scope.admin).then(function(resp){
+            $scope.admin = '';
            $location.path('/AdminSignin');
           });
          }
@@ -103,9 +127,9 @@ angular.module('zarad.admin',[])
   $scope.removeClub = function () {
 
     var remove = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Club Username" ng-model="club.username"></label>',
-    title: '<p>Enter Club UserName to delete</p>',
-     subTitle: 'Please Enter Club Username',
+    template : '<select ng-model="clubSelect.value"><option ng-repeat="club in clubs.data">{{club.username}}  {{club.clubName}}</option></select>',
+    title: '<p>Please select Club to delete</p>',
+     subTitle: 'Please select Club Username',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
@@ -115,8 +139,12 @@ angular.module('zarad.admin',[])
          text: '<b>Remove</b>',
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
-           Club.removeClub({username : $scope.club.username}).then(function (resp) {
-             $location.path('/AdminAction');
+           Club.removeClub({username : $scope.clubSelect.value.split(" ")[0]}).then(function (resp) {
+            $scope.club.username = '';
+            $scope.getClubs();
+            var alertPopup = $ionicPopup.alert({
+              title : resp
+            });
            });
          }
        },
@@ -139,9 +167,9 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
+            $scope.club = '';
             var alertPopup = $ionicPopup.alert({
-             title: 'Your User Name is:'+resp.username,
-             template: '{{resp.username}}'
+             title: 'Your User Name is:'+resp.username
               });
           });
          }
@@ -153,7 +181,7 @@ angular.module('zarad.admin',[])
   $scope.addTournament = function () {
 
     var Create = $ionicPopup.show({
-    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
     title: '<p>Creating New Club</p>',
      subTitle: 'Please fill the following fields',
      scope: $scope,
@@ -166,8 +194,63 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.AddTournament($scope.tournament)
           .then(function (resp) {
+            $scope.tournament = '';
             $location.path('/AllTournament');
           })
+         }
+       },
+     ]
+   });
+  };
+  // Remove tournament 
+  $scope.removeTournament = function () {
+
+    var remove = $ionicPopup.show({
+    template :'<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select>',
+    title: '<p>Please Select Tournament Name to delete</p>',
+     subTitle: 'Please Tournament Name from the list',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },
+       {
+         text: '<b>Remove</b>',
+         type: 'button button-assertive icon icon-left ion-trash-a',
+         onTap: function(e) {
+          Tournament.DeleteTournament({name:$scope.tournamentSelect.value})
+          .then(function (resp) {
+            $scope.getTournaments();
+            var alertPopup = $ionicPopup.alert({
+              title : resp
+            });
+          });
+         }
+       },
+     ]
+   });
+  };
+  // Edit tournament function 
+  $scope.editTournament = function () {
+
+    var Edit = $ionicPopup.show({
+    template: '<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><button ng-click="SearchAboutTournament()">Get Data</button><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    title: '<p>Edit Existing Tournament</p>',
+     subTitle: 'Please select from below and click Get Data',
+     scope: $scope,
+     buttons: [
+       { text: 'Cancel',
+       type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+        },{
+         text: '<b>Edit</b>',
+         type: 'button button-balanced icon icon-left ion-edit',
+         onTap: function(e) {
+          console.log($scope.tournament)
+          Tournament.EditTournament($scope.tournament)
+          .then(function (resp) {
+            $scope.tournament = '';
+            $location.path('/AllTournament');
+          });
          }
        },
      ]
