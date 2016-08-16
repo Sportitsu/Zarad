@@ -4,11 +4,10 @@ var jwt = require('jwt-simple');
 var helpers = require('../config/helpers');
 
 module.exports = {
-	//fetch one admin
+	//get one admin
 	getAdmin : function (req, res){
     Admin.findOne({username:req.params.username})
 		.exec(function (error,admin) {
-
 			if(admin){
 				var returnAdmin = new Admin ({
 					username : admin.username,
@@ -23,15 +22,10 @@ module.exports = {
 		});
 	},
 	//Add new admin 
-
-
 	addAdmin: function (req, res) { 
-
     var username=req.body.username;
     Admin.findOne({username: username})
     .exec(function(error,admin){
-    
-
        if(admin){
         helpers.errorHandler('Admin Already Exists', req,res);
       } else {
@@ -56,7 +50,6 @@ module.exports = {
           }
         });
       }
-
     });
   },
   // Admin sign in function 
@@ -65,7 +58,6 @@ module.exports = {
     var password = req.body.password;
     Admin.findOne({ username : username })
     .exec(function (error,admin) {
-      
         if(admin){
             Admin.comparePassword(password, admin.password, res, function(found){
                 if(found){
@@ -83,6 +75,7 @@ module.exports = {
         }
     });
   },
+  // removing one admin
   adminRemove : function (req,res) {
     var username = req.body.username;
     Admin.findOne({ username : username}).remove()
@@ -94,7 +87,7 @@ module.exports = {
       }
     });
   },
-
+  // get a list of all admins
   getAdmins : function (req,res) {
       Admin.find({})
       .exec(function (error, admins){

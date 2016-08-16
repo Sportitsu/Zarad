@@ -37,11 +37,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	templateUrl:'js/templates/AdminMain.html',
         	controller:'AdminController'
         })
-        .state('adminsign',{
-        	url:'/AdminSignin',
-        	templateUrl:'js/templates/AdminSignin.html',
-        	controller:'AdminController'
-        })
         .state('adminaction',{
         	url:'/AdminAction',
         	templateUrl: 'js/templates/AdminAction.html',
@@ -51,7 +46,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
-            
         }) 
         .state('userProfile',{
             url : '/userprofile',
