@@ -77,3 +77,11 @@ View the project roadmap [here](https://waffle.io/Sportitsu/Zarad)
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
+## Production
+
+See our website [here](http://zarad.herokuapp.com/#/).
+
+## Builds
+
+See our latest build [here](https://travis-ci.org/Sportitsu/Zarad).
