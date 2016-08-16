@@ -7,13 +7,13 @@ angular.module('zarad.videos', ['ionic'])
 	}
 
     $scope.youtubeParams = {
-      key: 'AIzaSyAnAi9xKNqI_xNGDKHtFZrInz5l_QkMqNs',
+      key: 'AIzaSyCe3SQ2EGPUgyqeW5PXscj8i4cN47Sck8Y',
       type: 'video',
       maxResults: '5',
       part: 'id,snippet',
-      q: 'creatorup',
+      q: '',
       order: 'date',
-      channelId: 'UCeEqIv7lVwOOLnwxuuhQFuQ',
+      channelId: 'UCet7ZVoSfu1QWwlVxua12Gg',
     }
 
 	$scope.videos = [];
