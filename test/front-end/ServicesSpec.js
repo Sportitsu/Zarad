@@ -2,16 +2,19 @@ describe('Services', function () {
 beforeEach(module('zarad'));
 
   afterEach(inject(function ($httpBackend) {
-    $httpBackend.verifyNoOutstandingExpectation();
+    // $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
   }));
 
-  describe('Admin Factory', function () {
+  describe('Factory', function () {
   var $httpBackend, Admin;
 
-   beforeEach(inject(function (_$httpBackend_, _Admin_) {
+   beforeEach(inject(function (_$httpBackend_, _Admin_, _Club_, _Tournament_, _User_) {
       $httpBackend = _$httpBackend_;
       Admin = _Admin_;
+      Club = _Club_;
+      Tournament = _Tournament_;
+      User = _User_;
     }));
 
    it('should exist', function () {
@@ -19,7 +22,7 @@ beforeEach(module('zarad'));
     });
 
    it('should have a method `Addclub`', function () {
-      expect(Admin.Addclub).to.be.a('function');
+      expect(Club.Addclub).to.be.a('function');
     });
 
   it('should add a new club with `Addclub`', function () {
@@ -30,7 +33,7 @@ beforeEach(module('zarad'));
         clubName: "zarad jordan" };
 
       $httpBackend
-        .expect('POST','/api/club/register')
+        .expect('POST','http://zarad.herokuapp.com/api/club/register')
         .respond(201, {
         username:1,
         password:"1111",
@@ -38,22 +41,18 @@ beforeEach(module('zarad'));
         clubName: "zarad jordan"
         });
       
-
-      Admin.Addclub(club).then(function (resp) {
+      Club.Addclub(club).then(function (resp) {
         expect(resp.status).to.equal(201);
         expect(resp.data.clubName).to.equal("zarad jordan");
       });
-
-      $httpBackend.flush();
     });
-
 
     // test Addtournament 
-   it('should have a method `Addtournament`', function () {
-      expect(Admin.Addtournament).to.be.a('function');
+   it('should have a method `AddTournament`', function () {
+      expect(Tournament.AddTournament).to.be.a('function');
     });
 
-  it('should add a new tournament with `Addtournament`', function () {
+  it('should add a new tournament with `AddTournament`', function () {
       var tournament  = {
         name:"cup",
         Date:"1111",
@@ -64,7 +63,7 @@ beforeEach(module('zarad'));
     };
 
       $httpBackend
-        .expect('POST','/api/tournament/create')
+        .expect('POST','http://zarad.herokuapp.com/api/tournament/create')
         .respond(201, {
         name:"cup",
         Date:"1111",
@@ -72,34 +71,20 @@ beforeEach(module('zarad'));
         organizer: "zarad jordan",
         details:" jejestu cup in jordan" ,
         poster:"tournament.gpj"
-    
         });
 
-      Admin.Addtournament(tournament ).then(function (resp) {
-        //expect(resp.status).to.equal(201);
+      Tournament.AddTournament(tournament ).then(function (resp) {
+        expect(resp.status).to.equal(201);
         expect(resp.name).to.equal('cup');
       });
-
-      $httpBackend.flush();
     });
-  });
-
-
-  
- describe('Profile Factory', function () {
-  var $httpBackend, Profile;
-
-   beforeEach(inject(function (_$httpBackend_, _Profile_) {
-      $httpBackend = _$httpBackend_;
-      Profile = _Profile_;
-    }));
-
-   it('should exist', function () {
-      expect(Profile).to.exist;
+  ///////////////////////////////
+   it('User should exist', function () {
+      expect(User).to.exist;
     });
 
-   it('should have a method `getClub`', function () {
-      expect(Profile.getClub).to.be.a('function');
+   it('Club should have a method `getClub`', function () {
+      expect(Club.getClub).to.be.a('function');
     });
 
     it('should get club with `getClub`', function () {
@@ -109,18 +94,12 @@ beforeEach(module('zarad'));
         country:"jordan",
         clubName: "zarad jordan" };
 
-      $httpBackend.expect('GET', '/api/club/x/1').respond(club);
+      $httpBackend.expect('GET', 'http://zarad.herokuapp.com/api/club/x/1').respond(club);
 
-      Profile.getClub(1).then(function (Profile) {
-        expect(Profile.data).to.deep.equal(club);
+      Club.getClub(1).then(function (club) {
+        expect(club.data).to.deep.equal(club);
       });
-
-      $httpBackend.flush();
     });
-
-  
   });
-
-
 });
 
