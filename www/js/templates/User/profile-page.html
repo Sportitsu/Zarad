@@ -9,19 +9,22 @@
         </div>
         <div class="animate-fade-slide-in-right">
             <div class="item item-left">
-                <h2>Attendance</h2>
-                <p>{{data.attendance}}</p>
                 <ion-icon ios="logo-apple" md="logo-android"></ion-icon>
                 <h2>Member Since</h2>
                 <p>{{data.Date.substr(0,10)}}</p>
+                <br>
                 <h2>Belt Color</h2>
                 <p>{{data.beltColor}}</p>
+                <br>
                 <h2>Medals</h2>
                 <ul ng-repeat ="medal in achievements track by $index">
                   <i class="icon logo-apple custom-icon"></i>
                     <ion-row>
                         <span>{{medal.place}}</span>{{medal.name}}
                     </ion-row>
+                </ul>
+                <br><br>
+            <button class="button button-stable" ng-click="showFriends()">My Friends</button>
             </div>
             <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
         </div>
