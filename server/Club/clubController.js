@@ -16,12 +16,22 @@ module.exports ={
 					clubName : club.clubName,
 					email : club.email
 				});
-				console.log('club controller',returnClub)
 				res.status(200).send(returnClub);
 			}else{
 				helpers.errorHandler(error, req, res);
 			}
 		});
+	},
+	getClubForUser : function(req,res){
+		var clubName = req.body.clubName ;
+	    Club.findOne({clubName : clubName})
+	    	.exec(function(err, club){
+	    		if(club){
+	    			res.status(200).send(club);
+	    		} else {
+	    			helpers.errorHandler('Error Getting Club', req,res);
+	    		}
+	    	})
 	},
 	// Add a new club
 	addClub : function(req,res){
