@@ -1,6 +1,6 @@
 <ion-view>
   <ion-pane>
-   <ion-content class="has-footer">
+   <ion-content ng-show="flag" class="has-footer">
       <div class="list card" ng-repeat="video in videos">
         <div class="item item-text-wrap">
           <h2>{{video.snippet.title}}</h2>
@@ -12,6 +12,11 @@
           </div>
         </div>
       </div>
+    </ion-content>
+    <ion-content ng-if="!flag" style="background-color:black">
+      <iframe src="//giphy.com/embed/m2lFxX5xwnsaY" style="margin-top:40px;margin-left:35px;" width="80%" height="30%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><h1 style="color:red">{{data.club}}</h1>
+      <h3 style="color:white">Not Yet Added A channel</h3>
+      <h2 style="color:white">Please Contact Them</h2>
     </ion-content>
   </ion-pane>
 </ion-view>
