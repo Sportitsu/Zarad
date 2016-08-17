@@ -1,13 +1,29 @@
 angular.module('zarad.videos', ['ionic'])
-.controller('VideosController', function($scope, User, Auth, $location, $http){
+.controller('VideosController', function($scope, User, Auth, Club, $location, $http){
+
+  $scope.data = JSON.parse(window.localStorage.getItem('user'));
+
+  // $http({
+  //   url : 'http://zarad.herokuapp.com/x/' + $scope.data.club,
+  //   method : 'GET' 
+  // })
+  // .success(function(resposne){
+  //   console.log(response);
+  // })
+  // .error(function(error){
+  //   console.log(error);
+  // })
+
 	$scope.playerVars = {
 	  rel: 0,
 	  showinfo: 0,
 	  modestbranding: 0,
 	}
 
-    $scope.youtubeParams = {
-      key: 'AIzaSyCe3SQ2EGPUgyqeW5PXscj8i4cN47Sck8Y',
+  var YOUTUBE_API_KEY2 = 'AIzaSyCe3SQ2EGPUgyqeW5PXscj8i4cN47Sck8Y';
+
+  $scope.youtubeParams = {
+      key: YOUTUBE_API_KEY2,
       type: 'video',
       maxResults: '5',
       part: 'id,snippet',
@@ -19,6 +35,7 @@ angular.module('zarad.videos', ['ionic'])
 	$scope.videos = [];
       $http.get('https://www.googleapis.com/youtube/v3/search', {params:$scope.youtubeParams}).success(function(response){
       angular.forEach(response.items, function(child){
+        console.log(child);
         $scope.videos.push(child);
       });
     })
