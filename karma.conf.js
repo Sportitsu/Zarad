@@ -35,6 +35,7 @@ module.exports = function(config) {
       'www/js/controller/profile.js',
       'www/js/controller/club.js',
       'www/js/controller/user/userProfile.js',
+      'www/js/controller/tournament.js',
       'www/js/controller/AdminHome.js',
       'www/js/templates/**.html',
       'www/js/controller/AdminHome.js',
@@ -42,7 +43,7 @@ module.exports = function(config) {
       //'test/front-end/routingSpec.js',
       //'test/front-end/ServicesSpec.js',
       //'test/front-end/profileSpec.js',
-      'test/front-end/clubSpec.js'
+      //'test/front-end/clubSpec.js'
     ],
 
 

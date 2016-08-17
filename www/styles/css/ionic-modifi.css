@@ -2,7 +2,23 @@
 background-color: #006600 !important;
 }
 */
+.tournamentposter{
 
+margin-left:10%; margin-top:10%;margin-right:10%;margin-bottom:3%;width: 80%; height:40%
+}
+.tournament{
+    background-color: rgb(153,50,204); height:70%; width: 80%; border-style: solid; align-items: center;
+    border-width: 5px; font-size:20px;margin:10%;color:rgb(0,0,0 )
+}
+.Comptetion{
+    text-align: center;font-size:20px;font-weight: bold;color:rgb(255,255,255)
+}
+.tournamentcolor{
+    color:rgb(255,255,255);
+}
+.tournamenttitel{
+  font-weight: bold;
+}
 .bar-light{
 background-color:  #6600cc !important;
 }

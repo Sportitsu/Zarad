@@ -41,6 +41,7 @@ angular.module('zarad.admin',[])
     };
     // git data from local machine and translate it to 64 base image
      var fileBt = $('<input>').attr('type','file');
+     console.log("sdfs")
      fileBt.on('change', () => {
       var file = fileBt[0].files[0];
       var reader = new FileReader();
@@ -49,6 +50,7 @@ angular.module('zarad.admin',[])
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
           $scope.tournament.poster = result.link;
+          console.log($scope.tournament.poster,"sdajkfhafdsfsdkjfhsk")
         });
       })
       // using the reader to decode the image to base64
@@ -239,8 +241,10 @@ angular.module('zarad.admin',[])
          text: '<b>Create</b>',
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
+          console.log($scope.tournament);
           Tournament.AddTournament($scope.tournament)
           .then(function (resp) {
+
             $scope.tournament = '';
             $location.path('/AllTournament');
           })
