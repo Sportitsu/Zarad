@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link rel="stylesheet" href="ionic/css/ionic.css">
   <link rel="stylesheet" href="styles/css/ionic-modifi.css">
@@ -8,29 +10,11 @@
   <link rel="stylesheet" href="styles/css/animate.css">
   <link href="lib/ionic-material/dist/ionic.material.css" rel="stylesheet">
 
-
-</head>
-<body ng-app="zarad" class="platform-ios platform-cordova platform-webview">
-<!-- app header here -->
-
-<!-- other html pages content rendering will be here -->
-  <!-- viewing tabs of the web app -->
-  <!-- other html pages content rendering will be here -->
-  
- 
-
-<ion-nav-view>
-      <ion-content>
-
-      </ion-content> 
- 
-</ion-nav-view>
-
-
  <script src="ionic/js/ionic.bundle.js"></script>
  <script src="lib/angular-route/angular-route.js"></script>
  <script src="lib/ionic-material/dist/ionic.material.min.js"></script>
  <script src="lib/jquery/dist/jquery.min.js"></script>
+ <script src="cordova.js"></script>
  <script src="js/controller/ng-cordova.min.js"></script>
  <script src="https://www.youtube.com/iframe_api"></script>
  <script src="lib/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
@@ -49,5 +33,22 @@
  <script src="js/controller/profile.js"></script>
  <script src="js/controller/tournament.js"></script>
  <script src="app.js"></script>
+</head>
+<body ng-app="zarad" class="platform-ios platform-cordova platform-webview">
+<!-- app header here -->
+
+<!-- other html pages content rendering will be here -->
+  <!-- viewing tabs of the web app -->
+  <!-- other html pages content rendering will be here -->
+  
+ 
+
+<ion-nav-view>
+      <ion-content>
+
+      </ion-content> 
+ 
+</ion-nav-view>
+
  </body>
 </html>
