@@ -4,10 +4,11 @@ angular.module('zarad.videos', ['ionic'])
   $scope.data = JSON.parse(window.localStorage.getItem('user'));
 
   // $http({
-  //   url : 'http://zarad.herokuapp.com/x/' + $scope.data.club,
-  //   method : 'GET' 
+  //   url : 'http://zarad.herokuapp.com/api/club/getclub',
+  //   method : 'POST',
+  //   data : { clubName : $scope.data.club } 
   // })
-  // .success(function(resposne){
+  // .success(function(response){
   //   console.log(response);
   // })
   // .error(function(error){

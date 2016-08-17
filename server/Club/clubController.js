@@ -133,6 +133,7 @@ module.exports ={
 		.exec(function (error, club) {
 			if(club){
 				club.country = req.body.country || club.country;
+				club.channelId = req.body.channelId || club.channelId;
 				if(req.body.newClubName){
 					var clubName = req.body.newClubName;
 					Club.findOne({ clubName : clubName})
