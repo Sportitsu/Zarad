@@ -1,7 +1,6 @@
 angular.module('zarad.user',['ionic'])
 .controller('UserProfileController',
  function($scope, $ionicPopup, Auth, $cordovaCamera, $ionicModal, $ionicLoading,$location, $window, $ionicPlatform, User, ionicMaterialMotion, ionicMaterialInk, $timeout){
-  console.log('User Profile js controller');
 
  $scope.user = {};
  $scope.data = JSON.parse(window.localStorage.user);
