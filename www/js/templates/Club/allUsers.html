@@ -1,14 +1,15 @@
 <div class="list">
-	<div ng-repeat="data in clubUsers.data">
+	<div ng-repeat="info in clubUsers.data">
     <a class="item item-avatar ng-enter-stagger" href="#">
-      <img src={{data.image}}>
-      <h2>{{data.firstName}}&nbsp;{{data.lastName}}</h2>
-      <p>{{data.phone}}</p>
-      <div style="background-color: {{data.beltColor}}; height: 10px; width: 10px"></div>
+      <img src={{info.user.image}}>
+      <h2>{{info.user.firstName}}&nbsp;{{info.user.lastName}}</h2>
+      <p>{{info.user.phone}}</p>
+      <div>End Date is {{info.user.endTime}}</div>
+      <div style="background-color: {{info.user.beltColor}}; height: 10px; width: 10px"></div>
       <!-- <div ng-repeat='ac in data.achievements'>
        <div id="my-div" ng-if="showcolor({{ac.place}})">
      	 <i class = "ion-ribbon-a" style="color:{{d.color}}"</i>
       </div> -->
     </a>
-	</div>
+	</div>  
 </div>

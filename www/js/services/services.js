@@ -212,10 +212,23 @@ angular.module('zarad.services',[])
         return data;
     })
   }
+
+  var resub=function(username){
+    return $http({
+      method:'POST',
+      url:'http://zarad.herokuapp.com/api/user/resub',
+      data:username
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  }
+
  return {
    getUser : getUser,
    editProfile : editProfile,
-   getAllUsers : getAllUsers
+   getAllUsers : getAllUsers,
+   resub: resub
  }
 })
 .factory('Tournament',function($http){

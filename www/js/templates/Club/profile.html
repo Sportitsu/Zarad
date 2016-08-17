@@ -1,0 +1,46 @@
+<!-- <ion-side-tab class="dark-bg" style="border-radius: 10px;">
+      <ion-side-tab-handle width="40" height="50" toggle="ion-chevron-left ion-chevron-right" class="dark-bg stable" style="border-radius: 10px 0 0 10px"><i class="icon ion-chevron-left"></i></ion-side-tab-handle>
+      <div class="list card">
+        <div class="item item-divider">Upcoming</div>
+        <div class="item item-body item-stable">
+          <div>
+            <button class="button" ng-click="resup()">resup</button>
+          </div>
+        </div>
+      </div>
+      <div class="list card">
+        <div class="item item-divider">Upcoming</div>
+        <div class="item item-body item-stable">
+          <div>
+            You have <b>21</b> meetings on your calendar tomorrow.
+          </div>
+        </div>
+      </div>
+    </ion-side-tab>
+  </ion-view>
+
+ -->
+  <ion-header-bar class="bar bar-header bar-dark">
+ <ion-title class="title">Zarad</ion-title>
+   <button class="button button-icon button-clear icon ion-navicon"></button>
+</ion-header-bar>
+
+<ion-content class="has-header">
+<div class="list card">
+
+  <div class="item item-avatar">
+    <img src="styles/css/1.gif" >
+    <h2>{{club.data.clubName}}</h2>
+    <p>{{club.data.country}}</p>
+  </div>
+</div>
+<div class="list card animated tada">  
+  <div class="item item-divider">Subscribtions</div>
+  <div class="item item-body">
+    <div>
+    username <button type="button" ng-click="resup()">resup</button>
+    </div>
+  </div>
+</div>  
+  </ion-content>
+

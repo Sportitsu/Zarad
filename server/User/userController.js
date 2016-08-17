@@ -188,6 +188,7 @@ module.exports= {
 		var username = req.body.username;
 		User.findOne({username : username})
 			.exec(function(err, user){
+				console.log('user',user)
 				if(user){
 					if(user.valid){
 						var isFinished = user.subscription + ((30 * 24 * 60 * 60 * 1000) * user.membership);
@@ -202,6 +203,7 @@ module.exports= {
 						user.valid = true;
 					}
 					user.save(function(err, saved){
+						console.log('d5l',saved)
 						if(saved){
 							res.status(201).send(saved);
 						} else {

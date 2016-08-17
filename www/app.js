@@ -67,11 +67,11 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         })
         .state('clubprofile',{
             url:'/clubProfile',
-            templateUrl: 'js/templates/Club/clubProfile.html',
+            templateUrl: 'js/templates/club/clubProfile.html',
             controller: 'clubController'
         })
         .state('clubprofile.users', {
-          url: "/allUsers",
+          url: '/allUsers',
           views: {
             'users-tab': {
               templateUrl: 'js/templates/club/allUsers.html',
