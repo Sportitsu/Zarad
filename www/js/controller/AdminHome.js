@@ -39,12 +39,14 @@ angular.module('zarad.admin',[])
         }
       });
     };
+  
     // git data from local machine and translate it to 64 base image
      var fileBt = $('<input>').attr('type','file');
-     fileBt.on('change', () => {
+
+     fileBt.on('change', function(){
       var file = fileBt[0].files[0];
       var reader = new FileReader();
-      reader.addEventListener('load', ()=>{
+      reader.addEventListener('load', function(){
         var imgData = reader.result.slice(23);
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
@@ -146,7 +148,7 @@ angular.module('zarad.admin',[])
   $scope.getClubs();
   $scope.getTournaments();
 
-  //delete admin function
+     //delete admin function
   $scope.deleteAdmin = function () {
     
     var remove = $ionicPopup.show({
