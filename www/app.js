@@ -5,15 +5,14 @@ var app = angular.module('zarad', [
 	'zarad.auth',
   'zarad.admin',
   'zarad.club',
+  'zarad.home',
   'youtube-embed',
   'zarad.tournament',
   'zarad.services',
-  'ngRoute',
   'ngCordova',
   'zarad.index',
   'ui.router',
   'zarad.videos'
-  
 	]);
 
 app.config(function($sceDelegateProvider) 
@@ -32,11 +31,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         	url: '/',
 		    templateUrl: 'js/templates/home.html',
 		    controller:'AuthController'
-        })
-        .state('signin', {
-            url:'/signin',
-            templateUrl : 'js/templates/signin.html',
-            controller:'AuthController'
         })
         .state('adminmain',{
         	url:'/AdminMain',
@@ -62,7 +56,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           url: "/home",
           views: {
             'home-tab': {
-              templateUrl: 'js/templates/User/profile-home.html'
+              templateUrl: 'js/templates/User/profile-home.html',
+              controller : 'UserHomeController'
             }
           }
         })
