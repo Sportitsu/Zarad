@@ -1,4 +1,28 @@
-<ion-content>
-<h1>This is the home page</h1>
-<p> Under construction </p>
-</ion-content>
+<ion-view>
+	<ion-content>
+		<ion-list ng-controller="UserHomeController"
+		          show-delete="shouldShowDelete"
+		          show-reorder="shouldShowReorder"
+		          can-swipe="listCanSwipe">
+		  <ion-item ng-repeat="todo in todos"
+		            class="list card">
+			    <h2>{{todo.task}}</h2>
+			    <ion-option-button class="button-positive"
+			                       ng-click="share(item)">
+			      Share
+			    </ion-option-button>
+			    <ion-option-button class="button-info"
+			                       ng-click="edit(item)">
+			      Edit
+			    </ion-option-button>
+			    <ion-delete-button class="ion-minus-circled"
+			                       ng-click="items.splice($index, 1)">
+			    </ion-delete-button>
+			    <ion-reorder-button class="ion-navicon"
+			                        on-reorder="reorderItem(item, $fromIndex, $toIndex)">
+			    </ion-reorder-button>
+ 
+		  </ion-item>
+		</ion-list>
+	</ion-content>
+</ion-view>
