@@ -14,7 +14,6 @@ var app = angular.module('zarad', [
   'zarad.index',
   'ui.router',
   'zarad.videos'
-  
 	]);
 
 app.config(function($sceDelegateProvider) 
