@@ -28,8 +28,9 @@ describe('AdminController',function(){
   }));
 
   afterEach(function () {
-    // $httpBackend.verifyNoOutstandingExpectation();
+    // $httpBackend.flush();
     $httpBackend.verifyNoOutstandingRequest();
+    // $httpBackend.verifyNoOutstandingExpectation();
      });
 
   //test if the function in the scope
