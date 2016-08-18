@@ -75,5 +75,20 @@ module.exports = {
 				helpers.errorHandler('Tournament Not Available', req, res);
 			}
 		});
+	},
+	getSearchTournament:function(req,res){
+		console.log("getSearchTournament")
+		var place = req.params.place;
+		Tournament.find({place:place})
+		.exec(function (error, tournaments) {
+			if(tournaments.length === 0){
+				console.log("erorr")
+				helpers.errorHandler('Empty Table', req, res);
+			}else{
+			     console.log(tournaments)
+				res.status(200).send(tournaments);
+			}
+		});
+
 	}
 };

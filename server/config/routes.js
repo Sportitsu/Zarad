@@ -23,6 +23,7 @@ module.exports = function(app){
 	app.post('/api/tournament/create', tournamentController.addTournament);
 	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
 	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
+	app.get('/api/tournament/y/:place', tournamentController.getSearchTournament);
 
 
 
