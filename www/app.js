@@ -77,7 +77,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'clubController'
             }
           }
-        })     
+        })
+        
+        //searchtournament    
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
