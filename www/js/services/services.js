@@ -66,7 +66,7 @@ angular.module('zarad.services',[])
 
   var signup = function(admin){
     return $http({
-      method:'POST',
+      method : 'POST',
       url:'http://zarad.herokuapp.com/api/admin/create',
       data:admin
     })
@@ -222,19 +222,7 @@ angular.module('zarad.services',[])
   };
 
  
-  var resubUser = function(data){
-    return $http({
-      method : 'POST' , 
-      url : 'http://zarad.herokuapp.com/api/user/resub',
-      data : data
-    })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return data;
-    })
-  };
+
 
   var deleteUser = function(data){
     return $http({
@@ -265,7 +253,6 @@ angular.module('zarad.services',[])
  return {
    getUser : getUser,
    editProfile : editProfile,
-   resubUser : resubUser,
    deleteUser : deleteUser,
    getAllUsers : getAllUsers
  }

@@ -2,7 +2,6 @@ angular.module('zarad.videos', ['ionic'])
 .controller('VideosController', function($scope, User, Auth, $window, Club, $location, $http){
   $scope.flag = true;
   $scope.data = JSON.parse($window.localStorage.member);
-  console.log(window.localStorage);
     Club.getClubForUser({clubName : $scope.data.club})
         .then(function(response){
           $scope.flag = true;
@@ -11,7 +10,6 @@ angular.module('zarad.videos', ['ionic'])
         })
         .catch(function(error){
           $scope.flag = false;
-          // console.log(error);
         });
 
     $scope.uploadPage = function(){
@@ -26,7 +24,7 @@ angular.module('zarad.videos', ['ionic'])
         $scope.youtubeParams = {
             key: YOUTUBE_API_KEY2,
             type: 'video',
-            maxResults: '5',
+            maxResults: '10',
             part: 'id,snippet',
             q: '',
             order: 'date',
