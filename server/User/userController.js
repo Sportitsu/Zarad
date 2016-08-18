@@ -219,17 +219,24 @@ module.exports= {
 		var method = req.body.method;
 		User.findOne({username : username})
 			.exec(function(err , user){
-				if(method > 0){
-					user.goals.push(goal);
-				} else { 
-
-					user.goals.splice(user.goals.indexOf(goal.title),1);
-				}
-				user.save(function(err,saved){
-					if(saved){
-						res.status(201).send(saved);
+				if(user){
+					if(method > 0){
+						user.goals.push(goal);
+					} else { 
+						if(goal.title){
+							user.goals.splice(user.goals.indexOf(goal.title),1);
+						} else {
+							helpers.errorHandler('Passing Wrong Key to Update', req,res);
+						}
 					}
-				})
+					user.save(function(err,saved){
+						if(saved){
+							res.status(201).send(saved);
+						}
+					})
+				} else {
+					helpers.errorHandler('User Not Found', req,res);
+				}
 			})
 	}
 };
