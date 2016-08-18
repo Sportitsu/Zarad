@@ -153,7 +153,7 @@ module.exports= {
 					user.beltColor = req.body.beltColor || user.beltColor;
 					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements  
 					user.attendance = req.body.attendance || user.attendance;
-					
+
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
@@ -211,5 +211,25 @@ module.exports= {
 					helpers.errorHandler('Not Available', req, res);
 				}
 			});
+	},
+
+	updateGoal : function(req,res){
+		var goal = req.body.goal; 
+		var username = req.body.username;
+		var method = req.body.method;
+		User.findOne({username : username})
+			.exec(function(err , user){
+				if(method > 0){
+					user.goals.push(goal);
+				} else { 
+
+					user.goals.splice(user.goals.indexOf(goal.title),1);
+				}
+				user.save(function(err,saved){
+					if(saved){
+						res.status(201).send(saved);
+					}
+				})
+			})
 	}
 };
