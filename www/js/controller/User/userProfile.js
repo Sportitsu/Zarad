@@ -177,17 +177,17 @@ angular.module('zarad.user',['ionic'])
     $scope.friendProfile.hide();
    }    
 
-     setInterval(function(){
-      User.getUser($scope.data.username)
-          .then(function(response){
-            if(JSON.stringify(response.data) !== $window.localStorage.member){
-              $scope.data = response.data;
-            }
-          })
-          .catch(function(error){
-            console.log(error);
-          })
-     },3000)
+     // setInterval(function(){
+     //  User.getUser($scope.data.username)
+     //      .then(function(response){
+     //        if(JSON.stringify(response.data) !== $window.localStorage.member){
+     //          $scope.data = response.data;
+     //        }
+     //      })
+     //      .catch(function(error){
+     //        console.log(error);
+     //      })
+     // },3000)
 
          // Set Header    
       $scope.isExpanded = false;

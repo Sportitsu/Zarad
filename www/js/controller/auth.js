@@ -2,6 +2,7 @@
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout){
 	$scope.user={};
+
 	$scope.showPopup = function() {
    //custom popup to show login box
    var myPopup = $ionicPopup.show({
@@ -17,21 +18,24 @@ angular.module('zarad.auth',[])
          text: '<b>Login</b>',
          type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
          onTap: function(e) {
+            
 
            if (!$scope.user.username || !$scope.user.password) {
              //don't allow the user to close unless they fill the fields
              e.preventDefault();
            } else {
              // return $scope.user;
+
              $scope.signin();
+
            }
          }
        },
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!');
-      //$('#n').val("");
+      $scope.user.username = '';
+      $scope.user.password = '';
 
    });
    $timeout(function() {
@@ -50,9 +54,13 @@ angular.module('zarad.auth',[])
      } else {
         User.getUser(resp.user)
        .then(function(response){
-          $window.localStorage.setItem('com.zarad', resp.token);
-          $window.localStorage['member'] = angular.toJson(response.data);
-          $location.path('/userprofile/home');
+          if(response.data.valid){
+            $window.localStorage.setItem('com.zarad', resp.token);
+            $window.localStorage['member'] = angular.toJson(response.data);
+            $location.path('/userprofile/home');
+          } else {
+            console.log('Please resubscribe');
+          }
        })
        .catch(function(error){
         console.log(error);
