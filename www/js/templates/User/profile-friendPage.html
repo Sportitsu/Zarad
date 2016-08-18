@@ -1,0 +1,36 @@
+<ion-modal-view>
+	  <ion-header-bar>
+	    <h1 class="title">{{displayFriend.firstName}}</h1>
+	    <div class="buttons">
+	      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+	    </div>
+	  </ion-header-bar>
+      <ion-content>
+        <div class="hero" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('{{displayFriend.image}}');"></div>
+                <h3><a class="light" style="color:white">{{displayFriend.firstName}}</a></h3>
+                <h4>{{displayFriend.club}}</h4>
+            </div>
+        </div>
+            <div class="item item-left">
+                <ion-icon ios="logo-apple" md="logo-android"></ion-icon>
+                <h2>Member Since</h2>
+                <p>{{displayFriend.Date.substr(0,10)}}</p>
+                <br>
+                <h2>Belt Color</h2>
+                <p>{{displayFriend.beltColor}}</p>
+                <br>
+                <h2>Medals</h2>
+                <ul ng-repeat ="medal in friendAchievements track by $index">
+                  <i class="icon logo-apple custom-icon"></i>
+                    <ion-row>
+                        <span>{{medal.place}}</span>{{medal.name}}
+                    </ion-row>
+                </ul>
+                <br><br><br><br>
+            <button class="button button-stable button-positive" ng-click="goBack()">Back</button>
+            </div>
+        </ion-content>
+
+</ion-modal-view>

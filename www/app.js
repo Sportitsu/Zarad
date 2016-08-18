@@ -3,14 +3,22 @@ var app = angular.module('zarad', [
   'ionic-material',
   'zarad.user',
 	'zarad.auth',
-	'zarad.admin',
-	'zarad.club',
-	'zarad.tournament',
-	'zarad.services',
+  'zarad.admin',
+  'zarad.club',
+  'youtube-embed',
+  'zarad.tournament',
+  'zarad.services',
   'ngCordova',
-	'zarad.index',
-	'ui.router'
+  'zarad.index',
+  'ui.router',
+  'zarad.videos'
+  
 	]);
+
+app.config(function($sceDelegateProvider) 
+{
+    $sceDelegateProvider.resourceUrlWhitelist(['self', new RegExp('^(http[s]?):\/\/(w{3}.)?youtube\.com/.+$')]);
+})
 
 app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
    
@@ -53,8 +61,25 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           url: "/home",
           views: {
             'home-tab': {
-              templateUrl: 'js/templates/User/profile-home.html',
+              templateUrl: 'js/templates/User/profile-home.html'
+            }
+          }
+        })
+        .state('userProfile.profile',{
+          url: "/profile",
+          views: {
+            'profile-tab': {
+              templateUrl: 'js/templates/User/profile-page.html',
               controller: 'UserProfileController'
+            }
+          }
+        })
+        .state('userProfile.videos',{
+          url : '/videos',
+          views : {
+            'video-tab' : {
+              templateUrl : 'js/templates/User/profile-video.html',
+              controller : 'VideosController'
             }
           }
         })
@@ -82,16 +107,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 })
 .run(function($rootScope, $state, $location , Auth, $ionicPlatform){
  $ionicPlatform.ready(function() {
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-      // for form inputs)
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-
-      // Don't remove this line unless you know what you are doing. It stops the viewport
-      // from snapping when text inputs are focused. Ionic handles this internally for
-      // a much nicer keyboard experience.
-      cordova.plugins.Keyboard.disableScroll(true);
-    }
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
