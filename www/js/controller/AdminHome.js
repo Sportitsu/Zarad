@@ -80,13 +80,15 @@ angular.module('zarad.admin',[])
            //don't allow the admin to close unless they fill the fields
            e.preventDefault();
          } else {
-          $scope.admin='';
            $scope.signin();
          }
        }
      },
    ]
  });
+ myPopup.then(function(){
+  $scope.admin = '';
+ })
 };
 
   //admin sign in
