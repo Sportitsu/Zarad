@@ -42,6 +42,32 @@ describe('Club Test Database', function(done){
 			})
 	});
 
+	it('should get Club For a user if passing a name', function(done){
+		chai.request(server)
+			.post('/api/club/getclub')
+			.send({
+				'clubName' : 'Fight-X'
+			})
+			.end(function(err, res){
+				expect(res.status).to.be.equal(200);
+				expect(res.body).to.have.property('username');
+				done();
+			})
+	});
+
+	it('should response with error 500 if passing wrong name for getting club',function(done){
+		chai.request(server)
+			.post('/api/club/getclub')
+			.send({
+				'clubName' : 'NotInList'
+			})
+			.end(function(err, res){
+				expect(res.status).to.be.equal(500);
+				done();
+			})
+	});
+
+
 	it('should return error 500 when collection is empty', function(done){
 		Club.collection.drop();
 		chai.request(server)

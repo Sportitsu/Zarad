@@ -39,6 +39,7 @@ angular.module('zarad.admin',[])
         }
       });
     };
+<<<<<<< HEAD
     // git data from local machine and translate it to 64 base image
      var fileBt = $('<input>').attr('type','file');
      console.log("sdfs")
@@ -46,11 +47,24 @@ angular.module('zarad.admin',[])
       var file = fileBt[0].files[0];
       var reader = new FileReader();
       reader.addEventListener('load', ()=>{
+=======
+  
+    // git data from local machine and translate it to 64 base image
+     var fileBt = $('<input>').attr('type','file');
+
+     fileBt.on('change', function(){
+      var file = fileBt[0].files[0];
+      var reader = new FileReader();
+      reader.addEventListener('load', function(){
+>>>>>>> 12b7eec477b95da6f1533188219648cbe746ee4c
         var imgData = reader.result.slice(23);
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
           $scope.tournament.poster = result.link;
+<<<<<<< HEAD
           console.log($scope.tournament.poster,"sdajkfhafdsfsdkjfhsk")
+=======
+>>>>>>> 12b7eec477b95da6f1533188219648cbe746ee4c
         });
       })
       // using the reader to decode the image to base64
@@ -60,7 +74,10 @@ angular.module('zarad.admin',[])
             
 
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> 12b7eec477b95da6f1533188219648cbe746ee4c
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
@@ -70,6 +87,40 @@ angular.module('zarad.admin',[])
       $location.path('/AdminAction')
     })
   };
+
+  //this is Admin log in pop up 
+  $scope.showPopup = function() {
+ //custom popup to show login box
+ var myPopup = $ionicPopup.show({
+  template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" id="n" placeholder="Enter First Name" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter your password" ng-model="admin.password"></label>',
+  title: '<p>Enter your login information</p>',
+   subTitle: 'Please fill all the fields',
+   scope: $scope,
+   buttons: [
+     { text: 'Cancel',
+     type: 'button button-outline icon icon-left ion-close-round button-dark bt',
+      },
+     {
+       text: '<b>Login</b>',
+       type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
+       onTap: function(e) {
+
+         if (!$scope.admin.username || !$scope.admin.password) {
+           //don't allow the admin to close unless they fill the fields
+           e.preventDefault();
+         } else {
+            $scope.signin();
+            
+         }
+       }
+     },
+   ]
+ });
+ myPopup.then(function(){
+  $scope.admin = '';
+ })
+};
+
 
   $scope.signout=function(){
     Admin.signout();
@@ -103,7 +154,6 @@ angular.module('zarad.admin',[])
     $scope.massage=" ";
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
-      console.log(tournament);
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;
@@ -119,7 +169,7 @@ angular.module('zarad.admin',[])
   $scope.getClubs();
   $scope.getTournaments();
 
-  //delete admin function
+     //delete admin function
   $scope.deleteAdmin = function () {
     
     var remove = $ionicPopup.show({
@@ -230,7 +280,11 @@ angular.module('zarad.admin',[])
   // Create new tournament
   $scope.addTournament = function () {
     var Create = $ionicPopup.show({
+<<<<<<< HEAD
     template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="date" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
+=======
+    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Name" ng-model="tournament.name"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label> <br>',
+>>>>>>> 12b7eec477b95da6f1533188219648cbe746ee4c
     title: '<p>Creating New Tournament</p>',
      subTitle: 'Please fill the following fields',
      scope: $scope,
@@ -296,7 +350,6 @@ angular.module('zarad.admin',[])
          text: '<b>Edit</b>',
          type: 'button button-balanced icon icon-left ion-edit',
          onTap: function(e) {
-          console.log($scope.tournament)
           Tournament.EditTournament($scope.tournament)
           .then(function (resp) {
             $scope.tournament = '';

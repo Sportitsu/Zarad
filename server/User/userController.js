@@ -45,6 +45,7 @@ module.exports= {
 					newObject.age = users[i].age;
 					newObject.image=users[i].image;
 					newObject.middleName = users[i].middleName || 'N/A';
+					newObject.image = users[i].image || 'http://i.imgur.com/FlEXhZo.jpg?1'
 					newArr.push(newObject);
 				}
 				res.status(200).json(newArr);
@@ -140,7 +141,6 @@ module.exports= {
 		User.findOne({username  : req.body.username})
 			.exec(function(err , user){
 				if(user){
-					console.log(user.achievements);
 					user.email = req.body.email || user.email; 
 					user.firstName = req.body.firstName || user.firstName;
 					user.lastName = req.body.lastName || user.lastName;
@@ -154,7 +154,6 @@ module.exports= {
 					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements  
 					user.attendance = req.body.attendance || user.attendance;
 					
-					console.log(user.achievements);
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;

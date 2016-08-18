@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.services',[])
 
-.factory('Auth',function($http,$window,$location){
+.factory('Auth',function($http,$window,$location, $ionicHistory){
 	var signup=function(data){
 		return $http({
 			method: 'POST',
@@ -24,8 +24,10 @@ angular.module('zarad.services',[])
   };
   
   var signout=function(){
-    $window.localStorage.removeItem('user');
-    $window.localStorage.removeItem('com.zarad');
+    localStorage.clear();
+    $window.localStorage.clear();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
     $location.path('/');
   }
  	var isAuth = function () {
@@ -64,7 +66,7 @@ angular.module('zarad.services',[])
 
   var signup = function(admin){
     return $http({
-      method:'POST',
+      method : 'POST',
       url:'http://zarad.herokuapp.com/api/admin/create',
       data:admin
     })
@@ -131,6 +133,24 @@ angular.module('zarad.services',[])
       return data;
     })
   }
+
+
+  var getClubForUser = function(data){
+    return $http({
+      method : 'POST' , 
+      url : 'http://zarad.herokuapp.com/api/club/getclub', 
+      data : data
+    })
+    .success(function(response){
+      return response;
+    })
+    .error(function(error){
+      return error;
+    })
+  } 
+
+
+
     //send club information to server
   var Addclub=function(club){
     return $http({
@@ -170,7 +190,8 @@ angular.module('zarad.services',[])
     getClub:getClub,
     Addclub : Addclub,
     removeClub : removeClub,
-    getClubs : getClubs
+    getClubs : getClubs,
+    getClubForUser : getClubForUser
   }
 })
 .factory('User', function($http){
@@ -196,7 +217,24 @@ angular.module('zarad.services',[])
       return response.data;
     })
     .error(function(data){
+      return data;
+    })
+  };
+
+ 
+
+
+  var deleteUser = function(data){
+    return $http({
+      method : 'POST' , 
+      url : 'http://zarad.herokuapp.com/api/user/delete',
+      data : data
+    })
+    .success(function(response){
       return response.data;
+    })
+    .error(function(data){
+      return data;
     })
   }
 
@@ -215,6 +253,7 @@ angular.module('zarad.services',[])
  return {
    getUser : getUser,
    editProfile : editProfile,
+   deleteUser : deleteUser,
    getAllUsers : getAllUsers
  }
 })
