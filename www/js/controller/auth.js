@@ -48,11 +48,11 @@ angular.module('zarad.auth',[])
         $window.localStorage.setItem('user',resp.user);
         $location.path('/club');
      } else {
-       User.getUser(resp.user)
+        User.getUser(resp.user)
        .then(function(response){
-    		$window.localStorage.setItem('com.zarad', resp.token);
-    		$window.localStorage['user'] = angular.toJson(response.data);
-    		$location.path('/userprofile');
+          $window.localStorage.setItem('com.zarad', resp.token);
+          $window.localStorage['member'] = angular.toJson(response.data);
+          $location.path('/userprofile/home');
        })
        .catch(function(error){
         console.log(error);

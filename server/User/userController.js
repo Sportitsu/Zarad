@@ -45,6 +45,7 @@ module.exports= {
 					newObject.age = users[i].age;
 					newObject.image=users[i].image;
 					newObject.middleName = users[i].middleName || 'N/A';
+					newObject.image = users[i].image || 'http://i.imgur.com/FlEXhZo.jpg?1'
 					newArr.push(newObject);
 				}
 				res.status(200).json(newArr);

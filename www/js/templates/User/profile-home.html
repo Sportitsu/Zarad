@@ -1,29 +1,4 @@
-<ion-view view-title="Home">
-      <ion-content ng-class="{expanded:$scope.isExpanded}">
-        <div class="hero slide-up" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
-            <div class="content">
-                <div class="avatar" ng-click="showOptions()" style="background-image: url('{{data.image}}');"></div>
-                <h3><a class="light" style="color:white">{{data.firstName}}</a></h3>
-                <h4>{{data.club}}</h4>
-            </div>
-        </div>
-        <div class="animate-fade-slide-in-right">
-            <div class="item item-left">
-                <h2>Attendance</h2>
-                <p>{{data.attendance}}</p>
-                <ion-icon ios="logo-apple" md="logo-android"></ion-icon>
-                <h2>Member Since</h2>
-                <p>{{data.Date.substr(0,10)}}</p>
-                <h2>Belt Color</h2>
-                <p>{{data.beltColor}}</p>
-                <h2>Medals</h2>
-                <ul ng-repeat ="medal in achievements track by $index">
-                  <i class="icon logo-apple custom-icon"></i>
-                    <ion-row>
-                        <span>{{medal.place}}</span>{{medal.name}}
-                    </ion-row>
-            </div>
-            <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
-        </div>
-        </ion-content>
-</ion-view>
+<ion-content>
+<h1>This is the home page</h1>
+<p> Under construction </p>
+</ion-content>

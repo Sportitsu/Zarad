@@ -34,6 +34,7 @@ module.exports = function(app){
 	app.post('/api/club/delete', clubController.clubRemove);
 	app.post('/api/club/editProfile', clubController.clubEdit);
 	app.post('/api/club/signin', clubController.signin);
+	app.post('/api/club/getclub', clubController.getClubForUser);
 
 
 
