@@ -66,7 +66,7 @@ angular.module('zarad.services',[])
 
   var signup = function(admin){
     return $http({
-      method:'POST',
+      method : 'POST',
       url:'http://zarad.herokuapp.com/api/admin/create',
       data:admin
     })
