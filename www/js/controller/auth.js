@@ -46,7 +46,7 @@ angular.module('zarad.auth',[])
      if(resp.user.indexOf('Cl') > -1){
         $window.localStorage.setItem('com.zarad', resp.token);
         $window.localStorage.setItem('user',resp.user);
-        $location.path('/clubProfile');
+        $location.path('/club');
      } else {
        User.getUser(resp.user)
        .then(function(response){

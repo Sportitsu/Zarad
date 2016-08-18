@@ -5,10 +5,15 @@ angular.module('zarad.club',[])
 	$scope.clubUsers={};
 	$scope.club={};
 	$scope.usersToSubscribe={};
-	$scope.usersEndedSubs={}
-
-	$scope.view=function(){
-		console.log('ejhhhh')
+	$scope.usersEndedSubs={};
+	$scope.onezoneDatepicker = {
+    date: 'date'
+};
+	$scope.show=function(){
+		if($scope.usersToSubscribe.data )
+			return true
+		else 
+			return false
 	}
 
 	$scope.AddUser=function(){
@@ -86,30 +91,24 @@ angular.module('zarad.club',[])
 
 	$scope.resup=function(){
 	var myPopup = $ionicPopup.show({
-   	template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" id="n" placeholder="Enter First Name" ng-model="user.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter your password" ng-model="user.password"></label>',
+   	template: '<onezone-datepicker datepicker-object="onezoneDatepicker"><button class="button button-block button-outline icon icon-left ion-calendar button-dark bt show-onezone-datepicker">{{onezoneDatepicker.date | date:"dd MMMM yyyy"}} click to pick the date</button></onezone-datepicker>',
    	title: '<p>Enter your login information</p>',
-     subTitle: 'Please fill all the fields',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
        type: 'button button-outline icon icon-left ion-close-round button-dark bt',
         },
        {
-         text: '<b>Login</b>',
+         text: '<b>Regester</b>',
          type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
          onTap: function(e) {
+    	 console.log($scope.onezoneDatepicker.date);
 
-           if (!$scope.user.username || !$scope.user.password) {
-             e.preventDefault();
-           } else {
-             $scope.signin();
-           }
          }
        },
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!');
    });
    $timeout(function() {
       myPopup.close(); //close the popup after 1 minute
@@ -117,6 +116,6 @@ angular.module('zarad.club',[])
 }
 	$scope.getUsers();
 	$scope.getClub();
-	$scope.renew('mihyar','2');
+	//$scope.renew('mihyar','2');
 
 });

@@ -1,6 +1,7 @@
 var app = angular.module('zarad', [
 	'ionic',
   'ionic-material',
+  'onezone-datepicker',
   'zarad.user',
 	'zarad.auth',
 	'zarad.admin',
@@ -65,12 +66,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             }
           }
         })
-        .state('clubprofile',{
-            url:'/clubProfile',
-            templateUrl: 'js/templates/club/clubProfile.html',
+        .state('club',{
+            url:'/club',
+            templateUrl: 'js/templates/club/club.html',
             controller: 'clubController'
         })
-        .state('clubprofile.users', {
+        .state('club.users', {
           url: '/allUsers',
           views: {
             'users-tab': {
@@ -78,7 +79,25 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'clubController'
             }
           }
-        })     
+        })
+        .state('club.profile', {
+          url: '/clubProfile',
+          views: {
+            'profile-tab': {
+              templateUrl: 'js/templates/club/clubProfile.html',
+              controller: 'clubController'
+            }
+          }
+        })
+         .state('club.tournament', {
+          url: '/allTournament',
+          views: {
+            'tournament-tab': {
+              templateUrl: 'js/templates/AllTournament.html',
+              controller: 'TournamentController'
+            }
+          }
+        })    
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');
 	$httpProvider.defaults.transformRequest = function(data) {        
