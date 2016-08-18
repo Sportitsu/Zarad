@@ -1,14 +1,24 @@
 <ion-view>
 	<ion-content>
+      <!-- <form ng-submit="createTask(newtask)"> -->
+        <div class="list">
+          <label class="item item-input">
+            <input type="text" placeholder="What is your next Goal?" ng-model="newtask">
+          </label>
+        </div>
+        <div class="padding">
+          <button type="submit" ng-click="createTask(newtask);newtask=''" class="button button-block button-positive">Set Goal</button>
+        </div>
+      <!-- </form> -->
 		<ion-list ng-controller="UserHomeController"
 		          show-delete="shouldShowDelete"
 		          show-reorder="shouldShowReorder"
 		          can-swipe="listCanSwipe">
-		  <ion-item ng-repeat="todo in todos"
+		  <ion-item ng-model="hint" ng-change="updateTodo()" ng-repeat="todo in todos"
 		            class="list card item-remove-animate">
 			    <h2>{{todo.task}}</h2>
 			    <ion-option-button class="button-assertive"
-			                       ng-click="todos.splice($index, 1)">
+			                       ng-click="todos.splice($index, 1);updateTodo(todo.task)">
 			      Delete
 			    </ion-option-button>
 		  </ion-item>
