@@ -46,7 +46,7 @@ module.exports = function(app){
 	app.post('/api/user/signin' , userController.signin);
 	app.post('/api/user/signup', userController.signup);
 	app.post('/api/user/resub' , userController.resub);
-	app.post('/api/user/goals', uesrController.updateGoal);
+	app.post('/api/user/goals', userController.updateGoal);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
