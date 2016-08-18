@@ -34,10 +34,8 @@ angular.module('zarad.auth',[])
      ]
    });
    myPopup.then(function(res) {
-     console.log('Tapped!');
       $scope.user.username = '';
-       $scope.user.password = '';
-      //$('#n').val("");
+      $scope.user.password = '';
 
    });
    $timeout(function() {
