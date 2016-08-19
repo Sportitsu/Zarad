@@ -12,7 +12,7 @@ module.exports = function(config) {
     // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
 
 
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['jasmine'],
 
 
     // list of files / patterns to load in the browser
@@ -30,7 +30,7 @@ module.exports = function(config) {
       'www/lib/ionic/js/ionic.bundle.js',
       'www/app.js',
       'www/js/**/*.js',
-      'test/front-end/AdminSpec.js',
+      // 'test/front-end/AdminSpec.js',
       //'test/front-end/routingSpec.js',
       'test/front-end/ServicesSpec.js',
       //'test/front-end/profileSpec.js',
