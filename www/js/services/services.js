@@ -330,3 +330,36 @@ angular.module('zarad.services',[])
     DeleteTournament:DeleteTournament
   }
 })
+.factory('Quotes' , function($http){
+  var getQuotes = function(){
+    return $http({
+      url : 'http://zarad.herokuapp.com/api/quotes/get',
+      method : 'GET'
+    })
+    .then(function(response){
+      return response.data;
+    })
+    .catch(function(error){
+      return error;
+    })
+  };
+
+  var addQuote = function(data){
+    return $http({
+      url : 'http://zarad.herokuapp.com/api/quotes/newquote',
+      method : 'POST', 
+      data : data
+    })
+    .then(function(response){
+      return response.data;
+    })
+    .catch(function(error){
+      return error;
+    })
+  };
+
+  return {
+    getQuotes : getQuotes, 
+    addQuote : addQuote
+  }
+})
