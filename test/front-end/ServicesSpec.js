@@ -11,12 +11,13 @@ describe('Services', function () {
   }));
 
   describe('Auth factory', function() {
-    var $httpBackend, Auth;
+    var $httpBackend, Auth, $window;
 
     // Before each test set our injected Auth factory (_Auth_) to our local Users variable
-    beforeEach(inject(function(_$httpBackend_, _Auth_) {
+    beforeEach(inject(function(_$httpBackend_, _Auth_, _$window_) {
       Auth = _Auth_;
       $httpBackend = _$httpBackend_;
+      $window = _$window_;
     }));
 
     // A test to verify the Auth factory exists
@@ -51,10 +52,38 @@ describe('Services', function () {
         });
         $httpBackend.flush();
       });
+    });
+
+  describe('signin()', function(){
+
+      it('should exist', function(){
+        expect(Auth.signin).toBeDefined();
+      });
 
       it('should return token when a user signin', function(){
-        var token = ''
-      })
+        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+
+        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond({token:token});
+        Auth.signin().then(function(resp){
+        expect(resp.token).toEqual(token);
+        });
+        $httpBackend.flush();
+      });
     });
+  describe('signout()', function(){
+
+      it('should exist', function(){
+        expect(Auth.signout).toBeDefined();
+      });
+
+      it('should clear localStorage when logout', function(){
+        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+
+        $window.localStorage.setItem('com.zarad',token);
+        Auth.signout();
+        expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+      });
+  });
+
   });
 });
