@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.services',[])
 
-.factory('Auth',function($http,$window,$location, $ionicHistory){
+.factory('Auth',function($http,$window,$location){
 	var signup=function(data){
 		return $http({
 			method: 'POST',
@@ -26,8 +26,6 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
     $location.path('/');
   }
  	var isAuth = function () {
