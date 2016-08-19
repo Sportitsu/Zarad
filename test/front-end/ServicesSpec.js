@@ -136,6 +136,36 @@ describe('Services', function () {
         $httpBackend.flush();
       });
   });
+  describe('signup()', function(){
+
+      it('should exist', function(){
+        expect(Admin.signup).toBeDefined();
+      });
+
+      it('should signup a new Admin', function(){
+        var mockAdmin = 
+        {
+          'username' : 'power',
+          'firstName' : 'education',
+          'email' : 'RBK@gmail.com',
+          'status' : 201
+        }
+        $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(mockAdmin);
+        Admin.signup().then(function(resp){
+          expect(resp.status).toEqual(201);
+          expect(resp.username).toEqual('power');
+          expect(resp.password).toEqual(undefined);
+          expect(resp.email).toEqual('RBK@gmail.com');
+        });
+        $httpBackend.flush();
+      });
+  });
+  describe('signout()', function(){
+
+      it('should exist', function(){
+        expect(Admin.signout).toBeDefined();
+      });
+  });
 
   });
 });
