@@ -221,7 +221,19 @@ angular.module('zarad.services',[])
     })
   };
 
- 
+ var updateGoal = function(data){
+  return $http({
+    method : 'POST' , 
+    url : 'http://zarad.herokuapp.com/api/user/goals' , 
+    data : data
+  })
+  .then(function(response){
+    return response;
+  })
+  .catch(function(error){
+    return error;
+  })
+ }
 
 
   var deleteUser = function(data){
@@ -252,6 +264,7 @@ angular.module('zarad.services',[])
   }
  return {
    getUser : getUser,
+   updateGoal : updateGoal,
    editProfile : editProfile,
    deleteUser : deleteUser,
    getAllUsers : getAllUsers
