@@ -40,14 +40,12 @@ describe('Services', function () {
             'firstName' : 'Mihyar',
             'lastName' : 'almaslama',
             'country' : 'Syria',
-            'email' : 'mihyar@gmail.com',
-            'status' : 201
+            'email' : 'mihyar@gmail.com'
           }
 
-        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(mockResponse);
+        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
 
         Auth.signup().then(function (resp) {
-          expect(resp.status).toEqual(201);
           expect(resp.username[0]).toEqual('P');
           expect(resp.username[1]).toEqual('l');
         });
@@ -62,7 +60,7 @@ describe('Services', function () {
       });
 
       it('should return token when a user signin', function(){
-        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond({token:token});
+        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond(200,{token:token});
         Auth.signin().then(function(resp){
         expect(resp.token).toEqual(token);
         });
@@ -111,6 +109,21 @@ describe('Services', function () {
 
   describe('Admin factory', function(){
       var $httpBackend, Admin, $window;
+      var mockResponse = [
+        {
+          username : "mihyar",
+          email : "mihyar@gmail.com",
+          firstName : "mihyar",
+          lastName : "almasalma",
+          _id : "57aaebbde482740300f4e0ee"
+        },{
+          username : "mohammad",
+          email : "mohammad@gmail.com",
+          firstName : "Mohammad",
+          lastName : "Al-Bakri",
+          _id : "57b5735791804d0300a2f7d5"
+        }
+        ];
 
       beforeEach(inject(function(_$httpBackend_, _Admin_, _$window_){
         $httpBackend = _$httpBackend_;
@@ -129,7 +142,7 @@ describe('Services', function () {
       });
 
       it('should return a token when Admin signin', function(){
-        $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond({token:token});
+        $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond(200,{token:token});
         Admin.signin().then(function(resp){
         expect(resp.token).toEqual(token);
         });
@@ -147,12 +160,10 @@ describe('Services', function () {
         {
           'username' : 'power',
           'firstName' : 'education',
-          'email' : 'RBK@gmail.com',
-          'status' : 201
+          'email' : 'RBK@gmail.com'
         }
-        $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(mockAdmin);
+        $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(201,mockAdmin);
         Admin.signup().then(function(resp){
-          expect(resp.status).toEqual(201);
           expect(resp.username).toEqual('power');
           expect(resp.password).toEqual(undefined);
           expect(resp.email).toEqual('RBK@gmail.com');
@@ -179,26 +190,25 @@ describe('Services', function () {
       });
 
       it('should return an array of admins 200(Success)', function(){
-        var mockResponse = [
-        {
-          username : "mihyar",
-          email : "mihyar@gmail.com",
-          firstName : "mihyar",
-          lastName : "almasalma",
-          _id : "57aaebbde482740300f4e0ee"
-        },{
-          username : "mohammad",
-          email : "mohammad@gmail.com",
-          firstName : "Mohammad",
-          lastName : "Al-Bakri",
-          _id : "57b5735791804d0300a2f7d5"
-        }
-        ];
 
-        $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(mockResponse);
+        $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(200,mockResponse);
         Admin.getAdmins().then(function(resp){
           expect(resp[0].username).toEqual('mihyar');
           expect(resp[1].username).toEqual('mohammad');
+        });
+        $httpBackend.flush();
+      });
+  });
+  describe('deleteAdmin()',function(){
+
+      it('should exist', function(){
+        expect(Admin.deleteAdmin).toBeDefined();
+      });
+
+      it('should remove existing admin 201(Success)', function(){
+        $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,mockResponse);
+        Admin.deleteAdmin(mockResponse[0].username).then(function(resp){
+          expect(resp).toEqual(mockResponse);
         });
         $httpBackend.flush();
       });
