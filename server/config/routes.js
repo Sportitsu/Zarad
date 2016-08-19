@@ -1,11 +1,11 @@
 'use strict';
-// TODO DELETE ADMIN 
 // Require all the controller functions here 
 var helpers = require('./helpers.js'); // our custom middleware
 var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
 var tournamentController = require('../Tournament/tournamentController');
+var quoteController = require('../Quotes/quotesController');
 
 // Waiting for database setup 
 module.exports = function(app){
@@ -23,8 +23,6 @@ module.exports = function(app){
 	app.post('/api/tournament/create', tournamentController.addTournament);
 	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
 	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
-
-
 
 
 	// Club Page Routes
@@ -47,6 +45,10 @@ module.exports = function(app){
 	app.post('/api/user/signup', userController.signup);
 	app.post('/api/user/resub' , userController.resub);
 	app.post('/api/user/goals', userController.updateGoal);
+
+	// Quote Routes
+	app.get('/api/quotes/get', quoteController.getQuotes);
+	app.post('/api/quotes/newquote', quoteController.addQuote);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
