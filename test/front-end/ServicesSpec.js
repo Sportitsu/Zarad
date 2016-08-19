@@ -172,6 +172,37 @@ describe('Services', function () {
         expect($window.localStorage.getItem('com.zarad')).toEqual(null);
       });
   });
+  describe('getAdmins()', function(){
+
+      it('should exist', function(){
+        expect(Admin.getAdmins).toBeDefined();
+      });
+
+      it('should return an array of admins 200(Success)', function(){
+        var mockResponse = [
+        {
+          username : "mihyar",
+          email : "mihyar@gmail.com",
+          firstName : "mihyar",
+          lastName : "almasalma",
+          _id : "57aaebbde482740300f4e0ee"
+        },{
+          username : "mohammad",
+          email : "mohammad@gmail.com",
+          firstName : "Mohammad",
+          lastName : "Al-Bakri",
+          _id : "57b5735791804d0300a2f7d5"
+        }
+        ];
+
+        $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(mockResponse);
+        Admin.getAdmins().then(function(resp){
+          expect(resp[0].username).toEqual('mihyar');
+          expect(resp[1].username).toEqual('mohammad');
+        });
+        $httpBackend.flush();
+      });
+  });
 
   });
 });
