@@ -1,6 +1,7 @@
 'use strict';
 
 describe('Services', function () {
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
   var baseUrl = 'http://zarad.herokuapp.com';
   // Before each test load our lets-hangout.services module
   beforeEach(angular.mock.module('zarad.services'));
@@ -61,8 +62,6 @@ describe('Services', function () {
       });
 
       it('should return token when a user signin', function(){
-        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
-
         $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond({token:token});
         Auth.signin().then(function(resp){
         expect(resp.token).toEqual(token);
@@ -77,8 +76,6 @@ describe('Services', function () {
       });
 
       it('should clear localStorage when logout', function(){
-        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
-
         $window.localStorage.setItem('com.zarad',token);
         Auth.signout();
         expect($window.localStorage.getItem('com.zarad')).toEqual(null);
@@ -103,7 +100,6 @@ describe('Services', function () {
       })
 
       it('should return admin when admin logs in and user when user or club logs in', function(){
-        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
         $window.localStorage.setItem('admin', token);
         expect(Auth.checkUser()).toEqual('admin');
         $window.localStorage.clear();
@@ -111,6 +107,35 @@ describe('Services', function () {
         expect(Auth.checkUser()).toEqual('user');
       });
     });
+  });
+
+  describe('Admin factory', function(){
+      var $httpBackend, Admin, $window;
+
+      beforeEach(inject(function(_$httpBackend_, _Admin_, _$window_){
+        $httpBackend = _$httpBackend_;
+        Admin = _Admin_;
+        $window = _$window_;
+      }));
+
+      it('Admin factory should exist', function(){
+        expect(Admin).toBeDefined();
+      });
+
+  describe('signin()', function(){
+
+      it('should exist',function(){
+        expect(Admin.signin).toBeDefined();
+      });
+
+      it('should return a token when Admin signin', function(){
+        $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond({token:token});
+        Admin.signin().then(function(resp){
+        expect(resp.token).toEqual(token);
+        });
+        $httpBackend.flush();
+      });
+  });
 
   });
 });
