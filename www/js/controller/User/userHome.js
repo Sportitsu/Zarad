@@ -1,11 +1,12 @@
 angular.module('zarad.home', ['ionic'])
-.controller('UserHomeController' , function($scope, $state, Todo){
+.controller('UserHomeController' , function($scope, $state, Todo, User, $window){
 	$scope.shouldShowDelete = false;
 	$scope.shouldShowReorder = false;
-	$scope.listCanSwipe = true
+	$scope.listCanSwipe = true;
+	$scope.data = JSON.parse($window.localStorage.member);
 	// $scope.todo = {};
-	$scope.todos = Todo.list();
-
+	$scope.todos = $scope.data.goals;
+	console.log($scope.todos);
 
 
 	$scope.updateTodo = function(goalDone){
@@ -13,11 +14,13 @@ angular.module('zarad.home', ['ionic'])
 	}
 
 	$scope.createTask = function(recentTask){
-		$scope.todos.push({task : recentTask });
+		User.updateGoal({ goal : { title : recentTask} , method : 1});
+		// $scope.todos.push({task : recentTask });
 	}
  
 })
-.service('Todo', function(User) { 
+.service('Todo', function(User, $window) { 
+	
 	var todos = [
 	  { task  : 'Eat Healthy Food'}
 	  ,
@@ -26,6 +29,9 @@ angular.module('zarad.home', ['ionic'])
 	  {task : 'Run 1000 M in 2 minutes'}
 	]
     this.list = function() {
+    	console.log(member.username);
+    	User.updateGoal()
+
         return todos;
     }
  
