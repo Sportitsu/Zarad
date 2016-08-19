@@ -14,9 +14,9 @@
 		          can-swipe="listCanSwipe">
 		  <ion-item ng-model="hint" ng-change="updateTodo()" ng-repeat="todo in todos"
 		            class="list card item-remove-animate">
-			    <h2>{{todo.task}}</h2>
+			    <h2>{{todo.title}}</h2>
 			    <ion-option-button class="button-assertive"
-			                       ng-click="todos.splice($index, 1);updateTodo(todo.task)">
+			                       ng-click="todos.splice($index, 1);updateTodo(todo.title)">
 			      Delete
 			    </ion-option-button>
 		  </ion-item>
