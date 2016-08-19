@@ -1,5 +1,5 @@
 angular.module('zarad.home', ['ionic'])
-.controller('UserHomeController' , function($scope, $state, Todo, User, $window){
+.controller('UserHomeController' , function($scope, $state, User, $window){
 	$scope.shouldShowDelete = false;
 	$scope.shouldShowReorder = false;
 	$scope.listCanSwipe = true;
@@ -11,13 +11,29 @@ angular.module('zarad.home', ['ionic'])
 
 	$scope.updateTodo = function(goalDone){
 		// Todo is delete the goalDone from the Database
+		console.log(goalDone);
+		User.updateGoal({
+			    "username" : $scope.data.username , 
+			    "goal" : { "title" : goalDone } ,
+			    "method" : "-1"})
+			.then(function(response){
+				console.log(response);
+			})
+			.catch(function(error){
+				console.log(error);
+			})
 	}
 
 	$scope.createTask = function(recentTask){
-		User.updateGoal({ goal : { title : recentTask} , method : 1});
-		// $scope.todos.push({task : recentTask });
-	}
- 
+		User.updateGoal({ username : $scope.data.username ,  goal : { title : recentTask} , method : 1})
+			.then(function(response){
+				console.log(response.data.goals);
+				$scope.todos = response.data.goals;
+			})
+			.catch(function(error){
+				console.log(error);
+			})
+ 	}
 })
 .service('Todo', function(User, $window) { 
 	
