@@ -1,6 +1,5 @@
 <ion-view>
 	<ion-content>
-      <!-- <form ng-submit="createTask(newtask)"> -->
         <div class="list">
           <label class="item item-input">
             <input type="text" placeholder="What is your next Goal?" ng-model="newtask">
@@ -9,8 +8,7 @@
         <div class="padding">
           <button type="submit" ng-click="createTask(newtask);newtask=''" class="button button-block button-positive">Set Goal</button>
         </div>
-      <!-- </form> -->
-		<ion-list ng-controller="UserHomeController"
+		<ion-list
 		          show-delete="shouldShowDelete"
 		          show-reorder="shouldShowReorder"
 		          can-swipe="listCanSwipe">
