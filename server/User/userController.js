@@ -225,12 +225,8 @@ module.exports= {
 							user.goals = [];
 						}
 						user.goals.push(goal);
-					} else { 
-						if(goal.title){
+					} else if(method < 0){ 
 							user.goals.splice(user.goals.indexOf(goal.title),1);
-						} else {
-							helpers.errorHandler('Passing Wrong Key to Update', req,res);
-						}
 					}
 					user.save(function(err,saved){
 						if(saved){
