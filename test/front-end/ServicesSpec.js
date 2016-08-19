@@ -96,6 +96,21 @@ describe('Services', function () {
         expect(Auth.isAuth()).toEqual(true);
       });
   });
+  describe('checkUser()', function(){
+
+      it('should exist', function(){
+        expect(Auth.isAuth).toBeDefined();
+      })
+
+      it('should return admin when admin logs in and user when user or club logs in', function(){
+        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+        $window.localStorage.setItem('admin', token);
+        expect(Auth.checkUser()).toEqual('admin');
+        $window.localStorage.clear();
+        $window.localStorage.setItem('user', token);
+        expect(Auth.checkUser()).toEqual('user');
+      });
+    });
 
   });
 });
