@@ -109,7 +109,7 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-.factory('Club',function($http){
+.factory('Club',function($http, $window, $location, $ionicHistory){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -149,8 +149,6 @@ angular.module('zarad.services',[])
     })
   } 
 
-
-
     //send club information to server
   var Addclub=function(club){
     return $http({
@@ -184,14 +182,34 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
+
+  var editClub=function(data){
+    return $http({
+      method:'POST',
+      url:'http://zarad.herokuapp.com/api/club/editProfile',
+      data:data
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  }
   
+  var signout=function(){
+    localStorage.clear();
+    $window.localStorage.clear();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
+    $location.path('/');
+  }
   return{
     AddUser : AddUser,
     getClub:getClub,
     Addclub : Addclub,
     removeClub : removeClub,
     getClubs : getClubs,
-    getClubForUser : getClubForUser
+    getClubForUser : getClubForUser,
+    editClub: editClub,
+    signout: signout
   }
 })
 .factory('User', function($http){

@@ -1,0 +1,46 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Edit&nbsp;{{club.data.clubName}}&nbsp;Profile</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+
+  <ion-content>
+    <form>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">User Name</span>
+          <input type="text" placeholder="Edit User Name" ng-model="club.data.username" ng-value="club.data.username" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Club Name</span>
+          <input type="text" placeholder="Edit Club Name" ng-model="club.data.newClubName" ng-value="club.data.clubName" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Country</span>
+          <input type="text" placeholder="Edit Country Name" ng-model="club.data.country" ng-value="club.data.country">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">ChannelID</span>
+          <input type="text" placeholder="Change ChannelID" ng-model="club.data.channelId" ng-value="club.data.channelId" >
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">Image</span>
+          <input type="text" placeholder="Change Club Logo" ng-model="club.data.Image" ng-value="club.data.Image" >
+        </label>
+
+        <label class = "col text-right button icon ion-locked button-stable" ng-click="showPassWord()">  Change Password</label>
+        <div style="text-align: center">
+          <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancel()">Cancel Edit</button>
+          <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirm()">Finished Edit</button>
+        </div>
+
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

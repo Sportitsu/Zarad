@@ -1,6 +1,6 @@
 'use strict';
 angular.module('zarad.club',[])
-.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout){
+.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
 	$scope.clubUser={};
 	$scope.clubUsers={};
 	$scope.club={};
@@ -8,9 +8,75 @@ angular.module('zarad.club',[])
 	$scope.usersEndedSubs={};
 	$scope.onezoneDatepicker = {
     date: 'date'
-};
+	};
+
+
+	$scope.showClubAction = function() {
+		var hideSheet = $ionicActionSheet.show({
+		 buttons: [
+		   { text: '<span>Add User</span>' },
+		   { text: '<span>Edit Profile</span>'},
+		   { text: '<span>Logout</span>'}
+		 ],
+		 cancelText: '<b>Cancel</b>',
+		 cancel: function() {
+		      console.log('Canceled');
+		    },
+		 buttonClicked: function(index) {
+		   if(index === 0 ){
+			    $location.path('/club/addUser')
+			    hideSheet();
+		   } else if(index === 2){
+				Club.signout();
+				hideSheet();
+		   } else {
+		   		$scope.modal.show();
+		   	    hideSheet();
+		   	}
+		  }
+		});
+	};
+
+	$ionicModal.fromTemplateUrl('js/templates/club/editProfile.html', {
+			scope: $scope
+		}).then(function(modal) {
+			$scope.modal = modal;
+	});
+
+	$scope.showPassWord=function(){
+
+	}
+
+	$scope.cancel=function(){
+		$scope.modal.hide();
+	}
+
+	$scope.confirm=function(){
+	var confirmPopup = $ionicPopup.confirm({
+     title: 'Are you sure of your edit',
+     template: ''
+    });
+    confirmPopup.then(function(res) {
+     if(res) {
+     	$scope.edit();
+     } else {
+       console.log('You are not sure');
+       $scope.modal.hide();
+     	}
+     });
+	};
+
+	$scope.edit=function(){
+		console.log($scope.club.data)
+		Club.editClub($scope.club.data).then(function(resp){
+			console.log(resp);
+			$scope.modal.hide();
+		})
+	}
+
+	
 	$scope.show=function(){
-		if($scope.usersToSubscribe.data )
+		if($scope.usersToSubscribe.data)
 			return true
 		else 
 			return false
@@ -117,5 +183,4 @@ angular.module('zarad.club',[])
 	$scope.getUsers();
 	$scope.getClub();
 	//$scope.renew('mihyar','2');
-
-});
+})
