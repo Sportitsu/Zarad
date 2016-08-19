@@ -20,7 +20,6 @@ angular.module('zarad.home', ['ionic'])
 				console.log(error);
 			})
 	}
-
 	$scope.createTask = function(recentTask){
 		User.updateGoal({ username : $scope.data.username ,  goal : { title : recentTask} , method : 1})
 			.then(function(response){
@@ -31,5 +30,5 @@ angular.module('zarad.home', ['ionic'])
 				console.log(error);
 			})
  	}
-})
+});
 

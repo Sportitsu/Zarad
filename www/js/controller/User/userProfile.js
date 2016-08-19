@@ -136,7 +136,6 @@ angular.module('zarad.user',['ionic'])
    }
 
    $scope.closeLogin = function(){
-    console.log('clicked');
      $scope.friends.hide();
    }
 

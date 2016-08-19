@@ -227,10 +227,10 @@ angular.module('zarad.services',[])
     url : 'http://zarad.herokuapp.com/api/user/goals' , 
     data : data
   })
-  .then(function(response){
+  .success(function(response){
     return response;
   })
-  .catch(function(error){
+  .error(function(error){
     return error;
   })
  }
