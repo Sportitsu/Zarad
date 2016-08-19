@@ -165,6 +165,12 @@ describe('Services', function () {
       it('should exist', function(){
         expect(Admin.signout).toBeDefined();
       });
+
+      it('shoudl clear localStorage on signout', function(){
+        $window.localStorage.setItem('com.zarad',token);
+        Admin.signout();
+        expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+      });
   });
 
   });
