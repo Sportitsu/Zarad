@@ -84,6 +84,18 @@ describe('Services', function () {
         expect($window.localStorage.getItem('com.zarad')).toEqual(null);
       });
   });
+  describe('isAuth()', function(){
+
+      it('should exist', function(){
+        expect(Auth.isAuth).toBeDefined();
+      });
+
+      it('should return true if the user is signed in', function(){
+        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+        $window.localStorage.setItem('com.zarad', token);
+        expect(Auth.isAuth()).toEqual(true);
+      });
+  });
 
   });
 });
