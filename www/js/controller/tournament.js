@@ -1,5 +1,5 @@
 'use strict';
-angular.module('zarad.tournament',[])
+angular.module('zarad.tournament',['ionic'])
 
 .controller('TournamentController',function($scope, $window, $location,Tournament){
 	$scope.AllTournament={};
@@ -9,5 +9,14 @@ angular.module('zarad.tournament',[])
 			$scope.AllTournament.data=AllTournament;
 		})
 	}
-		$scope.getAllTournament();
+	$scope.getAllTournament();
+
+
+  /*$ionicModal.fromTemplateUrl('modal.html', {
+    scope: $scope
+  }).then(function(modal) {
+  	console.log("dsf")
+    $scope.modal = modal;
+  });*/
+ 
 })

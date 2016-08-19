@@ -4,7 +4,7 @@ angular.module('zarad.admin',[])
 
 .controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament){
   $scope.admin={};
-	$scope.club = {};
+  $scope.club = {};
   $scope.tournament = {};
   $scope.user={};
   $scope.admins={};
@@ -336,4 +336,3 @@ angular.module('zarad.admin',[])
    });
   };
 });
-

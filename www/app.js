@@ -1,8 +1,8 @@
 var app = angular.module('zarad', [
-	'ionic',
+  'ionic',
   'ionic-material',
   'zarad.user',
-	'zarad.auth',
+  'zarad.auth',
   'zarad.admin',
   'zarad.club',
   'youtube-embed',
@@ -13,7 +13,7 @@ var app = angular.module('zarad', [
   'ui.router',
   'zarad.videos'
   
-	]);
+  ]);
 
 app.config(function($sceDelegateProvider) 
 {
@@ -28,9 +28,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
     $stateProvider
         .state('/', {
-        	url: '/',
-		    templateUrl: 'js/templates/home.html',
-		    controller:'AuthController'
+          url: '/',
+        templateUrl: 'js/templates/home.html',
+        controller:'AuthController'
         })
         .state('signin', {
             url:'/signin',
@@ -38,14 +38,14 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller:'AuthController'
         })
         .state('adminmain',{
-        	url:'/AdminMain',
-        	templateUrl:'js/templates/AdminMain.html',
-        	controller:'AdminController'
+          url:'/AdminMain',
+          templateUrl:'js/templates/AdminMain.html',
+          controller:'AdminController'
         })
         .state('adminaction',{
-        	url:'/AdminAction',
-        	templateUrl: 'js/templates/AdminAction.html',
-        	controller: 'AdminController'
+          url:'/AdminAction',
+          templateUrl: 'js/templates/AdminAction.html',
+          controller: 'AdminController'
         })
         .state('AllTournament',{
             url:'/AllTournament',
@@ -98,12 +98,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           }
         })     
         $urlRouterProvider.otherwise('/');
-	// $httpProvider.interceptors.push('AttachTokens');
-	$httpProvider.defaults.transformRequest = function(data) {        
-	    if (data === undefined) { return data; } 
-	    return $.param(data);
-	};
-	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+  // $httpProvider.interceptors.push('AttachTokens');
+  $httpProvider.defaults.transformRequest = function(data) {        
+      if (data === undefined) { return data; } 
+      return $.param(data);
+  };
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 })
 .run(function($rootScope, $state, $location , Auth, $ionicPlatform){
  $ionicPlatform.ready(function() {
