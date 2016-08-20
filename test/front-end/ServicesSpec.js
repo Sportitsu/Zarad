@@ -317,8 +317,41 @@ describe('Services', function () {
             expect(resp).toEqual('Club Deleted');
         });
         $httpBackend.flush();
-      })
+      });
   });
+
+  describe('getClubs()', function(){
+
+      it('should exist', function(){
+        expect(Club.getClubs).toBeDefined();
+      });
+
+      it('should return an array of all the clubs', function(){
+
+        var mockClubs = [{
+              'username':'Clmiha492',
+              'firstName' : 'Mihyar',
+              'lastName' : 'almaslama',
+              'country' : 'Syria',
+              'email' : 'mihyar@gmail.com', 
+              'clubName' : 'Makhai'
+            },{
+              'username' : 'Clazoz793',
+              'firstName' : 'azoz',
+              'lastName' : 'Alrawi',
+              'country' : 'Iraq',
+              'email' : 'azoz@gmail.com',
+              'clubName' : 'azoz international'
+            }]
+
+          $httpBackend.expect('GET', baseUrl + '/api/clubs').respond(200,mockClubs);
+          Club.getClubs().then(function(resp){
+            expect(resp).toEqual(mockClubs);
+          });
+        $httpBackend.flush();
+      });
+    });
+
 
   });
 });
