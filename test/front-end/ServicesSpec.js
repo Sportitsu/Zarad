@@ -574,6 +574,22 @@ describe('Services', function () {
           });
           $httpBackend.flush();
         });
-    })
+    });
+
+    describe('DeleteTournament()', function(){
+
+        it('should exist', function(){
+          expect(Tournament.DeleteTournament).toBeDefined();
+        });
+
+        it('should delete existing tournament', function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/delete').respond(201,'Tournament Deleted');
+          Tournament.DeleteTournament(mockResponse.name).then(function(resp){
+            expect(resp).toEqual('Tournament Deleted');
+          });
+          $httpBackend.flush();
+        });
+    });
   });
 });
