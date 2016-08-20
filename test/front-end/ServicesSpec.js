@@ -518,7 +518,7 @@ describe('Services', function () {
 
         var tournamentsArray = [
                                 {
-                                  "Date": "21/6/2016",
+                                  "name": "test",
                                   "place": "ReBootKamp",
                                   "organizer": "RBK2",
                                   "details": "This is a tournament hosted by RBK"
@@ -536,7 +536,21 @@ describe('Services', function () {
         });
         $httpBackend.flush();
       });
+    });
 
+    describe('SearchAboutTournament()', function(){
+
+        it('should exist', function(){
+          expect(Tournament.SearchAboutTournament).toBeDefined();
+        });
+
+        it('should be able to search for a tournament', function(){
+          $httpBackend.expect('GET', baseUrl + '/api/tournament/x/'+ mockResponse.name).respond(mockResponse);
+          Tournament.SearchAboutTournament(mockResponse.name).then(function(resp){
+            expect(resp.data).toEqual(mockResponse);
+          });
+          $httpBackend.flush();
+        });
     });
   });
 });
