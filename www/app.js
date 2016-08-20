@@ -48,6 +48,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller:'TournamentController'
         }) 
         .state('userProfile',{
+            cache : false,
             url : '/userprofile',
             templateUrl : 'js/templates/User/userProfile.html',
             absract : true
