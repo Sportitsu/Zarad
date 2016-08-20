@@ -492,7 +492,7 @@ describe('Services', function () {
         expect(Tournament).toBeDefined();
       });
 
-    describe('AddTournament', function(){
+    describe('AddTournament()', function(){
 
       it('should exist', function(){
         expect(Tournament.AddTournament).toBeDefined();
@@ -502,12 +502,41 @@ describe('Services', function () {
 
         $httpBackend.expect('POST', baseUrl + '/api/tournament/create').respond(201,mockResponse);
         Tournament.AddTournament(mockResponse).then(function(resp){
-          expect(resp).toEqual(mockResponse);
+          expect(resp.data).toEqual(mockResponse);
         });
         $httpBackend.flush();
       });
     });
 
-    
+    describe('getAllTournament()', function(){
+
+      it('should exist', function(){
+        expect(Tournament.getAllTournament).toBeDefined();
+      });
+
+      it('Should return an array of all tournaments', function(){
+
+        var tournamentsArray = [
+                                {
+                                  "Date": "21/6/2016",
+                                  "place": "ReBootKamp",
+                                  "organizer": "RBK2",
+                                  "details": "This is a tournament hosted by RBK"
+                                },
+                                {
+                                  "name": "dsaf",
+                                  "place": "jordan",
+                                  "organizer": "ww",
+                                  "details": "jordan"
+                                }];
+
+        $httpBackend.expect('GET', baseUrl + '/api/tournament/tournaments').respond(200,tournamentsArray);
+        Tournament.getAllTournament().then(function(resp){
+          expect(resp).toEqual(tournamentsArray);
+        });
+        $httpBackend.flush();
+      });
+
+    });
   });
 });
