@@ -472,4 +472,42 @@ describe('Services', function () {
     });
   });
 /////////////////////////////// Tournament tests ////////////////////////////
+  describe('Tournament factory', function(){
+    var $httpBackend, Tournament;
+
+    var mockResponse = {
+                      "name": "test",
+                      "Date": "21/6/2016",
+                      "place": "ReBootKamp",
+                      "organizer": "RBK2",
+                      "details": "This is a tournament hosted by RBK"
+                    };
+
+    beforeEach(inject(function(_$httpBackend_, _Tournament_){
+      $httpBackend = _$httpBackend_;
+      Tournament = _Tournament_;
+    }));
+
+      it('should exist', function(){
+        expect(Tournament).toBeDefined();
+      });
+
+    describe('AddTournament', function(){
+
+      it('should exist', function(){
+        expect(Tournament.AddTournament).toBeDefined();
+      });
+
+      it('should be able to add new tournament', function(){
+
+        $httpBackend.expect('POST', baseUrl + '/api/tournament/create').respond(201,mockResponse);
+        Tournament.AddTournament(mockResponse).then(function(resp){
+          expect(resp).toEqual(mockResponse);
+        });
+        $httpBackend.flush();
+      });
+    });
+
+    
+  });
 });
