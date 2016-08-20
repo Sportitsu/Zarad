@@ -164,9 +164,9 @@ describe('Services', function () {
           }
           $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(201,mockAdmin);
           Admin.signup().then(function(resp){
-            expect(resp.username).toEqual('power');
+            expect(resp.username).toEqual(mockAdmin.username);
             expect(resp.password).toEqual(undefined);
-            expect(resp.email).toEqual('RBK@gmail.com');
+            expect(resp.email).toEqual(mockAdmin.email);
           });
           $httpBackend.flush();
         });
@@ -253,6 +253,40 @@ describe('Services', function () {
       });
       $httpBackend.flush();
     });
+  });
+
+  describe('getClub()', function(){
+
+    it('should exist', function(){
+      expect(Club.getClub).toBeDefined();
+    });
+
+    it('should return a club given a club username', function(){
+      var username = mockResponse.username;
+
+        $httpBackend.expect('GET', baseUrl + '/api/club/x/'+username).respond(200, mockResponse);
+        Club.getClub(username).then(function(resp){
+          expect(resp.username).toEqual(mockResponse.username);
+        });
+        $httpBackend.flush();
+    });
+  });
+
+  describe('getClubForUser', function(){
+
+    it('should exist', function(){
+      expect(Club.getClubForUser).toBeDefined();
+    });
+
+    it('should return the Club information by clubName', function(){
+
+      $httpBackend.expect('POST', baseUrl + '/api/club/getclub').respond(200,mockResponse);
+      Club.getClubForUser(mockResponse.clubName).then(function(resp){
+        expect(resp.data.clubName).toEqual(mockResponse.clubName);
+      });
+      $httpBackend.flush();
+    });
+
   });
 
   });
