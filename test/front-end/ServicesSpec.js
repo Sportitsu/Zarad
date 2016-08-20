@@ -435,6 +435,41 @@ describe('Services', function () {
         });
     });
 
+    describe('getAllUsers()', function(){
 
+      var usersArray = [
+                  {
+                    "username": "mihyar",
+                    "email": "mihyar@gmail.com",
+                    "firstName": "Mohammad",
+                    "lastName": "Albakri",
+                    "club": "fit",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  },
+                  {
+                    "username": "mohammad",
+                    "email": "mohammad@gmail.com",
+                    "firstName": "Gisela",
+                    "lastName": "RBK",
+                    "club": "Makhai",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  }];
+        
+        it('should exist', function(){
+          expect(User.getAllUsers).toBeDefined();
+        });
+
+        it('should return an array of all the users', function(){
+
+          $httpBackend.expect('GET', baseUrl + '/api/users').respond(200, usersArray);
+          User.getAllUsers().then(function(resp){
+            expect(resp.data).toEqual(usersArray);
+          });
+          $httpBackend.flush();
+        });
+    });
   });
+/////////////////////////////// Tournament tests ////////////////////////////
 });
