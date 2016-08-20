@@ -310,22 +310,13 @@ angular.module('zarad.services',[])
     });
   };
 
-  var getSearchTournament=function(Tournament){
-    return $http({
-      method:'GET',
-      url: '/api/tournament/y/'+Tournament
-      
-    })
-    .then(function(resp){
-      return resp.data;
-    });
-  }
+  
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
     DeleteTournament:DeleteTournament,
-    getSearchTournament:getSearchTournament
+    
   }
 })
