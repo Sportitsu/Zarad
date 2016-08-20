@@ -4,7 +4,7 @@ angular.module('zarad.user',['ionic'])
  
  $scope.data = JSON.parse($window.localStorage.member);
  $scope.achievements = $scope.data.achievements;
-   
+ $scope.noMedal = false;
     for(var i = 0; i < $scope.achievements.length; i++){
       if($scope.achievements[i].place === '1' ){
         $scope.achievements[i].place = 'First Place ';
@@ -13,6 +13,9 @@ angular.module('zarad.user',['ionic'])
       } else if($scope.achievements[i].place === '3' ){
         $scope.achievements[i].place = 'Third Place ';
       }
+    }
+    if($scope.achievements.length === 0){
+      $scope.noMedal = true;
     }
 
     $scope.showOptions = function(){
@@ -156,11 +159,11 @@ angular.module('zarad.user',['ionic'])
 
 
    $scope.showProfile = function(objectFriend){
+    $scope.friendMedal = false;
     $scope.displayFriend = objectFriend;
     $scope.friendAchievements = objectFriend.achievements;
+    console.log(objectFriend.achievements);
     for(var i = 0; i < $scope.friendAchievements.length; i++){
-      console.log($scope.friendAchievements[i]);
-      console.log(1);
       if($scope.friendAchievements[i].place === '1' ){
         $scope.friendAchievements[i].place = 'First Place ';
       } else if($scope.friendAchievements[i].place === '2' ){
@@ -169,48 +172,33 @@ angular.module('zarad.user',['ionic'])
         $scope.friendAchievements[i].place = 'Third Place ';
       }
     }
+    if($scope.friendAchievements.length === 0){
+      $scope.friendMedal = true;
+    }
     $scope.friendProfile.show();
 
    }
    $scope.goBack = function(){
     $scope.friendProfile.hide();
    }    
-
-     // setInterval(function(){
-     //  User.getUser($scope.data.username)
-     //      .then(function(response){
-     //        if(JSON.stringify(response.data) !== $window.localStorage.member){
-     //          $scope.data = response.data;
-     //        }
-     //      })
-     //      .catch(function(error){
-     //        console.log(error);
-     //      })
-     // },3000)
-
          // Set Header    
-      $scope.isExpanded = false;
+   $scope.isExpanded = false;
 
 
-      // Set Motion
-      $timeout(function() {
-          ionicMaterialMotion.slideUp({
-              selector: '.slide-up'
-          });
-      }, 300);
+   // Set Motion
+   $timeout(function() {
+       ionicMaterialMotion.slideUp({
+           selector: '.slide-up'
+       });
+   }, 300);
 
-      $timeout(function() {
-          ionicMaterialMotion.fadeSlideInRight({
-              startVelocity: 3000
-          });
-      }, 500);
+   $timeout(function() {
+       ionicMaterialMotion.fadeSlideInRight({
+           startVelocity: 3000
+       });
+   }, 500);
 
-      // Set Ink
-      ionicMaterialInk.displayEffect();
+   // Set Ink
+   ionicMaterialInk.displayEffect();
  
-})
-
-.controller('newController' , function($scope){
-  console.log('hello');
-})
-
+});
