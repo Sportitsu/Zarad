@@ -2,7 +2,7 @@
 
 angular.module('zarad.admin',[])
 
-.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament){
+.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament,$ionicModal){
   $scope.admin={};
   $scope.club = {};
   $scope.tournament = {};
@@ -137,12 +137,14 @@ angular.module('zarad.admin',[])
     $scope.massage=" ";
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
+      console.log()
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;
         $scope.tournament.organizer=tournament.data.organizer;
         $scope.tournament.Date=tournament.data.Date;
-        $scope.tournament.poster=tournament.data.poster;
+        //$scope.tournament.poster=tournament.data.poster;
+        $scope.img=tournament.data.poster;
     }).catch(function(error){
       $scope.massage="Tournament Not Found";
     });
@@ -312,11 +314,28 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+
+  /*$ionicModal.fromTemplateUrl('js/templates/browseImage.html', {
+      scope: $scope,
+      animation: 'slide-in-up'
+   }).then(function(image) {
+      console.log(image);
+      $scope.image = image;
+   });
+
+
+
+   //ng-change="SearchAboutTournament()"
+  $scope.ShowImage=function(){
+    $scope.image.show()
+    console.log($scope.tournament.poster)
+  }*/
+
   // Edit tournament function 
-  $scope.editTournament = function () {
+ $scope.editTournament = function () {
 
     var Edit = $ionicPopup.show({
-    template: '<select ng-model="tournamentSelect.value"  class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><button ng-click="SearchAboutTournament()"  class="item  button-light" >Get Data</button><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    template: '<select ng-model="tournamentSelect.value" ng-change="SearchAboutTournament()" class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label><label ></br><li style="display: block"  ng-model="img"><img ng-show="img" border="0px" style="margin-left:30px" width="300px" height="200px" src={{img}} /></li></label><br>',
     title: '<p>Edit Existing Tournament</p>',
      subTitle: 'Please select from below and click Get Data',
      scope: $scope,
@@ -329,7 +348,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.EditTournament($scope.tournament)
           .then(function (resp) {
-            $scope.tournament = '';
+            $scope.tournament = {};
             $location.path('/AllTournament');
           });
          }
@@ -337,4 +356,6 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+
+
 });

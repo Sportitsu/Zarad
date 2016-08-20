@@ -98,11 +98,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             }
           }
         })
-        .state('searchtournament',{
-            url:'/searchtournament',
-            templateUrl: 'js/templates/searchtournament.html',
-            controller: 'TournamentController'
-        })    
+           
         $urlRouterProvider.otherwise('/');
   // $httpProvider.interceptors.push('AttachTokens');
   $httpProvider.defaults.transformRequest = function(data) {        
