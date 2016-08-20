@@ -36,7 +36,6 @@ angular.module('zarad.index',[])
 		 titleText: '<code>Action Menu</code>',
 		 cancelText: '<b>Cancel</b>',
 		 cancel: function() {
-		      console.log('Canceled');
 		    },
 		 buttonClicked: function(index) {
 		   if(index === 0 ){
