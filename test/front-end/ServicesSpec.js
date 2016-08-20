@@ -286,7 +286,22 @@ describe('Services', function () {
       });
       $httpBackend.flush();
     });
+  });
 
+  describe('Addclub', function(){
+
+      it('should exist', function(){
+        expect(Club.Addclub).toBeDefined();
+      });
+
+      it('should be able to add a new club', function(){
+
+        $httpBackend.expect('POST', baseUrl + '/api/club/register').respond(201,mockResponse);
+        Club.Addclub(mockResponse).then(function(resp){
+          expect(resp.clubName).toEqual(mockResponse.clubName);
+        });
+        $httpBackend.flush();
+      });
   });
 
   });
