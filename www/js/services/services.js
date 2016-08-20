@@ -136,11 +136,8 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/club/getclub', 
       data : data
     })
-    .success(function(response){
-      return response;
-    })
-    .error(function(error){
-      return error;
+    .then(function (resp) {
+      return resp;
     })
   } 
 
@@ -194,11 +191,9 @@ angular.module('zarad.services',[])
     return $http({
       method : 'GET' ,
       url : 'http://zarad.herokuapp.com/api/user/x/' + name
-    }).success(function(response){
-      return response.data;
     })
-    .error(function(data){
-      return data;
+    .then(function (resp) {
+      return resp.data
     });
   };
 
@@ -230,7 +225,7 @@ angular.module('zarad.services',[])
       url:'http://zarad.herokuapp.com/api/users'
     })
     .then(function(resp){
-      return resp.data;
+      return resp;
     })
   }
  return {
