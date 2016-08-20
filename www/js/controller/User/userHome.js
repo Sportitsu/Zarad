@@ -6,6 +6,7 @@ angular.module('zarad.home', ['ionic'])
 	$scope.data = JSON.parse($window.localStorage.member);
 	$scope.todos = $scope.data.goals;
 	$scope.quotes = [];
+ 	var takeout = 'https://www.google.jo/search?q=bjj+jiujitsu+motivation&espv=2&biw=1397&bih=803&tbm';
 
 	$scope.updateTodo = function(goalDone){
 		User.updateGoal({
@@ -13,7 +14,7 @@ angular.module('zarad.home', ['ionic'])
 			    "goal" : { "title" : goalDone } ,
 			    "method" : "-1"})
 			.then(function(response){
-				console.log(response);
+				$scope.todos = response.data.goals;
 			})
 			.catch(function(error){
 				console.log(error);
@@ -22,7 +23,6 @@ angular.module('zarad.home', ['ionic'])
 	$scope.createTask = function(recentTask){
 		User.updateGoal({ username : $scope.data.username ,  goal : { title : recentTask} , method : 1})
 			.then(function(response){
-				console.log(response.data.goals);
 				$scope.todos = response.data.goals;
 			})
 			.catch(function(error){
@@ -55,6 +55,8 @@ angular.module('zarad.home', ['ionic'])
  		  .then(function(response){
  		  	for(var i = 0 ; i < 4; i++){
  		  		var random = Math.floor(Math.random()*response.length);
+ 		  		if(response[random] !== takeout){
+ 		  		}
  		  		if($scope.quotes.indexOf(response[random]) === -1){
  		  			$scope.quotes.push(response[random]);
  		  		}
