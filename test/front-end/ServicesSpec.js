@@ -351,6 +351,46 @@ describe('Services', function () {
         $httpBackend.flush();
       });
     });
+  });
+//////////////////////////////// user factory ////////////////////////
+  describe('User factory', function(){
+
+    var $httpBackend, User;
+    var mockResponse = {
+      'username' : 'Plmoha492',
+      'emai' : 'mohammad@gmail.com',
+      'firstName' : 'mohammad',
+      'lastName' : 'Ali Klai',
+      'beltColor' : 'purple',
+      'club' : 'Makhai',
+      'country' : 'Jordan'
+    };
+
+    beforeEach(inject(function(_$httpBackend_, _User_){
+      $httpBackend = _$httpBackend_;
+      User = _User_;
+    }));
+
+    it('should exist', function(){
+      expect(User).toBeDefined();
+    });
+
+    describe('getUser()', function(){
+
+        it('should exist', function(){
+          expect(User.getUser).toBeDefined();
+        });
+
+        it('should get user data by username', function(){
+
+          $httpBackend.expect('GET', baseUrl + '/api/user/x/' + mockResponse.username).respond(200,mockResponse);
+          User.getUser(mockResponse.username).then(function(resp){
+            expect(resp.username).toEqual(mockResponse.username);
+            expect(resp.beltColor).toEqual(mockResponse.beltColor);
+          });
+          $httpBackend.flush();
+        });
+    });
 
 
   });
