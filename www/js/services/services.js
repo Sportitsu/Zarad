@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.services',[])
 
-.factory('Auth',function($http,$window,$location, $ionicHistory){
+.factory('Auth',function($http,$window,$location){
 	var signup=function(data){
 		return $http({
 			method: 'POST',
@@ -26,8 +26,6 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
     $location.path('/');
   }
  	var isAuth = function () {
@@ -126,11 +124,8 @@ angular.module('zarad.services',[])
       method:'GET',
       url:"http://zarad.herokuapp.com/api/club/x/"+username
     })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return data;
+    .then(function (resp) {
+      return resp.data;
     })
   }
 
@@ -213,16 +208,10 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/editProfile',
       data : user
     })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return data;
-    })
+    .then(function(resp){
+      return resp.data;
+    });
   };
-
- 
-
 
   var deleteUser = function(data){
     return $http({
@@ -230,24 +219,18 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/delete',
       data : data
     })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return data;
-    })
-  }
+    .then(function(resp){
+      return resp.data;
+    });
+  };
 
   var getAllUsers=function(){
     return $http({
       method:'GET',
       url:'http://zarad.herokuapp.com/api/users'
     })
-    .success(function(response){
-        return response.data;
-    })
-    .error(function(data){
-        return data;
+    .then(function(resp){
+      return resp.data;
     })
   }
  return {
