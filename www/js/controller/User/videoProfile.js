@@ -2,18 +2,7 @@ angular.module('zarad.videos', ['ionic'])
 .controller('VideosController', function($scope, User, Auth, $window, Club, $location, $http){
   $scope.flag = true;
   $scope.data = JSON.parse($window.localStorage.member);
-    // User.getUser(JSON.parse($window.localStorage.member).username)
-    //     .then(function(response){
-    //       console.log(response.data);
-    //       $scope.data = response.data;
-    //     })
-    //     .catch(function(error){
-    //       console.log(error);
-    //     })
 
-    $scope.init= function(){
-      alert(1);
-    }
 
     Club.getClubForUser({clubName : $scope.data.club})
         .then(function(response){
