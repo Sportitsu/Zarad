@@ -28,6 +28,7 @@ angular.module('zarad.services',[])
     $window.localStorage.clear();
     $ionicHistory.clearCache();
     $ionicHistory.clearHistory();
+    console.log($window.localStorage);
     $location.path('/');
   }
  	var isAuth = function () {

@@ -1,4 +1,4 @@
-<ion-view>
+<ion-nav-view ng-controller="VideosController" ng-init="init()">
   <ion-pane>
     <div  style="background-image:url('http://www.wpclipart.com/page_frames/background_pages/sky_backgrounds/beautiful_sky_background_page.jpg');width:100%;height:100%;">
      <ion-content ng-show="flag" class="has-footer">
@@ -15,10 +15,13 @@
         </div>
       </ion-content>
       <ion-content ng-if="!flag" style="background-color:black">
-        <iframe src="//giphy.com/embed/m2lFxX5xwnsaY" style="margin-top:40px;margin-left:35px;" width="80%" height="30%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><h1 style="color:red">{{data.club}}</h1>
-        <h3 style="color:white">Not Yet Added A channel</h3>
-        <h2 style="color:white">Please Contact Them</h2>
+        <iframe src="//giphy.com/embed/m2lFxX5xwnsaY" style="margin-top:40px;margin-left:35px;" width="80%" height="30%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        <br><br><br>
+        <h1 style="color:red;text-align:center;">{{data.club}}</h1>
+        <h3 style="color:white;text-align:center;">Not Yet Added A channel</h3>
+        <h2 style="color:white;text-align:center;">Please Contact Them</h2>
+        </div>
       </ion-content>
     </div>
   </ion-pane>
-</ion-view>
+</ion-nav-view>

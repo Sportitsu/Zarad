@@ -24,10 +24,13 @@
                         <span>{{medal.place}}</span>{{medal.name}}
                     </ion-row>
                 </ul>
+                <p ng-show="noMedal">Soon to become a World Champion!!</p>
                 <br><br>
-            <button class="button button-stable" ng-click="showFriends()">My Friends</button>
-            </div>
+                    <button style="margin-left:25%" class="button button-dark" ng-click="showFriends()">Club Members</button>
             <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
+            <br><br><br><br><br>
+            </div>
+
         </div>
         </ion-content>
     </div>
