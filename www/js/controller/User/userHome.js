@@ -1,5 +1,5 @@
 angular.module('zarad.home', ['ionic'])
-.controller('UserHomeController' , function($scope, $state, User, $window){
+.controller('UserHomeController' , function($scope, $state, User, $window, Quotes){
 	$scope.shouldShowDelete = false;
 	$scope.shouldShowReorder = false;
 	$scope.listCanSwipe = true;
@@ -29,6 +29,15 @@ angular.module('zarad.home', ['ionic'])
 			.catch(function(error){
 				console.log(error);
 			})
- 	}
+ 	};
+
+ 	Quotes.getQuotes()
+ 		  .then(function(response){
+ 		  	console.log(response);
+ 		  })
+ 		  .catch(function(error){
+ 		  	console.log(error);
+ 		  });
+
 });
 
