@@ -206,9 +206,9 @@ describe('Services', function () {
         });
 
         it('should remove existing admin 201(Success)', function(){
-          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,mockResponse);
+          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,'Admin Deleted');
           Admin.deleteAdmin(mockResponse[0].username).then(function(resp){
-            expect(resp).toEqual(mockResponse);
+            expect(resp).toEqual('Admin Deleted');
           });
           $httpBackend.flush();
         });
@@ -302,6 +302,22 @@ describe('Services', function () {
         });
         $httpBackend.flush();
       });
+  });
+
+  describe('removeClub()', function(){
+      
+      it('should exist', function(){
+        expect(Club.removeClub).toBeDefined();
+      });
+
+      it('should be able to remove a club give a clubName', function(){
+
+        $httpBackend.expect('POST', baseUrl + '/api/club/delete').respond(201, 'Club Deleted');
+        Club.removeClub(mockResponse.clubName).then(function(resp){
+            expect(resp).toEqual('Club Deleted');
+        });
+        $httpBackend.flush();
+      })
   });
 
   });
