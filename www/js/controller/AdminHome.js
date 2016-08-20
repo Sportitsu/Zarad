@@ -85,6 +85,7 @@ angular.module('zarad.admin',[])
        text: '<b>Login</b>',
        type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
        onTap: function(e) {
+        console.log($scope.admin);
 
          if (!$scope.admin.username || !$scope.admin.password) {
            //don't allow the admin to close unless they fill the fields
@@ -98,7 +99,7 @@ angular.module('zarad.admin',[])
    ]
  });
  myPopup.then(function(){
-  $scope.admin = '';
+  $scope.admin = {};
  })
 };
 
