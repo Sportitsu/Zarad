@@ -392,7 +392,7 @@ describe('Services', function () {
         });
     });
 
-    describe('editProfile', function(){
+    describe('editProfile()', function(){
 
         it('should exist', function(){
           expect(User.editProfile).toBeDefined();
@@ -414,6 +414,22 @@ describe('Services', function () {
           User.editProfile(mockResponse.username).then(function(resp){
             expect(resp.username).toEqual(mockResponse.username);
             expect(resp.firstName).not.toEqual(mockResponse.username);
+          });
+          $httpBackend.flush();
+        });
+    });
+
+    describe('deleteUser()', function(){
+
+        it('should exist', function(){
+          expect(User.deleteUser).toBeDefined();
+        });
+
+        it('should be able to remove a user by username', function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/delete').respond(201, 'User Deleted');
+          User.deleteUser(mockResponse.username).then(function(resp){
+            expect(resp).toEqual('User Deleted');
           });
           $httpBackend.flush();
         });
