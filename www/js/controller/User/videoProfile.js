@@ -2,8 +2,6 @@ angular.module('zarad.videos', ['ionic'])
 .controller('VideosController', function($scope, User, Auth, $window, Club, $location, $http){
   $scope.flag = true;
   $scope.data = JSON.parse($window.localStorage.member);
-
-
     Club.getClubForUser({clubName : $scope.data.club})
         .then(function(response){
           if(response.data.channelId){

@@ -4,7 +4,7 @@ angular.module('zarad.admin',[])
 
 .controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament){
   $scope.admin={};
-	$scope.club = {};
+  $scope.club = {};
   $scope.tournament = {};
   $scope.user={};
   $scope.admins={};
@@ -57,8 +57,16 @@ angular.module('zarad.admin',[])
       reader.readAsDataURL(file);
     })
      fileBt.click();
-            
+  };
 
+  //admin sign in
+  $scope.signin=function(){
+    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
+    .then(function(resp){
+      $window.localStorage.setItem('admin',resp.user);
+      $window.localStorage.setItem('com.zarad',resp.token);
+      $location.path('/AdminAction')
+    })
   };
   //admin sign in
   $scope.signin=function(){
@@ -86,6 +94,7 @@ angular.module('zarad.admin',[])
        text: '<b>Login</b>',
        type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
        onTap: function(e) {
+        console.log($scope.admin);
 
          if (!$scope.admin.username || !$scope.admin.password) {
            //don't allow the admin to close unless they fill the fields
@@ -99,7 +108,11 @@ angular.module('zarad.admin',[])
    ]
  });
  myPopup.then(function(){
+<<<<<<< HEAD
   $scope.admin = '';
+=======
+  $scope.admin = {};
+>>>>>>> 01307818f2745770f325e73b0a649c4f32ac4383
  })
 };
 
@@ -337,4 +350,3 @@ angular.module('zarad.admin',[])
    });
   };
 });
-

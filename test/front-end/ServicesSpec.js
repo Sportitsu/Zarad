@@ -1,126 +1,259 @@
+'use strict';
+
 describe('Services', function () {
-beforeEach(module('zarad'));
+  var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+  var baseUrl = 'http://zarad.herokuapp.com';
+  // Before each test load our lets-hangout.services module
+  beforeEach(angular.mock.module('zarad.services'));
 
   afterEach(inject(function ($httpBackend) {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
   }));
 
-  describe('Admin Factory', function () {
-  var $httpBackend, Admin;
+  describe('Auth factory', function() {
+    var $httpBackend, Auth, $window;
 
-   beforeEach(inject(function (_$httpBackend_, _Admin_) {
+    // Before each test set our injected Auth factory (_Auth_) to our local Users variable
+    beforeEach(inject(function(_$httpBackend_, _Auth_, _$window_) {
+      Auth = _Auth_;
       $httpBackend = _$httpBackend_;
-      Admin = _Admin_;
+      $window = _$window_;
     }));
 
-   it('should exist', function () {
-      expect(Admin).to.exist;
+    // A test to verify the Auth factory exists
+    it('Auth factory should exist', function() {
+      expect(Auth).toBeDefined();
     });
-
-   it('should have a method `Addclub`', function () {
-      expect(Admin.Addclub).to.be.a('function');
-    });
-
-  it('should add a new club with `Addclub`', function () {
-      var club = {
-        username:1,
-        password:"1111",
-        country:"jordan",
-        clubName: "zarad jordan" };
-
-      $httpBackend
-        .expect('POST','/api/club/register')
-        .respond(201, {
-        username:1,
-        password:"1111",
-        country:'jordan',
-        clubName: "zarad jordan"
-        });
-      
-
-      Admin.Addclub(club).then(function (resp) {
-        expect(resp.status).to.equal(201);
-        expect(resp.data.clubName).to.equal("zarad jordan");
-      });
-
-      $httpBackend.flush();
-    });
-
-
-    // test Addtournament 
-   it('should have a method `Addtournament`', function () {
-      expect(Admin.Addtournament).to.be.a('function');
-    });
-
-  it('should add a new tournament with `Addtournament`', function () {
-      var tournament  = {
-        name:"cup",
-        Date:"1111",
-        place:"jordan",
-        organizer: "zarad jordan",
-        details:" jejestu cup in jordan" ,
-        poster:"tournament.gpj"
-    };
-
-      $httpBackend
-        .expect('POST','/api/tournament/create')
-        .respond(201, {
-        name:"cup",
-        Date:"1111",
-        place:"jordan",
-        organizer: "zarad jordan",
-        details:" jejestu cup in jordan" ,
-        poster:"tournament.gpj"
     
+    describe('.signup()', function() {
+      // A test to verify the method signup exists
+      it('signup should exist', function() {
+        expect(Auth.signup).toBeDefined();
+      });
+
+      it('signup should POST data and username should start with Pl', function() {
+        var mockResponse = 
+          {
+            'username':'Plmiha492',
+            'password': 'play',
+            'firstName' : 'Mihyar',
+            'lastName' : 'almaslama',
+            'country' : 'Syria',
+            'email' : 'mihyar@gmail.com'
+          }
+
+        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
+
+        Auth.signup().then(function (resp) {
+          expect(resp.username[0]).toEqual('P');
+          expect(resp.username[1]).toEqual('l');
+        });
+        $httpBackend.flush();
+      });
+    });
+
+  describe('signin()', function(){
+
+      it('should exist', function(){
+        expect(Auth.signin).toBeDefined();
+      });
+
+      it('should return token when a user signin', function(){
+        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond(200,{token:token});
+        Auth.signin().then(function(resp){
+        expect(resp.token).toEqual(token);
+        });
+        $httpBackend.flush();
+      });
+    });
+  describe('signout()', function(){
+
+      it('should exist', function(){
+        expect(Auth.signout).toBeDefined();
+      });
+
+      it('should clear localStorage when logout', function(){
+        $window.localStorage.setItem('com.zarad',token);
+        Auth.signout();
+        expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+      });
+  });
+  describe('isAuth()', function(){
+
+      it('should exist', function(){
+        expect(Auth.isAuth).toBeDefined();
+      });
+
+      it('should return true if the user is signed in', function(){
+        var token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9';
+        $window.localStorage.setItem('com.zarad', token);
+        expect(Auth.isAuth()).toEqual(true);
+      });
+  });
+  describe('checkUser()', function(){
+
+      it('should exist', function(){
+        expect(Auth.isAuth).toBeDefined();
+      })
+
+      it('should return admin when admin logs in and user when user or club logs in', function(){
+        $window.localStorage.setItem('admin', token);
+        expect(Auth.checkUser()).toEqual('admin');
+        $window.localStorage.clear();
+        $window.localStorage.setItem('user', token);
+        expect(Auth.checkUser()).toEqual('user');
+      });
+    });
+  });
+///////////////////Admin factiry tests ///////////////////////////////////////
+  describe('Admin factory', function(){
+      var $httpBackend, Admin, $window;
+      var mockResponse = [
+        {
+          username : "mihyar",
+          email : "mihyar@gmail.com",
+          firstName : "mihyar",
+          lastName : "almasalma",
+          _id : "57aaebbde482740300f4e0ee"
+        },{
+          username : "mohammad",
+          email : "mohammad@gmail.com",
+          firstName : "Mohammad",
+          lastName : "Al-Bakri",
+          _id : "57b5735791804d0300a2f7d5"
+        }
+        ];
+
+      beforeEach(inject(function(_$httpBackend_, _Admin_, _$window_){
+        $httpBackend = _$httpBackend_;
+        Admin = _Admin_;
+        $window = _$window_;
+      }));
+
+        it('Admin factory should exist', function(){
+          expect(Admin).toBeDefined();
         });
 
-      Admin.Addtournament(tournament ).then(function (resp) {
-        //expect(resp.status).to.equal(201);
-        expect(resp.name).to.equal('cup');
-      });
+    describe('signin()', function(){
 
-      $httpBackend.flush();
+        it('should exist',function(){
+          expect(Admin.signin).toBeDefined();
+        });
+
+        it('should return a token when Admin signin', function(){
+          $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond(200,{token:token});
+          Admin.signin().then(function(resp){
+          expect(resp.token).toEqual(token);
+          });
+          $httpBackend.flush();
+        });
+    });
+    describe('signup()', function(){
+
+        it('should exist', function(){
+          expect(Admin.signup).toBeDefined();
+        });
+
+        it('should signup a new Admin', function(){
+          var mockAdmin = 
+          {
+            'username' : 'power',
+            'firstName' : 'education',
+            'email' : 'RBK@gmail.com'
+          }
+          $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(201,mockAdmin);
+          Admin.signup().then(function(resp){
+            expect(resp.username).toEqual('power');
+            expect(resp.password).toEqual(undefined);
+            expect(resp.email).toEqual('RBK@gmail.com');
+          });
+          $httpBackend.flush();
+        });
+    });
+    describe('signout()', function(){
+
+        it('should exist', function(){
+          expect(Admin.signout).toBeDefined();
+        });
+
+        it('shoudl clear localStorage on signout', function(){
+          $window.localStorage.setItem('com.zarad',token);
+          Admin.signout();
+          expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+        });
+    });
+    describe('getAdmins()', function(){
+
+        it('should exist', function(){
+          expect(Admin.getAdmins).toBeDefined();
+        });
+
+        it('should return an array of admins 200(Success)', function(){
+
+          $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(200,mockResponse);
+          Admin.getAdmins().then(function(resp){
+            expect(resp[0].username).toEqual(mockResponse[0].username);
+            expect(resp[1].username).toEqual(mockResponse[1].username);
+          });
+          $httpBackend.flush();
+        });
+    });
+    describe('deleteAdmin()',function(){
+
+        it('should exist', function(){
+          expect(Admin.deleteAdmin).toBeDefined();
+        });
+
+        it('should remove existing admin 201(Success)', function(){
+          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,mockResponse);
+          Admin.deleteAdmin(mockResponse[0].username).then(function(resp){
+            expect(resp).toEqual(mockResponse);
+          });
+          $httpBackend.flush();
+        });
     });
   });
+////////////////////////Club factory tests //////////////////////////////
+  describe('Club factory', function(){
+    var $httpBackend, Club;
+    var mockResponse = 
+          {
+            'username':'Plmiha492',
+            'firstName' : 'Mihyar',
+            'lastName' : 'almaslama',
+            'country' : 'Syria',
+            'email' : 'mihyar@gmail.com', 
+            'clubName' : 'Makhai'
+          };
 
-
-  
- describe('Profile Factory', function () {
-  var $httpBackend, Profile;
-
-   beforeEach(inject(function (_$httpBackend_, _Profile_) {
+    beforeEach(inject(function(_$httpBackend_, _Club_){
       $httpBackend = _$httpBackend_;
-      Profile = _Profile_;
+      Club = _Club_;
     }));
 
-   it('should exist', function () {
-      expect(Profile).to.exist;
+    it('should exist', function(){
+      expect(Club).toBeDefined();
     });
 
-   it('should have a method `getClub`', function () {
-      expect(Profile.getClub).to.be.a('function');
+  describe('AddUser()', function(){
+
+    it('should exist', function(){
+      expect(Club.AddUser).toBeDefined();
     });
 
-    it('should get club with `getClub`', function () {
-       var club = {
-        username:1,
-        password:"1111",
-        country:"jordan",
-        clubName: "zarad jordan" };
+    it('should be able to register new users to a club 201(Success)', function(){
 
-      $httpBackend.expect('GET', '/api/club/x/1').respond(club);
-
-      Profile.getClub(1).then(function (Profile) {
-        expect(Profile.data).to.deep.equal(club);
+      $httpBackend.expect('POST', baseUrl + '/api/club/register').respond(201,mockResponse);
+      Club.AddUser(mockResponse).then(function(resp){
+        expect(resp.password).toEqual(undefined);
+        expect(resp.username[0]).toEqual('P');
+        expect(resp.username[1]).toEqual('l');
+        expect(resp.clubName).toEqual(mockResponse.clubName);
       });
-
       $httpBackend.flush();
     });
-
-  
   });
 
-
+  });
 });
-
