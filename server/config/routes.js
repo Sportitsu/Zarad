@@ -49,6 +49,7 @@ module.exports = function(app){
 	// Quote Routes
 	app.get('/api/quotes/get', quoteController.getQuotes);
 	app.post('/api/quotes/newquote', quoteController.addQuote);
+	app.post('/api/quotes/delete', quoteController.deleteQuote);
 
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler

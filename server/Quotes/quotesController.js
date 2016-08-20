@@ -27,5 +27,9 @@ module.exports = {
 				res.status(201).send(saved);
 			}
 		})
+	}, 
+
+	deleteQuote : function(req,res){
+		// TODO Delete Quote
 	}
 };
