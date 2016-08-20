@@ -32,11 +32,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
         templateUrl: 'js/templates/home.html',
         controller:'AuthController'
         })
-        .state('signin', {
-            url:'/signin',
-            templateUrl : 'js/templates/signin.html',
-            controller:'AuthController'
-        })
         .state('adminmain',{
           url:'/AdminMain',
           templateUrl:'js/templates/AdminMain.html',
