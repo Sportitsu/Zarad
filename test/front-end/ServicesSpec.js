@@ -392,6 +392,33 @@ describe('Services', function () {
         });
     });
 
+    describe('editProfile', function(){
+
+        it('should exist', function(){
+          expect(User.editProfile).toBeDefined();
+        });
+
+        it('should edit user profile data', function(){
+
+          var edited = {
+            'username' : 'Plmoha492',
+            'emai' : 'mohammad@gmail.com',
+            'firstName' : 'mohammad',
+            'lastName' : 'Ali Clai',
+            'beltColor' : 'purple',
+            'club' : 'Makhai',
+            'country' : 'Jordan'
+          };
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/editProfile').respond(201, edited);
+          User.editProfile(mockResponse.username).then(function(resp){
+            expect(resp.username).toEqual(mockResponse.username);
+            expect(resp.firstName).not.toEqual(mockResponse.username);
+          });
+          $httpBackend.flush();
+        });
+    });
+
 
   });
 });
