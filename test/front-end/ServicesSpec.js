@@ -545,12 +545,35 @@ describe('Services', function () {
         });
 
         it('should be able to search for a tournament', function(){
-          $httpBackend.expect('GET', baseUrl + '/api/tournament/x/'+ mockResponse.name).respond(mockResponse);
+          $httpBackend.expect('GET', baseUrl + '/api/tournament/x/'+ mockResponse.name).respond(200,mockResponse);
           Tournament.SearchAboutTournament(mockResponse.name).then(function(resp){
             expect(resp.data).toEqual(mockResponse);
           });
           $httpBackend.flush();
         });
     });
+
+    describe('EditTournament()', function(){
+
+        it('should exist', function(){
+          expect(Tournament.EditTournament).toBeDefined();
+        });
+
+        it('should be able to edit already exists tournament', function(){
+          var edited = {
+                      "name": "test",
+                      "place": "ReBootKamp",
+                      "organizer": "RBK",
+                      "details": "This is a tournament hosted by RBK"
+                    };
+
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/edit').respond(201,edited);
+          Tournament.EditTournament(mockResponse.name).then(function(resp){
+            expect(resp.name).toEqual(edited.name);
+            expect(resp.organizer).not.toEqual(mockResponse.organizer);
+          });
+          $httpBackend.flush();
+        });
+    })
   });
 });
