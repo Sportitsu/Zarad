@@ -216,7 +216,7 @@ describe('Services', function () {
   });
 ////////////////////////Club factory tests //////////////////////////////
   describe('Club factory', function(){
-    var $httpBackend, Club;
+    var $httpBackend, Club, $window;
     var mockResponse = 
           {
             'username':'Plmiha492',
@@ -227,9 +227,10 @@ describe('Services', function () {
             'clubName' : 'Makhai'
           };
 
-    beforeEach(inject(function(_$httpBackend_, _Club_){
+    beforeEach(inject(function(_$httpBackend_, _Club_, _$window_){
       $httpBackend = _$httpBackend_;
       Club = _Club_;
+      $window = _$window_;
     }));
 
     it('should exist', function(){
@@ -322,34 +323,110 @@ describe('Services', function () {
 
   describe('getClubs()', function(){
 
-      it('should exist', function(){
-        expect(Club.getClubs).toBeDefined();
+        it('should exist', function(){
+          expect(Club.getClubs).toBeDefined();
+        });
+
+        it('should return an array of all the clubs', function(){
+
+          var mockClubs = [{
+                'username':'Clmiha492',
+                'firstName' : 'Mihyar',
+                'lastName' : 'almaslama',
+                'country' : 'Canada',
+                'email' : 'mihyar@gmail.com', 
+                'clubName' : 'Makhai'
+              },{
+                'username' : 'Clazoz793',
+                'firstName' : 'azoz',
+                'lastName' : 'Alrawi',
+                'country' : 'Iraq',
+                'email' : 'azoz@gmail.com',
+                'clubName' : 'azoz international'
+              }]
+
+            $httpBackend.expect('GET', baseUrl + '/api/clubs').respond(200,mockClubs);
+            Club.getClubs().then(function(resp){
+              expect(resp).toEqual(mockClubs);
+            });
+          $httpBackend.flush();
+        });
       });
 
-      it('should return an array of all the clubs', function(){
+  describe('editClub()', function(){
 
-        var mockClubs = [{
-              'username':'Clmiha492',
-              'firstName' : 'Mihyar',
-              'lastName' : 'almaslama',
-              'country' : 'Syria',
-              'email' : 'mihyar@gmail.com', 
-              'clubName' : 'Makhai'
-            },{
-              'username' : 'Clazoz793',
-              'firstName' : 'azoz',
-              'lastName' : 'Alrawi',
-              'country' : 'Iraq',
-              'email' : 'azoz@gmail.com',
-              'clubName' : 'azoz international'
-            }]
+        it('should exists', function(){
+          expect(Club.editClub).toBeDefined();
+        });
 
-          $httpBackend.expect('GET', baseUrl + '/api/clubs').respond(200,mockClubs);
-          Club.getClubs().then(function(resp){
-            expect(resp).toEqual(mockClubs);
+        it('should be able to edit existing club', function(){
+
+          var mockClubs = {
+                'username':'Clmiha492',
+                'firstName' : 'Mihyar',
+                'lastName' : 'almaslama',
+                'country' : 'Canada',
+                'email' : 'mihyar@gmail.com', 
+                'clubName' : 'Makhai'
+              };
+
+          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond(201, mockClubs);
+          Club.editClub(mockResponse).then(function(resp){
+            expect(resp.username).toEqual(mockClubs.username);
+            expect(resp).not.toEqual(mockResponse);
           });
-        $httpBackend.flush();
+          $httpBackend.flush();
+        });
+    });
+
+  describe('getClubUsers()', function(){
+
+        it('should exist', function(){
+          expect(Club.getClubUsers).toBeDefined();
+        });
+
+        it('should get all users of a certain club', function(){
+
+          var usersArray = [
+                  {
+                    "username": "mihyar",
+                    "email": "mihyar@gmail.com",
+                    "firstName": "Mohammad",
+                    "lastName": "Albakri",
+                    "club": "Makhai",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  },
+                  {
+                    "username": "mohammad",
+                    "email": "mohammad@gmail.com",
+                    "firstName": "Gisela",
+                    "lastName": "RBK",
+                    "club": "Makhai",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  }];
+
+          $httpBackend.expect('GET', baseUrl + '/api/users/clubUsers/' + mockResponse.clubName).respond(200,usersArray);
+          Club.getClubUsers(mockResponse.clubName).then(function(resp){
+            expect(resp.data[0].clubName).toEqual(mockResponse.club);
+            expect(resp.data[1].clubName).toEqual(mockResponse.club);
+          });
+          $httpBackend.flush();
+        });
       });
+
+  describe('signout()', function(){
+
+        it('should exist', function(){
+            expect(Club.signout).toBeDefined();
+        });
+
+        it('should clear localStorage when logs out', function(){
+            $window.localStorage.setItem('com.zarad',token);
+            Club.signout();
+            expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+        });
     });
   });
 //////////////////////////////// user factory ////////////////////////
