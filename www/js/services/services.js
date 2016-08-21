@@ -387,10 +387,7 @@ angular.module('zarad.services',[])
     })
     .then(function(response){
       return response.data;
-    })
-    .catch(function(error){
-      return error;
-    })
+    });
   };
 
   var addQuote = function(data){
@@ -401,10 +398,7 @@ angular.module('zarad.services',[])
     })
     .then(function(response){
       return response.data;
-    })
-    .catch(function(error){
-      return error;
-    })
+    });
   };
 
   return {
