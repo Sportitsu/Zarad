@@ -57,7 +57,7 @@ angular.module('zarad.services',[])
       method: "POST",
       data:  admin
       })
-    .then(function(resp){g
+    .then(function(resp){ 
       return resp.data;
     })
   }
