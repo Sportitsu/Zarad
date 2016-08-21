@@ -6,6 +6,7 @@ var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
 var tournamentController = require('../Tournament/tournamentController');
 var quoteController = require('../Quotes/quotesController');
+var likeController = require('../TourLikes/likeController');
 
 // Waiting for database setup 
 module.exports = function(app){
@@ -23,6 +24,9 @@ module.exports = function(app){
 	app.post('/api/tournament/create', tournamentController.addTournament);
 	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
 	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
+	
+	//Likes Page Routes
+	app.post('/api/like/addLike', likeController.addLike);
 
 
 	// Club Page Routes
@@ -37,6 +41,7 @@ module.exports = function(app){
 
 
 	// User Page Routes
+
     app.post('/api/user/delete', userController.deleteUser); // 
 	app.post('/api/user/editProfile', userController.editProfile);
 	app.get('/api/user/x/:username', userController.getUser);
@@ -51,6 +56,7 @@ module.exports = function(app){
 	app.post('/api/quotes/newquote', quoteController.addQuote);
 	app.post('/api/quotes/delete', quoteController.deleteQuote);
 
+	app.get('/api/users/clubUsers/:clubName', userController.getClubUsers);
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
     app.use(helpers.errorLogger);

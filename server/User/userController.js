@@ -52,6 +52,25 @@ module.exports= {
 			}
 		});
 	},
+
+	getClubUsers:function(req,res){
+		var clubName=req.params.clubName;
+		User.find({})
+		.exec(function(error,users){
+			if(users.length === 0){
+				helpers.errorHandler('Empty Table', req, res);
+			}else{
+				var results=[];
+				for (var i = 0; i < users.length; i++) {
+					if(users[i].club=== clubName){
+						results.push(users[i]);
+					}
+				}
+				res.status(200).json(results);
+			}
+		})
+	},
+
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
@@ -187,6 +206,7 @@ module.exports= {
 		var username = req.body.username;
 		User.findOne({username : username})
 			.exec(function(err, user){
+				console.log('user',user)
 				if(user){
 					if(user.valid){
 						var isFinished = user.subscription + ((30 * 24 * 60 * 60 * 1000) * user.membership);
@@ -201,6 +221,7 @@ module.exports= {
 						user.valid = true;
 					}
 					user.save(function(err, saved){
+						console.log('d5l',saved)
 						if(saved){
 							res.status(201).send(saved);
 						} else {

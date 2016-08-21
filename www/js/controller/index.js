@@ -58,6 +58,7 @@ angular.module('zarad.index',[])
 		});
 		};
 
+		
 		$scope.showDate = function(){
 				var willFinish = new Date($scope.data.subscription+((30*24*60*60*1000)*$scope.data.membership));
 				willFinish+='';

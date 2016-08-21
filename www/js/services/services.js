@@ -57,7 +57,7 @@ angular.module('zarad.services',[])
       method: "POST",
       data:  admin
       })
-    .then(function(resp){
+    .then(function(resp){ 
       return resp.data;
     })
   }
@@ -107,12 +107,12 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-.factory('Club',function($http){
+.factory('Club',function($http, $window, $location, $ionicHistory){
   var AddUser=function(user){
     return $http({
       method: 'POST',
-      url : 'http://zarad.herokuapp.com/api/club/register',
-      data:user
+      url : 'http://zarad.herokuapp.com/api/user/signup',
+      data: user
     })
     .then(function(resp){
       return resp.data;
@@ -136,15 +136,10 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/club/getclub', 
       data : data
     })
-    .success(function(response){
-      return response;
-    })
-    .error(function(error){
-      return error;
+    .then(function (resp) {
+      return resp;
     })
   } 
-
-
 
     //send club information to server
   var Addclub=function(club){
@@ -179,14 +174,45 @@ angular.module('zarad.services',[])
       return resp.data;
     })
   };
+
+  var editClub=function(data){
+    return $http({
+      method:'POST',
+      url:'http://zarad.herokuapp.com/api/club/editProfile',
+      data:data
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  };
+
+  var getClubUsers=function(clubname){
+    return $http({
+      method:'GET',
+      url:'http://zarad.herokuapp.com/api/users/clubUsers/'+clubname
+    })
+    .then(function(resp){
+      return resp;
+    })
+  }
   
+  var signout=function(){
+    localStorage.clear();
+    $window.localStorage.clear();
+    $ionicHistory.clearCache();
+    $ionicHistory.clearHistory();
+    $location.path('/');
+  }
   return{
     AddUser : AddUser,
     getClub:getClub,
     Addclub : Addclub,
     removeClub : removeClub,
     getClubs : getClubs,
-    getClubForUser : getClubForUser
+    getClubForUser : getClubForUser,
+    editClub: editClub,
+    getClubUsers: getClubUsers,
+    signout: signout
   }
 })
 .factory('User', function($http){
@@ -194,11 +220,9 @@ angular.module('zarad.services',[])
     return $http({
       method : 'GET' ,
       url : 'http://zarad.herokuapp.com/api/user/x/' + name
-    }).success(function(response){
-      return response.data;
     })
-    .error(function(data){
-      return data;
+    .then(function (resp) {
+      return resp
     });
   };
 
@@ -250,10 +274,23 @@ angular.module('zarad.services',[])
       return resp;
     })
   }
+
+  var resub=function(username){
+    return $http({
+      method:'POST',
+      url:'http://zarad.herokuapp.com/api/user/resub',
+      data:username
+    })
+    .then(function(resp){
+      return resp.data;
+    })
+  }
+
  return {
    getUser : getUser,
    updateGoal : updateGoal,
    editProfile : editProfile,
+   resub: resub,
    deleteUser : deleteUser,
    getAllUsers : getAllUsers
  }
@@ -310,12 +347,43 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
+
+    var Like=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: '/api/tournament/Like'
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var DisLike=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: ''
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
-    DeleteTournament:DeleteTournament
+    DeleteTournament:DeleteTournament,
+    DisLike:DisLike,
+    Like:Like
+    
   }
 })
 .factory('Quotes' , function($http){

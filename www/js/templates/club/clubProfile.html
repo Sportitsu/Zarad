@@ -1,0 +1,38 @@
+<!-- show club profile info -->
+<ion-content class="has-header">
+<div class="list card">
+  <div class="item item-avatar">
+    <img src="styles/css/1.gif" > 
+    <!-- {{club.data.image}} -->
+    <h2>{{club.data.clubName}}</h2>
+    <p>{{club.data.country}}</p>
+  </div>
+</div>
+
+<!-- show if there is users need to be registerd -->
+<div ng-show="show()">
+<div class="list card animated tada"> 
+  <a class="item item-icon-left" href="#">
+      <i class="icon ion-alert"></i>
+      <h2>Subscribtions:</h2>
+  </a>  
+  <p style="margin-left: 50px">Number of Users to subscribe for:<span style="color: red;margin-left: 10px">{{usersToSubscribe.data.length}}</span></p>
+  <p style="margin-left: 50px">
+  Number of Users ended subscribtions:<span style="color: red;margin-left: 10px">{{usersEndedSubs.data.length}}</span></p>
+</div>  
+<section id="cd-timeline" class="cd-container" ng-click="view()">
+    <div ng-repeat="user in usersToSubscribe.data">
+      <div class="cd-timeline-block" ng-mode="">
+        <div class="cd-timeline-picture text-center royal">
+          <img ng-src="{{user.image}}"></img>
+        </div>
+        <div class="cd-timeline-content padding royal">
+          <h5 class="marginBottom0 marginTop0">{{user.firstName}}&nbsp;{{user.lastname}}</h5>
+          <p class="marginTop5 cd-author">Subscription Date:{{user.subscription}}</p>
+          <button class="button" type="button" ng-click="resup(user.username)">resub</button>&nbsp;<button class="button">remove</button>
+          </div>
+      </div>
+  </div>
+</section>
+</div>
+</ion-content>

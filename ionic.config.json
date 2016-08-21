@@ -1,0 +1,11 @@
+{
+  "name": "Zarad",
+  "app_id": "a92b94c3",
+  "browsers": [
+    {
+      "platform": "android",
+      "browser": "crosswalk",
+      "version": "12.41.296.5"
+    }
+  ]
+}
