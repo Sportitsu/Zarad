@@ -1,15 +1,14 @@
 var app = angular.module('zarad', [
-	'ionic',
+  'ionic',
   'ionic-material',
   'onezone-datepicker',
   'zarad.user',
-	'zarad.auth',
+  'zarad.auth',
   'zarad.admin',
   'zarad.club',
   'youtube-embed',
   'zarad.tournament',
   'zarad.services',
-  'ngRoute',
   'ngCordova',
   'zarad.index',
   'ui.router',
@@ -30,18 +29,18 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
     $stateProvider
         .state('/', {
         	url: '/',
-		    templateUrl: 'js/templates/home.html',
-		    controller:'AuthController'
+  		    templateUrl: 'js/templates/home.html',
+  		    controller:'AuthController'
         })
         .state('adminmain',{
-        	url:'/AdminMain',
-        	templateUrl:'js/templates/AdminMain.html',
-        	controller:'AdminController'
+          url:'/AdminMain',
+          templateUrl:'js/templates/AdminMain.html',
+          controller:'AdminController'
         })
         .state('adminaction',{
-        	url:'/AdminAction',
-        	templateUrl: 'js/templates/AdminAction.html',
-        	controller: 'AdminController'
+          url:'/AdminAction',
+          templateUrl: 'js/templates/AdminAction.html',
+          controller: 'AdminController'
         })
         .state('AllTournament',{
             url:'/AllTournament',
@@ -117,12 +116,12 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           controller: 'clubController'
         })    
         $urlRouterProvider.otherwise('/');
-	// $httpProvider.interceptors.push('AttachTokens');
-	$httpProvider.defaults.transformRequest = function(data) {        
-	    if (data === undefined) { return data; } 
-	    return $.param(data);
-	};
-	$httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+  // $httpProvider.interceptors.push('AttachTokens');
+  $httpProvider.defaults.transformRequest = function(data) {        
+      if (data === undefined) { return data; } 
+      return $.param(data);
+  };
+  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
 })
 .run(function($rootScope, $state, $location , Auth, $ionicPlatform){
  $ionicPlatform.ready(function() {

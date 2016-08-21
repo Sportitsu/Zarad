@@ -128,12 +128,12 @@ angular.module('zarad.club',[])
 	$scope.getClub=function(){
 		var username=$window.localStorage.getItem('user');
 		Club.getClub(username).then(function(resp){
-			$scope.club.data=resp.data;
-			$scope.getUsers();
+			$scope.club.data=resp;
+			console.log(resp)
+			 $scope.getUsers();
 		})
 	};
 	$scope.getClub();
-
 	$scope.getUsers=function(){
 		var clubname=$scope.club.data['clubName'];
 		Club.getClubUsers(clubname)

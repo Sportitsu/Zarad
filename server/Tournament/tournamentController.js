@@ -10,7 +10,7 @@ module.exports = {
 			if(tournaments.length === 0){
 				helpers.errorHandler('Empty Table', req, res);
 			}else{
-			
+			     
 				res.status(200).send(tournaments);
 			}
 		});
