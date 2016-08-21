@@ -385,8 +385,8 @@ describe('Services', function () {
 
           $httpBackend.expect('GET', baseUrl + '/api/user/x/' + mockResponse.username).respond(200,mockResponse);
           User.getUser(mockResponse.username).then(function(resp){
-            expect(resp.username).toEqual(mockResponse.username);
-            expect(resp.beltColor).toEqual(mockResponse.beltColor);
+            expect(resp.data.username).toEqual(mockResponse.username);
+            expect(resp.data.beltColor).toEqual(mockResponse.beltColor);
           });
           $httpBackend.flush();
         });

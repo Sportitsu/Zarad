@@ -222,7 +222,7 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/x/' + name
     })
     .then(function (resp) {
-      return resp.data
+      return resp;
     });
   };
 
