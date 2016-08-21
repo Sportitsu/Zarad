@@ -15,7 +15,6 @@ angular.module('zarad.admin',[])
   $scope.tournamentSelect={};
   $scope.adminUsername = $window.localStorage.getItem('admin');
 
- 
   $scope.upload = function() {
     //imgur id
     var  IMGUR_CLIENT_ID = 'e5483dd45cb276b';
@@ -91,8 +90,7 @@ angular.module('zarad.admin',[])
            //don't allow the admin to close unless they fill the fields
            e.preventDefault();
          } else {
-            $scope.signin();
-            
+           $scope.signin();
          }
        }
      },
