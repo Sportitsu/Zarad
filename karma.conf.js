@@ -42,7 +42,7 @@ module.exports = function(config) {
       // 'www/js/controller/index.js',
       // 'www/js/controller/ng-cordova.min.js',
       // 'test/front-end/AdminSpec.js',
-      //'test/front-end/routingSpec.js',
+      // 'test/front-end/routingSpec.js',
       'test/front-end/ServicesSpec.js',
       'test/front-end/profileSpec.js'
       //'test/front-end/profileSpec.js',
