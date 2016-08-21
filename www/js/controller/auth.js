@@ -1,8 +1,7 @@
 'use strict';
 angular.module('zarad.auth',[])
-.controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout){
+.controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout, $q){
 	$scope.user={};
-
 	$scope.showPopup = function() {
    //custom popup to show login box
    var myPopup = $ionicPopup.show({
@@ -44,7 +43,7 @@ angular.module('zarad.auth',[])
   };
 
 	$scope.signin =function(){
-  	Auth.signin($scope.user)
+     Auth.signin($scope.user)
   	.then(function(resp){
      //save the token and username in local stoarage to distinguish signed in users
      if(resp.user.indexOf('Cl') > -1){

@@ -26,8 +26,6 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
     $location.path('/');
   }
  	var isAuth = function () {
@@ -249,7 +247,7 @@ angular.module('zarad.services',[])
       url:'http://zarad.herokuapp.com/api/users'
     })
     .then(function(resp){
-      return resp.data;
+      return resp;
     })
   }
  return {
