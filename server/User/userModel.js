@@ -25,6 +25,7 @@ var userSchema = new Schema ({
   valid : { type : Boolean , default : true },
   subscription : { type : Number },
   resub : { type : Boolean , default : false},
+  goals : {type : Array},
   salt : { type : String}
 });
 

@@ -68,6 +68,15 @@ angular.module('zarad.admin',[])
       $location.path('/AdminAction')
     })
   };
+  //admin sign in
+  $scope.signin=function(){
+    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
+    .then(function(resp){
+      $window.localStorage.setItem('admin',resp.user);
+      $window.localStorage.setItem('com.zarad',resp.token);
+      $location.path('/AdminAction')
+    })
+  };
 
   //this is Admin log in pop up 
   $scope.showPopup = function() {
