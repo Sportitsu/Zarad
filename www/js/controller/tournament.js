@@ -14,10 +14,20 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 	
 	$scope.ceckuser=function(){
-		console.log($window.localStorage.member)
 	if($window.localStorage.member!==undefined){
        $scope.LikeCtrl=true
 	}
 	}
 	$scope.ceckuser();
+	
+	$scope.Like=function(tournament){
+        var member=JSON.parse($window.localStorage.member)
+        Tournament.Like({name:tournament.name,
+                         username:member.username,
+                        })
+        .then(function(resp){
+            $scope.getAllTournament();
+            
+        })
+    }
 })

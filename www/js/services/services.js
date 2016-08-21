@@ -333,7 +333,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data:Tournament,
-      url: '/api/tournament/delete'
+      url: 'http://zarad.herokuapp.com/api/tournament/delete'
       
     })
     .then(function(resp){
