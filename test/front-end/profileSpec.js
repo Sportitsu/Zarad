@@ -6,13 +6,24 @@ describe('Testing AngularJS Zarad Profile Page', function(){
 
     describe('Testing parentController', function(){
       var scope , ctrl, $window;
-      var $q , deferred;
-      beforeEach(inject(function($controller, $rootScope, _$window_, _$q_){
+      var $q , deferred, User;
+      beforeEach(inject(function($controller, $rootScope, _$window_, _$q_, _User_, _$timeout_){
         scope = $rootScope.$new();
         ctrl = $controller('parentController',{$scope : scope});
         $window = _$window_;
         $window.localStorage.member=JSON.stringify({beltColor : 'purple'});
         $q =  _$q_;
+        deferred = _$q_.defer();
+        User = _User_;
+        spyOn(_User_, 'editProfile').and.returnValue(deferred.promise);
+
+        $controller('parentController', { 
+          $scope: scope, 
+          User: _User_, 
+          $window: _$window_,
+          $timeout: _$timeout_, 
+          $q: _$q_ 
+        });
       }));
 
       it('should initialize the data in the scope', function(){
@@ -45,7 +56,17 @@ describe('Testing AngularJS Zarad Profile Page', function(){
 
       it('should have confirm method', function(){
         expect(scope.confirm).toBeDefined();
+      });
+
+      it('should return promise when editing profile', function(){
+
+        // deferred.resolve({data: {username : 'Plmoha429' , password: "02134u32", valid:false}})
+
+        // scope.confirm();
+        // scope.$apply();
+
       })
+
     });
 });
 
