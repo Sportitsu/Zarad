@@ -107,7 +107,7 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-.factory('Club',function($http, $window, $location, $ionicHistory){
+.factory('Club',function($http, $window, $location){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -199,8 +199,6 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
     $location.path('/');
   }
   return{
@@ -232,11 +230,8 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/editProfile',
       data : user
     })
-    .success(function(response){
-      return response.data;
-    })
-    .error(function(data){
-      return data;
+    .then(function(resp){
+      return resp.data;
     })
   };
 
@@ -246,12 +241,10 @@ angular.module('zarad.services',[])
     url : 'http://zarad.herokuapp.com/api/user/goals' , 
     data : data
   })
-  .success(function(response){
-    return response;
-  })
-  .error(function(error){
-    return error;
-  })
+  .then(function(resp){
+    return resp;
+  });
+
  }
 
   var deleteUser = function(data){
