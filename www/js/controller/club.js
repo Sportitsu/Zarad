@@ -65,7 +65,6 @@ angular.module('zarad.club',[])
 			$scope.editUserModal = modal;
 	});
 
-
 	$scope.getUserPlace=function(place,username){
 		$scope.editUserProfileData.place=place;
 		$scope.editUserProfileData.username=username;
