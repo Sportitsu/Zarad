@@ -6,6 +6,7 @@ var adminController = require('../Admin/adminController');
 var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
 var tournamentController = require('../Tournament/tournamentController');
+var likeController = require('../TourLikes/likeController');
 
 // Waiting for database setup 
 module.exports = function(app){
@@ -23,8 +24,9 @@ module.exports = function(app){
 	app.post('/api/tournament/create', tournamentController.addTournament);
 	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
 	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
-
-
+	
+	//Likes Page Routes
+	app.post('/api/like/addLike', likeController.addLike);
 
 
 	// Club Page Routes

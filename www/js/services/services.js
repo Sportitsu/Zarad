@@ -328,11 +328,42 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
+
+    var Like=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: '/api/tournament/Like'
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var DisLike=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: ''
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
-    DeleteTournament:DeleteTournament
+    DeleteTournament:DeleteTournament,
+    DisLike:DisLike,
+    Like:Like
+    
   }
 })
