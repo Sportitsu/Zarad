@@ -30,6 +30,7 @@ angular.module('zarad.tournament',['ionic'])
 						 username:member.username,
 						})
 		.then(function(resp){
+			$scope.getAllTournament();
 			console.log(resp);
 		})
 	}

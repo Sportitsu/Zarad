@@ -303,7 +303,7 @@ angular.module('zarad.services',[])
   var getAllTournament=function(){
     return $http({
       method:'GET',
-      url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
+      url: '/api/tournament/tournaments'
       
     }).then(function(resp){
       return resp.data;
