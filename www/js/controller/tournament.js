@@ -20,18 +20,4 @@ angular.module('zarad.tournament',['ionic'])
 	}
 	}
 	$scope.ceckuser();
-
-	$scope.Like=function(tournament){
-		console.log(tournament.name)
-		var member=JSON.parse($window.localStorage.member)
-		console.log(member.username)
-
-		Tournament.Like({name:tournament.name,
-						 username:member.username,
-						})
-		.then(function(resp){
-			$scope.getAllTournament();
-			console.log(resp);
-		})
-	}
 })
