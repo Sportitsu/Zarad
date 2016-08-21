@@ -43,7 +43,6 @@ angular.module('zarad.user',['ionic'])
       scope: $scope,
       animation: 'slide-in-up'
    }).then(function(friendProfile) {
-      console.log(friendProfile);
       $scope.friendProfile = friendProfile;
    });
 
@@ -53,7 +52,6 @@ angular.module('zarad.user',['ionic'])
       scope: $scope,
       animation: 'slide-in-up'
    }).then(function(friends) {
-      console.log(friends);
       $scope.friends = friends;
    });
 
@@ -145,6 +143,7 @@ angular.module('zarad.user',['ionic'])
    $scope.myFriends = [];
    User.getAllUsers()
        .then(function(response){
+        console.log(response);
          for(var i = 0 ; i < response.data.length; i++){
           if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
             $scope.myFriends.push(response.data[i]);

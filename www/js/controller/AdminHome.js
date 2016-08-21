@@ -108,11 +108,7 @@ angular.module('zarad.admin',[])
    ]
  });
  myPopup.then(function(){
-<<<<<<< HEAD
-  $scope.admin = '';
-=======
   $scope.admin = {};
->>>>>>> 01307818f2745770f325e73b0a649c4f32ac4383
  })
 };
 
