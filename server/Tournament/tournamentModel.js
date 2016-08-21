@@ -8,7 +8,8 @@ var tournamentSchema = new Schema ({
 	place : {type : String , required : true},
 	organizer : {type : String , required : true},
 	details : {type :  String , required : true},
-	poster : {type : String , required : true}
+	poster : {type : String , required : true},
+	like:{type :[]}
 });
 
 var Tournament = mongoose.model('Tournament',tournamentSchema);

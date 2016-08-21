@@ -333,7 +333,7 @@ angular.module('zarad.services',[])
     return $http({
       method:'POST',
       data:Tournament,
-      url: 'http://zarad.herokuapp.com/api/tournament/delete'
+      url: '/api/tournament/delete'
       
     })
     .then(function(resp){
@@ -341,32 +341,19 @@ angular.module('zarad.services',[])
     });
   };
 
-    var Like=function(TourLike){
-    console.log(TourLike)
+    var Like=function(Like){
+    console.log(Like)
     return $http({
       method:'POST',
-      data:TourLike,
-      url: '/api/tournament/Like'
+      data:Like,
+      url: 'http://zarad.herokuapp.com/api/tournament/addLike'
       
     })
     .then(function(resp){
       return resp.data;
     });
   };
-
-  var DisLike=function(TourLike){
-    console.log(TourLike)
-    return $http({
-      method:'POST',
-      data:TourLike,
-      url: ''
-      
-    })
-    .then(function(resp){
-      return resp.data;
-    });
-  };
-
+   
   
   return{
     AddTournament:AddTournament,
@@ -374,7 +361,6 @@ angular.module('zarad.services',[])
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
     DeleteTournament:DeleteTournament,
-    DisLike:DisLike,
     Like:Like
     
   }
