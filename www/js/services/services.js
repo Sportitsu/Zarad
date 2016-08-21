@@ -113,8 +113,8 @@ angular.module('zarad.services',[])
   var AddUser=function(user){
     return $http({
       method: 'POST',
-      url : 'http://zarad.herokuapp.com/api/club/register',
-      data:user
+      url : 'http://zarad.herokuapp.com/api/user/signup',
+      data: user
     })
     .then(function(resp){
       return resp.data;
@@ -192,6 +192,16 @@ angular.module('zarad.services',[])
     .then(function(resp){
       return resp.data;
     })
+  };
+
+  var getClubUsers=function(clubname){
+    return $http({
+      method:'GET',
+      url:'/api/users/clubUsers/'+clubname
+    })
+    .then(function(resp){
+      return resp;
+    })
   }
   
   var signout=function(){
@@ -209,6 +219,7 @@ angular.module('zarad.services',[])
     getClubs : getClubs,
     getClubForUser : getClubForUser,
     editClub: editClub,
+    getClubUsers: getClubUsers,
     signout: signout
   }
 })

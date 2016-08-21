@@ -52,6 +52,25 @@ module.exports= {
 			}
 		});
 	},
+
+	getClubUsers:function(req,res){
+		var clubName=req.params.clubName;
+		User.find({})
+		.exec(function(error,users){
+			if(users.length === 0){
+				helpers.errorHandler('Empty Table', req, res);
+			}else{
+				var results=[];
+				for (var i = 0; i < users.length; i++) {
+					if(users[i].club=== clubName){
+						results.push(users[i]);
+					}
+				}
+				res.status(200).json(results);
+			}
+		})
+	},
+
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;

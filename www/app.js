@@ -110,6 +110,11 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
               controller: 'TournamentController'
             }
           }
+        })
+        .state('adduser',{
+          url:'/addUser',
+          templateUrl: 'js/templates/club/addUser.html',
+          controller: 'clubController'
         })    
         $urlRouterProvider.otherwise('/');
 	// $httpProvider.interceptors.push('AttachTokens');

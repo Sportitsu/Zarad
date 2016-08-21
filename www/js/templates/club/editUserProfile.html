@@ -1,0 +1,40 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Edit&nbsp;{{userProfileData.user.firstName}}&nbsp;{{userProfileData.user.lastName}}&nbsp;Profile</h1>
+
+  </ion-header-bar>
+achievements
+place
+  <ion-content>
+    <form>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label icon ion-plus-round">  New Achievement</span>
+          <input type="text" placeholder="Edit User Achievement" ng-model="userProfileData.user.achievements" ng-value="userProfileData.user.userProfileDataName" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label icon ion-earth">  Achievement's Place</span>
+          <input type="text" placeholder="Edit Achievement Place" ng-model="userProfileData.user.place" ng-value="userProfileData.user.country">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label icon ion-ribbon-a">  Achievement's Meddale</span>
+          <input type="text" placeholder="Edit Achievement Meddale" ng-model="userProfileData.user.meddale" ng-value="userProfileData.user.meddale">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label icon ion-minus-round">  Belt Color</span>
+          <input type="text" placeholder="Edit Achievement Meddale" ng-model="userProfileData.user.beltColor" ng-value="userProfileData.user.beltColor">
+        </label>
+
+        <br><br><br><br><br>
+        <div style="text-align: center">
+          <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancelUserEditing()">Cancel Editing</button>
+          <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirmUserEdit()">Finished Editing</button>
+        </div>
+
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

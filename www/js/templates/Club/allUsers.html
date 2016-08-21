@@ -1,15 +1,14 @@
-<div class="list">
-	<div ng-repeat="info in clubUsers.data">
-    <a class="item item-avatar ng-enter-stagger" href="#">
-      <img src={{info.user.image}}>
-      <h2>{{info.user.firstName}}&nbsp;{{info.user.lastName}}</h2>
-      <p>{{info.user.phone}}</p>
-      <div>End Date is {{info.user.endTime}}</div>
-      <div style="background-color: {{info.user.beltColor}}; height: 10px; width: 10px"></div>
-      <!-- <div ng-repeat='ac in data.achievements'>
-       <div id="my-div" ng-if="showcolor({{ac.place}})">
-     	 <i class = "ion-ribbon-a" style="color:{{d.color}}"</i>
-      </div> -->
-    </a>
-	</div>  
-</div>
+<section id="cd-timeline" class="cd-container ng-enter-stagger">
+    <div ng-repeat="info in clubUsers.data">
+      <div class="cd-timeline-block">
+        <div class="cd-timeline-picture text-center royal">
+          <img ng-src="{{info.user.image}}"> />
+        </div>
+        <div class="cd-timeline-content padding royal">
+          <h4 class="marginBottom0 marginTop0">{{info.user.firstName}}&nbsp;{{info.user.lastName}}</h4>
+          <p class="marginTop5 cd-author">Subscription Date: {{info.user.subscription}}</p>
+          <button class="button" type="button" ng-click="showUser(info)">view user</button>&nbsp;<button class="button" ng-click="editUser(info)">Edit User</button>&nbsp;<button class="button">Remove User</button>
+          </div>
+      </div>
+  </div>
+</section>

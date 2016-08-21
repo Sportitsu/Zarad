@@ -1,15 +1,14 @@
 'use strict';
 angular.module('zarad.club',[])
 .controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
-	$scope.clubUser={};
+	$scope.clubNewUser={};
 	$scope.clubUsers={};
 	$scope.club={};
+	$scope.userProfileData={};
+	$scope.username="";
 	$scope.usersToSubscribe={};
 	$scope.usersEndedSubs={};
-	$scope.onezoneDatepicker = {
-    date: 'date'
-	};
-
+	$scope.onezoneDatepicker = { date: 'date' };
 
 	$scope.showClubAction = function() {
 		var hideSheet = $ionicActionSheet.show({
@@ -20,86 +19,125 @@ angular.module('zarad.club',[])
 		 ],
 		 cancelText: '<b>Cancel</b>',
 		 cancel: function() {
-		      console.log('Canceled');
 		    },
 		 buttonClicked: function(index) {
 		   if(index === 0 ){
-			    $location.path('/club/addUser')
+			    //$location.path('/addUser')
+			    $scope.addUserModal.show();
 			    hideSheet();
 		   } else if(index === 2){
 				Club.signout();
 				hideSheet();
 		   } else {
-		   		$scope.modal.show();
+		   		$scope.editClubModal.show();
 		   	    hideSheet();
 		   	}
 		  }
 		});
 	};
 
-	$ionicModal.fromTemplateUrl('js/templates/club/editProfile.html', {
-			scope: $scope
+	$ionicModal.fromTemplateUrl('js/templates/club/editClubProfile.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
 		}).then(function(modal) {
-			$scope.modal = modal;
+			$scope.editClubModal = modal;
 	});
 
-	$scope.showPassWord=function(){
+	$ionicModal.fromTemplateUrl('js/templates/club/addUser.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function(modal) {
+			$scope.addUserModal = modal;
+	});
 
+	$ionicModal.fromTemplateUrl('js/templates/club/userProfile.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function(modal) {
+			$scope.userProfileModal = modal;
+	});
+
+	$ionicModal.fromTemplateUrl('js/templates/club/editUserProfile.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function(modal) {
+			$scope.editUserModal = modal;
+	});
+
+	$scope.showUser=function(data){
+		$scope.userProfileData=data;
+		$scope.userProfileModal.show();
+	}
+	$scope.editUser=function(data){
+		$scope.userProfileData=data;
+		$scope.editUserModal.show();
+	}
+	$scope.cancelClubEditing=function(){
+		$scope.editClubModal.hide();
 	}
 
-	$scope.cancel=function(){
-		$scope.modal.hide();
+	$scope.cancelAdding=function(){
+		$scope.addUserModal.hide();
 	}
 
-	$scope.confirm=function(){
+	$scope.cancelView=function(){
+		$scope.userProfileModal.hide();
+	}
+	$scope.cancelUserEditing=function(){
+		$scope.editUserModal.hide();
+	}
+
+	$scope.confirmClubEdit=function(){
 	var confirmPopup = $ionicPopup.confirm({
      title: 'Are you sure of your edit',
      template: ''
     });
     confirmPopup.then(function(res) {
      if(res) {
-     	$scope.edit();
+     	$scope.editClub();
      } else {
-       console.log('You are not sure');
-       $scope.modal.hide();
+       $scope.editClubModal.hide();
      	}
      });
 	};
 
-	$scope.edit=function(){
-		console.log($scope.club.data)
+	$scope.editClub=function(){
 		Club.editClub($scope.club.data).then(function(resp){
-			console.log(resp);
-			$scope.modal.hide();
+			$scope.editClubModal.hide();
 		})
 	}
 
-	
+	$scope.AddUser=function(){
+		$scope.clubNewUser.club=$scope.club.data.clubName;
+		Club.AddUser($scope.clubNewUser).then(function(resp){
+			var alertPopup = $ionicPopup.alert({
+             title: 'Your User Name is:'+resp.username
+             });
+			$scope.addUserModal.hide();
+		});
+		$scope.clubNewUser={};
+	};
+
 	$scope.show=function(){
-		if($scope.usersToSubscribe.data)
+		if($scope.usersToSubscribe.length !== undefined)
 			return true
 		else 
 			return false
 	}
 
-	$scope.AddUser=function(){
-		var data=$scope.clubUser;
-		Club.AddUser(data).then(function(resp){
-			console.log(resp.data);
-		});
-	};
-	$scope.editClub=function(){
-		
-	};
 	$scope.getClub=function(){
 		var username=$window.localStorage.getItem('user');
 		Club.getClub(username).then(function(resp){
-			console.log(resp.data.clubName);
 			$scope.club.data=resp.data;
+			$scope.getUsers();
 		})
 	};
+	$scope.getClub();
+
 	$scope.getUsers=function(){
-		User.getAllUsers().then(function(resp){
+		var clubname=$scope.club.data['clubName'];
+		Club.getClubUsers(clubname)
+		.then(function(resp){
 			//all users data
 			$scope.clubUsers.data=[];
 			//users that about to finish their subscription
@@ -107,55 +145,51 @@ angular.module('zarad.club',[])
 			//users finished their subscription
 			$scope.usersEndedSubs.data=[];
 			for (var i = 0; i < resp.data.length; i++) {
+				var date=new Date(resp.data[i].subscription).toString();
+				resp.data[i].subscription=date.substr(0,16);
 				$scope.clubUsers.data.push({user:resp.data[i]});
-				//check if the user subscription have 3 days left
-				if(resp.data[i].resub){
-					//calculate time user subs finishes
-					var willFinish = new Date(resp.data[i].subscription+((30*24*60*60*1000)*resp.data[i].membership));
-	           	 	willFinish+='';
-	            	willFinish = willFinish.substr(0,16);
-	            	//push all the users to object to view them
-					$scope.usersToSubscribe.data.push({
-						firstName:resp.data[i].firstName,
-						lastname:resp.data[i].lastName,
-						subscription:willFinish,
-						valid:resp.data[i].valid,
-						image:resp.data[i].image,
-						daysLeft:'less than 3 days'
-					})
-				}
-				//check if user subscibtion finished.
-				if(!resp.data[i].valid){
-					var willFinish = new Date(resp.data[i].subscription+((30*24*60*60*1000)*resp.data[i].membership));
-	           	 	willFinish+='';
-	            	willFinish = willFinish.substr(0,16);
-					$scope.usersEndedSubs.data.push({
-						firstName: resp.data[i].firstName,
-						lastname: resp.data[i].lastname,
-						subscription: willFinish,
-						valid:resp.data[i].valid,
-						image:resp.data[i].image
-					})
-				}
+				//check if the user subscription ended or have 3 days left
+				$scope.checkSubscription(resp.data[i]);
 			}
-			console.log($scope.usersToSubscribe.data)
-			console.log($scope.usersEndedSubs.data)
-			console.log($scope.clubUsers.data)
-		 })
-	}
-	$scope.renew = function(user,membership){
-	    var months = membership || 1
-	    User.resub({username : user, membership : months})
-	        .then(function(response){
-	          console.log(response);
-	          console.log('done');
-	        })
-	        .catch(function(error){
-	          console.log(error);
-	        });
+		})
 	};
 
-	$scope.resup=function(){
+	$scope.checkSubscription=function(user){
+		if(user.resub){
+			//calculate time user subs finishes
+			var willFinish = new Date(user.subscription+((30*24*60*60*1000)*user.membership));
+		    willFinish+='';
+		    willFinish = willFinish.substr(0,16);
+		    //save all almost ended users subs to object
+			$scope.usersToSubscribe.data.push({
+				firstName:user.firstName,
+				lastname:user.lastName,
+				subscription:willFinish,
+				username:user.username,
+				valid:user.valid,
+				image:user.image,
+				daysLeft:willFinish
+				})
+			}
+			//check if user subscibtion finished.
+			if(!user.valid){
+				var willFinish = new Date(user.subscription+((30*24*60*60*1000)*user.membership));
+		        willFinish+='';
+		        willFinish = willFinish.substr(0,16);
+				//save all ended users subs to object
+				$scope.usersEndedSubs.data.push({
+					firstName: user.firstName,
+					lastname: user.lastname,
+					username:user.username,
+					subscription: willFinish,
+					valid:user.valid,
+					image:user.image
+				})
+			}
+	}
+
+
+	$scope.resup=function(user){
 	var myPopup = $ionicPopup.show({
    	template: '<onezone-datepicker datepicker-object="onezoneDatepicker"><button class="button button-block button-outline icon icon-left ion-calendar button-dark bt show-onezone-datepicker">{{onezoneDatepicker.date | date:"dd MMMM yyyy"}} click to pick the date</button></onezone-datepicker>',
    	title: '<p>Enter your login information</p>',
@@ -168,8 +202,7 @@ angular.module('zarad.club',[])
          text: '<b>Regester</b>',
          type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
          onTap: function(e) {
-    	 console.log($scope.onezoneDatepicker.date);
-
+    	 $scope.renew(user);
          }
        },
      ]
@@ -180,7 +213,33 @@ angular.module('zarad.club',[])
       myPopup.close(); //close the popup after 1 minute
    }, 60000);
 }
-	$scope.getUsers();
-	$scope.getClub();
-	//$scope.renew('mihyar','2');
+
+	$scope.renew = function(user){
+		var months=$scope.getTime() || 1;
+	    User.resub({username : user, membership : months})
+	        .then(function(response){
+	          $scope.getUsers();
+	     })
+	};
+
+	$scope.getTime=function(){
+		var date=$scope.onezoneDatepicker.date;
+		var newDate=new Date(date);
+		var membership=newDate.getMonth();
+		var now=Date.now();
+		var nowDate=new Date(now).getMonth();
+		if(nowDate > membership){
+			var results=12-nowDate;
+			results+=membership;
+			return results;
+		}else if(nowDate === membership){
+			return ;
+		}else{
+			var results=membership-nowDate;
+			return results;
+		}
+	}
+
+	//call functions to get data
+	//$scope.getUsers();
 })
