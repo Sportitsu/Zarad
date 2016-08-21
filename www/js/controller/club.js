@@ -5,6 +5,7 @@ angular.module('zarad.club',[])
 	$scope.clubUsers={};
 	$scope.club={};
 	$scope.userProfileData={};
+	$scope.editUserProfileData={}
 	$scope.username="";
 	$scope.usersToSubscribe={};
 	$scope.usersEndedSubs={};
@@ -64,11 +65,16 @@ angular.module('zarad.club',[])
 			$scope.editUserModal = modal;
 	});
 
+
+	$scope.getUserPlace=function(place,username){
+		$scope.editUserProfileData.place=place;
+		$scope.editUserProfileData.username=username;
+	}
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
 		$scope.userProfileModal.show();
 	}
-	$scope.editUser=function(data){
+	$scope.editUserProfile=function(data){
 		$scope.userProfileData=data;
 		$scope.editUserModal.show();
 	}
@@ -87,6 +93,28 @@ angular.module('zarad.club',[])
 		$scope.editUserModal.hide();
 	}
 
+	$scope.removeUser=function(user){
+		var confirmPopup = $ionicPopup.confirm({
+	     title: 'Are you sure you want to remove '+user.user.firstName+' '+user.user.lastName+'?',
+	     template: ''
+	    });
+	    confirmPopup.then(function(res) {
+		    if(res) {
+		    	var username=user.user.username;
+		     	User.deleteUser({username : username}).then(function(resp){
+				var alertPopup = $ionicPopup.alert({
+	            	title: 'User '+ user.user.firstName +'  '+ user.user.lastName +' has been removed'
+	    		})
+	    		.then(function(){
+					$scope.editUserModal.hide();
+					$scope.getUsers();
+	    		})
+			});
+		    }else{
+		       $scope.editUserModal.hide();
+		    }
+	    });
+	}
 	$scope.confirmClubEdit=function(){
 	var confirmPopup = $ionicPopup.confirm({
      title: 'Are you sure of your edit',
@@ -100,6 +128,34 @@ angular.module('zarad.club',[])
      	}
      });
 	};
+
+	$scope.confirmUserEdit=function(){
+		var data=$scope.editUserProfileData;
+		if(!data.place){
+			var alertPopup = $ionicPopup.alert({
+	             title: 'please choose a middle to save your edit'
+	    })
+		}else if(data.username){
+			User.editProfile(data).then(function(resp){
+				var alertPopup = $ionicPopup.alert({
+	             title: 'Your Edit has been Added'
+	             }).then(function(){
+					$scope.editUserModal.hide();
+					$scope.editUserProfileData={};
+					$scope.getUsers();
+	             })
+			})
+		}else{
+			var alertPopup = $ionicPopup.alert({
+	             title: 'No Changes has been recorded'
+	        })
+			.then(function(){
+				$scope.editUserModal.hide();
+				$scope.editUserProfileData={};
+
+			})
+		}
+	}
 
 	$scope.editClub=function(){
 		Club.editClub($scope.club.data).then(function(resp){
@@ -129,7 +185,6 @@ angular.module('zarad.club',[])
 		var username=$window.localStorage.getItem('user');
 		Club.getClub(username).then(function(resp){
 			$scope.club.data=resp;
-			console.log(resp)
 			 $scope.getUsers();
 		})
 	};
@@ -239,7 +294,4 @@ angular.module('zarad.club',[])
 			return results;
 		}
 	}
-
-	//call functions to get data
-	//$scope.getUsers();
 })

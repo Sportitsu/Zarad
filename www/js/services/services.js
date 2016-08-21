@@ -57,7 +57,7 @@ angular.module('zarad.services',[])
       method: "POST",
       data:  admin
       })
-    .then(function(resp){g
+    .then(function(resp){ 
       return resp.data;
     })
   }
@@ -237,9 +237,10 @@ angular.module('zarad.services',[])
     });
   };
   var deleteUser = function(data){
+    console.log(data)
     return $http({
       method : 'POST' , 
-      url : 'http://zarad.herokuapp.com/api/user/delete',
+      url :'http://zarad.herokuapp.com/api/user/delete',
       data : data
     })
     .then(function(resp){
@@ -328,11 +329,42 @@ angular.module('zarad.services',[])
       return resp.data;
     });
   };
+
+    var Like=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: '/api/tournament/Like'
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  var DisLike=function(TourLike){
+    console.log(TourLike)
+    return $http({
+      method:'POST',
+      data:TourLike,
+      url: ''
+      
+    })
+    .then(function(resp){
+      return resp.data;
+    });
+  };
+
+  
   return{
     AddTournament:AddTournament,
     getAllTournament:getAllTournament,
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
-    DeleteTournament:DeleteTournament
+    DeleteTournament:DeleteTournament,
+    DisLike:DisLike,
+    Like:Like
+    
   }
 })

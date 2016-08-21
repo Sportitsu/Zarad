@@ -75,5 +75,6 @@ module.exports = {
 				helpers.errorHandler('Tournament Not Available', req, res);
 			}
 		});
-	}
+	},
+	
 };

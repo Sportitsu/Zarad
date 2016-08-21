@@ -2,7 +2,7 @@
 
 angular.module('zarad.admin',[])
 
-.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament){
+.controller('AdminController',function($scope, $window, $location,Admin, $state, $ionicPopup, $timeout, Club, Tournament,$ionicModal){
   $scope.admin={};
   $scope.club = {};
   $scope.tournament = {};
@@ -50,6 +50,7 @@ angular.module('zarad.admin',[])
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
           $scope.tournament.poster = result.link;
+          console.log( $scope.tournament.poster);
         });
       })
       // using the reader to decode the image to base64
@@ -84,7 +85,6 @@ angular.module('zarad.admin',[])
        text: '<b>Login</b>',
        type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
        onTap: function(e) {
-        console.log($scope.admin);
 
          if (!$scope.admin.username || !$scope.admin.password) {
            //don't allow the admin to close unless they fill the fields
@@ -139,7 +139,8 @@ angular.module('zarad.admin',[])
         $scope.tournament.details=tournament.data.details;
         $scope.tournament.organizer=tournament.data.organizer;
         $scope.tournament.Date=tournament.data.Date;
-        $scope.tournament.poster=tournament.data.poster;
+        //$scope.tournament.poster=tournament.data.poster;
+        $scope.img=tournament.data.poster;
     }).catch(function(error){
       $scope.massage="Tournament Not Found";
     });
@@ -153,7 +154,7 @@ angular.module('zarad.admin',[])
   $scope.deleteAdmin = function () {
     
     var remove = $ionicPopup.show({
-    template: '<select ng-model="adminSelect.value"><option ng-repeat="admin in admins.data">{{admin.username}}</option></select>',
+    template: '<select ng-model="adminSelect.value" style="height:37px"  class="item item-input item-select" ><option ng-repeat="admin in admins.data">{{admin.username}}</option></select>',
     title: '<p>Enter Admin UserName to delete</p>',
      subTitle: 'Please select Admin from the list',
      scope: $scope,
@@ -181,7 +182,7 @@ angular.module('zarad.admin',[])
     var register = $ionicPopup.show({
     template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Username" ng-model="admin.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Admin Password" ng-model="admin.password"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin Email" ng-model="admin.email"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin FirstName" ng-model="admin.firstName"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Admin LastName" ng-model="admin.lastName"></label>',
     title: '<p>Enter Admin UserName to delete</p>',
-     subTitle: 'Please select Admin from the list',
+     subTitle: 'Please fill the fields below',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
@@ -204,7 +205,7 @@ angular.module('zarad.admin',[])
   $scope.removeClub = function () {
 
     var remove = $ionicPopup.show({
-    template : '<select ng-model="clubSelect.value"><option ng-repeat="club in clubs.data">{{club.username}}  {{club.clubName}}</option></select>',
+    template : '<select ng-model="clubSelect.value"  style="height:37px"  class="item item-input item-select"><option ng-repeat="club in clubs.data">{{club.username}}  {{club.clubName}}</option></select>',
     title: '<p>Please select Club to delete</p>',
      subTitle: 'Please select Club Username',
      scope: $scope,
@@ -285,7 +286,7 @@ angular.module('zarad.admin',[])
   $scope.removeTournament = function () {
 
     var remove = $ionicPopup.show({
-    template :'<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select>',
+    template :'<select ng-model="tournamentSelect.value" style="height:37px"  class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select>',
     title: '<p>Please Select Tournament Name to delete</p>',
      subTitle: 'Please Tournament Name from the list',
      scope: $scope,
@@ -309,13 +310,15 @@ angular.module('zarad.admin',[])
      ]
    });
   };
+
+
   // Edit tournament function 
-  $scope.editTournament = function () {
+ $scope.editTournament = function () {
 
     var Edit = $ionicPopup.show({
-    template: '<select ng-model="tournamentSelect.value"><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><button ng-click="SearchAboutTournament()">Get Data</button><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Poster" ng-model="tournament.poster"></label><br>',
+    template: '<select style="height:37px"  ng-model="tournamentSelect.value" style="height:37px" ng-change="SearchAboutTournament()" class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label><label ></br><li style="display: block"  ng-model="img"><img ng-show="img" border="0px" style="margin-left:30px" width="300px" height="200px" src={{img}} /></li></label><br>',
     title: '<p>Edit Existing Tournament</p>',
-     subTitle: 'Please select from below and click Get Data',
+     subTitle: 'Please select from below',
      scope: $scope,
      buttons: [
        { text: 'Cancel',
@@ -326,7 +329,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.EditTournament($scope.tournament)
           .then(function (resp) {
-            $scope.tournament = '';
+            $scope.tournament = {};
             $location.path('/AllTournament');
           });
          }

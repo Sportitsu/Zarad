@@ -1,6 +1,13 @@
 <ion-content scroll="false" >
+
+<label class="item item-input">
+<i class="icon ion-search placeholder-icon"></i>
+<input type="search" placeholder="Search" ng-model="search" >
+</label>
+
+
   <ion-slides  options="options" does-continue="true" ng-if="AllTournament.data.length" slider="data.slider">
-    <ion-slide-page  ng-repeat="tournament in AllTournament.data |orderBy:'- Date' ">
+    <ion-slide-page  ng-repeat="tournament in AllTournament.data |orderBy:'- Date'|filter:search ">
     <div class="tournament">
     <img style=" margin-left:10%; margin-top:10%;margin-bottom:3%;width: 80%; height:40%"   src='{{tournament.poster}}'/>
     <div style="margin-left:10%">
@@ -13,10 +20,13 @@
     <span class="tournamenttitel" ">Organizer By:</span>{{tournament.organizer}}<br>
     </div>
     <div class="tournamentcolor">
-    <span class="tournamenttitel" ">Date:</span>Date:{{tournament.Date}}<br></div>
+    <span class="tournamenttitel" ">Date:</span>{{tournament.Date.substring(0,15)}}<br></div>
     <div class="tournamentcolor">
     <span class="tournamenttitel" "> More details:</span>{{tournament.details}}<br>
     </div>
+    <br>
+    <button ng-show={{LikeCtrl}} ng-click="Like(tournament)" class="icon ion-thumbsup placeholder-icon button button-small button-assertive" >Like</button>
+    <button ng-show={{LikeCtrl}} ng-click="DisLike(tournament)"  class="icon ion-thumbsdown placeholder-icon button button-small button-assertive" >Like</button>
     </div>
     </ion-slide-page>
    
