@@ -727,6 +727,23 @@ describe('Services', function () {
           $httpBackend.flush();
         });
     });
+
+    describe('Like()', function(){
+
+        it('should exists', function(){
+          expect(Tournament.Like).toBeDefined();
+        });
+
+        it('should be able to like a tournament',function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/addLike').respond({status:201, data : mockResponse});
+          Tournament.Like(mockResponse.name).then(function(resp){
+            expect(resp.status).toEqual(201);
+            expect(resp.data).toEqual(mockResponse);
+          });
+          $httpBackend.flush();
+        });
+    });
   });
 /////////////////////////////////////// Quotes Tests ///////////////////////////////
     describe('Quotes factory', function(){
