@@ -303,7 +303,7 @@ angular.module('zarad.services',[])
   var getAllTournament=function(){
     return $http({
       method:'GET',
-      url: '/api/tournament/tournaments'
+      url: 'http://zarad.herokuapp.com/api/tournament/tournaments'
       
     }).then(function(resp){
       return resp.data;
@@ -341,12 +341,12 @@ angular.module('zarad.services',[])
     });
   };
 
-    var Like=function(TourLike){
-    console.log(TourLike)
+    var Like=function(Like){
+    console.log(Like)
     return $http({
       method:'POST',
-      data:TourLike,
-      url: '/api/tournament/addLike'
+      data:Like,
+      url: 'http://zarad.herokuapp.com/api/tournament/addLike'
       
     })
     .then(function(resp){
