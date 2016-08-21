@@ -584,6 +584,23 @@ describe('Services', function () {
           $httpBackend.flush();
         });
     });
+
+    describe('resub()', function(){
+
+        it('should exists', function(){
+          expect(User.resub).toBeDefined;
+        });
+
+        it('should be able to renew user subscription', function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/resub').respond({status: 201, data: 'subscription renewed'});
+          User.resub(mockResponse.username).then(function(resp){
+            expect(resp.data).toEqual('subscription renewed');
+            expect(resp.status).toEqual(201);
+          });
+          $httpBackend.flush();
+        });
+    });
   });
 /////////////////////////////// Tournament tests ////////////////////////////
   describe('Tournament factory', function(){
