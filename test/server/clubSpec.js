@@ -250,53 +250,6 @@ describe('Club Test Database', function(done){
 			})
 	});
 
-	// it('should handle error if requesting an existent clubName', function(done){
-	// 	var newClub = new Club({
-	// 		'username' : 'source' ,
-	// 		'password' : '123' , 
-	// 		'clubName' : 'source' ,
-	// 		'country' : 'Jordan'
-	// 	})
-	// 	newClub.save(function(err,saved){
-	// 		chai.request(server)
-	// 			.post('/api/club/editProfile')
-	// 			.send({
-	// 				'username' : saved.username,
-	// 				'newClubName' : 'Fight-X', 
-	// 				'country' : 'Amman'
-	// 			})
-	// 			.end(function(err, res){
-	// 				expect(res.status).to.be.equal(500);
-	// 				done();
-	// 			})
-	// 	})
-	// });
-
-	it('should update club with new name if is not existent between our clubs', function(done){
-		var newClub = new Club({
-			'username' : 'source',
-			'password' : '1234',
-			'clubName' : 'SourceMMA',
-			'country'  : 'Jordan'
-		})
-		newClub.save(function(err,saved){
-			chai.request(server)
-				.post('/api/club/editProfile')
-				.send({
-					'username' : saved.username,
-					'newClubName' : 'Makhai',
-					'country' : 'Ordon'
-				})
-				.end(function(err, res){
-					expect(res.status).to.be.equal(201);
-					expect(res.body.clubName).to.be.equal('Makhai');
-					expect(res.body.country).to.be.equal('Ordon');
-					done();
-				})
-		})
-	});
-
-
 	it('should change password if oldPassword is passed in the body', function(done){
 			chai.request(server)	
 				.post('/api/club/editProfile')

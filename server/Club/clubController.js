@@ -141,17 +141,6 @@ module.exports ={
 				club.country = req.body.country || club.country;
 				club.channelId = req.body.channelId || club.channelId;
 				club.image = req.body.image || club.image;
-				if(req.body.newClubName){
-					var clubName = req.body.newClubName;
-					Club.findOne({ clubName : clubName})
-					.exec(function (error,clubTwo) {
-						if(clubTwo){
-							helpers.errorHandler('Club Name Already Exists', req, res);
-						}else{
-							club.clubName = req.body.newClubName;
-						}
-					});
-				}
 				if(req.body.oldPassword){
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
 						if(found){

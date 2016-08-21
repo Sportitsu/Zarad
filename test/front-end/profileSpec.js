@@ -6,12 +6,13 @@ describe('Testing AngularJS Zarad Profile Page', function(){
 
     describe('Testing parentController', function(){
       var scope , ctrl, $window;
-
-      beforeEach(inject(function($controller, $rootScope, _$window_){
+      var $q , deferred;
+      beforeEach(inject(function($controller, $rootScope, _$window_, _$q_){
         scope = $rootScope.$new();
         ctrl = $controller('parentController',{$scope : scope});
         $window = _$window_;
         $window.localStorage.member=JSON.stringify({beltColor : 'purple'});
+        $q =  _$q_;
       }));
 
       it('should initialize the data in the scope', function(){
@@ -45,7 +46,6 @@ describe('Testing AngularJS Zarad Profile Page', function(){
       it('should have confirm method', function(){
         expect(scope.confirm).toBeDefined();
       })
-
     });
 });
 
@@ -99,12 +99,7 @@ describe('JS Login Page', function(){
 
     describe('Auth Controller Promise Tests', function () {
 
-      var $scope;
-      var $q;
-      var deferred;
-      var $window;
-      var Auth;
-      var User;
+      var $scope, $q,deferred,$window,Auth,User;
       beforeEach(inject(function(_$controller_, _$rootScope_, _$location_, _User_, _$window_, _$ionicPopup_ , _Auth_, _$timeout_, _$q_) {
 
         $q = _$q_;
