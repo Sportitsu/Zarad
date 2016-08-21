@@ -14,41 +14,20 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 	
 	$scope.ceckuser=function(){
-		console.log($window.localStorage.member)
 	if($window.localStorage.member!==undefined){
        $scope.LikeCtrl=true
 	}
 	}
 	$scope.ceckuser();
-
+	
 	$scope.Like=function(tournament){
-		console.log(tournament._id)
-		var member=JSON.parse($window.localStorage.member)
-		console.log(member.username)
-
-		Tournament.Like({tourid:tournament._id,
-						 username:member.username,
-						 like:true,
-						 disLike:false
-						})
-		.then(function(resp){
-			//console.log(resp);
-		})
-	}
-
-	$scope.DisLike=function(tournament){
-		console.log(tournament)
-		var member=JSON.parse($window.localStorage.member)
-        console.log(member.username)
-		Tournament.DisLike({tourid:tournament._id,
-						 username:member.username,
-						 like:false,
-						 disLike:true
-						})
-		.then(function(resp){
-			//console.log(resp);
-
-		})
-	}
-
+        var member=JSON.parse($window.localStorage.member)
+        Tournament.Like({name:tournament.name,
+                         username:member.username,
+                        })
+        .then(function(resp){
+            $scope.getAllTournament();
+            
+        })
+    }
 })
