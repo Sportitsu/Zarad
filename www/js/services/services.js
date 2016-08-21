@@ -107,7 +107,7 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-.factory('Club',function($http, $window, $location, $ionicHistory){
+.factory('Club',function($http, $window, $location){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -199,8 +199,8 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
+   //  $ionicHistory.clearCache();
+   //  $ionicHistory.clearHistory();
     $location.path('/');
   }
   return{
