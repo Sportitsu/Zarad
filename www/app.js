@@ -1,6 +1,7 @@
 var app = angular.module('zarad', [
   'ionic',
   'ionic-material',
+  'onezone-datepicker',
   'zarad.user',
   'zarad.auth',
   'zarad.admin',
@@ -12,8 +13,7 @@ var app = angular.module('zarad', [
   'zarad.index',
   'ui.router',
   'zarad.videos'
-  
-  ]);
+	]);
 
 app.config(function($sceDelegateProvider) 
 {
@@ -31,14 +31,6 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           url: '/',
         templateUrl: 'js/templates/home.html',
         controller:'AuthController'
-<<<<<<< HEAD
-        })
-        .state('signin', {
-            url:'/signin',
-            templateUrl : 'js/templates/signin.html',
-            controller:'AuthController'
-=======
->>>>>>> 6ca2cf0a67e81941bf15f92f05369a9c565a0d13
         })
         .state('adminmain',{
           url:'/AdminMain',
@@ -86,21 +78,43 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             }
           }
         })
-        .state('clubprofile',{
-            url:'/clubProfile',
-            templateUrl: 'js/templates/Club/clubProfile.html',
-            controller: 'clubController'
+        .state('club',{
+          url:'/club',
+          templateUrl: 'js/templates/club/club.html',
+          controller: 'clubController'
         })
-        .state('clubprofile.users', {
-          url: "/allUsers",
+        .state('club.users', {
+          url: '/allUsers',
           views: {
             'users-tab': {
-              templateUrl: 'js/templates/Club/allUsers.html',
+              templateUrl: 'js/templates/club/allUsers.html',
               controller: 'clubController'
             }
           }
         })
-           
+        .state('club.profile', {
+          url: '/clubProfile',
+          views: {
+            'profile-tab': {
+              templateUrl: 'js/templates/club/clubProfile.html',
+              controller: 'clubController'
+            }
+          }
+        })
+         .state('club.tournament', {
+          url: '/allTournament',
+          views: {
+            'tournament-tab': {
+              templateUrl: 'js/templates/AllTournament.html',
+              controller: 'TournamentController'
+            }
+          }
+        })
+        .state('adduser',{
+          url:'/addUser',
+          templateUrl: 'js/templates/club/addUser.html',
+          controller: 'clubController'
+        })    
         $urlRouterProvider.otherwise('/');
   // $httpProvider.interceptors.push('AttachTokens');
   $httpProvider.defaults.transformRequest = function(data) {        

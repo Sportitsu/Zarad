@@ -8,6 +8,7 @@ module.exports = {
 		var tourid=req.body.tourid
 		var username=req.body.username
 		//{ tourid: '113', username: '123', like: true, disLike: false }
+		//we must test user name also 
 		Like.findOne({ tourid : tourid})
 		.exec(function(error,returnlike){
 			console.log("dss")
@@ -34,5 +35,11 @@ module.exports = {
 
 			}
 		})
+	},
+	DisLike:function(req,res){
+		console.log(req.body)
+		var tourid=req.body.tourid
+		var username=req.body.username
+
 	}
 }
