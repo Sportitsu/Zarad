@@ -8,7 +8,6 @@ var app = angular.module('zarad', [
   'youtube-embed',
   'zarad.tournament',
   'zarad.services',
-  'ngRoute',
   'ngCordova',
   'zarad.index',
   'ui.router',
@@ -32,11 +31,14 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           url: '/',
         templateUrl: 'js/templates/home.html',
         controller:'AuthController'
+<<<<<<< HEAD
         })
         .state('signin', {
             url:'/signin',
             templateUrl : 'js/templates/signin.html',
             controller:'AuthController'
+=======
+>>>>>>> 6ca2cf0a67e81941bf15f92f05369a9c565a0d13
         })
         .state('adminmain',{
           url:'/AdminMain',

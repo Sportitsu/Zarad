@@ -12,7 +12,7 @@ angular.module('zarad.tournament',['ionic'])
 		})
 	}
 	$scope.getAllTournament();
-
+	
 	$scope.ceckuser=function(){
 		console.log($window.localStorage.member)
 	if($window.localStorage.member!==undefined){
@@ -50,6 +50,5 @@ angular.module('zarad.tournament',['ionic'])
 
 		})
 	}
-	
-	
+
 })

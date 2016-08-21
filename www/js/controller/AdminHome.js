@@ -58,9 +58,8 @@ angular.module('zarad.admin',[])
       reader.readAsDataURL(file);
     })
      fileBt.click();
-            
-
   };
+
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
@@ -87,6 +86,7 @@ angular.module('zarad.admin',[])
        text: '<b>Login</b>',
        type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
        onTap: function(e) {
+        console.log($scope.admin);
 
          if (!$scope.admin.username || !$scope.admin.password) {
            //don't allow the admin to close unless they fill the fields
@@ -100,7 +100,7 @@ angular.module('zarad.admin',[])
    ]
  });
  myPopup.then(function(){
-  $scope.admin = '';
+  $scope.admin = {};
  })
 };
 
@@ -356,6 +356,4 @@ angular.module('zarad.admin',[])
      ]
    });
   };
-
-
 });
