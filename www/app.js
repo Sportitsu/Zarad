@@ -28,9 +28,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
     $stateProvider
         .state('/', {
-        	url: '/',
-  		    templateUrl: 'js/templates/home.html',
-  		    controller:'AuthController'
+          url: '/',
+        templateUrl: 'js/templates/home.html',
+        controller:'AuthController'
         })
         .state('adminmain',{
           url:'/AdminMain',
