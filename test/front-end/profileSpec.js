@@ -1,7 +1,9 @@
 'use strict';
 describe('Testing AngularJS Zarad Profile Page', function(){
 
-    beforeEach(module('zarad'));
+    beforeEach(angular.mock.module('zarad.index'));
+    beforeEach(angular.mock.module('zarad.services'));
+    beforeEach(angular.mock.module('ionic'));
 
     describe('Testing parentController', function(){
       var scope , ctrl, $window;
@@ -28,8 +30,9 @@ describe('Testing AngularJS Zarad Profile Page', function(){
 });
 
 describe('JS Login Page', function(){
-  beforeEach(module('zarad'));
-
+  beforeEach(angular.mock.module('zarad.auth'));
+  beforeEach(angular.mock.module('zarad.services'));
+  beforeEach(angular.mock.module('ionic'));
   describe('Auth Controller', function(){
     var scope , ctrl, mockWindow, mockPopup;
     var originalTimeout;
@@ -63,62 +66,61 @@ describe('JS Login Page', function(){
       expect(typeof scope.showPopup).toBe('function');
     });
 
-    it('should save the token after user signin' , function(done){
-      scope.user = {
-        username : 'Plmoha492' ,
-        password : 'test'
-      };
-      scope.signin();
-        expect(mockWindow.localStorage.member).toBeDefined();
-        done();
+    describe('Testing a Controller that uses a Promise', function () {
 
-    });
-  })
+      var $scope;
+      var $q;
+      var deferred;
+      var $window;
+      var Auth;
+      beforeEach(inject(function(_$controller_, _$rootScope_, _$location_, _User_, _$window_, _$ionicPopup_ , _Auth_, _$timeout_, _$q_) {
 
-  describe('Testing a Controller that uses a Promise', function () {
+        $q = _$q_;
+        $scope = _$rootScope_.$new();
+        // We use the $q service to create a mock instance of defer
+        deferred = _$q_.defer();
+        Auth = _Auth_;
+        // Use a Jasmine Spy to return the deferred promise
+        spyOn(_Auth_, 'signin').and.returnValue(deferred.promise);
+        $window = _$window_
+        // Init the controller, passing our spy service instance
 
-        var $scope;
-        var $q;
-        var deferred;
-        beforeEach(module('zarad'));
-        beforeEach(inject(function($controller, _$rootScope_, _$q_, Auth) {
-          $q = _$q_;
-          $scope = _$rootScope_.$new();
-          // We use the $q service to create a mock instance of defer
-          deferred = _$q_.defer();
-          
-          // Use a Jasmine Spy to return the deferred promise
-          spyOn(Auth, 'signin').and.returnValue(deferred.promise);
-          
-          // Init the controller, passing our spy service instance
-          $controller('AuthController', { 
-            $scope: $scope, 
-            Auth: Auth
-          });
-        }));
-
-        it('should resolve promise', function () {
-          // Setup the data we wish to return for the .then function in the controller
-          deferred.resolve({ user: 'Clmoha492'  , token: 'dfjakj32343SdDfjn' });
-          
-          // We have to call apply for this to work
-          $scope.$apply();
-          // Since we called apply, not we can perform our assertions
-          expect($scope.results).not.toBe(undefined);
-          expect($scope.error).toBe(undefined);
+        _$controller_('AuthController', { 
+          $scope: $scope, 
+          Auth: _Auth_,
+          $location: _$location_, 
+          User: _User_, 
+          $window: _$window_,
+          $timeout: _$timeout_, 
+          $q: _$q_ 
         });
+      }));
+
+      it('should resolve promise', function () {
+        // Setup the data we wish to return for the .then function in the controller
+        deferred.resolve({ user: 'Clmoha492'  , token: 'dfjakj32343SdDfjn' });
         
-        it('should reject promise', function () {
-          // This will call the .catch function in the controller
-          deferred.reject();
-          
-          // We have to call apply for this to work
-          $scope.$apply();
-          // Since we called apply, not we can perform our assertions
-          expect($scope.results).toBe(undefined);
-          expect($scope.error).toBe('There has been an error!');
-        });
+        // We have to call apply for this to work
+        $scope.signin();
+        $scope.$apply();
+        // Since we called apply, not we can perform our assertions
+        expect(Auth.signin).toHaveBeenCalled();
+        expect($scope.error).toBe(undefined);
       });
+      
+      // it('should reject promise', function () {
+      //   // This will call the .catch function in the controller
+      //   deferred.reject();
+        
+      //   // We have to call apply for this to work
+      //   $scope.signin();
+      //   $scope.$apply();
+      //   // Since we called apply, not we can perform our assertions
+      //   expect($scope.myMethod).toBe(true);
+      //   expect($scope.error).toBeDefined();
+      // });
+    });
 
+  })
 })
 
