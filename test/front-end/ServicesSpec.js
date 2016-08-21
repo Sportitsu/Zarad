@@ -43,11 +43,12 @@ describe('Services', function () {
             'email' : 'mihyar@gmail.com'
           }
 
-        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
+        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond({status:201,data:mockResponse});
 
         Auth.signup().then(function (resp) {
-          expect(resp.username[0]).toEqual('P');
-          expect(resp.username[1]).toEqual('l');
+          expect(resp.data.username[0]).toEqual('P');
+          expect(resp.data.username[1]).toEqual('l');
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -60,9 +61,11 @@ describe('Services', function () {
       });
 
       it('should return token when a user signin', function(){
-        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond(200,{token:token});
+        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond({status:200,data:{token:token}});
         Auth.signin().then(function(resp){
-        expect(resp.token).toEqual(token);
+        // expect(resp.token).toEqual(token);
+        expect(resp.data.token).toEqual(token);
+        expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
       });
@@ -142,9 +145,10 @@ describe('Services', function () {
         });
 
         it('should return a token when Admin signin', function(){
-          $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond(200,{token:token});
+          $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond({status:200,data:{token:token}});
           Admin.signin().then(function(resp){
-          expect(resp.token).toEqual(token);
+          expect(resp.data.token).toEqual(token);
+          expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -162,11 +166,12 @@ describe('Services', function () {
             'firstName' : 'education',
             'email' : 'RBK@gmail.com'
           }
-          $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(201,mockAdmin);
+          $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond({status:201,data:mockAdmin});
           Admin.signup().then(function(resp){
-            expect(resp.username).toEqual(mockAdmin.username);
-            expect(resp.password).toEqual(undefined);
-            expect(resp.email).toEqual(mockAdmin.email);
+            expect(resp.data.username).toEqual(mockAdmin.username);
+            expect(resp.data.password).toEqual(undefined);
+            expect(resp.data.email).toEqual(mockAdmin.email);
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -191,10 +196,11 @@ describe('Services', function () {
 
         it('should return an array of admins 200(Success)', function(){
 
-          $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(200,mockResponse);
+          $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond({status:200,data:mockResponse});
           Admin.getAdmins().then(function(resp){
-            expect(resp[0].username).toEqual(mockResponse[0].username);
-            expect(resp[1].username).toEqual(mockResponse[1].username);
+            expect(resp.data[0].username).toEqual(mockResponse[0].username);
+            expect(resp.data[1].username).toEqual(mockResponse[1].username);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -206,9 +212,10 @@ describe('Services', function () {
         });
 
         it('should remove existing admin 201(Success)', function(){
-          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,'Admin Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond({status:201,data:'Admin Deleted'});
           Admin.deleteAdmin(mockResponse[0].username).then(function(resp){
-            expect(resp).toEqual('Admin Deleted');
+            expect(resp.data).toEqual('Admin Deleted');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -245,12 +252,13 @@ describe('Services', function () {
 
     it('should be able to register new users to a club 201(Success)', function(){
 
-      $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
+      $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond({status:201,data:mockResponse});
       Club.AddUser(mockResponse).then(function(resp){
-        expect(resp.password).toEqual(undefined);
-        expect(resp.username[0]).toEqual('P');
-        expect(resp.username[1]).toEqual('l');
-        expect(resp.clubName).toEqual(mockResponse.clubName);
+        expect(resp.data.password).toEqual(undefined);
+        expect(resp.data.username[0]).toEqual('P');
+        expect(resp.data.username[1]).toEqual('l');
+        expect(resp.data.clubName).toEqual(mockResponse.clubName);
+        expect(resp.status).toEqual(201);
       });
       $httpBackend.flush();
     });
@@ -265,9 +273,10 @@ describe('Services', function () {
     it('should return a club given a club username', function(){
       var username = mockResponse.username;
 
-        $httpBackend.expect('GET', baseUrl + '/api/club/x/'+username).respond(200, mockResponse);
+        $httpBackend.expect('GET', baseUrl + '/api/club/x/'+username).respond({status:200, data:mockResponse});
         Club.getClub(username).then(function(resp){
-          expect(resp.username).toEqual(mockResponse.username);
+          expect(resp.data.username).toEqual(mockResponse.username);
+          expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
     });
@@ -284,6 +293,7 @@ describe('Services', function () {
       $httpBackend.expect('POST', baseUrl + '/api/club/getclub').respond(200,mockResponse);
       Club.getClubForUser(mockResponse.clubName).then(function(resp){
         expect(resp.data.clubName).toEqual(mockResponse.clubName);
+        expect(resp.status).toEqual(200);
       });
       $httpBackend.flush();
     });
@@ -297,9 +307,10 @@ describe('Services', function () {
 
       it('should be able to add a new club', function(){
 
-        $httpBackend.expect('POST', baseUrl + '/api/club/register').respond(201,mockResponse);
+        $httpBackend.expect('POST', baseUrl + '/api/club/register').respond({status:201,data:mockResponse});
         Club.Addclub(mockResponse).then(function(resp){
-          expect(resp.clubName).toEqual(mockResponse.clubName);
+          expect(resp.data.clubName).toEqual(mockResponse.clubName);
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -313,9 +324,10 @@ describe('Services', function () {
 
       it('should be able to remove a club give a clubName', function(){
 
-        $httpBackend.expect('POST', baseUrl + '/api/club/delete').respond(201, 'Club Deleted');
+        $httpBackend.expect('POST', baseUrl + '/api/club/delete').respond({status:201, data:'Club Deleted'});
         Club.removeClub(mockResponse.clubName).then(function(resp){
-            expect(resp).toEqual('Club Deleted');
+            expect(resp.data).toEqual('Club Deleted');
+            expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -345,9 +357,10 @@ describe('Services', function () {
                 'clubName' : 'azoz international'
               }]
 
-            $httpBackend.expect('GET', baseUrl + '/api/clubs').respond(200,mockClubs);
+            $httpBackend.expect('GET', baseUrl + '/api/clubs').respond({status:200,data:mockClubs});
             Club.getClubs().then(function(resp){
-              expect(resp).toEqual(mockClubs);
+              expect(resp.data).toEqual(mockClubs);
+              expect(resp.status).toEqual(200);
             });
           $httpBackend.flush();
         });
@@ -370,10 +383,11 @@ describe('Services', function () {
                 'clubName' : 'Makhai'
               };
 
-          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond(201, mockClubs);
+          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond({status:201, data:mockClubs});
           Club.editClub(mockResponse).then(function(resp){
-            expect(resp.username).toEqual(mockClubs.username);
-            expect(resp).not.toEqual(mockResponse);
+            expect(resp.data.username).toEqual(mockClubs.username);
+            expect(resp.data).not.toEqual(mockResponse);
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -411,6 +425,7 @@ describe('Services', function () {
           Club.getClubUsers(mockResponse.clubName).then(function(resp){
             expect(resp.data[0].clubName).toEqual(mockResponse.club);
             expect(resp.data[1].clubName).toEqual(mockResponse.club);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -429,7 +444,7 @@ describe('Services', function () {
         });
     });
   });
-//////////////////////////////// user factory ////////////////////////
+//////////////////////////////// User factory ////////////////////////
   describe('User factory', function(){
 
     var $httpBackend, User;
@@ -464,6 +479,7 @@ describe('Services', function () {
           User.getUser(mockResponse.username).then(function(resp){
             expect(resp.data.username).toEqual(mockResponse.username);
             expect(resp.data.beltColor).toEqual(mockResponse.beltColor);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -487,10 +503,29 @@ describe('Services', function () {
             'country' : 'Jordan'
           };
 
-          $httpBackend.expect('POST', baseUrl + '/api/user/editProfile').respond(201, edited);
+          $httpBackend.expect('POST', baseUrl + '/api/user/editProfile').respond({status:201, data:edited});
           User.editProfile(mockResponse.username).then(function(resp){
-            expect(resp.username).toEqual(mockResponse.username);
-            expect(resp.firstName).not.toEqual(mockResponse.username);
+            expect(resp.data.username).toEqual(mockResponse.username);
+            expect(resp.data.firstName).not.toEqual(mockResponse.username);
+            expect(resp.status).toEqual(201);
+          });
+          $httpBackend.flush();
+        });
+    });
+
+    describe('updateGoal()', function(){
+
+        it('should exists', function(){
+          expect(User.updateGoal).toBeDefined();
+        });
+
+        it('should insert new goals and delete existing goals', function(){
+          var goalId=1;
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/goals').respond(201,'Goal Updated');
+          User.updateGoal(goalId).then(function(resp){
+            expect(resp.data).toEqual('Goal Updated');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -504,9 +539,10 @@ describe('Services', function () {
 
         it('should be able to remove a user by username', function(){
 
-          $httpBackend.expect('POST', baseUrl + '/api/user/delete').respond(201, 'User Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/user/delete').respond({status:201, data:'User Deleted'});
           User.deleteUser(mockResponse.username).then(function(resp){
-            expect(resp).toEqual('User Deleted');
+            expect(resp.data).toEqual('User Deleted');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -543,6 +579,7 @@ describe('Services', function () {
           $httpBackend.expect('GET', baseUrl + '/api/users').respond(200, usersArray);
           User.getAllUsers().then(function(resp){
             expect(resp.data).toEqual(usersArray);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -580,6 +617,7 @@ describe('Services', function () {
         $httpBackend.expect('POST', baseUrl + '/api/tournament/create').respond(201,mockResponse);
         Tournament.AddTournament(mockResponse).then(function(resp){
           expect(resp.data).toEqual(mockResponse);
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -607,9 +645,10 @@ describe('Services', function () {
                                   "details": "jordan"
                                 }];
 
-        $httpBackend.expect('GET', baseUrl + '/api/tournament/tournaments').respond(200,tournamentsArray);
+        $httpBackend.expect('GET', baseUrl + '/api/tournament/tournaments').respond({status:200,data:tournamentsArray});
         Tournament.getAllTournament().then(function(resp){
-          expect(resp).toEqual(tournamentsArray);
+          expect(resp.data).toEqual(tournamentsArray);
+          expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
       });
@@ -625,6 +664,7 @@ describe('Services', function () {
           $httpBackend.expect('GET', baseUrl + '/api/tournament/x/'+ mockResponse.name).respond(200,mockResponse);
           Tournament.SearchAboutTournament(mockResponse.name).then(function(resp){
             expect(resp.data).toEqual(mockResponse);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -644,10 +684,11 @@ describe('Services', function () {
                       "details": "This is a tournament hosted by RBK"
                     };
 
-          $httpBackend.expect('POST', baseUrl + '/api/tournament/edit').respond(201,edited);
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/edit').respond({status:201,data: edited});
           Tournament.EditTournament(mockResponse.name).then(function(resp){
-            expect(resp.name).toEqual(edited.name);
-            expect(resp.organizer).not.toEqual(mockResponse.organizer);
+            expect(resp.data.name).toEqual(edited.name);
+            expect(resp.data.organizer).not.toEqual(mockResponse.organizer);
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -661,9 +702,10 @@ describe('Services', function () {
 
         it('should delete existing tournament', function(){
 
-          $httpBackend.expect('POST', baseUrl + '/api/tournament/delete').respond(201,'Tournament Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/delete').respond({status:201,data:'Tournament Deleted'});
           Tournament.DeleteTournament(mockResponse.name).then(function(resp){
-            expect(resp).toEqual('Tournament Deleted');
+            expect(resp.data).toEqual('Tournament Deleted');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
