@@ -42,6 +42,9 @@ describe('Testing AngularJS Zarad Profile Page', function(){
         expect($window.localStorage.member).toBeDefined();
       })
 
+      it('should have confirm method', function(){
+        expect(scope.confirm).toBeDefined();
+      })
 
     });
 });
