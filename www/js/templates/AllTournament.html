@@ -25,8 +25,8 @@
     <span class="tournamenttitel" "> More details:</span>{{tournament.details}}<br>
     </div>
     <br>
-    <button ng-show={{LikeCtrl}} ng-click="Like(tournament)" class="icon ion-thumbsup placeholder-icon button button-small button-assertive" >Like</button>
-    <button ng-show={{LikeCtrl}} ng-click="DisLike(tournament)"  class="icon ion-thumbsdown placeholder-icon button button-small button-assertive" >Like</button>
+    <button ng-show={{LikeCtrl}} ng-click="Like(tournament)" class="icon ion-thumbsup placeholder-icon button button-small button-assertive" >{{tournament.like.length}}</button>
+    
     </div>
     </ion-slide-page>
    

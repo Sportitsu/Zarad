@@ -11,10 +11,10 @@ module.exports = {
 		//we must test user name also 
 		Like.findOne({ tourid : tourid})
 		.exec(function(error,returnlike){
-			console.log("dss")
 			if(returnlike){
-				returnlike.like=true;
-				returnlike.disLike=false
+				console.log("dss")
+				returnlike.like=req.body.like;
+				returnlike.disLike=req.body.disLike
 			   	returnlike.save(function(error,saved){
 					res.status(201).send(saved);
 				});
@@ -23,10 +23,12 @@ module.exports = {
 				var newLike = new Like({
 					tourid: req.body.tourid,
 					username: req.body.username,
-					like: true,
-					disLike: false 
+					like: req.body.like,
+					disLike: req.body.disLike 
 				});
+				console.log(newLike);
 				newLike.save(function(error,newLike){
+					console.log(newLike,error)
 					if(error){
 						helpers.errorHandler(error, req, res);
 					}
@@ -41,5 +43,16 @@ module.exports = {
 		var tourid=req.body.tourid
 		var username=req.body.username
 
+	},
+	getAll : function (req,res) {
+		Like.find({})
+		.exec(function (error, likes) {
+			if(likes.length === 0){
+				helpers.errorHandler('Empty Table', req, res);
+			}else{
+			     
+				res.status(200).send(likes);
+			}
+		});
 	}
 }
