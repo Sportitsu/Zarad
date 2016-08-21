@@ -74,7 +74,6 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
-		console.log(username, 'This is the username');
 		// var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		if(username.charAt(0)==='P' && username.charAt(1)==='l'){
 			User.findOne({username: username})
@@ -206,7 +205,6 @@ module.exports= {
 		var username = req.body.username;
 		User.findOne({username : username})
 			.exec(function(err, user){
-				console.log('user',user)
 				if(user){
 					if(user.valid){
 						var isFinished = user.subscription + ((30 * 24 * 60 * 60 * 1000) * user.membership);
@@ -221,7 +219,6 @@ module.exports= {
 						user.valid = true;
 					}
 					user.save(function(err, saved){
-						console.log('d5l',saved)
 						if(saved){
 							res.status(201).send(saved);
 						} else {
