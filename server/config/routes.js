@@ -24,11 +24,8 @@ module.exports = function(app){
 	app.post('/api/tournament/create', tournamentController.addTournament);
 	app.post('/api/tournament/delete', tournamentController.tournamentRemove);
 	app.post('/api/tournament/edit', tournamentController.tournamentEdit);
+	app.post('/api/tournament/addLike', tournamentController.addLike);
 	
-	//Likes Page Routes
-	app.post('/api/like/addLike', likeController.addLike);
-
-
 	// Club Page Routes
 	app.post('/api/club/register',clubController.addClub);
 	app.get('/api/club/x/:username', clubController.getClub);
