@@ -4,9 +4,13 @@ angular.module('zarad.videos', ['ionic'])
   $scope.data = JSON.parse($window.localStorage.member);
     Club.getClubForUser({clubName : $scope.data.club})
         .then(function(response){
-          $scope.flag = true;
-          $scope.myClub = response.data;
-          $scope.uploadPage();
+          if(response.data.channelId){
+            $scope.flag = true;
+            $scope.myClub = response.data;
+            $scope.uploadPage();
+          } else {
+            $scope.flag = false;
+          }
         })
         .catch(function(error){
           $scope.flag = false;

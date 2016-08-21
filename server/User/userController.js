@@ -172,7 +172,6 @@ module.exports= {
 					user.beltColor = req.body.beltColor || user.beltColor;
 					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements  
 					user.attendance = req.body.attendance || user.attendance;
-					
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
@@ -206,7 +205,6 @@ module.exports= {
 		var username = req.body.username;
 		User.findOne({username : username})
 			.exec(function(err, user){
-				console.log('user',user)
 				if(user){
 					if(user.valid){
 						var isFinished = user.subscription + ((30 * 24 * 60 * 60 * 1000) * user.membership);
@@ -221,7 +219,6 @@ module.exports= {
 						user.valid = true;
 					}
 					user.save(function(err, saved){
-						console.log('d5l',saved)
 						if(saved){
 							res.status(201).send(saved);
 						} else {
@@ -232,5 +229,31 @@ module.exports= {
 					helpers.errorHandler('Not Available', req, res);
 				}
 			});
+	},
+
+	updateGoal : function(req,res){
+		var goal = req.body.goal; 
+		var username = req.body.username;
+		var method = req.body.method;
+		User.findOne({username : username})
+			.exec(function(err , user){
+				if(user){
+					if(method > 0){
+						if(user.goals === undefined){
+							user.goals = [];
+						}
+						user.goals.push(goal);
+					} else if(method < 0){ 
+							user.goals.splice(user.goals.indexOf(goal.title),1);
+					}
+					user.save(function(err,saved){
+						if(saved){
+							res.status(201).send(saved);
+						}
+					})
+				} else {
+					helpers.errorHandler('User Not Found', req,res);
+				}
+			})
 	}
 };

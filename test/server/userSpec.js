@@ -469,6 +469,74 @@ describe('User Test Database', function(done){
 					done();
 				})
 		})
+	});
+
+	describe('Updating user Goals',  function(done){
+		beforeEach(function(done){
+			var newUser = new User({
+				'username' : 'mihyar' , 
+				'password' : 'test', 
+				'email'  : 'mihyar@gmail.com' ,
+				'beltColor' : 'Purple' , 
+				'country'  : 'Syria' , 
+				'club' : 'Makhai',
+				'goals' : [{title : 'Get my Purple belt in 2 years'}]
+
+			})
+			newUser.save();
+			done();
+		});
+
+		afterEach(function(done){
+			User.collection.drop();
+			done();
+		})
+		it('should add a new goal in the user/s Database', function(done){
+			chai.request(server)
+				.post('/api/user/goals')
+				.send({
+					'username' : 'mihyar' , 
+					'method'  : '1' ,
+					'goal' : { title : 'Make 2000 armbars in less than a week'}
+				})
+				.end(function(err , res){
+					expect(res.status).to.be.equal(201);
+					expect(res.body).to.have.property('goals');
+					expect(res.body.goals.length).to.be.equal(2);
+					done();
+				})
+		});
+
+		it('should return 500 if user not found', function(done){
+			chai.request(server)
+				.post('/api/user/goals')
+				.send({
+					'username' : 'whatever' ,
+					'method'  : '1' , 
+					'goal' : {title : 'Dont make anything be lazy'}
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					expect(res.body).to.not.have.property('goals');
+					done();
+				})
+		});
+
+		it('should delete a goal when method is passed in database', function(done){
+			chai.request(server)
+				.post('/api/user/goals')
+				.send({
+					'username' : 'mihyar' , 
+					'method'  : '-1' , 
+					'goal'  : {title : 'Make 2000 armbars in less than a week'}
+				})
+				.end(function(err ,res){
+					expect(res.status).to.be.equal(201);
+					expect(res.body).to.have.property('goals');
+					expect(res.body.goals.length).to.be.equal(0);
+					done();	
+				})
+		})
 	})
 });	
 
