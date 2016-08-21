@@ -731,18 +731,8 @@ describe('Services', function () {
 /////////////////////////////////////// Quotes Tests ///////////////////////////////
     describe('Quotes factory', function(){
         var $httpBackend, Quotes;
-        
-        beforeEach(inject(function(_$httpBackend_, _Quotes_){
-          $httpBackend = _$httpBackend_;
-          Quotes = _Quotes_;
-        }));
 
-        it('should exists', function(){
-          expect(Quotes).toBeDefined();
-        });
-
-        describe('getQuotes()', function(){
-          var mockResponse = [
+        var mockResponse = [
                         {
                           "_id": "57b7dd13209d2b0300367c1a",
                           "image": "http://67.media.tumblr.com/bba1e0bab577e738d063041af9d999f8/tumblr_o2eo50NrAR1ts2km8o1_500.jpg"
@@ -755,6 +745,17 @@ describe('Services', function () {
                           "_id": "57b7e2e0209d2b0300367c1c",
                           "image": "http://i1277.photobucket.com/albums/y482/colo56/JiuJitsu/tumblr_m72oy1pknb1r39lqlo1_500_zps9f1ac09b.jpg"
                         }];
+        
+        beforeEach(inject(function(_$httpBackend_, _Quotes_){
+          $httpBackend = _$httpBackend_;
+          Quotes = _Quotes_;
+        }));
+
+        it('should exists', function(){
+          expect(Quotes).toBeDefined();
+        });
+
+        describe('getQuotes()', function(){
 
           it('should exists', function(){
             expect(Quotes.getQuotes).toBeDefined();
@@ -769,6 +770,24 @@ describe('Services', function () {
             });
             $httpBackend.flush();
           });
-        })
-    })
+        });
+
+      describe('addQuote()',function(){
+
+          it('should exists', function (){
+            expect(Quotes.addQuote).toBeDefined();
+          });
+
+          it('should add a new quote', function(){
+
+
+            $httpBackend.expect('POST', baseUrl + '/api/quotes/newquote').respond({status:201,data:mockResponse[0]});
+            Quotes.addQuote(mockResponse[0]).then(function(resp){
+              expect(resp.data).toEqual(mockResponse[0]);
+              expect(resp.status).toEqual(201);
+            });
+            $httpBackend.flush();
+          });
+      });
+    });
 });
