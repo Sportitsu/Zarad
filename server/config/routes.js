@@ -39,6 +39,7 @@ module.exports = function(app){
 
 
 	// User Page Routes
+
     app.post('/api/user/delete', userController.deleteUser); // 
 	app.post('/api/user/editProfile', userController.editProfile);
 	app.get('/api/user/x/:username', userController.getUser);
@@ -46,7 +47,7 @@ module.exports = function(app){
 	app.post('/api/user/signin' , userController.signin);
 	app.post('/api/user/signup', userController.signup);
 	app.post('/api/user/resub' , userController.resub);
-
+	app.get('/api/users/clubUsers/:clubName', userController.getClubUsers);
     // If a request is sent somewhere other than the routes above,
     // send it through our custom error handler
     app.use(helpers.errorLogger);

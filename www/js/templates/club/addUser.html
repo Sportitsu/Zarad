@@ -1,0 +1,75 @@
+<ion-modal-view>
+  <ion-header-bar>
+    <h1 class="title">Add New User</h1>
+    <div class="buttons">
+      <button class="button button-clear" ng-click="closeLogin()">Close</button>
+    </div>
+  </ion-header-bar>
+  <ion-content>
+    <form>
+      <div class="list">
+        <label class="item item-input">
+          <span class="input-label">First Name</span>
+          <input type="text" placeholder="Enter User First Name" ng-model="clubNewUser.firstName" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Last Name</span>
+          <input type="text" placeholder="Enter User Last Name" ng-model="clubNewUser.lastName" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Middle Name</span>
+          <input type="text" placeholder="Enter User Middle Name" ng-model="clubNewUser.middleName">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="password" placeholder="Enter user password" ng-model="clubNewUser.password">
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">Age</span>
+          <input type="text" placeholder="Enter User Age" ng-model="clubNewUser.age">
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">Email</span>
+          <input type="text" placeholder="Enter User Email" ng-model="clubNewUser.email">
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">Country</span>
+          <input type="text" placeholder="Enter User country" ng-model="clubNewUser.country">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">PhoneNumber</span>
+          <input type="text" placeholder="Enter User PhoneNumber" ng-model="clubNewUser.phone">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Belt Color</span>
+          <input type="text" placeholder="Enter User BeltColor" ng-model="clubNewUser.beltColor">
+        </label>
+
+
+        <label class="item item-input">
+          <span class="input-label">Achievements</span>
+          <input type="text" placeholder="Enter User achievements" ng-model="clubNewUser.achievements">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Membership</span>
+          <input type="text" placeholder="Enter User membership" ng-model="clubNewUser.membership">
+        </label>
+
+        <div style="text-align: center">
+          <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancelAdding()">Cancel Adding</button>
+          <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="AddUser()">Finished Adding</button>
+        </div>
+
+      </div>
+    </form>
+  </ion-content>
+</ion-modal-view>

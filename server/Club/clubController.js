@@ -14,7 +14,8 @@ module.exports ={
 					username : club.username,
 					country : club.country,
 					clubName : club.clubName,
-					email : club.email
+					email : club.email,
+					image: club.image
 				});
 				res.status(200).send(returnClub);
 			}else{
@@ -51,7 +52,9 @@ module.exports ={
 					password : req.body.password,
 					country  : req.body.country,
 					clubName : req.body.clubName,
-					email : req.body.email
+					email : req.body.email,
+					channelId: req.body.channelId || "",
+					image: req.body.image
 				});
 				newClub.save(function (error,club) {
 					if(error){
@@ -61,7 +64,9 @@ module.exports ={
 							username : club.username,
 							country : club.country,
 							clubName : club.clubName,
-							email : club.email
+							email : club.email,
+							channelId: req.body.channelId || "",
+							image : club.image
 						});
 						res.status(201).send(returnClub);
 					}
@@ -83,6 +88,7 @@ module.exports ={
 					clubObj.country = clubs[i].country;
 					clubObj.clubName = clubs[i].clubName;
 					clubObj.email = clubs[i].email;
+					clubObj.image=clubs[i].image;
 					clubArray.push(clubObj);
 				}
 				res.status(200).send(clubArray);
@@ -134,6 +140,7 @@ module.exports ={
 			if(club){
 				club.country = req.body.country || club.country;
 				club.channelId = req.body.channelId || club.channelId;
+				club.image = req.body.image || club.image;
 				if(req.body.newClubName){
 					var clubName = req.body.newClubName;
 					Club.findOne({ clubName : clubName})

@@ -1,0 +1,47 @@
+<ion-modal-view>
+	  <ion-header-bar>
+	    <div style="background-color: {{userProfileData.user.beltColor}};width:100%"></div>
+	  </ion-header-bar>
+      <ion-content>
+        <div class="hero" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
+            <div class="content">
+                <div class="avatar" style="background-image: url('{{userProfileData.user.image}}');"></div>
+                <h3><a class="light" style="color:white">{{userProfileData.user.firstName}}&nbsp;{{userProfileData.user.lastName}}</a></h3>
+                <h4>{{userProfileData.user.club}}</h4>
+            </div>
+        </div>
+            <div class="item item-left">
+                <h2 class="icon ion-home"> Country</h2>
+                <p>{{userProfileData.user.country}}</p>
+                <br>
+                <h2 class="icon ion-email"> Email</h2>
+                <p>{{userProfileData.user.email}}</p>
+                <br>
+                <h2 class="icon ion-ios-telephone"> phone</h2>
+                <p>{{userProfileData.user.phone}}</p>
+                <br>
+                <h2 class="icon ion-man"> Age</h2>
+                <p>{{userProfileData.user.age}}</p>
+                <br>
+                <h2 class="icon ion-calendar"> Member Since</h2>
+                <p>{{userProfileData.user.Date.substr(0,10)}}</p>
+                <br>
+                <h2 class="icon ion-calendar"> subscription Until</h2>
+                <p>{{userProfileData.user.subscription}}</p>
+                <br>
+                <h2 class="icon ion-minus-round"> Belt Color</h2>
+                <p>{{userProfileData.user.beltColor}}</p>
+                <br>
+                <h2 class="icon ion-ribbon-a"> Medals</h2>
+                <ul ng-repeat ="medal in userProfileData.user track by $index">
+                  <i class="icon logo-apple custom-icon"></i>
+                    <ion-row>
+                        <span>{{medal.place}}</span>{{medal.name}}
+                    </ion-row>
+                </ul>
+                <br><br><br><br>
+            <button class="button button-block button-stable button-positive" ng-click="cancelView()">Exit</button>
+            </div>
+        </ion-content>
+
+</ion-modal-view>

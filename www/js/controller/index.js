@@ -4,7 +4,7 @@ angular.module('zarad.index',[])
 	//depending on user saved token in the localstoarge.
 	//signout function
 	$scope.user = {};
-	$scope.data = JSON.parse($window.localStorage.member)
+	$scope.data =JSON.parse($window.localStorage.member)
 		// Gets the Date of Today to Use in Membership Action PopUp	
 		var objToday = new Date(),
 		  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -53,6 +53,7 @@ angular.module('zarad.index',[])
 		});
 		};
 
+		
 		$scope.showDate = function(){
 				var willFinish = new Date($scope.data.subscription+((30*24*60*60*1000)*$scope.data.membership));
 				willFinish+='';
