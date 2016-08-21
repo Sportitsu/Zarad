@@ -55,6 +55,7 @@ module.exports= {
 	signin : function(req, res){
 		var username = req.body.username;
 		var password = req.body.password;
+		console.log(username, 'This is the username');
 		// var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		if(username.charAt(0)==='P' && username.charAt(1)==='l'){
 			User.findOne({username: username})
@@ -153,11 +154,6 @@ module.exports= {
 					user.beltColor = req.body.beltColor || user.beltColor;
 					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements  
 					user.attendance = req.body.attendance || user.attendance;
-<<<<<<< HEAD
-
-=======
-					
->>>>>>> 01307818f2745770f325e73b0a649c4f32ac4383
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
 								user.password = req.body.password;
