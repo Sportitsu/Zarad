@@ -79,6 +79,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           }
         })
         .state('club',{
+          cache:false,
           url:'/club',
           templateUrl: 'js/templates/club/club.html',
           controller: 'clubController'

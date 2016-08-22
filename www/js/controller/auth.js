@@ -34,9 +34,7 @@ angular.module('zarad.auth',[])
      ]
    });
    myPopup.then(function(res) {
-      $scope.user.username = '';
-      $scope.user.password = '';
-
+      $scope.user={};
    });
    $timeout(function() {
       myPopup.close(); //close the popup after 1 minute
