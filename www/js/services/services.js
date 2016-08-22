@@ -81,6 +81,8 @@ angular.module('zarad.services',[])
   var signout=function(){
     $window.localStorage.removeItem('admin');
     $window.localStorage.removeItem('com.zarad');
+    localStorage.clear();
+    $window.localStorage.clear();
     $location.path('/');
   }
   //get all registered Admins

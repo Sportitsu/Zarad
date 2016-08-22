@@ -13,7 +13,7 @@ angular.module('zarad.admin',[])
   $scope.clubSelect={};
   $scope.tournaments={};
   $scope.tournamentSelect={};
-  $scope.adminUsername = $window.localStorage.getItem('admin');
+  $scope.adminUsername=$window.localStorage.getItem('admin');
 
   $scope.upload = function() {
     //imgur id
@@ -66,7 +66,7 @@ angular.module('zarad.admin',[])
       if(resp.status !== 500){
       $window.localStorage.setItem('admin',resp.user);
       $window.localStorage.setItem('com.zarad',resp.token);
-      $location.path('/AdminAction')
+      $location.path('/AdminAction');
       }else{
         var alertPopup = $ionicPopup.alert({
           title : resp.data
