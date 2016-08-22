@@ -122,7 +122,7 @@ In the end, the database mainly stored user,admin,club data to help with authent
 # Schema's
 
 ### User Schema
-
+```sh
 {
 	username : { type: String, required: true, index : {unique: true}},
 	password : { type: String, required: true},
@@ -146,7 +146,7 @@ In the end, the database mainly stored user,admin,club data to help with authent
   goals : {type : Array},
   salt : { type : String}
 }
-
+```
 
 ### Admin Schema
 
