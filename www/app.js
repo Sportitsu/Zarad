@@ -45,6 +45,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           controller: 'AdminController'
         })
         .state('AllTournament',{
+            cache : false,
             url:'/AllTournament',
             templateUrl:'js/templates/AllTournament.html',
             controller:'TournamentController'
