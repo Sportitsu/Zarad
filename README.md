@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
-[(https://travis-ci.org/Sportitsu/Zarad.svg?branch=master)]
+[https://travis-ci.org/Sportitsu/Zarad.svg?branch=master]
 # Zarad
 
 > project description
