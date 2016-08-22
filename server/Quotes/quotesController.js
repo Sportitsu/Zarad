@@ -25,8 +25,6 @@ module.exports = {
 			console.log(err);
 			if(saved){
 				res.status(201).send(saved);
-			}else{
-				helpers.errorHandler('Error Adding Quotes')
 			}
 		})
 	}, 
