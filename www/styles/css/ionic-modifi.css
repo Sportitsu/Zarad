@@ -89,4 +89,19 @@ background-color: white;
    -webkit-animation-duration:0;
   animation-duration:0;
 }
+ion-row > span[data="1"] {
+  color: #ffd700;
+  margin-left: 20px;
+  font-size: 20px;
+}
+ion-row > span[data="2"] {
+  color: #cd7f32;
+  margin-left: 20px;
+  font-size: 20px;
+}
+ion-row > span[data="3"] {
+  color: #c0c0c0;
+  margin-left: 20px;
+  font-size: 20px;
+}
 
