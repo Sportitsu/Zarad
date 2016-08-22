@@ -50,7 +50,7 @@ module.exports = function(app){
 	// Quote Routes
 	app.get('/api/quotes/get', quoteController.getQuotes);
 	app.post('/api/quotes/newquote', quoteController.addQuote);
-	app.post('/api/quotes/delete', quoteController.deleteQuote);
+	
 
 	app.get('/api/users/clubUsers/:clubName', userController.getClubUsers);
     // If a request is sent somewhere other than the routes above,

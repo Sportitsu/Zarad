@@ -103,6 +103,7 @@ angular.module('zarad.admin',[])
 
 
   $scope.signout=function(){
+    $scope.adminUsername='';
     Admin.signout();
   }
   //get a list of all admins
@@ -194,8 +195,10 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
-            $scope.admin = '';
-           $location.path('/AdminSignin');
+            var alertPopup = $ionicPopup.alert({
+             title: 'Admin Created: '+resp.username
+              });
+            $scope.admin = {};
           });
          }
        },
