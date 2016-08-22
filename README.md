@@ -2,6 +2,7 @@
 # Zarad
 
 > project description
+Zarad is app help  the sport clubs to manage  their  activities and facilitate ***trace** the players and their history,also it helps player to see the videos related to his club.    
 
 ## Team
 
@@ -105,12 +106,13 @@ npm install
 
 
 
-#The Database Table
-> admin
-> tournament
-> club
-> user
->quote
+#The Database 
+| Table        |
+| admin|
+| tournament|
+| club|
+| user|
+| quote|
 
 ### Roadmap
 

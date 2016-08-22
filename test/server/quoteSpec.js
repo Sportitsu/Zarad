@@ -50,10 +50,24 @@ describe('Quote DataBase', function(done){
 	it('should get add new quotes to database' , function(done){
 		chai.request(server)
 			.post('/api/quotes/newquote')
+			.send({
+				'image' : 'ZaradQuote.jpg' 
+			})
 			.end(function(err, res){
 				expect(res.status).to.be.equal(201);
 				expect(res.body.length).to.be.equal(1);
 				expect(res.body[0].image).to.be.equal('ZaradQuote.jpg');
+				done();
+			})
+	});
+	it('should handle error when not adding quotes', function(done){
+		chai.request(server)
+			.post('/api/quotes/newquote')
+			.send({
+				'image' : 'ZaradQuote.jpg' 
+			})
+			.end(function(err, res){
+				expect(res.status).to.be.equal(500);
 				done();
 			})
 	});
