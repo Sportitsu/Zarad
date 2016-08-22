@@ -15,6 +15,25 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
 
 
+    preprocessors: {
+        //
+        // your other preprocessors
+        //
+
+        //
+        // tell karma to use the ng-html2js preprocessor
+        "www/js/templates/**/*.html": "ng-html2js"
+    },
+
+    ngHtml2JsPreprocessor: {
+        //
+        // Make up a module name to contain your templates.
+        // We will use this name in the jasmine test code.
+        // For advanced configs, see https://github.com/karma-runner/karma-ng-html2js-preprocessor
+        moduleName: 'test-templates',
+    },
+
+
     // list of files / patterns to load in the browser
     files: [
       // 'www/lib/angular/angular.js',
@@ -29,6 +48,7 @@ module.exports = function(config) {
       'www/lib/ionic-material/dist/ionic.material.min.js',
       'www/lib/ionic/js/ionic.js',
       'www/lib/ionic/js/ionic.bundle.js',
+      'www/js/templates/**/*.html',
       'www/app.js',
       'www/js/**/*.js',
       // 'www/js/controller/auth.js',
@@ -43,6 +63,10 @@ module.exports = function(config) {
       // 'www/js/controller/ng-cordova.min.js',
       // 'test/front-end/AdminSpec.js',
       // 'test/front-end/routingSpec.js',
+      'test/front-end/userSpec.js',
+      'test/front-end/adminSpec.js',
+      'test/front-end/clubSpec.js',
+      'test/front-end/tournamentSpec.js',
       'test/front-end/ServicesSpec.js',
       'test/front-end/profileSpec.js'
       //'test/front-end/profileSpec.js',
@@ -60,7 +84,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-        'www/js/**/*.js' : 'coverage'
+        ['www/js/**/*.js'] : 'coverage'
     },
 
 
@@ -89,6 +113,7 @@ module.exports = function(config) {
     // level of logging
     // possible values: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
+    // logLevel: config.LOG_DEBUG,
 
 
     // enable / disable watching file and executing tests whenever any file changes
