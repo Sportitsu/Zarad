@@ -1,7 +1,12 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
+[![Build Status](https://travis-ci.org/Mihyar-30614/Zarad.svg?branch=master)](https://travis-ci.org/Mihyar-30614/Zarad/)
+
+
 # Zarad 
 
 Zarad is app help  the sport clubs to manage  their  activities and facilitate track the players and their history,also it helps player to see the videos related to his club.    
+
+
 
 ## Team
 
@@ -69,6 +74,7 @@ npm install -g ionic
 npm install
 ```
 
+
 #APIs Used
 - We used the Youtube API to gather details about the videos related to each club
 - we used Imgur API to stord the tournaments Image .
@@ -108,16 +114,19 @@ npm install
 
 
 #The Database 
+<<<<<<< HEAD
 We used MongoDB for our database. Initially,we were planning on club being able to have users , also we have tournament table which stored  tournament data ,quote table have  data about  quote.
 In the end, the database mainly stored user,admin,club data to help with authentication and to deliver a more customized experience
 
 
 | Table :       |
+
 | admin|
 | tournament|
 | club|
 | user|
 | quote|
+
 
 # Schema's
 

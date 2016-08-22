@@ -43,11 +43,12 @@ describe('Services', function () {
             'email' : 'mihyar@gmail.com'
           }
 
-        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
+        $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond({status:201,data:mockResponse});
 
         Auth.signup().then(function (resp) {
-          expect(resp.username[0]).toEqual('P');
-          expect(resp.username[1]).toEqual('l');
+          expect(resp.data.username[0]).toEqual('P');
+          expect(resp.data.username[1]).toEqual('l');
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -62,7 +63,8 @@ describe('Services', function () {
       it('should return token when a user signin', function(){
         $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond(200,{token:token});
         Auth.signin().then(function(resp){
-        expect(resp.token).toEqual(token);
+        expect(resp.data.token).toEqual(token);
+        expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
       });
@@ -144,7 +146,8 @@ describe('Services', function () {
         it('should return a token when Admin signin', function(){
           $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond(200,{token:token});
           Admin.signin().then(function(resp){
-          expect(resp.token).toEqual(token);
+          expect(resp.data.token).toEqual(token);
+          expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -162,11 +165,12 @@ describe('Services', function () {
             'firstName' : 'education',
             'email' : 'RBK@gmail.com'
           }
-          $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond(201,mockAdmin);
+          $httpBackend.expect('POST', baseUrl + '/api/admin/create').respond({status:201,data:mockAdmin});
           Admin.signup().then(function(resp){
-            expect(resp.username).toEqual(mockAdmin.username);
-            expect(resp.password).toEqual(undefined);
-            expect(resp.email).toEqual(mockAdmin.email);
+            expect(resp.data.username).toEqual(mockAdmin.username);
+            expect(resp.data.password).toEqual(undefined);
+            expect(resp.data.email).toEqual(mockAdmin.email);
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -191,10 +195,11 @@ describe('Services', function () {
 
         it('should return an array of admins 200(Success)', function(){
 
-          $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond(200,mockResponse);
+          $httpBackend.expect('GET', baseUrl + '/api/admin/admins').respond({status:200,data:mockResponse});
           Admin.getAdmins().then(function(resp){
-            expect(resp[0].username).toEqual(mockResponse[0].username);
-            expect(resp[1].username).toEqual(mockResponse[1].username);
+            expect(resp.data[0].username).toEqual(mockResponse[0].username);
+            expect(resp.data[1].username).toEqual(mockResponse[1].username);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -206,9 +211,10 @@ describe('Services', function () {
         });
 
         it('should remove existing admin 201(Success)', function(){
-          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond(201,'Admin Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/admin/delete').respond({status:201,data:'Admin Deleted'});
           Admin.deleteAdmin(mockResponse[0].username).then(function(resp){
-            expect(resp).toEqual('Admin Deleted');
+            expect(resp.data).toEqual('Admin Deleted');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -216,7 +222,7 @@ describe('Services', function () {
   });
 ////////////////////////Club factory tests //////////////////////////////
   describe('Club factory', function(){
-    var $httpBackend, Club;
+    var $httpBackend, Club, $window;
     var mockResponse = 
           {
             'username':'Plmiha492',
@@ -227,9 +233,10 @@ describe('Services', function () {
             'clubName' : 'Makhai'
           };
 
-    beforeEach(inject(function(_$httpBackend_, _Club_){
+    beforeEach(inject(function(_$httpBackend_, _Club_, _$window_){
       $httpBackend = _$httpBackend_;
       Club = _Club_;
+      $window = _$window_;
     }));
 
     it('should exist', function(){
@@ -244,12 +251,13 @@ describe('Services', function () {
 
     it('should be able to register new users to a club 201(Success)', function(){
 
-      $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
+      $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond({status:201,data:mockResponse});
       Club.AddUser(mockResponse).then(function(resp){
-        expect(resp.password).toEqual(undefined);
-        expect(resp.username[0]).toEqual('P');
-        expect(resp.username[1]).toEqual('l');
-        expect(resp.clubName).toEqual(mockResponse.clubName);
+        expect(resp.data.password).toEqual(undefined);
+        expect(resp.data.username[0]).toEqual('P');
+        expect(resp.data.username[1]).toEqual('l');
+        expect(resp.data.clubName).toEqual(mockResponse.clubName);
+        expect(resp.status).toEqual(201);
       });
       $httpBackend.flush();
     });
@@ -264,9 +272,10 @@ describe('Services', function () {
     it('should return a club given a club username', function(){
       var username = mockResponse.username;
 
-        $httpBackend.expect('GET', baseUrl + '/api/club/x/'+username).respond(200, mockResponse);
+        $httpBackend.expect('GET', baseUrl + '/api/club/x/'+username).respond({status:200, data:mockResponse});
         Club.getClub(username).then(function(resp){
-          expect(resp.username).toEqual(mockResponse.username);
+          expect(resp.data.username).toEqual(mockResponse.username);
+          expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
     });
@@ -283,6 +292,7 @@ describe('Services', function () {
       $httpBackend.expect('POST', baseUrl + '/api/club/getclub').respond(200,mockResponse);
       Club.getClubForUser(mockResponse.clubName).then(function(resp){
         expect(resp.data.clubName).toEqual(mockResponse.clubName);
+        expect(resp.status).toEqual(200);
       });
       $httpBackend.flush();
     });
@@ -296,9 +306,10 @@ describe('Services', function () {
 
       it('should be able to add a new club', function(){
 
-        $httpBackend.expect('POST', baseUrl + '/api/club/register').respond(201,mockResponse);
+        $httpBackend.expect('POST', baseUrl + '/api/club/register').respond({status:201,data:mockResponse});
         Club.Addclub(mockResponse).then(function(resp){
-          expect(resp.clubName).toEqual(mockResponse.clubName);
+          expect(resp.data.clubName).toEqual(mockResponse.clubName);
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -312,9 +323,10 @@ describe('Services', function () {
 
       it('should be able to remove a club give a clubName', function(){
 
-        $httpBackend.expect('POST', baseUrl + '/api/club/delete').respond(201, 'Club Deleted');
+        $httpBackend.expect('POST', baseUrl + '/api/club/delete').respond({status:201, data:'Club Deleted'});
         Club.removeClub(mockResponse.clubName).then(function(resp){
-            expect(resp).toEqual('Club Deleted');
+            expect(resp.data).toEqual('Club Deleted');
+            expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -322,37 +334,116 @@ describe('Services', function () {
 
   describe('getClubs()', function(){
 
-      it('should exist', function(){
-        expect(Club.getClubs).toBeDefined();
+        it('should exist', function(){
+          expect(Club.getClubs).toBeDefined();
+        });
+
+        it('should return an array of all the clubs', function(){
+
+          var mockClubs = [{
+                'username':'Clmiha492',
+                'firstName' : 'Mihyar',
+                'lastName' : 'almaslama',
+                'country' : 'Canada',
+                'email' : 'mihyar@gmail.com', 
+                'clubName' : 'Makhai'
+              },{
+                'username' : 'Clazoz793',
+                'firstName' : 'azoz',
+                'lastName' : 'Alrawi',
+                'country' : 'Iraq',
+                'email' : 'azoz@gmail.com',
+                'clubName' : 'azoz international'
+              }]
+
+            $httpBackend.expect('GET', baseUrl + '/api/clubs').respond({status:200,data:mockClubs});
+            Club.getClubs().then(function(resp){
+              expect(resp.data).toEqual(mockClubs);
+              expect(resp.status).toEqual(200);
+            });
+          $httpBackend.flush();
+        });
       });
 
-      it('should return an array of all the clubs', function(){
+  describe('editClub()', function(){
 
-        var mockClubs = [{
-              'username':'Clmiha492',
-              'firstName' : 'Mihyar',
-              'lastName' : 'almaslama',
-              'country' : 'Syria',
-              'email' : 'mihyar@gmail.com', 
-              'clubName' : 'Makhai'
-            },{
-              'username' : 'Clazoz793',
-              'firstName' : 'azoz',
-              'lastName' : 'Alrawi',
-              'country' : 'Iraq',
-              'email' : 'azoz@gmail.com',
-              'clubName' : 'azoz international'
-            }]
+        it('should exists', function(){
+          expect(Club.editClub).toBeDefined();
+        });
 
-          $httpBackend.expect('GET', baseUrl + '/api/clubs').respond(200,mockClubs);
-          Club.getClubs().then(function(resp){
-            expect(resp).toEqual(mockClubs);
+        it('should be able to edit existing club', function(){
+
+          var mockClubs = {
+                'username':'Clmiha492',
+                'firstName' : 'Mihyar',
+                'lastName' : 'almaslama',
+                'country' : 'Canada',
+                'email' : 'mihyar@gmail.com', 
+                'clubName' : 'Makhai'
+              };
+
+          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond({status:201, data:mockClubs});
+          Club.editClub(mockResponse).then(function(resp){
+            expect(resp.data.username).toEqual(mockClubs.username);
+            expect(resp.data).not.toEqual(mockResponse);
+            expect(resp.status).toEqual(201);
           });
-        $httpBackend.flush();
+          $httpBackend.flush();
+        });
+    });
+
+  describe('getClubUsers()', function(){
+
+        it('should exist', function(){
+          expect(Club.getClubUsers).toBeDefined();
+        });
+
+        it('should get all users of a certain club', function(){
+
+          var usersArray = [
+                  {
+                    "username": "mihyar",
+                    "email": "mihyar@gmail.com",
+                    "firstName": "Mohammad",
+                    "lastName": "Albakri",
+                    "club": "Makhai",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  },
+                  {
+                    "username": "mohammad",
+                    "email": "mohammad@gmail.com",
+                    "firstName": "Gisela",
+                    "lastName": "RBK",
+                    "club": "Makhai",
+                    "beltColor": "purple",
+                    "country": "Jordan"
+                  }];
+
+          $httpBackend.expect('GET', baseUrl + '/api/users/clubUsers/' + mockResponse.clubName).respond(200,usersArray);
+          Club.getClubUsers(mockResponse.clubName).then(function(resp){
+            expect(resp.data[0].clubName).toEqual(mockResponse.club);
+            expect(resp.data[1].clubName).toEqual(mockResponse.club);
+            expect(resp.status).toEqual(200);
+          });
+          $httpBackend.flush();
+        });
       });
+
+  describe('signout()', function(){
+
+        it('should exist', function(){
+            expect(Club.signout).toBeDefined();
+        });
+
+        it('should clear localStorage when logs out', function(){
+            $window.localStorage.setItem('com.zarad',token);
+            Club.signout();
+            expect($window.localStorage.getItem('com.zarad')).toEqual(null);
+        });
     });
   });
-//////////////////////////////// user factory ////////////////////////
+//////////////////////////////// User factory ////////////////////////
   describe('User factory', function(){
 
     var $httpBackend, User;
@@ -387,6 +478,7 @@ describe('Services', function () {
           User.getUser(mockResponse.username).then(function(resp){
             expect(resp.data.username).toEqual(mockResponse.username);
             expect(resp.data.beltColor).toEqual(mockResponse.beltColor);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -410,10 +502,29 @@ describe('Services', function () {
             'country' : 'Jordan'
           };
 
-          $httpBackend.expect('POST', baseUrl + '/api/user/editProfile').respond(201, edited);
+          $httpBackend.expect('POST', baseUrl + '/api/user/editProfile').respond({status:201, data:edited});
           User.editProfile(mockResponse.username).then(function(resp){
-            expect(resp.username).toEqual(mockResponse.username);
-            expect(resp.firstName).not.toEqual(mockResponse.username);
+            expect(resp.data.username).toEqual(mockResponse.username);
+            expect(resp.data.firstName).not.toEqual(mockResponse.username);
+            expect(resp.status).toEqual(201);
+          });
+          $httpBackend.flush();
+        });
+    });
+
+    describe('updateGoal()', function(){
+
+        it('should exists', function(){
+          expect(User.updateGoal).toBeDefined();
+        });
+
+        it('should insert new goals and delete existing goals', function(){
+          var goalId=1;
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/goals').respond(201,'Goal Updated');
+          User.updateGoal(goalId).then(function(resp){
+            expect(resp.data).toEqual('Goal Updated');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -427,9 +538,10 @@ describe('Services', function () {
 
         it('should be able to remove a user by username', function(){
 
-          $httpBackend.expect('POST', baseUrl + '/api/user/delete').respond(201, 'User Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/user/delete').respond({status:201, data:'User Deleted'});
           User.deleteUser(mockResponse.username).then(function(resp){
-            expect(resp).toEqual('User Deleted');
+            expect(resp.data).toEqual('User Deleted');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -466,6 +578,24 @@ describe('Services', function () {
           $httpBackend.expect('GET', baseUrl + '/api/users').respond(200, usersArray);
           User.getAllUsers().then(function(resp){
             expect(resp.data).toEqual(usersArray);
+            expect(resp.status).toEqual(200);
+          });
+          $httpBackend.flush();
+        });
+    });
+
+    describe('resub()', function(){
+
+        it('should exists', function(){
+          expect(User.resub).toBeDefined;
+        });
+
+        it('should be able to renew user subscription', function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/user/resub').respond({status: 201, data: 'subscription renewed'});
+          User.resub(mockResponse.username).then(function(resp){
+            expect(resp.data).toEqual('subscription renewed');
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -503,6 +633,7 @@ describe('Services', function () {
         $httpBackend.expect('POST', baseUrl + '/api/tournament/create').respond(201,mockResponse);
         Tournament.AddTournament(mockResponse).then(function(resp){
           expect(resp.data).toEqual(mockResponse);
+          expect(resp.status).toEqual(201);
         });
         $httpBackend.flush();
       });
@@ -530,9 +661,10 @@ describe('Services', function () {
                                   "details": "jordan"
                                 }];
 
-        $httpBackend.expect('GET', baseUrl + '/api/tournament/tournaments').respond(200,tournamentsArray);
+        $httpBackend.expect('GET', baseUrl + '/api/tournament/tournaments').respond({status:200,data:tournamentsArray});
         Tournament.getAllTournament().then(function(resp){
-          expect(resp).toEqual(tournamentsArray);
+          expect(resp.data).toEqual(tournamentsArray);
+          expect(resp.status).toEqual(200);
         });
         $httpBackend.flush();
       });
@@ -548,6 +680,7 @@ describe('Services', function () {
           $httpBackend.expect('GET', baseUrl + '/api/tournament/x/'+ mockResponse.name).respond(200,mockResponse);
           Tournament.SearchAboutTournament(mockResponse.name).then(function(resp){
             expect(resp.data).toEqual(mockResponse);
+            expect(resp.status).toEqual(200);
           });
           $httpBackend.flush();
         });
@@ -567,10 +700,11 @@ describe('Services', function () {
                       "details": "This is a tournament hosted by RBK"
                     };
 
-          $httpBackend.expect('POST', baseUrl + '/api/tournament/edit').respond(201,edited);
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/edit').respond({status:201,data: edited});
           Tournament.EditTournament(mockResponse.name).then(function(resp){
-            expect(resp.name).toEqual(edited.name);
-            expect(resp.organizer).not.toEqual(mockResponse.organizer);
+            expect(resp.data.name).toEqual(edited.name);
+            expect(resp.data.organizer).not.toEqual(mockResponse.organizer);
+            expect(resp.status).toEqual(201);
           });
           $httpBackend.flush();
         });
@@ -584,12 +718,92 @@ describe('Services', function () {
 
         it('should delete existing tournament', function(){
 
-          $httpBackend.expect('POST', baseUrl + '/api/tournament/delete').respond(201,'Tournament Deleted');
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/delete').respond({status:201,data:'Tournament Deleted'});
           Tournament.DeleteTournament(mockResponse.name).then(function(resp){
-            expect(resp).toEqual('Tournament Deleted');
+            expect(resp.data).toEqual('Tournament Deleted');
+            expect(resp.status).toEqual(201);
+          });
+          $httpBackend.flush();
+        });
+    });
+
+    describe('Like()', function(){
+
+        it('should exists', function(){
+          expect(Tournament.Like).toBeDefined();
+        });
+
+        it('should be able to like a tournament',function(){
+
+          $httpBackend.expect('POST', baseUrl + '/api/tournament/addLike').respond({status:201, data : mockResponse});
+          Tournament.Like(mockResponse.name).then(function(resp){
+            expect(resp.status).toEqual(201);
+            expect(resp.data).toEqual(mockResponse);
           });
           $httpBackend.flush();
         });
     });
   });
+/////////////////////////////////////// Quotes Tests ///////////////////////////////
+    describe('Quotes factory', function(){
+        var $httpBackend, Quotes;
+
+        var mockResponse = [
+                        {
+                          "_id": "57b7dd13209d2b0300367c1a",
+                          "image": "http://67.media.tumblr.com/bba1e0bab577e738d063041af9d999f8/tumblr_o2eo50NrAR1ts2km8o1_500.jpg"
+                        },
+                        {
+                          "_id": "57b7e277209d2b0300367c1b",
+                          "image": "http://4.bp.blogspot.com/-PnY8eaR7y0E/VMUftUyaqLI/AAAAAAAAANY/rV5M6CarTJw/s1600/joe_rogan_bjj_black_belt.png"
+                        },
+                        {
+                          "_id": "57b7e2e0209d2b0300367c1c",
+                          "image": "http://i1277.photobucket.com/albums/y482/colo56/JiuJitsu/tumblr_m72oy1pknb1r39lqlo1_500_zps9f1ac09b.jpg"
+                        }];
+        
+        beforeEach(inject(function(_$httpBackend_, _Quotes_){
+          $httpBackend = _$httpBackend_;
+          Quotes = _Quotes_;
+        }));
+
+        it('should exists', function(){
+          expect(Quotes).toBeDefined();
+        });
+
+        describe('getQuotes()', function(){
+
+          it('should exists', function(){
+            expect(Quotes.getQuotes).toBeDefined();
+          });
+
+          it('should be able to fetch all Quotes', function(){
+
+            $httpBackend.expect('GET', baseUrl + '/api/quotes/get').respond({status:200, data: mockResponse});
+            Quotes.getQuotes().then(function(resp){
+              expect(resp.status).toEqual(200);
+              expect(resp.data[0].image).toEqual(mockResponse[0].image);
+            });
+            $httpBackend.flush();
+          });
+        });
+
+      describe('addQuote()',function(){
+
+          it('should exists', function (){
+            expect(Quotes.addQuote).toBeDefined();
+          });
+
+          it('should add a new quote', function(){
+
+
+            $httpBackend.expect('POST', baseUrl + '/api/quotes/newquote').respond({status:201,data:mockResponse[0]});
+            Quotes.addQuote(mockResponse[0]).then(function(resp){
+              expect(resp.data).toEqual(mockResponse[0]);
+              expect(resp.status).toEqual(201);
+            });
+            $httpBackend.flush();
+          });
+      });
+    });
 });

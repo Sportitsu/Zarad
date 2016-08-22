@@ -11,6 +11,7 @@ angular.module('zarad.club',[])
 	$scope.usersEndedSubs={};
 	$scope.onezoneDatepicker = { date: 'date' };
 
+
 	$scope.showClubAction = function() {
 		var hideSheet = $ionicActionSheet.show({
 		 buttons: [
