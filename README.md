@@ -1,13 +1,12 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
 # Zarad
-https://travis-ci.org/Sportitsu/Zarad.svg?branch=master
-> project description
+> Manage sports clubs
 
 ## Team
 
   - __Product Owner__: Mohammad al-bakri
   - __Scrum Master__: Mihyar Al-masalma
-  - __Development Team Members__: Fatima hammami, Elham rababah
+  - __Development Team Members__: Fatima hammami, Elham rababah, Mohammad Al-bakri, Mihyar Al-Masalma
 
 ## Table of Contents
 
