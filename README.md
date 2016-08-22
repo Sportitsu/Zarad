@@ -107,6 +107,7 @@ npm install
 
 #The Database 
 | Table        |
+| -------------|
 | admin|
 | tournament|
 | club|
