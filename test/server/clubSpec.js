@@ -263,8 +263,7 @@ describe('Club Test Database', function(done){
 					done();
 				})
 	});
-
-		it('should return 500 ERROR if old Password is incorrect', function(done){
+	it('should return 500 ERROR if old Password is incorrect', function(done){
 			chai.request(server)
 				.post('/api/club/editProfile')
 				.send({
@@ -277,5 +276,30 @@ describe('Club Test Database', function(done){
 					done();
 				})
 	})
+
+	it('should get club for spacific user by getClubForUser', function(done){
+			chai.request(server)	
+				.post('/api/club/getclub')
+				.send({
+					"clubName": "Fight-X"
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(200);
+					expect(res.body).to.have.property('username');
+					done();
+				})
+	});
+	it('handle error getClubForUser', function(done){
+			chai.request(server)	
+				.post('/api/club/getclub')
+				.send({
+					"Name": "Fight-X"
+				})
+				.end(function(err, res){
+					expect(res.status).to.be.equal(500);
+					done();
+				})
+	});
+
 })
 
