@@ -29,9 +29,9 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
 
     $stateProvider
         .state('/', {
-          url: '/',
-        templateUrl: 'js/templates/home.html',
-        controller:'AuthController'
+        	url: '/',
+  		    templateUrl: 'js/templates/home.html',
+  		    controller:'AuthController'
         })
         .state('adminmain',{
           url:'/AdminMain',
@@ -82,7 +82,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           }
         })
         .state('club',{
-          cache: false,
+          cache:false,
           url:'/club',
           templateUrl: 'js/templates/club/club.html',
           controller: 'clubController'

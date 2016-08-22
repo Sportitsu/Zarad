@@ -50,13 +50,72 @@
 
         <label class="item item-input">
           <span class="input-label">Belt Color</span>
-          <input type="text" placeholder="Enter User BeltColor" ng-model="clubNewUser.beltColor">
+          <!-- <input type="text" placeholder="Enter User BeltColor" ng-model="clubNewUser.beltColor"> -->
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('white')">
+              <i class="icon ion-minus" style="color: #e6e6e6 !important"></i> 
+            </button>
+          </label>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('orange')">
+              <i class="icon ion-minus" style="color: orange !important"></i> 
+            </button>
+          </label>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('green')">
+              <i class="icon ion-minus" style="color: green !important"></i> 
+            </button>
+          </label>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('blue')">
+              <i class="icon ion-minus" style="color: blue !important"></i> 
+            </button>
+          </label>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('pruple')">
+              <i class="icon ion-minus" style="color: purple !important"></i> 
+            </button>
+          </label>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('red')">
+              <i class="icon ion-minus" style="color: red !important"></i> 
+            </button>
+          </label>
+           <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('brown')">
+              <i class="icon ion-minus" style="color: brown !important"></i> 
+            </button>
+          </label>
+           <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData('black')">
+              <i class="icon ion-minus" style="color: black !important"></i> 
+            </button>
+          </label>
         </label>
 
 
         <label class="item item-input">
           <span class="input-label">Achievements</span>
-          <input type="text" placeholder="Enter User achievements" ng-model="clubNewUser.achievements">
+          <span>name: </span>
+          <input type="text" placeholder=" Enter User achievements" ng-model="clubNewUser.achievements.name">
+          <span style="margin-left: 50px !important">Meddle:</span>
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData(1)">
+              <i class="icon ion-ribbon-a" style="color: #ffd700 !important"></i> 
+            </button>
+          </label>
+
+          <label>
+            <button class="button button-clear button-dark" ng-click="getAchievmentData(2)">
+             <i class="icon ion-ribbon-a" style="color: #cd7f32 !important"></i>
+            </button>
+          </label>
+
+          <label>
+           <button class="button button-clear button-dark" ng-click="getAchievmentData(3)">
+               <i class="icon ion-ribbon-a" style="color: #c0c0c0 !important"></i>
+             </button>   
+           </label> 
         </label>
 
         <label class="item item-input">

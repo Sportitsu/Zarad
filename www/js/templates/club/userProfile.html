@@ -32,11 +32,11 @@
                 <h2 class="icon ion-minus-round"> Belt Color</h2>
                 <p>{{userProfileData.user.beltColor}}</p>
                 <br>
-                <h2 class="icon ion-ribbon-a"> Medals</h2>
-                <ul ng-repeat ="medal in userProfileData.user track by $index">
-                  <i class="icon logo-apple custom-icon"></i>
+                <h2 class="icon ion-ribbon-b"> Achievements</h2>
+                <ul ng-repeat ="medal in userProfileData.user.achievements track by $index">
                     <ion-row>
-                        <span>{{medal.place}}</span>{{medal.name}}
+                        <span>{{medal.name}}</span>
+                        <span data={{medal.place}} ng-if="medal.place"><i class="icon ion-ribbon-a"></i></span>
                     </ion-row>
                 </ul>
                 <br><br><br><br>

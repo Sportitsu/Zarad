@@ -69,7 +69,7 @@ describe('Club Controller', function(){
 
   it('should have show User working', function(){
     $scope.userProfileData;
-    $scope.editUser('Some Data Here');
+    $scope.editUserProfile('Some Data Here');
     expect($scope.userProfileData).toEqual('Some Data Here');
   });
 

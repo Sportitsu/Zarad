@@ -4,7 +4,6 @@ angular.module('zarad.index',[])
 	$scope.user = {};
 	$scope.data = {};
 	$scope.checkColor = function(){
-		console.log($scope.data);
 		if($scope.data.beltColor.toLowerCase() !== 'white'){
 			$scope.initColor = 'white';
 		} else {
@@ -127,9 +126,8 @@ angular.module('zarad.index',[])
 		 		.then(function(response){
 		 			console.log(response);
 		 			$scope.data = response.data;
-					// $state.go($state.current, {}, {reload: true});
+					$state.go($state.current, {}, {reload: true});
 				   $timeout(function() {
-				   		$route.reload();
 				      $scope.modal.hide();
 				    }, 500);
 		 		})

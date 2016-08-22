@@ -8,10 +8,11 @@ module.exports = {
 	getQuotes : function(req, res){
 		Quote.find({})
 			 .exec(function(err, quotes){
-			 	if(quotes){
+			 	if(quotes.length > 0){
 			 		res.status(200).send(quotes);
 			 	} else {
-			 		helpers.errorHandler('Error Getting Quotes')
+			 		// helpers.errorHandler('Error Getting Quotes')
+			 		res.status(500).send('NOTHING IN');
 			 	}
 			 })
 	} , 
@@ -21,15 +22,9 @@ module.exports = {
 			image : req.body.image
 		})
 		newQuote.save(function(err, saved){
-			console.log(saved);
-			console.log(err);
 			if(saved){
 				res.status(201).send(saved);
 			}
 		})
-	}, 
-
-	deleteQuote : function(req,res){
-		// TODO Delete Quote
 	}
 };

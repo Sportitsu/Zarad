@@ -47,25 +47,18 @@ describe('Admin Controller', function(){
 		expect($scope.admin).toBeDefined();
 	});
 
-	// it('should have an upload to Imgur function',function(){
-	// 	$scope.upload();
-	// 	$scope.$apply();
-	// 	expect(true).toBe(true);
-	// })
-
-
 	it('should have a signin Function in scope', function(){
 		expect($scope.signin).toBeDefined();
 	});
 
 	it('sign in function should be able to work', function(){
 		$scope.admin = { username :'rebootKamp' , password: '1234'}
-		deferred.resolve({user : 'blabla' , token : '21340u8jkdaf'});
+		deferred.resolve({user : 'rebootKamp' , token : '21340u8jkdaf'});
 
 		$scope.signin();
 		$scope.$apply();
 
-		expect($window.localStorage.getItem('admin')).toEqual('blabla');
+		expect($window.localStorage.getItem('admin')).toEqual('rebootKamp');
 		expect(true).toBe(true);
 	});
 

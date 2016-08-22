@@ -43,6 +43,7 @@ angular.module('zarad.user',['ionic'])
     };
 
    $scope.initialize = function(){
+
      $ionicModal.fromTemplateUrl('js/templates/User/profile-friendPage.html', {
         scope: $scope,
         animation: 'slide-in-up'
@@ -129,65 +130,60 @@ angular.module('zarad.user',['ionic'])
       });
    }
 
+  
+   // $scope.showFriends = function(){
+   //   $scope.friends.show();
+   // }
 
 
-   if($scope.data.resub){
-    setTimeout(function(){
-     setInterval(function(){
-      $('#resubscribe').fadeToggle();
-     },2000)
-    },1000);
-   }
-   
 
-   $scope.showFriends = function(){
-     $scope.friends.show();
-   }
+   // $scope.closeLogin = function(){
+   //   $scope.friends.hide();
+   // }
 
-   $scope.closeLogin = function(){
-     $scope.friends.hide();
-   }
+
 
    $scope.myFriends = [];
-   // User.getAllUsers()
-   //     .then(function(response){
-   //      console.log(response);
-   //       for(var i = 0 ; i < response.data.length; i++){
-   //        if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
-   //          $scope.myFriends.push(response.data[i]);
-   //        }
-   //       }
-   //       console.log($scope.myFriends);
-   //     })
-   //     .catch(function(error){
-   //       console.log(error);
-   //     });
+   $scope.getAllUsers = function(){
+     User.getAllUsers()
+         .then(function(response){
+          console.log(response);
+           for(var i = 0 ; i < response.data.length; i++){
+            if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
+              $scope.myFriends.push(response.data[i]);
+            }
+           }
+           console.log($scope.myFriends);
+         })
+         .catch(function(error){
+           console.log(error);
+         });    
+   }
 
 
 
    $scope.showProfile = function(objectFriend){
-    $scope.friendMedal = false;
-    $scope.displayFriend = objectFriend;
-    $scope.friendAchievements = objectFriend.achievements;
-    console.log(objectFriend.achievements);
-    for(var i = 0; i < $scope.friendAchievements.length; i++){
-      if($scope.friendAchievements[i].place === '1' ){
-        $scope.friendAchievements[i].place = 'First Place ';
-      } else if($scope.friendAchievements[i].place === '2' ){
-        $scope.friendAchievements[i].place = 'Second Place ';
-      } else if($scope.friendAchievements[i].place === '3' ){
-        $scope.friendAchievements[i].place = 'Third Place ';
+      $scope.friendMedal = false;
+      $scope.displayFriend = objectFriend;
+      $scope.friendAchievements = objectFriend.achievements;
+      for(var i = 0; i < $scope.friendAchievements.length; i++){
+        if($scope.friendAchievements[i].place === '1' ){
+          $scope.friendAchievements[i].place = 'First Place ';
+        } else if($scope.friendAchievements[i].place === '2' ){
+          $scope.friendAchievements[i].place = 'Second Place ';
+        } else if($scope.friendAchievements[i].place === '3' ){
+          $scope.friendAchievements[i].place = 'Third Place ';
+        }
       }
-    }
-    if($scope.friendAchievements.length === 0){
-      $scope.friendMedal = true;
-    }
-    $scope.friendProfile.show();
-
+      if($scope.friendAchievements.length === 0){
+        $scope.friendMedal = true;
+      }
+      // $scope.friendProfile.show();
    }
-   $scope.goBack = function(){
-    $scope.friendProfile.hide();
-   }    
+
+   // $scope.goBack = function(){
+   //  $scope.friendProfile.hide();
+   // }    
          // Set Header    
    $scope.isExpanded = false;
 

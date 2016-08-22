@@ -61,9 +61,10 @@ angular.module('zarad.admin',[])
 
   //admin sign in
   $scope.signin=function(){
+    $window.localStorage.setItem('admin',$scope.admin.username);
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
-      $window.localStorage.setItem('admin',resp.user);
+      // $window.localStorage.setItem('admin',resp.user);
       $window.localStorage.setItem('com.zarad',resp.token);
       $location.path('/AdminAction')
     })
@@ -103,6 +104,7 @@ angular.module('zarad.admin',[])
 
 
   $scope.signout=function(){
+    $scope.adminUsername='';
     Admin.signout();
   }
   //get a list of all admins
@@ -134,6 +136,7 @@ angular.module('zarad.admin',[])
 
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
+      console.log()
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;
@@ -193,8 +196,10 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
+            var alertPopup = $ionicPopup.alert({
+             title: 'Admin Created: '+resp.username
+              });
             $scope.admin = {};
-           $location.path('/AdminSignin');
           });
          }
        },
@@ -311,14 +316,13 @@ angular.module('zarad.admin',[])
    });
   };
 
-
   // Edit tournament function 
  $scope.editTournament = function () {
 
     var Edit = $ionicPopup.show({
-    template: '<select style="height:37px"  ng-model="tournamentSelect.value" style="height:37px" ng-change="SearchAboutTournament()" class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label><label ></br><li style="display: block"  ng-model="img"><img ng-show="img" border="0px" style="margin-left:30px" width="300px" height="200px" src={{img}} /></li></label><br>',
+    template: 'Please select tournament from below <br><select style="height:37px"  ng-model="tournamentSelect.value" style="height:37px" ng-change="SearchAboutTournament()" class="item item-input item-select" ><option ng-repeat="tournament in tournaments.data">{{tournament.name}}</option></select><br><br> Tournament place <label class="item item-input"> <i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament place" ng-model="tournament.place"></label><br>Details<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Details" ng-model="tournament.details"></label><br> Tournament Organizer<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament organizer" ng-model="tournament.organizer"></label><br>Tournament Date<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" placeholder="Tournament Date" ng-model="tournament.Date"></label><br> Poster <label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" class="bottom-marg-15" type="button" value="choose Poster" ng-click="upload()"></label><label ></br><li style="display: block"  ng-model="img"><img ng-show="img" border="0px" style="margin-left:30px" width="300px" height="200px" src={{img}} /></li></label><br>',
     title: '<p>Edit Existing Tournament</p>',
-     subTitle: 'Please select from below',
+     
      scope: $scope,
      buttons: [
        { text: 'Cancel',

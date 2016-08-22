@@ -15,7 +15,9 @@ describe('Tournament Controller', function(){
 		Tournament = _Tournament_;
 
         spyOn(Tournament, 'getAllTournament').and.returnValue(deferred.promise);
+        spyOn(Tournament, 'Like').and.returnValue(deferred.promise);
 
+        $window.localStorage.member = JSON.stringify({username : 'Plmoha', image : 'asdfi.jpg'})
 		$controller('TournamentController',{
 			$scope : $scope ,
 			$window : $window ,
@@ -45,5 +47,23 @@ describe('Tournament Controller', function(){
 
 			expect($scope.LikeCtrl).toEqual(true);
 		});
+
+
+		it('should have a function called Like', function(){
+			expect($scope.Like).toBeDefined();
+		});
+
+		it('should have a like function that works', function(){
+			deferred.resolve({data: 'gettingData'});
+
+			$scope.Like({name: 'testingname' , username :'anotherone'});
+			$scope.$apply();
+
+			expect(Tournament.Like).toHaveBeenCalled();
+
+		})
+
+
+
 
 })

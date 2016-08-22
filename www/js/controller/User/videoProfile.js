@@ -1,5 +1,6 @@
 angular.module('zarad.videos', ['ionic'])
 .controller('VideosController', function($scope, User, Auth, $window, Club, $location, $http){
+  $scope.videos = [];
   $scope.flag = true;
   $scope.data = JSON.parse($window.localStorage.member);
     Club.getClubForUser({clubName : $scope.data.club})
@@ -35,14 +36,27 @@ angular.module('zarad.videos', ['ionic'])
             channelId: $scope.myClub.channelId,
           }
 
-      	$scope.videos = [];
-            $http.get('https://www.googleapis.com/youtube/v3/search', {params:$scope.youtubeParams}).success(function(response){
-            angular.forEach(response.items, function(child){
-              $scope.videos.push(child);
-            });
-          })
+          $scope.getVideo();
     }
       
-
+    $scope.getVideo = function(){
+      // $http({
+      //   method : 'GET',
+      //   params : $scope.youtubeParams ,
+      //   url : 'https://www.googleapis.com/youtube/v3/search'})
+      // .then(function(response){
+      //   angular.forEach(response.data.items, function(child){
+      //    $scope.videos.push(child);
+      //   })
+      // })
+      // .catch(function(error){
+      //   console.log(error);
+      // })
+      $http.get('https://www.googleapis.com/youtube/v3/search', {params:$scope.youtubeParams}).success(function(response){
+        angular.forEach(response.items, function(child){
+          $scope.videos.push(child);
+        });
+      })      
+    }
     
 })

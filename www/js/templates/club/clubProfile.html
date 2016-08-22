@@ -1,4 +1,5 @@
 <!-- show club profile info -->
+<br>
 <ion-content class="has-header">
 <div class="list card">
   <div class="item item-avatar">
@@ -10,7 +11,7 @@
 </div>
 
 <!-- show if there is users need to be registerd -->
-<div ng-show="show()">
+<div ng-show="true">
 <div class="list card animated tada"> 
   <a class="item item-icon-left" href="#">
       <i class="icon ion-alert"></i>
@@ -22,14 +23,14 @@
 </div>  
 <section id="cd-timeline" class="cd-container" ng-click="view()">
     <div ng-repeat="user in usersToSubscribe.data">
-      <div class="cd-timeline-block" ng-mode="">
+      <div class="cd-timeline-block">
         <div class="cd-timeline-picture text-center royal">
-          <img ng-src="{{user.image}}"></img>
+          <img ng-src="{{user.image}}"> />
         </div>
         <div class="cd-timeline-content padding royal">
-          <h5 class="marginBottom0 marginTop0">{{user.firstName}}&nbsp;{{user.lastname}}</h5>
-          <p class="marginTop5 cd-author">Subscription Date:{{user.subscription}}</p>
-          <button class="button" type="button" ng-click="resup(user.username)">resub</button>&nbsp;<button class="button">remove</button>
+          <h5 class="marginBottom0 marginTop0">{{user.firstName}}&nbsp;{{user.lastName}}</h5>
+          <p class="marginTop5 cd-author">Subscription Date: {{user.subscription}}</p>
+          <button class="button" type="button" ng-click="resup(user)">resub</button>&nbsp;<button class="button" ng-click="removeUserEnded(user)">remove</button>
           </div>
       </div>
   </div>
