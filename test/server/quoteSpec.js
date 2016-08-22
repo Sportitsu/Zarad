@@ -1,4 +1,4 @@
-/*process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test';
 var expect = require ('chai').expect;
 var path = require('path')
 var server = require(path.join(__dirname,'../../' ,'./server/server.js'));
@@ -10,7 +10,7 @@ var Quote = require('../../server/Quotes/quotesModel');
 var quotesController = require('../../server/Quotes/quotesController');
 
 
-describe('Quote DataBase', function(done){
+/*describe('Quote DataBase', function(done){
 	beforeEach(function(done){
 		var newQuote = new Quote ({
 			'image' : 'ZaradQuote.jpg' 
@@ -75,6 +75,5 @@ describe('Quote DataBase', function(done){
 
 
 
-})
+})*/
 
-*/
