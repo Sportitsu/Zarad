@@ -1,8 +1,12 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
 [![Build Status](https://travis-ci.org/Mihyar-30614/Zarad.svg?branch=master)](https://travis-ci.org/Mihyar-30614/Zarad/)
-# Zarad
-> project description
-Zarad is app help  the sport clubs to manage  their  activities and facilitate ***trace** the players and their history,also it helps player to see the videos related to his club.    
+
+
+# Zarad 
+
+Zarad is app help  the sport clubs to manage  their  activities and facilitate track the players and their history,also it helps player to see the videos related to his club.    
+
+
 
 ## Team
 
@@ -71,6 +75,9 @@ npm install
 ```
 
 
+#APIs Used
+- We used the Youtube API to gather details about the videos related to each club
+- we used Imgur API to stord the tournaments Image .
 
 # RESTful Routes
 | Method        | Endpoint      | Description  |
@@ -78,42 +85,121 @@ npm install
 |Post           |/api/admin/create|create new admin |
 |Post|/api/admin/signin|check if the admin authenticat to use the app|
 |get|/api/admin/x/:username|get the data of admin depend on username.Username must be passed in as the last part of the URL path|
-|post|/api/admin/delete|delete +++Spacefic++ admin  |
+|post|/api/admin/delete|delete specific admin  |
 |Post|/api/admin/admins|get information of all admin|
 |get|/api/tournament/x/:name|get information of tournament depend on name.name must be passed in as the last part of the URL path|
 |get|/api/tournament/tournaments|get information of all tournaments | 
 |post|/api/tournament/create|create new tournaments|
-|post|/api/tournament/delete|delete +++Spacefic++ tournaments|
+|post|/api/tournament/delete|delete specific tournaments|
 |post|/api/tournament/edit'|update tournament information|
 |post|/api/tournament/addLike'| add like on tournament|
 |post|/api/club/register|create new club|
 |get|/api/club/x/:username|get information of club depend on username.username must be passed in as the last part of the URL path|
 |get|/api/clubs| get information of all club|
-|post|/api/club/delete|Remove +++Spacefic++ club |
+|post|/api/club/delete|Remove specific club |
 |post|/api/club/editProfile|update information of club|
 |post|/api/club/signin|check if the club authenticat to use the app|
 |post|/api/club/getclub|get information of club|
-|post|/api/user/delete|delete +++Spacefic++ user|
+|post|/api/user/delete|delete specific user|
 |post|/api/user/editProfile| update information Profile of user|
 |get|/api/user/x/:username| get information of user depend on username.username must be passed in as the last part of the URL path|
 |get|/api/users| get information of all user|
 |post|/api/user/signin| check if the user authenticat to use the app|
 |post|/api/user/signup| create new user|
-|post|/api/user/resub| check  the user ***subsecrbtion** to use the app|
-|post|/api/user/goals| add goals for +++Spacefic++ user|
+|post|/api/user/resub| check  the user subscribtion to use the app|
+|post|/api/user/goals| add goals for specific user|
 |get|/api/quotes/get|get information of quote |
-|post|/api/quotes/newquote| add new quote to +++Spacefic++ user|
+|post|/api/quotes/newquote| add new quote to specific user|
 
 
 
 #The Database 
-| Table        |
+<<<<<<< HEAD
+We used MongoDB for our database. Initially,we were planning on club being able to have users , also we have tournament table which stored  tournament data ,quote table have  data about  quote.
+In the end, the database mainly stored user,admin,club data to help with authentication and to deliver a more customized experience
+
+
+| Table :       |
+
 | admin|
 | tournament|
 | club|
 | user|
 | quote|
 
+
+# Schema's
+
+### User Schema
+```sh
+{
+	username : { type: String, required: true, index : {unique: true}},
+	password : { type: String, required: true},
+  country : { type : String , required : true },
+  beltColor: { type: String , required: true},
+  club: { type: String, required: true},
+  membership : { type : Number, required : true , default : 1 },
+  email: { type: String , index : {unique : true}},
+  firstName: { type: String},
+  image : {type : String},
+  lastName: { type: String },
+  middleName : { type : String },
+  age : { type : Number},
+  phone: { type: String },
+  Date: { type: Date, default: Date.now() },
+  attendance : { type: Number },
+  achievements: { type : Array},
+  valid : { type : Boolean , default : true },
+  subscription : { type : Number },
+  resub : { type : Boolean , default : false},
+  goals : {type : Array},
+  salt : { type : String}
+}
+```
+
+### Admin Schema
+  ```sh
+{
+	username : {type: String, required : true, index : { unique : true }},
+	password : {type: String, required : true},
+	firstName : {type: String, required : true},
+	lastName : {type: String, required : true},
+	email : {type: String, required : true},
+  salt : { type : String}
+}
+```
+
+### Club Schema
+```sh
+{
+	username : {type : String, required : true, index : {unique : true} },
+	password : {type : String, required : true },
+  email    : {type : String , index : { unique : true}},
+	country  : {type : String, required : true },
+	clubName : {type : String, required : true, index : { unique : true } },
+  image    : {type:String },
+  channelId : {type : String, unique : true},
+  salt : { type : String}
+}
+```
+### Tournament Schema
+```sh
+{
+	name : {type : String , required : true},
+	Date : {type : String , required : true},
+	place : {type : String , required : true},
+	organizer : {type : String , required : true},
+	details : {type :  String , required : true},
+	poster : {type : String , required : true},
+	like:{type :[]}
+})
+```
+### Qoutes Schema
+```sh
+ {
+ image : { type : String}
+}
+```
 ### Roadmap
 
 View the project roadmap [here](https://waffle.io/Sportitsu/Zarad)
