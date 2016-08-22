@@ -61,13 +61,18 @@ angular.module('zarad.admin',[])
 
   //admin sign in
   $scope.signin=function(){
-    $window.localStorage.setItem('admin',$scope.admin.username);
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
-      // $window.localStorage.setItem('admin',resp.user);
+      if(resp.status !== 500){
+      $window.localStorage.setItem('admin',resp.user);
       $window.localStorage.setItem('com.zarad',resp.token);
       $location.path('/AdminAction')
-    })
+      }else{
+        var alertPopup = $ionicPopup.alert({
+          title : resp.data
+        });
+      }
+    });
   };
 
   //this is Admin log in pop up 
