@@ -179,8 +179,19 @@ angular.module('zarad.club',[])
 	}
 
 	$scope.editClub=function(){
+		console.log($scope.club.data)
 		Club.editClub($scope.club.data).then(function(resp){
-			$scope.editClubModal.hide();
+			console.log(resp);
+			if(resp.status !== 500){
+				$scope.editClubModal.hide();
+			}else{
+				var alertPopup = $ionicPopup.alert({
+	            title: resp.data
+	            })
+	            .then(function(){
+	            	$scope.getClub();
+	            })
+			}
 		})
 	}
 

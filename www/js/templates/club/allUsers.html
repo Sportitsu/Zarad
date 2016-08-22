@@ -1,3 +1,4 @@
+<ion-scroll scrollX="true">
 <section id="cd-timeline" class="cd-container ng-enter-stagger">
     <div ng-repeat="info in clubUsers.data">
       <div class="cd-timeline-block">
@@ -7,8 +8,9 @@
         <div class="cd-timeline-content padding royal">
           <h4 class="marginBottom0 marginTop0">{{info.user.firstName}}&nbsp;{{info.user.lastName}}</h4>
           <p class="marginTop5 cd-author">Subscription Date: {{info.user.subscription}}</p>
-          <button class="button" type="button" ng-click="showUser(info)">view user</button>&nbsp;<button class="button" ng-click="editUserProfile(info)">Edit User</button>&nbsp;<button class="button" ng-click="removeUser(info)">Remove User</button>
+          <button class="button button-small" ng-click="showUser(info)"><i class="icon ion-eye"></i></button>&nbsp;<button class="button button-small" ng-click="editUserProfile(info)"><i class="icon ion-edit"></i></button>&nbsp;<button class="button button-small" ng-click="removeUser(info)"><i class="icon ion-trash-a"></i></button>
           </div>
       </div>
   </div>
 </section>
+</ion-scroll>
