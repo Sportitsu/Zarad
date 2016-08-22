@@ -2,12 +2,12 @@
     <div ng-repeat="info in clubUsers.data">
       <div class="cd-timeline-block">
         <div class="cd-timeline-picture text-center royal">
-          <img ng-src="{{info.user.image}}"> />
+          <img ng-src="{{info.user.image}}" />
         </div>
         <div class="cd-timeline-content padding royal">
           <h4 class="marginBottom0 marginTop0">{{info.user.firstName}}&nbsp;{{info.user.lastName}}</h4>
           <p class="marginTop5 cd-author">Subscription Date: {{info.user.subscription}}</p>
-          <button class="button" type="button" ng-click="showUser(info)">view user</button>&nbsp;<button class="button" ng-click="editUser(info)">Edit User</button>&nbsp;<button class="button">Remove User</button>
+          <button class="button" type="button" ng-click="showUser(info)">view user</button>&nbsp;<button class="button" ng-click="editUserProfile(info)">Edit User</button>&nbsp;<button class="button" ng-click="removeUser(info)">Remove User</button>
           </div>
       </div>
   </div>

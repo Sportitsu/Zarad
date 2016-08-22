@@ -248,9 +248,10 @@ angular.module('zarad.services',[])
  }
 
   var deleteUser = function(data){
+    console.log(data)
     return $http({
       method : 'POST' , 
-      url : 'http://zarad.herokuapp.com/api/user/delete',
+      url :'http://zarad.herokuapp.com/api/user/delete',
       data : data
     })
     .then(function(resp){
