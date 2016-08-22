@@ -149,7 +149,7 @@ In the end, the database mainly stored user,admin,club data to help with authent
 ```
 
 ### Admin Schema
-
+  ```sh
 {
 	username : {type: String, required : true, index : { unique : true }},
 	password : {type: String, required : true},
@@ -158,9 +158,10 @@ In the end, the database mainly stored user,admin,club data to help with authent
 	email : {type: String, required : true},
   salt : { type : String}
 }
+```
 
 ### Club Schema
-
+```sh
 {
 	username : {type : String, required : true, index : {unique : true} },
 	password : {type : String, required : true },
@@ -171,7 +172,9 @@ In the end, the database mainly stored user,admin,club data to help with authent
   channelId : {type : String, unique : true},
   salt : { type : String}
 }
+```
 ### Tournament Schema
+```sh
 {
 	name : {type : String , required : true},
 	Date : {type : String , required : true},
@@ -181,12 +184,13 @@ In the end, the database mainly stored user,admin,club data to help with authent
 	poster : {type : String , required : true},
 	like:{type :[]}
 })
-
+```
 ### Qoutes Schema
+```sh
  {
  image : { type : String}
 }
-
+```
 ### Roadmap
 
 View the project roadmap [here](https://waffle.io/Sportitsu/Zarad)
