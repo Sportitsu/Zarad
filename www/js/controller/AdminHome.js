@@ -61,18 +61,10 @@ angular.module('zarad.admin',[])
 
   //admin sign in
   $scope.signin=function(){
+    $window.localStorage.setItem('admin',$scope.admin.username);
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
-      $window.localStorage.setItem('admin',resp.user);
-      $window.localStorage.setItem('com.zarad',resp.token);
-      $location.path('/AdminAction')
-    })
-  };
-  //admin sign in
-  $scope.signin=function(){
-    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
-    .then(function(resp){
-      $window.localStorage.setItem('admin',resp.user);
+      // $window.localStorage.setItem('admin',resp.user);
       $window.localStorage.setItem('com.zarad',resp.token);
       $location.path('/AdminAction')
     })
@@ -112,6 +104,7 @@ angular.module('zarad.admin',[])
 
 
   $scope.signout=function(){
+    $scope.adminUsername='';
     Admin.signout();
   }
   //get a list of all admins
@@ -203,8 +196,10 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
-            $scope.admin = '';
-           $location.path('/AdminSignin');
+            var alertPopup = $ionicPopup.alert({
+             title: 'Admin Created: '+resp.username
+              });
+            $scope.admin = {};
           });
          }
        },
