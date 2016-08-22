@@ -43,22 +43,29 @@ angular.module('zarad.auth',[])
 	$scope.signin =function(){
      Auth.signin($scope.user)
   	.then(function(resp){
+
+     if(resp.status !== 500){
      //save the token and username in local stoarage to distinguish signed in users
-     if(resp.user.indexOf('Cl') > -1){
-        $window.localStorage.setItem('com.zarad', resp.token);
-        $window.localStorage.setItem('user',resp.user);
+     if(resp.data.user.indexOf('Cl') > -1){
+        $window.localStorage.setItem('com.zarad', resp.data.token);
+        $window.localStorage.setItem('user',resp.data.user);
         $location.path('/club');
-     } else {
-       $scope.setWindowUser(resp);
-     }
-  	}).catch(function(error){
-      $scope.error = error;
-  	});
-  };
+      }else if(resp.data.user.indexOf('Pl') > -1){
+        $scope.setWindowUser(resp.data);
+      }
+      }
+      else{
+        var alertPopup = $ionicPopup.alert({
+            title: resp.data
+        })
+    }
+  });
+};
 
   $scope.setWindowUser = function(resp){                                          
        User.getUser(resp.user)
        .then(function(response){
+        if(response)
           if(response.data.valid){
             $window.localStorage.setItem('com.zarad', resp.token);
             $window.localStorage['member'] = angular.toJson(response.data);

@@ -6,7 +6,6 @@ var userController = require('../User/userController');
 var clubController = require('../Club/clubController');
 var tournamentController = require('../Tournament/tournamentController');
 var quoteController = require('../Quotes/quotesController');
-var likeController = require('../TourLikes/likeController');
 
 // Waiting for database setup 
 module.exports = function(app){

@@ -39,6 +39,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           controller:'AdminController'
         })
         .state('adminaction',{
+          cache:false,
           url:'/AdminAction',
           templateUrl: 'js/templates/AdminAction.html',
           controller: 'AdminController'

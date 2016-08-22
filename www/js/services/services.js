@@ -19,8 +19,11 @@ angular.module('zarad.services',[])
       data:user
     })
     .then(function(resp){
-      return resp.data;
-    }); 
+      return resp;
+    })
+    .catch(function(error){
+      return error;
+    })
   };
   
   var signout=function(){

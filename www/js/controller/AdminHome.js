@@ -13,7 +13,7 @@ angular.module('zarad.admin',[])
   $scope.clubSelect={};
   $scope.tournaments={};
   $scope.tournamentSelect={};
-  $scope.adminUsername = $window.localStorage.getItem('admin');
+  $scope.adminUsername=$window.localStorage.getItem('admin');
 
   $scope.upload = function() {
     //imgur id
@@ -59,15 +59,6 @@ angular.module('zarad.admin',[])
      fileBt.click();
   };
 
-  //admin sign in
-  $scope.signin=function(){
-    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
-    .then(function(resp){
-      $window.localStorage.setItem('admin',resp.user);
-      $window.localStorage.setItem('com.zarad',resp.token);
-      $location.path('/AdminAction')
-    })
-  };
   //admin sign in
   $scope.signin=function(){
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
