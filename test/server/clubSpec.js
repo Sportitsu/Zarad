@@ -277,7 +277,7 @@ describe('Club Test Database', function(done){
 				})
 	})
 
-	it('should get club for spacific user by getClubForUser', function(done){
+	/*it('should get club for spacific user by getClubForUser', function(done){
 			chai.request(server)	
 				.post('/api/club/getclub')
 				.send({
@@ -299,7 +299,7 @@ describe('Club Test Database', function(done){
 					expect(res.status).to.be.equal(500);
 					done();
 				})
-	});
+	});*/
 
 })
 
