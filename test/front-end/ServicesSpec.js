@@ -61,9 +61,8 @@ describe('Services', function () {
       });
 
       it('should return token when a user signin', function(){
-        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond({status:200,data:{token:token}});
+        $httpBackend.expect('POST', baseUrl + '/api/user/signin').respond(200,{token:token});
         Auth.signin().then(function(resp){
-        // expect(resp.token).toEqual(token);
         expect(resp.data.token).toEqual(token);
         expect(resp.status).toEqual(200);
         });
@@ -145,7 +144,7 @@ describe('Services', function () {
         });
 
         it('should return a token when Admin signin', function(){
-          $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond({status:200,data:{token:token}});
+          $httpBackend.expect('POST', baseUrl + '/api/admin/signin').respond(200,{token:token});
           Admin.signin().then(function(resp){
           expect(resp.data.token).toEqual(token);
           expect(resp.status).toEqual(200);
