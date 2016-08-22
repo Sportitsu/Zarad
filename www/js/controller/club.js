@@ -1,6 +1,7 @@
 'use strict';
 angular.module('zarad.club',[])
 .controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
+	//added somethign for pull request
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
 	$scope.club={};
