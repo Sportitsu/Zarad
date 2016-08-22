@@ -120,6 +120,7 @@ In the end, the database mainly stored user,admin,club data to help with authent
 | quote|
 
 #Schema's
+
 ### User Schema
 {
 	username : { type: String, required: true, index : {unique: true}},
