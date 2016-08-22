@@ -9,7 +9,6 @@ chai.use(chaiHttp);
 var Quote = require('../../server/Quotes/quotesModel');
 var quotesController = require('../../server/Quotes/quotesController');
 
-<<<<<<< HEAD
 
 /*describe('Quote DataBase', function(done){
 	beforeEach(function(done){
