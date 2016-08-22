@@ -145,9 +145,6 @@ module.exports ={
 					Club.comparePassword(req.body.oldPassword , club.password, res, function (found){
 						if(found){
 							club.password = req.body.password;
-							club.save(function(error,savedClub){
-								res.status(201).send('Updated/n'+savedClub);
-							});
 						} else {
 							helpers.errorHandler('Wrong Entry', req, res);
 						}

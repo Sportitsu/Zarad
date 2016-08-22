@@ -26,7 +26,17 @@
           <input type="text" placeholder="Change Club Logo" ng-model="club.data.Image" ng-value="club.data.Image" >
         </label>
 
-        <label class = "col text-right button icon ion-locked button-stable" ng-click="showPassWord()">  Change Password</label>
+         <label class="item item-input">
+          <span class="input-label">Old Password</span>
+          <input type="password" placeholder="Enter Old Password" ng-model="club.data.oldPassword" ng-value="club.data.oldPassword" >
+        </label>
+
+         <label class="item item-input">
+          <span class="input-label">New Password</span>
+          <input type="password" placeholder="Enter New Password" ng-model="club.data.password" ng-value="club.data.password" >
+        </label>
+
+        <!-- <label class = "col text-right button icon ion-locked button-stable" ng-click="showPassWord()">  Change Password</label> -->
         <div style="text-align: center">
           <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancelClubEditing()">Cancel Edit</button>
           <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirmClubEdit()">Finished Edit</button>
