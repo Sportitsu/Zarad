@@ -1,7 +1,8 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
 [![Build Status](https://travis-ci.org/Mihyar-30614/Zarad.svg?branch=master)](https://travis-ci.org/Mihyar-30614/Zarad/)
 # Zarad
-> Manage sports clubs
+> project description
+Zarad is app help  the sport clubs to manage  their  activities and facilitate ***trace** the players and their history,also it helps player to see the videos related to his club.    
 
 ## Team
 
@@ -68,6 +69,50 @@ From within the root directory:
 npm install -g ionic
 npm install
 ```
+
+
+
+# RESTful Routes
+| Method        | Endpoint      | Description  |
+| ------------- |:-------------:| ------------:|
+|Post           |/api/admin/create|create new admin |
+|Post|/api/admin/signin|check if the admin authenticat to use the app|
+|get|/api/admin/x/:username|get the data of admin depend on username.Username must be passed in as the last part of the URL path|
+|post|/api/admin/delete|delete +++Spacefic++ admin  |
+|Post|/api/admin/admins|get information of all admin|
+|get|/api/tournament/x/:name|get information of tournament depend on name.name must be passed in as the last part of the URL path|
+|get|/api/tournament/tournaments|get information of all tournaments | 
+|post|/api/tournament/create|create new tournaments|
+|post|/api/tournament/delete|delete +++Spacefic++ tournaments|
+|post|/api/tournament/edit'|update tournament information|
+|post|/api/tournament/addLike'| add like on tournament|
+|post|/api/club/register|create new club|
+|get|/api/club/x/:username|get information of club depend on username.username must be passed in as the last part of the URL path|
+|get|/api/clubs| get information of all club|
+|post|/api/club/delete|Remove +++Spacefic++ club |
+|post|/api/club/editProfile|update information of club|
+|post|/api/club/signin|check if the club authenticat to use the app|
+|post|/api/club/getclub|get information of club|
+|post|/api/user/delete|delete +++Spacefic++ user|
+|post|/api/user/editProfile| update information Profile of user|
+|get|/api/user/x/:username| get information of user depend on username.username must be passed in as the last part of the URL path|
+|get|/api/users| get information of all user|
+|post|/api/user/signin| check if the user authenticat to use the app|
+|post|/api/user/signup| create new user|
+|post|/api/user/resub| check  the user ***subsecrbtion** to use the app|
+|post|/api/user/goals| add goals for +++Spacefic++ user|
+|get|/api/quotes/get|get information of quote |
+|post|/api/quotes/newquote| add new quote to +++Spacefic++ user|
+
+
+
+#The Database 
+| Table        |
+| admin|
+| tournament|
+| club|
+| user|
+| quote|
 
 ### Roadmap
 
