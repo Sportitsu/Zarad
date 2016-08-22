@@ -70,7 +70,7 @@ npm install
 ```
 
 #APIs Used
--We used the Youtube API to gather details about the videos related to each club.
+-We used the Youtube API to gather details about the videos related to each club
 -we used Imgur API to stord the tournaments Image .
 
 # RESTful Routes
