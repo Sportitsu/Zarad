@@ -1,7 +1,7 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
 # Zarad 
 
-Zarad is app help  the sport clubs to manage  their  activities and facilitate ***trace** the players and their history,also it helps player to see the videos related to his club.    
+Zarad is app help  the sport clubs to manage  their  activities and facilitate track the players and their history,also it helps player to see the videos related to his club.    
 
 ## Team
 

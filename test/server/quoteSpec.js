@@ -10,7 +10,7 @@ var Quote = require('../../server/Quotes/quotesModel');
 var quotesController = require('../../server/Quotes/quotesController');
 
 
-/*describe('Quote DataBase', function(done){
+describe('Quote DataBase', function(done){
 	beforeEach(function(done){
 		var newQuote = new Quote ({
 			'image' : 'ZaradQuote.jpg' 
@@ -61,4 +61,4 @@ var quotesController = require('../../server/Quotes/quotesController');
 	});
 	
 })
-*/
+
