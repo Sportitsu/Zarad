@@ -138,7 +138,6 @@ angular.module('zarad.admin',[])
 
   //search for a specific tournament
   $scope.SearchAboutTournament=function(){
-    $scope.massage=" ";
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
       console.log()
@@ -149,9 +148,7 @@ angular.module('zarad.admin',[])
         $scope.tournament.Date=tournament.data.Date;
         //$scope.tournament.poster=tournament.data.poster;
         $scope.img=tournament.data.poster;
-    }).catch(function(error){
-      $scope.massage="Tournament Not Found";
-    });
+    })
   };
 
   $scope.getAdmins();
@@ -178,6 +175,9 @@ angular.module('zarad.admin',[])
           .then(function (admin) {
             $scope.adminSelect = '';
             $scope.getAdmins();
+            var alertPopup = $ionicPopup.alert({
+              title : admin
+            });
           });
          }
        },
@@ -284,8 +284,10 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
           Tournament.AddTournament($scope.tournament)
           .then(function (resp) {
-            $scope.tournament = '';
-            $location.path('/AllTournament');
+            $scope.tournament = {};
+            var alertPopup = $ionicPopup.alert({
+              title : "Tournamet Created"
+            });
           })
          }
        },
@@ -339,7 +341,9 @@ angular.module('zarad.admin',[])
           Tournament.EditTournament($scope.tournament)
           .then(function (resp) {
             $scope.tournament = {};
-            $location.path('/AllTournament');
+            var alertPopup = $ionicPopup.alert({
+             title: "Tournamet Edited"
+              });
           });
          }
        },
