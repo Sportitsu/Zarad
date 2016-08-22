@@ -76,6 +76,8 @@ angular.module('zarad.services',[])
   var signout=function(){
     $window.localStorage.removeItem('admin');
     $window.localStorage.removeItem('com.zarad');
+    localStorage.clear();
+    $window.localStorage.clear();
     $location.path('/');
   }
   //get all registered Admins
@@ -220,7 +222,7 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/x/' + name
     })
     .then(function (resp) {
-      return resp
+      return resp;
     });
   };
 
@@ -374,10 +376,7 @@ angular.module('zarad.services',[])
     })
     .then(function(response){
       return response.data;
-    })
-    .catch(function(error){
-      return error;
-    })
+    });
   };
 
   var addQuote = function(data){
@@ -388,10 +387,7 @@ angular.module('zarad.services',[])
     })
     .then(function(response){
       return response.data;
-    })
-    .catch(function(error){
-      return error;
-    })
+    });
   };
 
   return {
