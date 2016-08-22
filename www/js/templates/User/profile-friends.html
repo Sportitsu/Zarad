@@ -1,12 +1,8 @@
 <ion-modal-view>
-	<!-- <ion-header-bar> -->
+  <div  style="background-image:url('http://www.wpclipart.com/page_frames/background_pages/sky_backgrounds/beautiful_sky_background_page.jpg');width:100%;height:100%;">
+	<ion-header-bar>
 	    <h1 class="title" style="color:black;text-align:center">My Friends</h1>
-	    <ion-nav-bar>
-	    <ion-nav-back-button class="button-clear">
-	      <i class="ion-arrow-left-c"></i> Back
-		  </ion-nav-back-button>
-		</ion-nav-bar>
-	<!-- </ion-header-bar> -->
+	</ion-header-bar>
 	<ion-content>
 		<label class="item item-input">
 	  		<i class="icon ion-search placeholder-icon"></i>
@@ -14,11 +10,12 @@
 		</label>
 		<div class="list card" ng-repeat="friend in myFriends | filter : search">
 		  <div class="item item-avatar" ng-click="showProfile(friend)" >
-		    <img src="styles/css/1.gif" >
+		    <img src="friend.image">
 		    <h2>{{friend.firstName}} {{friend.lastName}}</h2>
 		    <p>{{friend.club}}</p>
 		  </div>
 		</div>
 		<button class="button button-block button-dark" ng-click="closeLogin()">Back</button>
 	</ion-content>
+	</div>
 </ion-modal-view>

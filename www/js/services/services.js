@@ -107,7 +107,7 @@ angular.module('zarad.services',[])
     deleteAdmin : deleteAdmin
   };
 })
-.factory('Club',function($http, $window, $location, $ionicHistory){
+.factory('Club',function($http, $window, $location){
   var AddUser=function(user){
     return $http({
       method: 'POST',
@@ -199,8 +199,6 @@ angular.module('zarad.services',[])
   var signout=function(){
     localStorage.clear();
     $window.localStorage.clear();
-    $ionicHistory.clearCache();
-    $ionicHistory.clearHistory();
     $location.path('/');
   }
   return{
@@ -222,7 +220,7 @@ angular.module('zarad.services',[])
       url : 'http://zarad.herokuapp.com/api/user/x/' + name
     })
     .then(function (resp) {
-      return resp.data
+      return resp
     });
   };
 
@@ -234,8 +232,21 @@ angular.module('zarad.services',[])
     })
     .then(function(resp){
       return resp.data;
-    });
+    })
   };
+
+ var updateGoal = function(data){
+  return $http({
+    method : 'POST' , 
+    url : 'http://zarad.herokuapp.com/api/user/goals' , 
+    data : data
+  })
+  .then(function(resp){
+    return resp;
+  });
+
+ }
+
   var deleteUser = function(data){
     console.log(data)
     return $http({
@@ -271,6 +282,7 @@ angular.module('zarad.services',[])
 
  return {
    getUser : getUser,
+   updateGoal : updateGoal,
    editProfile : editProfile,
    resub: resub,
    deleteUser : deleteUser,
@@ -330,32 +342,19 @@ angular.module('zarad.services',[])
     });
   };
 
-    var Like=function(TourLike){
-    console.log(TourLike)
+    var Like=function(Like){
+    console.log(Like)
     return $http({
       method:'POST',
-      data:TourLike,
-      url: '/api/tournament/Like'
+      data:Like,
+      url: 'http://zarad.herokuapp.com/api/tournament/addLike'
       
     })
     .then(function(resp){
       return resp.data;
     });
   };
-
-  var DisLike=function(TourLike){
-    console.log(TourLike)
-    return $http({
-      method:'POST',
-      data:TourLike,
-      url: ''
-      
-    })
-    .then(function(resp){
-      return resp.data;
-    });
-  };
-
+   
   
   return{
     AddTournament:AddTournament,
@@ -363,8 +362,40 @@ angular.module('zarad.services',[])
     SearchAboutTournament:SearchAboutTournament,
     EditTournament:EditTournament,
     DeleteTournament:DeleteTournament,
-    DisLike:DisLike,
     Like:Like
     
+  }
+})
+.factory('Quotes' , function($http){
+  var getQuotes = function(){
+    return $http({
+      url : 'http://zarad.herokuapp.com/api/quotes/get',
+      method : 'GET'
+    })
+    .then(function(response){
+      return response.data;
+    })
+    .catch(function(error){
+      return error;
+    })
+  };
+
+  var addQuote = function(data){
+    return $http({
+      url : 'http://zarad.herokuapp.com/api/quotes/newquote',
+      method : 'POST', 
+      data : data
+    })
+    .then(function(response){
+      return response.data;
+    })
+    .catch(function(error){
+      return error;
+    })
+  };
+
+  return {
+    getQuotes : getQuotes, 
+    addQuote : addQuote
   }
 })

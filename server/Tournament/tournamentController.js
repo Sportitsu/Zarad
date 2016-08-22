@@ -76,5 +76,23 @@ module.exports = {
 			}
 		});
 	},
+	addLike : function (req,res) {
+	    console.log(req.body);
+		Tournament.findOne({ name : req.body.name })
+		.exec(function(error, tournament){
+			if(tournament){
+				if(tournament.like.indexOf(req.body.username)===-1){
+					tournament.like.push(req.body.username)
+				}else{
+					tournament.like.splice(tournament.like.indexOf(req.body.username,1));
+				}
+				tournament.save(function(error,saved){
+					res.status(201).send(saved);
+				});
+			}else{
+				helpers.errorHandler('Tournament Not Available', req, res);
+			}
+		});
+	}
 	
 };

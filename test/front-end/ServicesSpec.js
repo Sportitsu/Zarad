@@ -244,7 +244,7 @@ describe('Services', function () {
 
     it('should be able to register new users to a club 201(Success)', function(){
 
-      $httpBackend.expect('POST', baseUrl + '/api/club/register').respond(201,mockResponse);
+      $httpBackend.expect('POST', baseUrl + '/api/user/signup').respond(201,mockResponse);
       Club.AddUser(mockResponse).then(function(resp){
         expect(resp.password).toEqual(undefined);
         expect(resp.username[0]).toEqual('P');
@@ -385,8 +385,8 @@ describe('Services', function () {
 
           $httpBackend.expect('GET', baseUrl + '/api/user/x/' + mockResponse.username).respond(200,mockResponse);
           User.getUser(mockResponse.username).then(function(resp){
-            expect(resp.username).toEqual(mockResponse.username);
-            expect(resp.beltColor).toEqual(mockResponse.beltColor);
+            expect(resp.data.username).toEqual(mockResponse.username);
+            expect(resp.data.beltColor).toEqual(mockResponse.beltColor);
           });
           $httpBackend.flush();
         });

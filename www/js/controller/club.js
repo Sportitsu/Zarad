@@ -5,8 +5,7 @@ angular.module('zarad.club',[])
 	$scope.clubUsers={};
 	$scope.club={};
 	$scope.userProfileData={};
-	$scope.editUserProfileData={}
-	$scope.username="";
+	$scope.editUserProfileData={};
 	$scope.usersToSubscribe={};
 	$scope.usersEndedSubs={};
 	$scope.onezoneDatepicker = { date: 'date' };
@@ -185,7 +184,6 @@ angular.module('zarad.club',[])
 
 	$scope.AddUser=function(){
 		$scope.clubNewUser.club=$scope.club.data.clubName;
-		console.log($scope.clubNewUser);
 		Club.AddUser($scope.clubNewUser).then(function(resp){
 			var alertPopup = $ionicPopup.alert({
              title: 'Your User Name is:'+resp.username
@@ -253,13 +251,13 @@ angular.module('zarad.club',[])
 		    willFinish = willFinish.substr(0,16);
 		    //save all almost ended users subs to object
 			$scope.usersToSubscribe.data.push({
-				firstName:user.firstName,
-				lastName:user.lastName,
-				subscription:willFinish,
-				username:user.username,
-				valid:user.valid,
-				image:user.image,
-				daysLeft:willFinish
+				firstName: user.firstName,
+				lastName: user.lastName,
+				subscription: willFinish,
+				username: user.username,
+				valid: user.valid,
+				image: user.image,
+				daysLeft: willFinish
 				})
 			}
 			//check if user subscibtion finished.
@@ -271,11 +269,10 @@ angular.module('zarad.club',[])
 				$scope.usersEndedSubs.data.push({
 					firstName: user.firstName,
 					lastName: user.lastname,
-					username:user.username,
+					username: user.username,
 					subscription: willFinish,
 					image:user.image,
-					valid:user.valid,
-					image:user.image
+					valid:user.valid
 				})
 			}
 	}
@@ -314,11 +311,26 @@ angular.module('zarad.club',[])
 	    	});
 	    	$scope.onezoneDatepicker.date='';
 		}else{
-		    User.resub({username : user, membership : months})
-	        .then(function(response){
-	          $scope.getUsers();
-	          console.log('user resubscribed');
-	     })
+			var confirmPopup = $ionicPopup.confirm({
+		     title: 'Are you sure you want to resubscribe for '+user.firstName+' '+user.lastName+'?',
+		     template: ''
+		    });
+		    confirmPopup.then(function(res) {
+			    if(res) {
+			    	User.resub({username : user.username, membership : months})
+			        .then(function(response){
+				        var alertPopup = $ionicPopup.alert({
+				        title: 'user'+' '+user.firstName +' '+ user.lastName + ' ' +'have beed resubscribed'
+				    	})
+				    	.then(function(){
+				           $scope.getUsers();
+				           $scope.onezoneDatepicker.date="";
+				    	})
+			    	})
+			    }else{
+			    	$scope.onezoneDatepicker.date="";
+			    }
+	    	});
 		}
 	};
 
@@ -341,5 +353,5 @@ angular.module('zarad.club',[])
 			var results=membershipMonth-nowDateMonth;
 			return results;
 		}
-	}
+	};
 })

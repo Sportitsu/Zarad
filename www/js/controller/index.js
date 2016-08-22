@@ -1,10 +1,21 @@
 angular.module('zarad.index',[])
 .controller('parentController',function($scope, $ionicModal, $ionicPopup, $state, $timeout, $ionicActionSheet, $window, Auth, User){
-	//this controller was made for index html page to show and hide logout button
-	//depending on user saved token in the localstoarge.
-	//signout function
+
 	$scope.user = {};
-	$scope.data =JSON.parse($window.localStorage.member)
+	$scope.data = {};
+	$scope.checkColor = function(){
+		if($scope.data.beltColor.toLowerCase() !== 'white'){
+			$scope.initColor = 'white';
+		} else {
+			$scope.initColor = 'black';
+		}
+	}
+
+	if(typeof $window.localStorage.member !== 'undefined'){
+		$scope.data = JSON.parse($window.localStorage.member);
+		$scope.checkColor();
+	}
+	
 		// Gets the Date of Today to Use in Membership Action PopUp	
 		var objToday = new Date(),
 		  weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
@@ -20,11 +31,6 @@ angular.module('zarad.index',[])
 		  curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
 		var today = dayOfWeek + " " + dayOfMonth + " of " + curMonth + ", " + curYear;
 
-		if($scope.data.beltColor.toLowerCase() !== 'white'){
-			$scope.initColor = 'white';
-		} else {
-			$scope.initColor = 'black';
-		}
 		$scope.showAction = function() {
 		// Show the action sheet
 		var hideSheet = $ionicActionSheet.show({
@@ -36,7 +42,6 @@ angular.module('zarad.index',[])
 		 titleText: '<code>Action Menu</code>',
 		 cancelText: '<b>Cancel</b>',
 		 cancel: function() {
-		      console.log('Canceled');
 		    },
 		 buttonClicked: function(index) {
 		   if(index === 0 ){

@@ -1,10 +1,8 @@
 <ion-modal-view>
-	  <ion-header-bar>
-	    <h1 class="title">{{displayFriend.firstName}}</h1>
-	    <div class="buttons">
-	      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-	    </div>
-	  </ion-header-bar>
+      <ion-header-bar style="background-color:{{displayFriend.beltColor}}">
+        <h1 class="title">{{displayFriend.firstName}}</h1>
+      </ion-header-bar>
+  <div  style="background-image:url('http://www.wpclipart.com/page_frames/background_pages/sky_backgrounds/beautiful_sky_background_page.jpg');width:100%;height:100%;">
       <ion-content>
         <div class="hero" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
             <div class="content">
@@ -19,7 +17,8 @@
                 <p>{{displayFriend.Date.substr(0,10)}}</p>
                 <br>
                 <h2>Belt Color</h2>
-                <p>{{displayFriend.beltColor}}</p>
+                <p>{{displayFriend.beltColor}}
+                 <i class="icon ion-minus" style="color:{{displayFriend.beltColor}} !important"></i></p>
                 <br>
                 <h2>Medals</h2>
                 <ul ng-repeat ="medal in friendAchievements track by $index">
@@ -28,9 +27,10 @@
                         <span data={{medal.place}} ng-if="medal.place"><i class="icon ion-ribbon-a"></i></span>
                     </ion-row>
                 </ul>
+                <p ng-show="friendMedal">Soon to become a World Champion!!</p>
                 <br><br><br><br>
-            <button class="button button-stable button-positive" ng-click="goBack()">Back</button>
+            <button style="margin-left:35%" class="button button-positive" ng-click="goBack()">Back</button>
             </div>
         </ion-content>
-
+</div>
 </ion-modal-view>

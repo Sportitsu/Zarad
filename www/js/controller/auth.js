@@ -1,8 +1,7 @@
 'use strict';
 angular.module('zarad.auth',[])
-.controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout){
+.controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout, $q){
 	$scope.user={};
-
 	$scope.showPopup = function() {
    //custom popup to show login box
    var myPopup = $ionicPopup.show({
@@ -42,7 +41,7 @@ angular.module('zarad.auth',[])
   };
 
 	$scope.signin =function(){
-  	Auth.signin($scope.user)
+     Auth.signin($scope.user)
   	.then(function(resp){
      //save the token and username in local stoarage to distinguish signed in users
      if(resp.user.indexOf('Cl') > -1){
@@ -50,22 +49,26 @@ angular.module('zarad.auth',[])
         $window.localStorage.setItem('user',resp.user);
         $location.path('/club');
      } else {
-        User.getUser(resp.user)
+       $scope.setWindowUser(resp);
+     }
+  	}).catch(function(error){
+      $scope.error = error;
+  	});
+  };
+
+  $scope.setWindowUser = function(resp){                                          
+       User.getUser(resp.user)
        .then(function(response){
-          if(response.valid){
+          if(response.data.valid){
             $window.localStorage.setItem('com.zarad', resp.token);
-            $window.localStorage['member'] = angular.toJson(response);
+            $window.localStorage['member'] = angular.toJson(response.data);
             $location.path('/userprofile/home');
           } else {
             console.log('Please resubscribe');
           }
        })
        .catch(function(error){
-        console.log(error);
+        $scope.error = error;
        })
-     }
-  	}).catch(function(error){
-  		console.error(error);
-  	});
-  };
+  }
 })

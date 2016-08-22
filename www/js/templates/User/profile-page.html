@@ -1,4 +1,5 @@
 <ion-view view-title="Home">
+  <div  style="background-image:url('http://www.wpclipart.com/page_frames/background_pages/sky_backgrounds/beautiful_sky_background_page.jpg');width:100%;height:100%;">
       <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
             <div class="content">
@@ -14,7 +15,8 @@
                 <p>{{data.Date.substr(0,10)}}</p>
                 <br>
                 <h2>Belt Color</h2>
-                <p>{{data.beltColor}}</p>
+                <p>{{data.beltColor}} 
+                <i class="icon ion-minus" style="color: {{data.beltColor}} !important"></i></p>
                 <br>
                 <h2>Medals</h2>
                 <ul ng-repeat ="medal in achievements track by $index">
@@ -23,10 +25,14 @@
                         <span data={{medal.place}} ng-if="medal.place"><i class="icon ion-ribbon-a"></i></span>
                     </ion-row>
                 </ul>
+                <p ng-show="noMedal">Soon to become a World Champion!!</p>
                 <br><br>
-            <button class="button button-stable" ng-click="showFriends()">My Friends</button>
-            </div>
+                    <button style="margin-left:25%" class="button button-dark" ng-click="showFriends()">Club Members</button>
             <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
+            <br><br><br><br><br>
+            </div>
+
         </div>
         </ion-content>
+    </div>
 </ion-view>

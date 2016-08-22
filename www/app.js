@@ -6,6 +6,7 @@ var app = angular.module('zarad', [
   'zarad.auth',
   'zarad.admin',
   'zarad.club',
+  'zarad.home',
   'youtube-embed',
   'zarad.tournament',
   'zarad.services',
@@ -48,6 +49,7 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
             controller:'TournamentController'
         }) 
         .state('userProfile',{
+            cache : false,
             url : '/userprofile',
             templateUrl : 'js/templates/User/userProfile.html',
             absract : true
@@ -56,7 +58,8 @@ app.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
           url: "/home",
           views: {
             'home-tab': {
-              templateUrl: 'js/templates/User/profile-home.html'
+              templateUrl: 'js/templates/User/profile-home.html',
+              controller : 'UserHomeController'
             }
           }
         })

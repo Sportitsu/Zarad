@@ -5,6 +5,11 @@ angular.module('zarad.user',['ionic'])
  $scope.data = JSON.parse($window.localStorage.member);
  $scope.achievements = $scope.data.achievements;
 
+ $scope.noMedal = false;
+    if($scope.achievements.length === 0){
+      $scope.noMedal = true;
+    }
+
     $scope.showOptions = function(){
       var myPopup = $ionicPopup.show({
         titleText : 'Please Select',
@@ -30,7 +35,6 @@ angular.module('zarad.user',['ionic'])
       scope: $scope,
       animation: 'slide-in-up'
    }).then(function(friendProfile) {
-      console.log(friendProfile);
       $scope.friendProfile = friendProfile;
    });
 
@@ -40,7 +44,6 @@ angular.module('zarad.user',['ionic'])
       scope: $scope,
       animation: 'slide-in-up'
    }).then(function(friends) {
-      console.log(friends);
       $scope.friends = friends;
    });
 
@@ -126,13 +129,13 @@ angular.module('zarad.user',['ionic'])
    }
 
    $scope.closeLogin = function(){
-    console.log('clicked');
      $scope.friends.hide();
    }
 
    $scope.myFriends = [];
    User.getAllUsers()
        .then(function(response){
+        console.log(response);
          for(var i = 0 ; i < response.data.length; i++){
           if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
             $scope.myFriends.push(response.data[i]);
@@ -147,50 +150,37 @@ angular.module('zarad.user',['ionic'])
 
 
    $scope.showProfile = function(objectFriend){
+    $scope.friendMedal = false;
     $scope.displayFriend = objectFriend;
     $scope.friendAchievements = objectFriend.achievements;
+
+    if($scope.friendAchievements.length === 0){
+      $scope.friendMedal = true;
+    }
     $scope.friendProfile.show();
 
    }
    $scope.goBack = function(){
     $scope.friendProfile.hide();
    }    
-
-     // setInterval(function(){
-     //  User.getUser($scope.data.username)
-     //      .then(function(response){
-     //        if(JSON.stringify(response.data) !== $window.localStorage.member){
-     //          $scope.data = response.data;
-     //        }
-     //      })
-     //      .catch(function(error){
-     //        console.log(error);
-     //      })
-     // },3000)
-
          // Set Header    
-      $scope.isExpanded = false;
+   $scope.isExpanded = false;
 
 
-      // Set Motion
-      $timeout(function() {
-          ionicMaterialMotion.slideUp({
-              selector: '.slide-up'
-          });
-      }, 300);
+   // Set Motion
+   $timeout(function() {
+       ionicMaterialMotion.slideUp({
+           selector: '.slide-up'
+       });
+   }, 300);
 
-      $timeout(function() {
-          ionicMaterialMotion.fadeSlideInRight({
-              startVelocity: 3000
-          });
-      }, 500);
+   $timeout(function() {
+       ionicMaterialMotion.fadeSlideInRight({
+           startVelocity: 3000
+       });
+   }, 500);
 
-      // Set Ink
-      ionicMaterialInk.displayEffect();
+   // Set Ink
+   ionicMaterialInk.displayEffect();
  
-})
-
-.controller('newController' , function($scope){
-  console.log('hello');
-})
-
+});
