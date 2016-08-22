@@ -18,6 +18,13 @@ angular.module('zarad.tournament',['ionic'])
        $scope.LikeCtrl=true
 	}
 	}
+	$scope.ceckuserandadmin=function(){
+		console.log($window.localStorage)
+	if($window.localStorage.member!==undefined ||$window.localStorage.user!==undefined ){
+       $scope.Backbutton=true;
+	}
+	}
+	$scope.ceckuserandadmin();
 	$scope.ceckuser();
 	
 	$scope.Like=function(tournament){

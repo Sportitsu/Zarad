@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 var Quote = require('../../server/Quotes/quotesModel');
 var quotesController = require('../../server/Quotes/quotesController');
 
+<<<<<<< HEAD
 
 /*describe('Quote DataBase', function(done){
 	beforeEach(function(done){
@@ -55,25 +56,11 @@ var quotesController = require('../../server/Quotes/quotesController');
 			})
 			.end(function(err, res){
 				expect(res.status).to.be.equal(201);
-				expect(res.body).to.be.equal(1);
 				expect(res.body.image).to.be.equal('ZaradQuote.jpg');
 				done();
 			})
 	});
-	it('should handle error when not adding quotes', function(done){
-		chai.request(server)
-			.post('/api/quotes/newquote')
-			.send({
-				'image' : 'ZaradQuote.jpg' 
-			})
-			.end(function(err, res){
-				expect(res.status).to.be.equal(500);
-				done();
-			})
-	});
-
-
-
-
-})*/
+	
+})
+*/
 
