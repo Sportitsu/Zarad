@@ -114,6 +114,27 @@ angular.module('zarad.club',[])
 		    }
 	    });
 	}
+
+	$scope.removeUserEnded=function(user){
+		var confirmPopup = $ionicPopup.confirm({
+	     title: 'Are you sure you want to remove '+user.firstName+' '+ user.lastName+'?',
+	     template: ''
+	    });
+	    confirmPopup.then(function(res) {
+		    if(res) {
+		    	var username=user.username;
+		     	User.deleteUser({username : username}).then(function(resp){
+				var alertPopup = $ionicPopup.alert({
+	            	title: 'User '+ user.firstName +'  '+ user.lastName +' has been removed'
+	    		})
+	    		.then(function(){
+					$scope.getUsers();
+	    		})
+			});
+		   }
+	    });
+	}
+
 	$scope.confirmClubEdit=function(){
 	var confirmPopup = $ionicPopup.confirm({
      title: 'Are you sure of your edit',
@@ -164,11 +185,14 @@ angular.module('zarad.club',[])
 
 	$scope.AddUser=function(){
 		$scope.clubNewUser.club=$scope.club.data.clubName;
+		console.log($scope.clubNewUser);
 		Club.AddUser($scope.clubNewUser).then(function(resp){
 			var alertPopup = $ionicPopup.alert({
              title: 'Your User Name is:'+resp.username
-             });
-			$scope.addUserModal.hide();
+             })
+			.then(function(){
+				$scope.addUserModal.hide();
+             })
 		});
 		$scope.clubNewUser={};
 	};
@@ -178,6 +202,19 @@ angular.module('zarad.club',[])
 			return true
 		else 
 			return false
+	}
+	$scope.getAchievmentData=function(data){
+		if(typeof data === 'string'){
+			$scope.clubNewUser.beltColor=data;	
+		}else if(typeof data === 'number'){
+			if($scope.clubNewUser.achievements !== undefined){
+				$scope.clubNewUser.achievements.place=data;
+			}else{
+				$scope.clubNewUser.achievements={};
+				$scope.clubNewUser.achievements.name="";
+				$scope.clubNewUser.achievements.place=data;
+			}
+		}
 	}
 
 	$scope.getClub=function(){
@@ -217,7 +254,7 @@ angular.module('zarad.club',[])
 		    //save all almost ended users subs to object
 			$scope.usersToSubscribe.data.push({
 				firstName:user.firstName,
-				lastname:user.lastName,
+				lastName:user.lastName,
 				subscription:willFinish,
 				username:user.username,
 				valid:user.valid,
@@ -233,9 +270,10 @@ angular.module('zarad.club',[])
 				//save all ended users subs to object
 				$scope.usersEndedSubs.data.push({
 					firstName: user.firstName,
-					lastname: user.lastname,
+					lastName: user.lastname,
 					username:user.username,
 					subscription: willFinish,
+					image:user.image,
 					valid:user.valid,
 					image:user.image
 				})
@@ -245,7 +283,7 @@ angular.module('zarad.club',[])
 
 	$scope.resup=function(user){
 	var myPopup = $ionicPopup.show({
-   	template: '<onezone-datepicker datepicker-object="onezoneDatepicker"><button class="button button-block button-outline icon icon-left ion-calendar button-dark bt show-onezone-datepicker">{{onezoneDatepicker.date | date:"dd MMMM yyyy"}} click to pick the date</button></onezone-datepicker>',
+   	template: '<onezone-datepicker datepicker-object="onezoneDatepicker"><button class="button button-block button-outline icon icon-left ion-calendar button-dark bt show-onezone-datepicker">{{onezoneDatepicker.date | date:"dd MMMM yyyy"}} Picker</button></onezone-datepicker>',
    	title: '<p>Enter your login information</p>',
      scope: $scope,
      buttons: [
@@ -264,32 +302,43 @@ angular.module('zarad.club',[])
    myPopup.then(function(res) {
    });
    $timeout(function() {
-      myPopup.close(); //close the popup after 1 minute
+      myPopup.close();
    }, 60000);
 }
 
 	$scope.renew = function(user){
-		var months=$scope.getTime() || 1;
-	    User.resub({username : user, membership : months})
+		var months=$scope.getTime();
+		if(months=== 0){
+			var alertPopup = $ionicPopup.alert({
+	           	title: 'Please select date with at least one month range'
+	    	});
+	    	$scope.onezoneDatepicker.date='';
+		}else{
+		    User.resub({username : user, membership : months})
 	        .then(function(response){
 	          $scope.getUsers();
+	          console.log('user resubscribed');
 	     })
+		}
 	};
 
 	$scope.getTime=function(){
 		var date=$scope.onezoneDatepicker.date;
 		var newDate=new Date(date);
-		var membership=newDate.getMonth();
+		var membershipYear=newDate.getFullYear();
+		var membershipMonth=newDate.getMonth();
 		var now=Date.now();
-		var nowDate=new Date(now).getMonth();
-		if(nowDate > membership){
-			var results=12-nowDate;
-			results+=membership;
+		var nowDateYear=new Date(now).getFullYear();
+		var nowDateMonth=new Date(now).getMonth();
+
+		if(membershipYear === nowDateYear && membershipMonth <= nowDateMonth){
+			return 0;
+		}else if(nowDateMonth > membershipMonth){
+			var results=12-nowDateMonth;
+			results+=membershipMonth;
 			return results;
-		}else if(nowDate === membership){
-			return ;
 		}else{
-			var results=membership-nowDate;
+			var results=membershipMonth-nowDateMonth;
 			return results;
 		}
 	}

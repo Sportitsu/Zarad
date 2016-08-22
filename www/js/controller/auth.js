@@ -54,9 +54,9 @@ angular.module('zarad.auth',[])
      } else {
         User.getUser(resp.user)
        .then(function(response){
-          if(response.data.valid){
+          if(response.valid){
             $window.localStorage.setItem('com.zarad', resp.token);
-            $window.localStorage['member'] = angular.toJson(response.data);
+            $window.localStorage['member'] = angular.toJson(response);
             $location.path('/userprofile/home');
           } else {
             console.log('Please resubscribe');

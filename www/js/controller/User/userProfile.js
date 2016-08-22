@@ -4,16 +4,6 @@ angular.module('zarad.user',['ionic'])
  
  $scope.data = JSON.parse($window.localStorage.member);
  $scope.achievements = $scope.data.achievements;
-   
-    for(var i = 0; i < $scope.achievements.length; i++){
-      if($scope.achievements[i].place === '1' ){
-        $scope.achievements[i].place = 'First Place ';
-      } else if($scope.achievements[i].place === '2' ){
-        $scope.achievements[i].place = 'Second Place ';
-      } else if($scope.achievements[i].place === '3' ){
-        $scope.achievements[i].place = 'Third Place ';
-      }
-    }
 
     $scope.showOptions = function(){
       var myPopup = $ionicPopup.show({
@@ -159,17 +149,6 @@ angular.module('zarad.user',['ionic'])
    $scope.showProfile = function(objectFriend){
     $scope.displayFriend = objectFriend;
     $scope.friendAchievements = objectFriend.achievements;
-    for(var i = 0; i < $scope.friendAchievements.length; i++){
-      console.log($scope.friendAchievements[i]);
-      console.log(1);
-      if($scope.friendAchievements[i].place === '1' ){
-        $scope.friendAchievements[i].place = 'First Place ';
-      } else if($scope.friendAchievements[i].place === '2' ){
-        $scope.friendAchievements[i].place = 'Second Place ';
-      } else if($scope.friendAchievements[i].place === '3' ){
-        $scope.friendAchievements[i].place = 'Third Place ';
-      }
-    }
     $scope.friendProfile.show();
 
    }

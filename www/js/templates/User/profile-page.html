@@ -18,9 +18,9 @@
                 <br>
                 <h2>Medals</h2>
                 <ul ng-repeat ="medal in achievements track by $index">
-                  <i class="icon logo-apple custom-icon"></i>
                     <ion-row>
-                        <span>{{medal.place}}</span>{{medal.name}}
+                        <span>{{medal.name}}</span>
+                        <span data={{medal.place}} ng-if="medal.place"><i class="icon ion-ribbon-a"></i></span>
                     </ion-row>
                 </ul>
                 <br><br>
