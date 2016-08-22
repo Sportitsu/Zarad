@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/Sportitsu/Zarad.png?label=ready&title=Ready)](https://waffle.io/Sportitsu/Zarad)
-# Zarad description
+# Zarad 
 
 Zarad is app help  the sport clubs to manage  their  activities and facilitate ***trace** the players and their history,also it helps player to see the videos related to his club.    
 
@@ -149,6 +149,7 @@ In the end, the database mainly stored user,admin,club data to help with authent
 
 
 ### Admin Schema
+
 {
 	username : {type: String, required : true, index : { unique : true }},
 	password : {type: String, required : true},
@@ -157,7 +158,9 @@ In the end, the database mainly stored user,admin,club data to help with authent
 	email : {type: String, required : true},
   salt : { type : String}
 }
+
 ### Club Schema
+
 {
 	username : {type : String, required : true, index : {unique : true} },
 	password : {type : String, required : true },
