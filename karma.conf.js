@@ -44,6 +44,8 @@ module.exports = function(config) {
       'www/lib/ionic/js/ionic-angular.js',
       'www/lib/ionic/js/ionic.bundle.js',
       'www/ionic/js/ionic.bundle.js',
+      'www/lib/ionic-material/dist/ionic.material.min.js',
+      'www/ng-cordova.min.js',
       // 'www/lib/angular-ui-router/release/angular-ui-router.js',
       'www/lib/ionic-material/dist/ionic.material.min.js',
       'www/lib/ionic/js/ionic.js',

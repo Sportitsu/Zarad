@@ -3,7 +3,8 @@ angular.module('zarad.club',[])
 .controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
-	$scope.club={};
+	// Added to the club.html
+	// $scope.club={};
 	$scope.userProfileData={};
 	$scope.username="";
 	$scope.usersToSubscribe={};
@@ -36,56 +37,61 @@ angular.module('zarad.club',[])
 		});
 	};
 
-	$ionicModal.fromTemplateUrl('js/templates/club/editClubProfile.html', {
-			scope: $scope,
-			animation: 'slide-in-up'
-		}).then(function(modal) {
-			$scope.editClubModal = modal;
-	});
+	$scope.callModals = function(){
+		$ionicModal.fromTemplateUrl('js/templates/club/editClubProfile.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.editClubModal = modal;
+		});
 
-	$ionicModal.fromTemplateUrl('js/templates/club/addUser.html', {
-			scope: $scope,
-			animation: 'slide-in-up'
-		}).then(function(modal) {
-			$scope.addUserModal = modal;
-	});
+		$ionicModal.fromTemplateUrl('js/templates/club/addUser.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.addUserModal = modal;
+		});
 
-	$ionicModal.fromTemplateUrl('js/templates/club/userProfile.html', {
-			scope: $scope,
-			animation: 'slide-in-up'
-		}).then(function(modal) {
-			$scope.userProfileModal = modal;
-	});
+		$ionicModal.fromTemplateUrl('js/templates/club/userProfile.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.userProfileModal = modal;
+		});
 
-	$ionicModal.fromTemplateUrl('js/templates/club/editUserProfile.html', {
-			scope: $scope,
-			animation: 'slide-in-up'
-		}).then(function(modal) {
-			$scope.editUserModal = modal;
-	});
+		$ionicModal.fromTemplateUrl('js/templates/club/editUserProfile.html', {
+				scope: $scope,
+				animation: 'slide-in-up'
+			}).then(function(modal) {
+				$scope.editUserModal = modal;
+		});
+	}
 
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
-		$scope.userProfileModal.show();
 	}
 	$scope.editUser=function(data){
 		$scope.userProfileData=data;
-		$scope.editUserModal.show();
-	}
-	$scope.cancelClubEditing=function(){
-		$scope.editClubModal.hide();
 	}
 
-	$scope.cancelAdding=function(){
-		$scope.addUserModal.hide();
-	}
+	// $scope.cancelClubEditing=function(){
+	// 	$scope.editClubModal.hide();
+	// }
 
-	$scope.cancelView=function(){
-		$scope.userProfileModal.hide();
-	}
-	$scope.cancelUserEditing=function(){
-		$scope.editUserModal.hide();
-	}
+	// $scope.cancelAdding=function(){
+	// 	$scope.addUserModal.hide();
+	// }
+
+	// Has no button that calls this
+	// $scope.cancelView=function(){
+	// 	$scope.userProfileModal.hide();
+	// }
+
+
+	// $scope.cancelUserEditing=function(){
+	// 	$scope.editUserModal.hide();
+	// }
+
 
 	$scope.confirmClubEdit=function(){
 	var confirmPopup = $ionicPopup.confirm({
@@ -133,7 +139,11 @@ angular.module('zarad.club',[])
 			 $scope.getUsers();
 		})
 	};
-	$scope.getClub();
+
+	// Calling in the ng- init club.html
+	// $scope.getClub();
+
+
 	$scope.getUsers=function(){
 		var clubname=$scope.club.data['clubName'];
 		Club.getClubUsers(clubname)

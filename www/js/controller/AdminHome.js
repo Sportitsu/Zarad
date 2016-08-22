@@ -68,15 +68,6 @@ angular.module('zarad.admin',[])
       $location.path('/AdminAction')
     })
   };
-  //admin sign in
-  $scope.signin=function(){
-    Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
-    .then(function(resp){
-      $window.localStorage.setItem('admin',resp.user);
-      $window.localStorage.setItem('com.zarad',resp.token);
-      $location.path('/AdminAction')
-    })
-  };
 
   //this is Admin log in pop up 
   $scope.showPopup = function() {
@@ -140,7 +131,7 @@ angular.module('zarad.admin',[])
 
   //search for a specific tournament
   $scope.SearchAboutTournament=function(){
-    $scope.massage=" ";
+
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
         $scope.tournament.name=tournament.data.name;
@@ -155,9 +146,9 @@ angular.module('zarad.admin',[])
     });
   };
 
-  $scope.getAdmins();
-  $scope.getClubs();
-  $scope.getTournaments();
+  // $scope.getAdmins();
+  // $scope.getClubs();
+  // $scope.getTournaments();
 
      //delete admin function
   $scope.deleteAdmin = function () {
@@ -177,7 +168,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
            Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
-            $scope.adminSelect = '';
+            $scope.adminSelect = {};
             $scope.getAdmins();
           });
          }
@@ -202,7 +193,7 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-person-add',
          onTap: function(e) {
            Admin.signup($scope.admin).then(function(resp){
-            $scope.admin = '';
+            $scope.admin = {};
            $location.path('/AdminSignin');
           });
          }
@@ -227,7 +218,7 @@ angular.module('zarad.admin',[])
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
            Club.removeClub({username : $scope.clubSelect.value.split(" ")[0]}).then(function (resp) {
-            $scope.club.username = '';
+            $scope.club.username = {};
             $scope.getClubs();
             var alertPopup = $ionicPopup.alert({
               title : resp
@@ -254,7 +245,7 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
-            $scope.club = '';
+            $scope.club = {};
             var alertPopup = $ionicPopup.alert({
              title: 'Your User Name is:'+resp.username
               });

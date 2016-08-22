@@ -32,19 +32,13 @@ angular.module('zarad.auth',[])
        },
      ]
    });
-   myPopup.then(function(res) {
-      $scope.user.username = '';
-      $scope.user.password = '';
-
-   });
-   $timeout(function() {
-      myPopup.close(); //close the popup after 1 minute
-   }, 60000);
   };
 
 	$scope.signin =function(){
      Auth.signin($scope.user)
-  	.then(function(resp){
+    .then(function(resp){
+    $scope.user.username = '';
+    $scope.user.password = '';
      //save the token and username in local stoarage to distinguish signed in users
      if(resp.user.indexOf('Cl') > -1){
         $window.localStorage.setItem('com.zarad', resp.token);

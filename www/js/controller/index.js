@@ -4,6 +4,7 @@ angular.module('zarad.index',[])
 	$scope.user = {};
 	$scope.data = {};
 	$scope.checkColor = function(){
+		console.log($scope.data);
 		if($scope.data.beltColor.toLowerCase() !== 'white'){
 			$scope.initColor = 'white';
 		} else {
@@ -45,7 +46,8 @@ angular.module('zarad.index',[])
 		    },
 		 buttonClicked: function(index) {
 		   if(index === 0 ){
-			    $scope.modal.show();
+			    // $scope.modal.show();
+			    $scope.$emit('openEdit');
 			    hideSheet();
 		   } else if(index===1){
 				$scope.logout();
@@ -67,10 +69,6 @@ angular.module('zarad.index',[])
 				title : '<b style="color:red">' +today + '</b>',
 				template : 'Your membership ends in <b style="color:red">' + willFinish + '</b>'
 			});
-
-			myPopup.then(function(res){
-				console.log('Done');
-			})
 		};
 		
 		$scope.logout=function(){
@@ -78,12 +76,16 @@ angular.module('zarad.index',[])
 		};
 
 
+		$scope.$on('openEdit', function(){
+			$ionicModal.fromTemplateUrl('js/templates/User/profile-edit.html', {
+				scope: $scope
+			}).then(function(modal) {
+				$scope.modal = modal;
+				$scope.modal.show()
+			});
 
-		$ionicModal.fromTemplateUrl('js/templates/User/profile-edit.html', {
-			scope: $scope
-		}).then(function(modal) {
-			$scope.modal = modal;
-		});
+		})
+
 		 $scope.showPassWord = function(){
 		  var myPopup = $ionicPopup.show({
 		    template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter Old Password" ng-model="user.oldPassword"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter New Password" ng-model="user.password"></label><br>' ,
@@ -121,19 +123,19 @@ angular.module('zarad.index',[])
 
 		 $scope.confirm = function(){
 		  $scope.user.username = $scope.data.username;
-		  console.log($scope.user);
 		 	User.editProfile($scope.user)
 		 		.then(function(response){
-		 			$scope.data = response.data;
 		 			console.log(response);
+		 			$scope.data = response.data;
+					// $state.go($state.current, {}, {reload: true});
+				   $timeout(function() {
+				   		$route.reload();
+				      $scope.modal.hide();
+				    }, 500);
 		 		})
 		 		.catch(function(error){
 		 			console.log(error);
 		 		})
-			$state.go($state.current, {}, {reload: true});
-		   $timeout(function() {
-		      $scope.modal.hide();
-		    }, 500);
 		 }
 })
 

@@ -50,21 +50,19 @@ angular.module('zarad.home', ['ionic'])
  		
  	}
 
-
- 	Quotes.getQuotes()
- 		  .then(function(response){
- 		  	for(var i = 0 ; i < 4; i++){
- 		  		var random = Math.floor(Math.random()*response.length);
- 		  		if(response[random] !== takeout){
- 		  		}
- 		  		if($scope.quotes.indexOf(response[random]) === -1){
- 		  			$scope.quotes.push(response[random]);
- 		  		}
- 		  	}
- 		  })
- 		  .catch(function(error){
- 		  	console.log(error);
- 		  });
+ 	$scope.initialize = function(){
+	 	Quotes.getQuotes()
+	 		  .then(function(response){
+	 		  	for(var i = 0 ; i < 4; i++){
+	 		  		var random = Math.floor(Math.random()*response.length);
+	 		  		if($scope.quotes.indexOf(response[random]) === -1){
+	 		  			$scope.quotes.push(response[random]);
+	 		  		}
+	 		  	}
+	 		  })
+	 		  .catch(function(error){
+	 		  	console.log(error);
+	 		  });	
+ 	}
 
 });
-
