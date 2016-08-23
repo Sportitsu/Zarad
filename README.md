@@ -114,7 +114,6 @@ npm install
 
 
 #The Database 
-<<<<<<< HEAD
 We used MongoDB for our database. Initially,we were planning on club being able to have users , also we have tournament table which stored  tournament data ,quote table have  data about  quote.
 In the end, the database mainly stored user,admin,club data to help with authentication and to deliver a more customized experience
 
