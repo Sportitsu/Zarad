@@ -54,6 +54,12 @@ background-color: white;
     width:250px;
     align:center;
 }
+.btt{
+   background-color: white;
+    color: #6600cc !important;
+    width:250px;
+    margin-left:10%;
+    }
 .img{
     margin-top:70px;
     margin-left: auto;
