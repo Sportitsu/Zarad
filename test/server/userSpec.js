@@ -52,6 +52,46 @@ describe('User Test Database', function(done){
 			})
 	});
 
+	it('should get club for the user', function(done){
+		var newClub = new Club({
+			username : 'Cltest123', 
+			password : 'test' , 
+			country :  'Jordan' , 
+			email  : 'test@gmail.com' ,
+			clubName : 'Makhai'
+		})
+		newClub.save();
+
+		var newUser = new User({
+			username:  'Pltest123' , 
+			password : 'test' ,
+			country  :'Jordan' ,
+			firstName :'Mohammad' ,
+			email : 'testting' ,
+			club : 'Makhai'	
+		})
+
+		newUser.save();
+
+		chai.request(server)
+			.get('/api/users/clubUsers/Makhai')
+			.end(function(err,res){
+				expect(res.status).to.be.equal(200);
+				done();
+			})
+
+	});
+
+	it('should handle error when users length is zero', function(done){
+		User.collection.drop();
+		chai.request(server)
+			.get('/api/users/clubUsers/DForce')
+			.end(function(err, res){
+				expect(res.status).to.be.equal(500);
+				done();
+			})
+	})
+
 	it('should return with status 500' , function(done){
 		User.collection.drop();
 		chai.request(server)
@@ -528,7 +568,7 @@ describe('User Test Database', function(done){
 				.send({
 					'username' : 'mihyar' , 
 					'method'  : '-1' , 
-					'goal'  : {title : 'Make 2000 armbars in less than a week'}
+					'goal'  : {title : 'Get my Purple belt in 2 years'}
 				})
 				.end(function(err ,res){
 					expect(res.status).to.be.equal(201);
@@ -536,7 +576,7 @@ describe('User Test Database', function(done){
 					expect(res.body.goals.length).to.be.equal(0);
 					done();	
 				})
-		})
+		});
 	})
 });	
 

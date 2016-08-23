@@ -50,7 +50,6 @@ angular.module('zarad.admin',[])
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
           $scope.tournament.poster = result.link;
-          console.log( $scope.tournament.poster);
         });
       })
       // using the reader to decode the image to base64
@@ -140,7 +139,6 @@ angular.module('zarad.admin',[])
   $scope.SearchAboutTournament=function(){
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
-      console.log()
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;
@@ -150,10 +148,6 @@ angular.module('zarad.admin',[])
         $scope.img=tournament.data.poster;
     })
   };
-
-  $scope.getAdmins();
-  $scope.getClubs();
-  $scope.getTournaments();
 
      //delete admin function
   $scope.deleteAdmin = function () {
@@ -173,7 +167,7 @@ angular.module('zarad.admin',[])
          onTap: function(e) {
            Admin.deleteAdmin({username:$scope.adminSelect.value})
           .then(function (admin) {
-            $scope.adminSelect = '';
+            $scope.adminSelect = {};
             $scope.getAdmins();
             var alertPopup = $ionicPopup.alert({
               title : admin
@@ -228,7 +222,7 @@ angular.module('zarad.admin',[])
          type: 'button button-assertive icon icon-left ion-trash-a',
          onTap: function(e) {
            Club.removeClub({username : $scope.clubSelect.value.split(" ")[0]}).then(function (resp) {
-            $scope.club.username = '';
+            $scope.club.username = {};
             $scope.getClubs();
             var alertPopup = $ionicPopup.alert({
               title : resp
@@ -255,7 +249,7 @@ angular.module('zarad.admin',[])
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
           Club.Addclub($scope.club).then(function (resp) {
-            $scope.club = '';
+            $scope.club = {};
             var alertPopup = $ionicPopup.alert({
              title: 'Your User Name is:'+resp.username
               });

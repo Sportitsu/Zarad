@@ -43,7 +43,6 @@ module.exports= {
 					newObject.membership = users[i].membership;
 					newObject.country = users[i].country;
 					newObject.age = users[i].age;
-					newObject.image=users[i].image;
 					newObject.middleName = users[i].middleName || 'N/A';
 					newObject.image = users[i].image || 'http://i.imgur.com/FlEXhZo.jpg?1'
 					newArr.push(newObject);
@@ -241,12 +240,15 @@ module.exports= {
 			.exec(function(err , user){
 				if(user){
 					if(method > 0){
-						if(user.goals === undefined){
-							user.goals = [];
-						}
 						user.goals.push(goal);
-					} else if(method < 0){ 
-							user.goals.splice(user.goals.indexOf(goal.title),1);
+					} else if(method < 0){
+							for(var i = 0 ; i < user.goals.length; i++){
+								if(user.goals[i].title === goal.title){
+									console.log(user.goals[i].title);
+									user.goals.splice(i,1);
+								}
+
+							}
 					}
 					user.save(function(err,saved){
 						if(saved){

@@ -9,13 +9,13 @@
 	  		<input type="search" placeholder="Search" ng-model="search">
 		</label>
 		<div class="list card" ng-repeat="friend in myFriends | filter : search">
-		  <div class="item item-avatar" ng-click="showProfile(friend)" >
-		    <img src="friend.image">
+		  <div class="item item-avatar" ng-click="showProfile(friend);friendProfile.show();" >
+		    <img src="{{friend.image}}">
 		    <h2>{{friend.firstName}} {{friend.lastName}}</h2>
 		    <p>{{friend.club}}</p>
 		  </div>
 		</div>
-		<button class="button button-block button-dark" ng-click="closeLogin()">Back</button>
+		<button class="button button-block button-dark" ng-click="friends.hide();">Back</button>
 	</ion-content>
 	</div>
 </ion-modal-view>

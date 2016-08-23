@@ -64,6 +64,9 @@ angular.module('zarad.services',[])
     })
     .catch(function(error){
       return error;
+    })
+    .catch(function(error){
+      return error;
     });
   }
 
@@ -150,7 +153,6 @@ angular.module('zarad.services',[])
 
     //send club information to server
   var Addclub=function(club){
-    console.log(club);
     return $http({
       method:'POST',
       data: club,
@@ -353,7 +355,6 @@ angular.module('zarad.services',[])
   };
 
     var Like=function(Like){
-    console.log(Like)
     return $http({
       method:'POST',
       data:Like,
@@ -403,3 +404,4 @@ angular.module('zarad.services',[])
     addQuote : addQuote
   }
 })
+
