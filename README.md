@@ -30,8 +30,8 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
   <img src="masters/screenshots/combine_images.jpg" width="350"/>
 </p>
 
-> app is now running online through :
-[here](http://zarad.herokuapp.com)
+> Web Browser application link :
+[Click Here](http://zarad.herokuapp.com)
 
 > Preview the app on your phone
 ```sh
