@@ -1,5 +1,5 @@
 angular.module('zarad.index',[])
-.controller('parentController',function($scope, $ionicModal, $ionicPopup, $state, $timeout, $ionicActionSheet, $window, Auth, User){
+.controller('parentController',function($scope, $ionicModal, $ionicPopup, $state, $timeout, $ionicActionSheet, $window, Auth, User, $location){
 
 	$scope.user = {};
 	$scope.data = {};
@@ -37,7 +37,8 @@ angular.module('zarad.index',[])
 		 buttons: [
 		   { text: '<span>Edit</span>' },
 		   { text: '<span>Logout</span>'},
-		   { text: '<span>Membership</span>'}
+		   { text: '<span>Membership</span>'},
+		   { text: '<span>Tournament</span>'}
 		 ],
 		 titleText: '<code>Action Menu</code>',
 		 cancelText: '<b>Cancel</b>',
@@ -51,9 +52,11 @@ angular.module('zarad.index',[])
 		   } else if(index===1){
 				$scope.logout();
 				hideSheet();
-		   } else {
+		   } else if(index===2){
 		   	    $scope.showDate();
 		   	    hideSheet();
+		   } else {
+		   	$location.path('/AllTournament')
 		   }
 		 }
 		});

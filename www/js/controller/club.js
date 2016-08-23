@@ -254,7 +254,7 @@ angular.module('zarad.club',[])
 	};
 
 	$scope.show=function(){
-		if($scope.usersToSubscribe.data.length !== undefined || $scope.usersEndedSubs.data.length !== undefined)
+		if($scope.usersToSubscribe !== {} || $scope.usersEndedSubs !== {})
 			return true
 		else 
 			return false
