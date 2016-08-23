@@ -64,8 +64,8 @@ angular.module('zarad.admin',[])
     Admin.signin({username: $scope.admin.username, password:$scope.admin.password})
     .then(function(resp){
       if(resp.status !== 500){
-      $window.localStorage.setItem('admin',resp.user);
-      $window.localStorage.setItem('com.zarad',resp.token);
+      $window.localStorage.setItem('admin',resp.data.user);
+      $window.localStorage.setItem('com.zarad',resp.data.token);
       $location.path('/AdminAction');
       }else{
         var alertPopup = $ionicPopup.alert({
