@@ -133,25 +133,6 @@ angular.module('zarad.club',[])
 		$scope.userProfileData=data;
 	}
 
-	// $scope.cancelClubEditing=function(){
-	// 	$scope.editClubModal.hide();
-	// }
-
-	// $scope.cancelAdding=function(){
-	// 	$scope.addUserModal.hide();
-	// }
-
-	// Has no button that calls this
-	// $scope.cancelView=function(){
-	// 	$scope.userProfileModal.hide();
-	// }
-
-
-	// $scope.cancelUserEditing=function(){
-	// 	$scope.editUserModal.hide();
-	// }
-
-
 	$scope.removeUser=function(user){
 		var confirmPopup = $ionicPopup.confirm({
 	     title: 'Are you sure you want to remove '+user.user.firstName+' '+user.user.lastName+'?',
