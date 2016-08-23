@@ -241,9 +241,6 @@ module.exports= {
 			.exec(function(err , user){
 				if(user){
 					if(method > 0){
-						if(user.goals === undefined){
-							user.goals = [];
-						}
 						user.goals.push(goal);
 					} else if(method < 0){
 							for(var i = 0 ; i < user.goals.length; i++){

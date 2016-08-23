@@ -10,9 +10,9 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 ## Team
 
-  - __Product Owner__: Mohammad al-bakri
-  - __Scrum Master__: Mihyar Al-masalma
-  - __Development Team Members__: Fatima hammami, Elham rababah, Mohammad Al-bakri, Mihyar Al-Masalma
+  - __Product Owner__: Mohammad Al-Bakri
+  - __Scrum Master__: Mihyar Al-Masalma
+  - __Development Team Members__: Fatima Hammami, Elham Rababah, Mohammad Al-Bakri, Mihyar Al-Masalma
 
 ## Table of Contents
 
@@ -28,6 +28,12 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 > app is now running online through :
 [here](zara.herokuapp.com)
+
+> Preview the app on your phone
+```sh
+Download Ionic View from Play Store or App store 
+Enter this Id : A92B94C3
+```
 
 >to run the app locally:
 ```sh
