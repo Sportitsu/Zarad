@@ -150,6 +150,7 @@ angular.module('zarad.services',[])
 
     //send club information to server
   var Addclub=function(club){
+    console.log(club);
     return $http({
       method:'POST',
       data: club,

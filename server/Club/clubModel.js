@@ -13,7 +13,7 @@ var clubSchema = new Schema ({
 	country  : {type : String, required : true },
 	clubName : {type : String, required : true, index : { unique : true } },
   image    : {type:String },
-  channelId : {type : String, unique : true},
+  channelId : {type : String},
   salt : { type : String}
 });
 
