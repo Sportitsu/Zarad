@@ -16,11 +16,15 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.ceckuser=function(){
 	if($window.localStorage.member!==undefined){
        $scope.LikeCtrl=true
+       $scope.link="#/home"
+	}else{
+		$scope.link="#/"
 	}
+	console.log($scope.link,$window.localStorage.member);
 	}
 	$scope.ceckuserandadmin=function(){
-		console.log($window.localStorage)
-	if($window.localStorage.member!==undefined ||$window.localStorage.user!==undefined ){
+		//console.log($window.localStorage)
+	if($window.localStorage.user!==undefined ){
        $scope.Backbutton=true;
 	}
 	}
@@ -37,4 +41,5 @@ angular.module('zarad.tournament',['ionic'])
             
         })
     }
+    
 })
