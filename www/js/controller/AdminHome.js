@@ -250,6 +250,7 @@ angular.module('zarad.admin',[])
          text: '<b>Create</b>',
          type: 'button button-balanced icon icon-left ion-plus-circled',
          onTap: function(e) {
+          console.log($scope.club);
           Club.Addclub($scope.club).then(function (resp) {
             $scope.club = {};
             var alertPopup = $ionicPopup.alert({
