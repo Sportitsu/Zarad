@@ -12,8 +12,8 @@ var clubSchema = new Schema ({
   email    : {type : String , index : { unique : true}},
 	country  : {type : String, required : true },
 	clubName : {type : String, required : true, index : { unique : true } },
-  image    : {type:String },
-  channelId : {type : String, unique : true},
+  image    : {type:String},
+  channelId : {type : String},
   salt : { type : String}
 });
 

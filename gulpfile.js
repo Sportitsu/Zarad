@@ -17,8 +17,24 @@ var paths = {
 
 gulp.task('default', ['sass', 'lint' , 'watch']);
 
+gulp.task('scripts',function(){
+  return gulp.src(['www/app.js',
+                    'www/js/services/services.js',
+                    'www/js/controller/user/*.js',
+                    'www/js/controller/*.js'
+  ])
+          .pipe(concat('all.js'))
+          .pipe(gulp.dest('./dist'));
+});
+ 
+// gulp.task('concat:dist', function() {
+//   gulp.src('www/js/templates/{,*/}*.js')
+//     .pipe(concat.scripts(pkg.name + '.js'))
+//     .pipe(gulp.dest('dist'));
+// });
+
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+   gulp.src('./scss/ionic.app.scss')
     .pipe(sass())
     .on('error', sass.logError)
     .pipe(gulp.dest('./www/cssionic/'))
@@ -33,6 +49,10 @@ gulp.task('sass', function(done) {
 gulp.task('watch', function() {
   gulp.watch(paths.sass, ['sass']);
   gulp.watch(paths.lint, ['lint'])
+});
+
+gulp.task('uglify',function(){
+
 });
 
 gulp.task('install', ['git-check'], function() {
