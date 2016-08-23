@@ -151,10 +151,6 @@ angular.module('zarad.admin',[])
     })
   };
 
-  // $scope.getAdmins();
-  // $scope.getClubs();
-  // $scope.getTournaments();
-
      //delete admin function
   $scope.deleteAdmin = function () {
     
