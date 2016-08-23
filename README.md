@@ -28,6 +28,7 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 <p align="center">
   <img src="masters/screenshots/combine_images.jpg" width="350"/>
+  <img src="masters/screenshots/combine_images2.jpg" width="350"/>
 </p>
 
 > Web Browser application link :

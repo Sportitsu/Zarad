@@ -85,14 +85,14 @@ describe('Club Controller', function(){
 
 
   it('should show when there are unsubscribed users', function(){
-    $scope.usersToSubscribe = [1,2,3];
+    $scope.usersToSubscribe = {data:[1,2,3]};
     $scope.show();
     $scope.$apply();
     expect(true).toBe(true); 
   });
 
   it('should return false when no unsubscribed users', function(){
-    $scope.usersToSubscribe;
+    $scope.usersToSubscribe = {data:[]};
     $scope.show();
     $scope.$apply();
     expect(true).toBe(true);
@@ -171,18 +171,11 @@ describe('Club Controller', function(){
 
   });
 
-
-  // it('should have popup for confirmation when removing user', function(){
-  //   deferred.resolve({})
-  //   var popup = spyOn(ionicPopupMock, 'confirm').and.callThrough().and.returnValue(deferred.promise);
-  //   $scope.removeUser();
-  //   expect(popup).toHaveBeenCalled();
-  //   expect(true).toBe(true);    
-  // })
-
-
-
-
+  it('should test the cancel function that does nothing', function(){
+    $scope.cancelAction();
+    $scope.$apply();
+    expect(true).toBe(true);
+  });
 
 });
 

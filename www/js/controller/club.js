@@ -12,6 +12,9 @@ angular.module('zarad.club',[])
 	$scope.usersEndedSubs={};
 	$scope.onezoneDatepicker = { date: 'date' };
 
+	$scope.cancelAction = function(){
+		console.log('nothing here');
+	}
 
 	$scope.showClubAction = function() {
 		var hideSheet = $ionicActionSheet.show({
@@ -21,8 +24,7 @@ angular.module('zarad.club',[])
 		   { text: '<span>Logout</span>'}
 		 ],
 		 cancelText: '<b>Cancel</b>',
-		 cancel: function() {
-		    },
+		 cancel: $scope.cancelAction , 
 		 buttonClicked: function(index) {
 		   if(index === 0 ){
 			    //$location.path('/addUser')
@@ -127,7 +129,6 @@ angular.module('zarad.club',[])
 	}
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
-		console.log($scope.userProfileData);
 	}
 	$scope.editUserProfile=function(data){
 		$scope.userProfileData=data;
