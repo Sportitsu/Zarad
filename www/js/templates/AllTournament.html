@@ -11,18 +11,22 @@
     <div class="tournament">
     <img style=" margin-left:10%; margin-top:5%;margin-bottom:3%;width: 80%; height:40%"   src='{{tournament.poster}}'/>
     <div style="margin-left:10%">
-    <div class="Comptetion"> The <span style="font-weight: bold;    text-align: center;">{{tournament.name}}</span> Comptetion<br><br>
+    <div class="Comptetion"><span style="font-weight: bold;    text-align: center;">{{tournament.name}}</span><br><br>
     </div>
+    <br>
     <div class="tournamentcolor">
-    <span class="tournamenttitel" > Place: </span> it will be in {{tournament.place}}<br>
+    <span class="tournamenttitel" > Place: </span>{{tournament.place}}<br>
     </div>
+    <br>
     <div class="tournamentcolor">
-    <span class="tournamenttitel" ">Organizer By:</span>{{tournament.organizer}}<br>
+    <span class="tournamenttitel" ">Organized By: </span>{{tournament.organizer}}<br>
     </div>
+    <br>
     <div class="tournamentcolor">
-    <span class="tournamenttitel" ">Date:</span>{{tournament.Date.substring(0,15)}}<br></div>
+    <span class="tournamenttitel" ">Date: </span>{{tournament.Date.substring(0,15)}}<br></div>
+    <br>
     <div class="tournamentcolor">
-    <span class="tournamenttitel" "> More details:</span>{{tournament.details}}<br>
+    <span style="font-size:12px" ">{{tournament.details}}</span><br>
     </div>
     </div>
     </div>
