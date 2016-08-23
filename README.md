@@ -26,9 +26,9 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 ## Usage
 
-
-![GroupSettings](https://raw.githubusercontent.com/Zarad1993/Zarad/master/screenshots/combine_images.jpg "Group Settings Screen")
-![alt tag](https://raw.githubusercontent.com/Zarad1993/Zarad/master/screenshots/combine_images.jpg)
+<p align="center">
+  <img src="masters/screenshots/combine_images.jpg" width="350"/>
+</p>
 
 > app is now running online through :
 [here](http://zarad.herokuapp.com)
