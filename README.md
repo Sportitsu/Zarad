@@ -27,7 +27,7 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 ## Usage
 
 > app is now running online through :
-[here](zara.herokuapp.com)
+[here](http://zarad.herokuapp.com)
 
 > Preview the app on your phone
 ```sh
