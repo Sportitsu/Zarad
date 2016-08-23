@@ -1,6 +1,6 @@
 'use strict';
 angular.module('zarad.club',[])
-.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
+.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal, $cordovaCamera){
 	//added somethign for pull request
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
@@ -66,6 +66,59 @@ angular.module('zarad.club',[])
 			$scope.editUserModal = modal;
 	});
 
+	 $scope.showOptions = function(){
+      var myPopup = $ionicPopup.show({
+        titleText : 'Please Select',
+        scope : $scope,
+        buttons : [
+           { text: '<h6>Camera</h6>' ,
+             type: 'button button-outline' ,
+             onTap : function(){
+              $scope.takePhoto({type : Camera.PictureSourceType.CAMERA })
+              console.log('Clicked On Camera');
+             } },
+        { text: '<h6>Photos</h6>',
+          type: 'button button-outline',
+          onTap : function(){
+            $scope.takePhoto({type : Camera.PictureSourceType.PHOTOLIBRARY })
+          }},
+          {text: 'exit'}
+        ]
+      })
+    };
+
+     $scope.takePhoto = function(source){
+      var options = {
+        quality : 50,
+        destinationType : Camera.DestinationType.DATA_URL,
+        sourceType : source.type ,
+        allowEdit: true ,
+        encodingType: Camera.EncodingType.JPEG,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      }
+
+      $cordovaCamera.getPicture(options) 
+                    .then(function(imageData){
+                      uploadToIMGUR('',imageData, function(response){
+                        var object = {
+                          username  : $scope.data.username ,
+                          image : response.link
+                        }
+                       $scope.club.data.Image = response.link;
+                        User.editProfile(object)
+                            .then(function(response){
+                              alert('WhatsApp Guyss');
+                              $scope.data.image = response.image;
+                            })
+                            .catch(function(error){
+                              alert(error);
+                            })
+                      })
+      });
+   }
+   
 	$scope.getUserPlace=function(place,username){
 		$scope.editUserProfileData.place=place;
 	}

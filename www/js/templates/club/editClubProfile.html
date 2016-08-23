@@ -22,11 +22,6 @@
         </label>
 
          <label class="item item-input">
-          <span class="input-label">Image</span>
-          <input type="text" placeholder="Change Club Logo" ng-model="club.data.Image" ng-value="club.data.Image" >
-        </label>
-
-         <label class="item item-input">
           <span class="input-label">Old Password</span>
           <input type="password" placeholder="Enter Old Password" ng-model="club.data.oldPassword" ng-value="club.data.oldPassword" >
         </label>
@@ -34,6 +29,12 @@
          <label class="item item-input">
           <span class="input-label">New Password</span>
           <input type="password" placeholder="Enter New Password" ng-model="club.data.password" ng-value="club.data.password" >
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Image</span>
+          <!-- <input type="text" placeholder="Change Club Logo" ng-model="club.data.Image" ng-value="club.data.Image" > -->
+          <button class="button button-stable col col-bottom bottom bottom-right" ng-click="showOptions()">Change Picture</button>
         </label>
 
         <!-- <label class = "col text-right button icon ion-locked button-stable" ng-click="showPassWord()">  Change Password</label> -->
