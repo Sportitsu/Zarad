@@ -14,15 +14,15 @@ angular.module('zarad.tournament',['ionic'])
 	$scope.getAllTournament();
 	
 	$scope.ceckuser=function(){
-	if($window.localStorage.member!==undefined){
-       $scope.LikeCtrl=true
-	}
+		if($window.localStorage.member!==undefined){
+	       $scope.LikeCtrl=true
+		}
 	}
 	$scope.ceckuserandadmin=function(){
 		console.log($window.localStorage)
-	if($window.localStorage.member!==undefined ||$window.localStorage.user!==undefined ){
-       $scope.Backbutton=true;
-	}
+		if($window.localStorage.member!==undefined ||$window.localStorage.user!==undefined ){
+	       $scope.Backbutton=true;
+		}
 	}
 	$scope.ceckuserandadmin();
 	$scope.ceckuser();
