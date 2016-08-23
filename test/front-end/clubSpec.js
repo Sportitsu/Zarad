@@ -4,6 +4,9 @@ describe('Club Controller', function(){
   beforeEach(angular.mock.module('zarad.club'));
   beforeEach(angular.mock.module('zarad.services'));
   beforeEach(angular.mock.module('ionic'));
+  beforeEach(angular.mock.module('ngCordova'));
+  beforeEach(angular.mock.module('ionic-material'));
+
 
 
 

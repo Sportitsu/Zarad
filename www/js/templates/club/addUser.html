@@ -65,6 +65,10 @@
               <i class="icon ion-minus" style="color: green !important"></i> 
             </button>
           </label>
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label"></span>
           <label>
             <button class="button button-clear button-dark" ng-click="getAchievmentData('blue')">
               <i class="icon ion-minus" style="color: blue !important"></i> 
@@ -80,6 +84,10 @@
               <i class="icon ion-minus" style="color: red !important"></i> 
             </button>
           </label>
+        </label>
+
+        <label class="item item-input">
+           <span class="input-label"></span>
            <label>
             <button class="button button-clear button-dark" ng-click="getAchievmentData('brown')">
               <i class="icon ion-minus" style="color: brown !important"></i> 
@@ -95,9 +103,11 @@
 
         <label class="item item-input">
           <span class="input-label">Achievements</span>
-          <span>name: </span>
-          <input type="text" placeholder=" Enter User achievements" ng-model="clubNewUser.achievements.name">
-          <span style="margin-left: 50px !important">Meddle:</span>
+          <input type="text" placeholder=" Enter name of achievement" ng-model="clubNewUser.achievements.name">
+        </label>
+
+        <label class="item item-input">
+          <span class="input-label">Meddale</span>
           <label>
             <button class="button button-clear button-dark" ng-click="getAchievmentData(1)">
               <i class="icon ion-ribbon-a" style="color: #ffd700 !important"></i> 

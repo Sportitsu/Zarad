@@ -1,6 +1,6 @@
 'use strict';
 angular.module('zarad.club',[])
-.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal){
+.controller('clubController',function($scope,$window,Club,User,$ionicPopup,$timeout,$location, $ionicActionSheet, $ionicModal, $cordovaCamera){
 	//added somethign for pull request
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
@@ -69,9 +69,61 @@ angular.module('zarad.club',[])
 		});
 	}
 
+	 $scope.showOptions = function(){
+      var myPopup = $ionicPopup.show({
+        titleText : 'Please Select',
+        scope : $scope,
+        buttons : [
+           { text: '<h6>Camera</h6>' ,
+             type: 'button button-outline' ,
+             onTap : function(){
+              $scope.takePhoto({type : Camera.PictureSourceType.CAMERA })
+              console.log('Clicked On Camera');
+             } },
+        { text: '<h6>Photos</h6>',
+          type: 'button button-outline',
+          onTap : function(){
+            $scope.takePhoto({type : Camera.PictureSourceType.PHOTOLIBRARY })
+          }},
+          {text: 'exit'}
+        ]
+      })
+    };
+
+     $scope.takePhoto = function(source){
+      var options = {
+        quality : 50,
+        destinationType : Camera.DestinationType.DATA_URL,
+        sourceType : source.type ,
+        allowEdit: true ,
+        encodingType: Camera.EncodingType.JPEG,
+        popoverOptions: CameraPopoverOptions,
+        saveToPhotoAlbum: false,
+        correctOrientation: true
+      }
+
+      $cordovaCamera.getPicture(options) 
+                    .then(function(imageData){
+                      uploadToIMGUR('',imageData, function(response){
+                        var object = {
+                          username  : $scope.data.username ,
+                          image : response.link
+                        }
+                       $scope.club.data.Image = response.link;
+                        User.editProfile(object)
+                            .then(function(response){
+                              alert('WhatsApp Guyss');
+                              $scope.data.image = response.image;
+                            })
+                            .catch(function(error){
+                              alert(error);
+                            })
+                      })
+      });
+   }
+   
 	$scope.getUserPlace=function(place,username){
 		$scope.editUserProfileData.place=place;
-		$scope.editUserProfileData.username=username;
 	}
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
@@ -157,11 +209,13 @@ angular.module('zarad.club',[])
      });
 	};
 
-	$scope.confirmUserEdit=function(){
+	$scope.confirmUserEdit=function(user){
+		$scope.editUserProfileData.username=user;
+		console.log(user,$scope.editUserProfileData)
 		var data=$scope.editUserProfileData;
-		if(!data.place){
+		if(!data.place && data.achievements || data.place && !data.achievements){
 			var alertPopup = $ionicPopup.alert({
-	             title: 'please choose a middle to save your edit'
+	             title: 'please fill achievement data to save your edit'
 	    })
 		}else if(data.username){
 			User.editProfile(data).then(function(resp){
