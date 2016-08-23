@@ -81,29 +81,6 @@ describe('Club Controller', function(){
   }));
 
 
-  // it('should return promise when editing club', function(){
-
-  //   deferred.resolve({ image : 'sdfsdf.jpg'})
-  //   $scope.club = { data : { image : 'sdfsdf.jpg'}};
-  //   $scope.editClub();
-  //   $scope.$apply();
-
-  //   expect(Club.editClub).toHaveBeenCalled();
-
-  // });
-
-  // it('should be able to add user', function(){
-
-  //   deferred.resolve({username : 'Plffhu123'});
-  //   $scope.club = {data : {clubName: 'Makhai'}};
-
-  //   $scope.AddUser();
-  //   $scope.$apply();
-
-  //   expect(User).toBeDefined();
-
-  // });
-
   it('should show when there are unsubscribed users', function(){
     $scope.usersToSubscribe = [1,2,3];
     $scope.show();
@@ -174,7 +151,31 @@ describe('Club Controller', function(){
     $scope.getTime();
     $scope.$apply();
     expect(true).toBe(true);
-  })
+  });
+
+  it('should have an initialize function that starts at start', function(){
+    var popup = spyOn(ionicModalMock, 'fromTemplateUrl').and.callThrough().and.returnValue(deferred.promise);
+    deferred.resolve({innerscope : 'test'});
+    $scope.callModals();
+    expect(popup).toHaveBeenCalled();
+    expect(true).toBe(true);
+  });
+
+  it('should have a get user place function that works', function(){
+    $scope.getUserPlace(3,'Plmoha492');
+    $scope.$apply();
+    expect($scope.editUserProfileData.place).toBe(3);
+
+  });
+
+
+  // it('should have popup for confirmation when removing user', function(){
+  //   deferred.resolve({})
+  //   var popup = spyOn(ionicPopupMock, 'confirm').and.callThrough().and.returnValue(deferred.promise);
+  //   $scope.removeUser();
+  //   expect(popup).toHaveBeenCalled();
+  //   expect(true).toBe(true);    
+  // })
 
 
 
