@@ -68,7 +68,6 @@ angular.module('zarad.club',[])
 
 	$scope.getUserPlace=function(place,username){
 		$scope.editUserProfileData.place=place;
-		$scope.editUserProfileData.username=username;
 	}
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
@@ -150,11 +149,13 @@ angular.module('zarad.club',[])
      });
 	};
 
-	$scope.confirmUserEdit=function(){
+	$scope.confirmUserEdit=function(user){
+		$scope.editUserProfileData.username=user;
+		console.log(user,$scope.editUserProfileData)
 		var data=$scope.editUserProfileData;
-		if(!data.place){
+		if(!data.place && data.achievements || data.place && !data.achievements){
 			var alertPopup = $ionicPopup.alert({
-	             title: 'please choose a middle to save your edit'
+	             title: 'please fill achievement data to save your edit'
 	    })
 		}else if(data.username){
 			User.editProfile(data).then(function(resp){
