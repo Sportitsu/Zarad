@@ -238,6 +238,7 @@ angular.module('zarad.club',[])
 			console.log(resp);
 			if(resp.status !== 500){
 				$scope.editClubModal.hide();
+				$scope.getClub();
 			}else{
 				var alertPopup = $ionicPopup.alert({
 	            title: resp.data
@@ -250,16 +251,17 @@ angular.module('zarad.club',[])
 	}
 
 	$scope.AddUser=function(){
-		$scope.clubNewUser.club=$scope.club.data.clubName;
-		Club.AddUser($scope.clubNewUser).then(function(resp){
-			var alertPopup = $ionicPopup.alert({
-             title: 'Your User Name is:'+resp.username
-             })
-			.then(function(){
-				$scope.addUserModal.hide();
-             })
-		});
-		$scope.clubNewUser={};
+			$scope.clubNewUser.membership=membership;
+			$scope.clubNewUser.club=$scope.club.data.clubName;
+			Club.AddUser($scope.clubNewUser).then(function(resp){
+				var alertPopup = $ionicPopup.alert({
+	             title: 'Your User Name is:'+resp.username
+	             })
+				.then(function(){
+					$scope.addUserModal.hide();
+	             })
+			});
+			$scope.clubNewUser={};
 	};
 
 	$scope.show=function(){
