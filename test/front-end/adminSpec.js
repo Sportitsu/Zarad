@@ -53,7 +53,7 @@ describe('Admin Controller', function(){
 
 	it('sign in function should be able to work', function(){
 		$scope.admin = { username :'rebootKamp' , password: '1234'}
-		deferred.resolve({user : 'rebootKamp' , token : '21340u8jkdaf'});
+		deferred.resolve({data:{user : 'rebootKamp' , token : '21340u8jkdaf'}});
 
 		$scope.signin();
 		$scope.$apply();
