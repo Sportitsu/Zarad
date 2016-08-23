@@ -10,7 +10,7 @@
 		</label>
 		<div class="list card" ng-repeat="friend in myFriends | filter : search">
 		  <div class="item item-avatar" ng-click="showProfile(friend)" >
-		    <img src="friend.image">
+		    <img src="{{friend.image}}">
 		    <h2>{{friend.firstName}} {{friend.lastName}}</h2>
 		    <p>{{friend.club}}</p>
 		  </div>

@@ -54,7 +54,7 @@ module.exports ={
 					clubName : req.body.clubName,
 					email : req.body.email,
 					channelId: req.body.channelId || "",
-					image: req.body.image
+					image: req.body.image || 'http://i.imgur.com/FlEXhZo.jpg?1'
 				});
 				newClub.save(function (error,club) {
 					if(error){
