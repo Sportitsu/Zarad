@@ -121,7 +121,7 @@ npm install
 
 
 #The Database 
-Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments
+Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
 
 ### Roadmap
 
