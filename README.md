@@ -39,34 +39,31 @@ Download Ionic View from Play Store or App store
 Enter this Id : A92B94C3
 ```
 
->to run the app locally:
+>To run the app locally:
+
 ```sh
-ionic serve 
-```
->to run the app on phone platforms
-```sh
-ionic serve --lab
+git clone https://github.com/Sportitsu/Zarad.git
 ```
 
-## Running Test
--run front end test
 ```sh
-npm run karma
+npm install && bower install
 ```
 
--run back end test with coverage
+```sh
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
+```
+
+## Running Tests
 ```sh
 npm test
 ```
 
--run front end cover test
-```sh
-npm run cover
-```
 ## styling guide
 ```sh
 gulp
 ```
+
 ## Requirements
 
 - Node 6.3.x
