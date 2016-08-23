@@ -147,14 +147,11 @@ angular.module('zarad.user',['ionic'])
    $scope.getAllUsers = function(){
      User.getAllUsers()
          .then(function(response){
-          console.log(response);
            for(var i = 0 ; i < response.data.length; i++){
-            console.log(response.data[i].image);
             if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
               $scope.myFriends.push(response.data[i]);
             }
            }
-           console.log($scope.myFriends);
          })
          .catch(function(error){
            console.log(error);
