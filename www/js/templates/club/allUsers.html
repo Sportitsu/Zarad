@@ -1,4 +1,5 @@
-<section id="cd-timeline" class="cd-container ng-enter-stagger"  ng-init="callModals();">
+<ion-scroll scrollX="true">
+<section id="cd-timeline" class="cd-container ng-enter-stagger" ng-init="callModals();">
     <div ng-repeat="info in clubUsers.data">
       <div class="cd-timeline-block">
         <div class="cd-timeline-picture text-center royal">
@@ -12,3 +13,4 @@
       </div>
   </div>
 </section>
+</ion-scroll>

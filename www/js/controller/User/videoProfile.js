@@ -17,14 +17,16 @@ angular.module('zarad.videos', ['ionic'])
           $scope.flag = false;
         });
 
-    $scope.uploadPage = function(){
-      	$scope.playerVars = {
-      	  rel: 0,
-      	  showinfo: 0,
-      	  modestbranding: 0,
-      	}
-
         var YOUTUBE_API_KEY2 = 'AIzaSyCe3SQ2EGPUgyqeW5PXscj8i4cN47Sck8Y';
+        $scope.playerVars = {
+          rel: 0,
+          showinfo: 0,
+          modestbranding: 0,
+        };
+
+
+    $scope.uploadPage = function(){
+
 
         $scope.youtubeParams = {
             key: YOUTUBE_API_KEY2,
@@ -40,18 +42,6 @@ angular.module('zarad.videos', ['ionic'])
     }
       
     $scope.getVideo = function(){
-      // $http({
-      //   method : 'GET',
-      //   params : $scope.youtubeParams ,
-      //   url : 'https://www.googleapis.com/youtube/v3/search'})
-      // .then(function(response){
-      //   angular.forEach(response.data.items, function(child){
-      //    $scope.videos.push(child);
-      //   })
-      // })
-      // .catch(function(error){
-      //   console.log(error);
-      // })
       $http.get('https://www.googleapis.com/youtube/v3/search', {params:$scope.youtubeParams}).success(function(response){
         angular.forEach(response.items, function(child){
           $scope.videos.push(child);

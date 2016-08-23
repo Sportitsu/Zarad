@@ -20,10 +20,9 @@ angular.module('zarad.services',[])
     })
     .then(function(resp){
       return resp;
-    })
-    .catch(function(error){
+    }).catch(function (error) {
       return error;
-    }); 
+    })
   };
   
   var signout=function(){
@@ -66,6 +65,9 @@ angular.module('zarad.services',[])
     .catch(function(error){
       return error;
     })
+    .catch(function(error){
+      return error;
+    });
   }
 
   var signup = function(admin){
@@ -190,7 +192,10 @@ angular.module('zarad.services',[])
       data:data
     })
     .then(function(resp){
-      return resp.data;
+      return resp;
+    })
+    .catch(function(error){
+      return error;
     })
   };
 
@@ -256,10 +261,9 @@ angular.module('zarad.services',[])
  }
 
   var deleteUser = function(data){
-    console.log(data)
     return $http({
       method : 'POST' , 
-      url :'http://zarad.herokuapp.com/api/user/delete',
+      url : 'http://zarad.herokuapp.com/api/user/delete',
       data : data
     })
     .then(function(resp){

@@ -106,6 +106,8 @@ module.exports= {
             });
 		}else if(username.charAt(0) ==='C' && username.charAt(1)=== 'l'){
 			clubController.signin(req,res);
+		}else{
+			helpers.errorHandler(' Invalid User Name', req, res);
 		}
 	},
 	signup : function(req, res){

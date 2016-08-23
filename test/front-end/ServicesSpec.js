@@ -382,7 +382,7 @@ describe('Services', function () {
                 'clubName' : 'Makhai'
               };
 
-          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond({status:201, data:mockClubs});
+          $httpBackend.expect('POST', baseUrl + '/api/club/editProfile').respond(201,mockClubs);
           Club.editClub(mockResponse).then(function(resp){
             expect(resp.data.username).toEqual(mockClubs.username);
             expect(resp.data).not.toEqual(mockResponse);

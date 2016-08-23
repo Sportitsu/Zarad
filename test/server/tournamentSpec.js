@@ -256,4 +256,5 @@ describe('Tournaments DataBase', function(done){
 	                })
 	        })
     })
+
 });
