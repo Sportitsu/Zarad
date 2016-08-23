@@ -33,13 +33,11 @@
 
         <label class="item item-input">
           <span class="input-label">Image</span>
-          <!-- <input type="text" placeholder="Change Club Logo" ng-model="club.data.Image" ng-value="club.data.Image" > -->
           <button class="button button-stable col col-bottom bottom bottom-right" ng-click="showOptions()">Change Picture</button>
         </label>
 
-        <!-- <label class = "col text-right button icon ion-locked button-stable" ng-click="showPassWord()">  Change Password</label> -->
         <div style="text-align: center">
-          <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancelClubEditing()">Cancel Edit</button>
+          <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="editClubModal.hide();">Cancel Edit</button>
           <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirmClubEdit()">Finished Edit</button>
         </div>
 

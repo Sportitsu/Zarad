@@ -77,7 +77,6 @@ module.exports = {
 		});
 	},
 	addLike : function (req,res) {
-	    console.log(req.body);
 		Tournament.findOne({ name : req.body.name })
 		.exec(function(error, tournament){
 			if(tournament){

@@ -64,6 +64,9 @@ angular.module('zarad.services',[])
     })
     .catch(function(error){
       return error;
+    })
+    .catch(function(error){
+      return error;
     });
   }
 
@@ -402,3 +405,4 @@ angular.module('zarad.services',[])
     addQuote : addQuote
   }
 })
+

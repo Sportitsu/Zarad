@@ -2,7 +2,19 @@
 angular.module('zarad.auth',[])
 .controller('AuthController',function($scope ,$location, User, $window , Auth, $ionicPopup, $timeout, $q){
 	$scope.user={};
-	$scope.showPopup = function() {
+  $scope.onTap = function(e) {
+           if (!$scope.user.username || !$scope.user.password) {
+             //don't allow the user to close unless they fill the fields
+             e.preventDefault();
+           } else {
+             // return $scope.user;
+
+             $scope.signin();
+
+           }
+         };
+	
+  $scope.showPopup = function() {
    //custom popup to show login box
    var myPopup = $ionicPopup.show({
    	template: '<label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="text" id="n" placeholder="Enter First Name" ng-model="user.username"></label><br><label class="item item-input"><i class="icon ion-arrow-right-b placeholder-icon"></i><input type="password" placeholder="Enter your password" ng-model="user.password"></label>',
@@ -16,36 +28,17 @@ angular.module('zarad.auth',[])
        {
          text: '<b>Login</b>',
          type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
-         onTap: function(e) {
-            
-
-           if (!$scope.user.username || !$scope.user.password) {
-             //don't allow the user to close unless they fill the fields
-             e.preventDefault();
-           } else {
-             // return $scope.user;
-
-             $scope.signin();
-
-           }
-         }
+         onTap: $scope.onTap
        },
      ]
    });
-   myPopup.then(function(res) {
-      $scope.user={};
-   });
-   $timeout(function() {
-      myPopup.close(); //close the popup after 1 minute
-   }, 60000);
   };
 
 	$scope.signin =function(){
      Auth.signin($scope.user)
   	.then(function(resp){
-
+      $scope.user = {};
      if(resp.status !== 500){
-     //save the token and username in local stoarage to distinguish signed in users
      if(resp.data.user.indexOf('Cl') > -1){
         $window.localStorage.setItem('com.zarad', resp.data.token);
         $window.localStorage.setItem('user',resp.data.user);

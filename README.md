@@ -10,9 +10,9 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 ## Team
 
-  - __Product Owner__: Mohammad al-bakri
-  - __Scrum Master__: Mihyar Al-masalma
-  - __Development Team Members__: Fatima hammami, Elham rababah, Mohammad Al-bakri, Mihyar Al-Masalma
+  - __Product Owner__: Mohammad Al-Bakri
+  - __Scrum Master__: Mihyar Al-Masalma
+  - __Development Team Members__: Fatima Hammami, Elham Rababah, Mohammad Al-Bakri, Mihyar Al-Masalma
 
 ## Table of Contents
 
@@ -26,37 +26,45 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 
 ## Usage
 
-> app is now running online through :
-[here](zara.herokuapp.com)
+<p align="center">
+  <img src="masters/screenshots/combine_images.jpg" width="350"/>
+  <img src="masters/screenshots/combine_images2.jpg" width="350"/>
+</p>
 
->to run the app locally:
-```sh
-ionic serve 
-```
->to run the app on phone platforms
-```sh
-ionic serve --lab
-```
+> Web Browser application link :
+[Click Here](http://zarad.herokuapp.com)
 
-## Running Test
--run front end test
+> Preview the app on your phone
 ```sh
-npm run karma
+Download Ionic View from Play Store or App store 
+Enter this Id : A92B94C3
 ```
 
--run back end test with coverage
+>To run the app locally:
+
+```sh
+git clone https://github.com/Sportitsu/Zarad.git
+```
+
+```sh
+npm install && bower install
+```
+
+```sh
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
+```
+
+## Running Tests
 ```sh
 npm test
 ```
 
--run front end cover test
-```sh
-npm run cover
-```
 ## styling guide
 ```sh
 gulp
 ```
+
 ## Requirements
 
 - Node 6.3.x
@@ -76,8 +84,8 @@ npm install
 
 
 #APIs Used
-- We used the Youtube API to gather details about the videos related to each club
-- we used Imgur API to stord the tournaments Image .
+- We used the Youtube API to gather details about the videos related to each Academy
+- we used Imgur API to store the tournaments Image .
 
 # RESTful Routes
 | Method        | Endpoint      | Description  |
@@ -114,91 +122,8 @@ npm install
 
 
 #The Database 
-We used MongoDB for our database. Initially,we were planning on club being able to have users , also we have tournament table which stored  tournament data ,quote table have  data about  quote.
-In the end, the database mainly stored user,admin,club data to help with authentication and to deliver a more customized experience
+Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
 
-
-| Table :       |
-
-| admin|
-| tournament|
-| club|
-| user|
-| quote|
-
-
-# Schema's
-
-### User Schema
-```sh
-{
-	username : { type: String, required: true, index : {unique: true}},
-	password : { type: String, required: true},
-  country : { type : String , required : true },
-  beltColor: { type: String , required: true},
-  club: { type: String, required: true},
-  membership : { type : Number, required : true , default : 1 },
-  email: { type: String , index : {unique : true}},
-  firstName: { type: String},
-  image : {type : String},
-  lastName: { type: String },
-  middleName : { type : String },
-  age : { type : Number},
-  phone: { type: String },
-  Date: { type: Date, default: Date.now() },
-  attendance : { type: Number },
-  achievements: { type : Array},
-  valid : { type : Boolean , default : true },
-  subscription : { type : Number },
-  resub : { type : Boolean , default : false},
-  goals : {type : Array},
-  salt : { type : String}
-}
-```
-
-### Admin Schema
-  ```sh
-{
-	username : {type: String, required : true, index : { unique : true }},
-	password : {type: String, required : true},
-	firstName : {type: String, required : true},
-	lastName : {type: String, required : true},
-	email : {type: String, required : true},
-  salt : { type : String}
-}
-```
-
-### Club Schema
-```sh
-{
-	username : {type : String, required : true, index : {unique : true} },
-	password : {type : String, required : true },
-  email    : {type : String , index : { unique : true}},
-	country  : {type : String, required : true },
-	clubName : {type : String, required : true, index : { unique : true } },
-  image    : {type:String },
-  channelId : {type : String, unique : true},
-  salt : { type : String}
-}
-```
-### Tournament Schema
-```sh
-{
-	name : {type : String , required : true},
-	Date : {type : String , required : true},
-	place : {type : String , required : true},
-	organizer : {type : String , required : true},
-	details : {type :  String , required : true},
-	poster : {type : String , required : true},
-	like:{type :[]}
-})
-```
-### Qoutes Schema
-```sh
- {
- image : { type : String}
-}
-```
 ### Roadmap
 
 View the project roadmap [here](https://waffle.io/Sportitsu/Zarad)
