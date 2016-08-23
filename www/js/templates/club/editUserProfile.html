@@ -6,26 +6,26 @@
     <form>
       <div class="list">
         <label class="item item-input">
-          <span class="input-label icon ion-plus-round">  New Achievement</span>
+          <span class="input-label icon ion-plus-round">  Achievement</span>
           <input type="text" placeholder="Add new Achievement" ng-model="editUserProfileData.achievements">
         </label>
 
         <label class="item item-input">
-        <span class="input-label icon ion-earth">  Achievement's Place</span>
+        <span class="input-label icon ion-ribbon-a">  Place</span>
           <label>
-            <button class="button button-clear button-dark" ng-click="getUserPlace(1,userProfileData.user.username)">
+            <button class="button button-clear button-dark" ng-click="getUserPlace(1)">
               <i class="icon ion-ribbon-a" style="color: #ffd700 !important"></i> 
             </button>
           </label>
 
           <label>
-            <button class="button button-clear button-dark" ng-click="getUserPlace(2,userProfileData.user.username)">
+            <button class="button button-clear button-dark" ng-click="getUserPlace(2)">
              <i class="icon ion-ribbon-a" style="color: #cd7f32 !important"></i>
             </button>
           </label>
 
           <label>
-           <button class="button button-clear button-dark" ng-click="getUserPlace(3,userProfileData.user.username)">
+           <button class="button button-clear button-dark" ng-click="getUserPlace(3)">
                <i class="icon ion-ribbon-a" style="color: #c0c0c0 !important"></i>
              </button>   
            </label> 
@@ -40,7 +40,7 @@
         <br><br><br>
         <div style="text-align: center">
           <button class="button button-outline icon icon-left ion-close-round button-dark bt" ng-click="cancelUserEditing()">Cancel Editing</button>
-          <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirmUserEdit()">Finished Editing</button>
+          <button class="button button-outline icon icon-left ion-edit button-dark bt" ng-click="confirmUserEdit(userProfileData.user.username)">Finished Editing</button>
         </div>
 
       </div>
