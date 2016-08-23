@@ -20,6 +20,7 @@ angular.module('zarad.tournament',['ionic'])
 	}else{
 		$scope.link="#/"
 	}
+	console.log($scope.link,$window.localStorage);
 	}
 	$scope.ceckuserandadmin=function(){
 		
