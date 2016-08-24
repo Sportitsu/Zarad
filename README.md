@@ -17,6 +17,9 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [ARCHITECTURE](#architecture)
+    1. [Tech Stack](#tech-stack)
+    1. [System Architecture](#system-architecture)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -40,8 +43,6 @@ Download Ionic View from Play Store or App store
 Enter this Id : A92B94C3
 ```
 
->To run the app locally:
-
 
 ## Running Tests
 ```sh
@@ -52,6 +53,35 @@ npm test
 ```sh
 gulp
 ```
+
+## Architecture
+
+### Tech Stack
+
+1) Front-End
+- Ionic  
+- Angular
+
+2) Back-End
+- Node/Express
+- MongoDB
+
+
+3) Testing
+- Mocha
+- Chai
+- Karma 
+- Jasmine
+
+4) Deployment
+- Heroku
+
+
+### System Architecture
+
+<p align="center">
+  <img src="masters/screenshots/systemArchitecture.jpg" width="350"/>
+</p>
 
 ## Requirements
 
