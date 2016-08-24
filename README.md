@@ -4,7 +4,7 @@
 
 # Zarad 
 
-Zarad is app help  the sport clubs to manage  their  activities and facilitate track the players and their history,also it helps player to see the videos related to his club.    
+Zarad is an application that helps JiuJitsu Academies manage their members and facilitate track players achievements plus their history, also it helps each member to see the latest techniques uploaded by the academy.    
 
 
 
@@ -84,8 +84,11 @@ npm install
 
 
 #APIs Used
-- We used the Youtube API to gather details about the videos related to each Academy
-- we used Imgur API to store the tournaments Image .
+- We used the Youtube API to collect Academy youtube channel videos. 
+- we used Imgur API to save memory on our database.
+
+#The Database 
+Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
 
 # RESTful Routes
 | Method        | Endpoint      | Description  |
@@ -118,11 +121,6 @@ npm install
 |post|/api/user/goals| add goals for specific user|
 |get|/api/quotes/get|get information of quote |
 |post|/api/quotes/newquote| add new quote to specific user|
-
-
-
-#The Database 
-Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
 
 ### Roadmap
 
