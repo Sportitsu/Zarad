@@ -17,7 +17,7 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [ARCHITECTURE](#architecture)
+1. [Architecture](#architecture)
     1. [Tech Stack](#tech-stack)
     1. [System Architecture](#system-architecture)
 1. [Requirements](#requirements)
@@ -51,8 +51,7 @@ Enter this Id : 4C581605
 
 ## Running Tests
 ```sh
-Web platform -- > ionic serve
-Phone platform -- > ionic serve --lab
+npm test
 ```
 
 ## styling guide
@@ -90,7 +89,7 @@ gulp
 
 - Node 6.3.x
 - mongoDB 4.1.0
-- ionic 1.3.1
+- Ionic 1.3.1
 
 ## Development
 

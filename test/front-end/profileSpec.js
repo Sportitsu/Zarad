@@ -65,19 +65,6 @@ describe('Testing AngularJS Zarad Profile Page', function(){
         expect(scope.confirm).toBeDefined();
       });
 
-      // it('should return promise when editing profile', function(){
-      //   scope.data.username = 'Plmoha3492';
-      //   scope.user = { username : 'Plmoha492', beltColor : 'Yellow'};
-
-      //   deferred.resolve({data: {username : 'Plmoha429' , password: "02134u32", valid:false , beltColor : 'Yellow'}})
-
-
-      //   scope.confirm();
-      //   scope.$apply();
-
-      //   expect(User.editProfile).toHaveBeenCalled();
-      // });
-
       it('should return error', function(){
         scope.data.username = 'Plmoha3492';
         scope.user = { username : 'Plmoha492', beltColor : 'Yellow'};

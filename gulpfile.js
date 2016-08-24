@@ -26,12 +26,6 @@ gulp.task('scripts',function(){
           .pipe(concat('all.js'))
           .pipe(gulp.dest('./dist'));
 });
- 
-// gulp.task('concat:dist', function() {
-//   gulp.src('www/js/templates/{,*/}*.js')
-//     .pipe(concat.scripts(pkg.name + '.js'))
-//     .pipe(gulp.dest('dist'));
-// });
 
 gulp.task('sass', function(done) {
    gulp.src('./scss/ionic.app.scss')
