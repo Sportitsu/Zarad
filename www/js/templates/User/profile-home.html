@@ -8,23 +8,23 @@
             <input type="text" placeholder="What is your next Goal?" ng-model="newtask">
           </label>
           <button type="submit" ng-click="createTask(newtask);newtask=''" class="button button-block button-positive">Set Goal</button>
-			<ion-list
-			          show-delete="shouldShowDelete"
-			          show-reorder="shouldShowReorder"
-			          can-swipe="listCanSwipe">
-			  <ion-item style="background-color:lightyellow" ng-model="hint" ng-change="updateTodo()" ng-repeat="todo in todos"
-			            class="list card item-remove-animate">
-				    <h2>{{todo.title}}</h2>
-				    <ion-option-button class="button-assertive"
-				                       ng-click="updateTodo(todo.title);">
-				      Done 
-				    </ion-option-button>
-			  </ion-item>
-			</ion-list>
-	        <div class="card" ng-repeat="quote in quotes track by $index">
-			   <div class="item item-body">
-			      <img class="full-image" src="{{quote.image}}">
-			</div>
+      <ion-list
+                show-delete="shouldShowDelete"
+                show-reorder="shouldShowReorder"
+                can-swipe="listCanSwipe">
+        <ion-item style="background-color:lightyellow" ng-model="hint" ng-change="updateTodo()" ng-repeat="todo in todos"
+                  class="list card item-remove-animate">
+            <h2>{{todo.title}}</h2>
+            <ion-option-button class="button-assertive"
+                               ng-click="updateTodo(todo.title);">
+              Done 
+            </ion-option-button>
+        </ion-item>
+      </ion-list>
+          <div class="card" ng-repeat="quote in quotes track by $index">
+         <div class="item item-body">
+            <img class="full-image" src="{{quote.image}}">
+      </div>
         </div>
         <br><br>
   </ion-content>
