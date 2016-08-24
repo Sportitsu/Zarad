@@ -29,10 +29,15 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 
 ## Usage
 
-<p align="center">
-  <img src="masters/screenshots/combine_images.jpg" width="350"/>
-  <img src="masters/screenshots/combine_images2.jpg" width="350"/>
-</p>
+
+
+### As a subscribed Member
+
+![Subscribed](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/combine_images.jpg "Subscribed")
+
+### As a Club Owner
+
+![Club Owner](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/combine_images2.jpg "Club Ownder")
 
 > Web Browser application link :
 [Click Here](http://zarad.herokuapp.com)
