@@ -122,9 +122,8 @@ angular.module('zarad.user',['ionic'])
       });
    }
 
-
-
-
+  
+  
    $scope.myFriends = [];
    $scope.getAllUsers = function(){
      User.getAllUsers()
@@ -136,7 +135,6 @@ angular.module('zarad.user',['ionic'])
               $scope.myFriends.push(response.data[i]);
             }
            }
-           console.log($scope.myFriends);
          })
          .catch(function(error){
            console.log(error);

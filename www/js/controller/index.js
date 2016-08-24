@@ -127,7 +127,6 @@ angular.module('zarad.index',[])
 		  $scope.user.username = $scope.data.username;
 		 	User.editProfile($scope.user)
 		 		.then(function(response){
-		 			console.log(response);
 		 			$scope.data = response.data;
 					$state.go($state.current, {}, {reload: true});
 				   $timeout(function() {

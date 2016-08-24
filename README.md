@@ -46,7 +46,8 @@ Enter this Id : A92B94C3
 
 ## Running Tests
 ```sh
-npm test
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
 ```
 
 ## styling guide
@@ -112,11 +113,16 @@ Phone platform -- > ionic serve --lab
 
 
 #APIs Used
+<<<<<<< HEAD
 - We used the Youtube API to collect Academy youtube channel videos. 
 - we used Imgur API to save memory on our database.
 
 #The Database 
 Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
+=======
+- We used the Youtube API to gather details about the videos related to each Academy
+- we used Imgur API to store the tournaments Image .
+>>>>>>> 766a667b35dbe9842bcb4c3b9570cdfcaa322d02
 
 # RESTful Routes
 | Method        | Endpoint      | Description  |

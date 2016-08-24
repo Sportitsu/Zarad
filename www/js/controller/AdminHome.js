@@ -50,7 +50,6 @@ angular.module('zarad.admin',[])
         // sending the decoded image to IMGUR to get a link for that image
         uploadToIMGUR(IMGUR_CLIENT_ID, imgData, function(result){
           $scope.tournament.poster = result.link;
-          console.log( $scope.tournament.poster);
         });
       })
       // using the reader to decode the image to base64
@@ -140,7 +139,6 @@ angular.module('zarad.admin',[])
   $scope.SearchAboutTournament=function(){
     Tournament.SearchAboutTournament($scope.tournamentSelect.value)
     .then(function(tournament){
-      console.log()
         $scope.tournament.name=tournament.data.name;
         $scope.tournament.place=tournament.data.place;
         $scope.tournament.details=tournament.data.details;

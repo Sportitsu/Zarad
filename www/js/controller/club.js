@@ -4,6 +4,7 @@ angular.module('zarad.club',[])
 	//added somethign for pull request
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
+	// Added to the club.html
 	$scope.club={};
 	$scope.userProfileData={};
 	$scope.editUserProfileData={};
@@ -192,7 +193,6 @@ angular.module('zarad.club',[])
 
 	$scope.confirmUserEdit=function(user){
 		$scope.editUserProfileData.username=user;
-		console.log(user,$scope.editUserProfileData)
 		var data=$scope.editUserProfileData;
 		if(!data.place && data.achievements || data.place && !data.achievements){
 			var alertPopup = $ionicPopup.alert({
@@ -221,9 +221,7 @@ angular.module('zarad.club',[])
 	}
 
 	$scope.editClub=function(){
-		console.log($scope.club.data)
 		Club.editClub($scope.club.data).then(function(resp){
-			console.log(resp);
 			if(resp.status !== 500){
 				$scope.editClubModal.hide();
 				$scope.getClub();
@@ -281,6 +279,7 @@ angular.module('zarad.club',[])
 		})
 	};
 
+	// Calling in the ng- init club.html
 	$scope.getClub();
 
 
