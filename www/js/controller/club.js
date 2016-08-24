@@ -14,7 +14,7 @@ angular.module('zarad.club',[])
 
 	$scope.cancelAction = function(){
 		console.log('nothing here');
-	}
+	};
 
 	$scope.showClubAction = function() {
 		var hideSheet = $ionicActionSheet.show({
@@ -69,27 +69,27 @@ angular.module('zarad.club',[])
 			}).then(function(modal) {
 				$scope.editUserModal = modal;
 		});
-	}
+	};
 
 	 $scope.showOptions = function(){
-      var myPopup = $ionicPopup.show({
+       $ionicPopup.show({
         titleText : 'Please Select',
         scope : $scope,
         buttons : [
            { text: '<h6>Camera</h6>' ,
              type: 'button button-outline' ,
              onTap : function(){
-              $scope.takePhoto({type : Camera.PictureSourceType.CAMERA })
+              $scope.takePhoto({type : Camera.PictureSourceType.CAMERA });
               console.log('Clicked On Camera');
              } },
         { text: '<h6>Photos</h6>',
           type: 'button button-outline',
           onTap : function(){
-            $scope.takePhoto({type : Camera.PictureSourceType.PHOTOLIBRARY })
+            $scope.takePhoto({type : Camera.PictureSourceType.PHOTOLIBRARY });
           }},
           {text: 'exit'}
         ]
-      })
+      });
     };
 
      $scope.takePhoto = function(source){
@@ -102,7 +102,7 @@ angular.module('zarad.club',[])
         popoverOptions: CameraPopoverOptions,
         saveToPhotoAlbum: false,
         correctOrientation: true
-      }
+      };
 
       $cordovaCamera.getPicture(options) 
                     .then(function(imageData){
@@ -110,7 +110,7 @@ angular.module('zarad.club',[])
                         var object = {
                           username  : $scope.data.username ,
                           image : response.link
-                        }
+                        };
                        $scope.club.data.Image = response.link;
                         User.editProfile(object)
                             .then(function(response){
@@ -119,20 +119,20 @@ angular.module('zarad.club',[])
                             })
                             .catch(function(error){
                               alert(error);
-                            })
-                      })
+                            });
+                      });
       });
-   }
+   };
    
-	$scope.getUserPlace=function(place,username){
+	$scope.getUserPlace=function(place){
 		$scope.editUserProfileData.place=place;
-	}
+	};
 	$scope.showUser=function(data){
 		$scope.userProfileData=data;
-	}
+	};
 	$scope.editUserProfile=function(data){
 		$scope.userProfileData=data;
-	}
+	};
 
 	$scope.removeUser=function(user){
 		var confirmPopup = $ionicPopup.confirm({
@@ -142,20 +142,20 @@ angular.module('zarad.club',[])
 	    confirmPopup.then(function(res) {
 		    if(res) {
 		    	var username=user.user.username;
-		     	User.deleteUser({username : username}).then(function(resp){
-				var alertPopup = $ionicPopup.alert({
+		     	User.deleteUser({username : username}).then(function(){
+				$ionicPopup.alert({
 	            	title: 'User '+ user.user.firstName +'  '+ user.user.lastName +' has been removed'
 	    		})
 	    		.then(function(){
 					$scope.editUserModal.hide();
 					$scope.getUsers();
-	    		})
+	    		});
 			});
 		    }else{
 		       $scope.editUserModal.hide();
 		    }
 	    });
-	}
+	};
 
 	$scope.removeUserEnded=function(user){
 		var confirmPopup = $ionicPopup.confirm({
@@ -165,17 +165,17 @@ angular.module('zarad.club',[])
 	    confirmPopup.then(function(res) {
 		    if(res) {
 		    	var username=user.username;
-		     	User.deleteUser({username : username}).then(function(resp){
-				var alertPopup = $ionicPopup.alert({
+		     	User.deleteUser({username : username}).then(function(){
+				$ionicPopup.alert({
 	            	title: 'User '+ user.firstName +'  '+ user.lastName +' has been removed'
 	    		})
 	    		.then(function(){
 					$scope.getUsers();
-	    		})
+	    		});
 			});
 		   }
 	    });
-	}
+	};
 
 	$scope.confirmClubEdit=function(){
 	var confirmPopup = $ionicPopup.confirm({
@@ -195,30 +195,30 @@ angular.module('zarad.club',[])
 		$scope.editUserProfileData.username=user;
 		var data=$scope.editUserProfileData;
 		if(!data.place && data.achievements || data.place && !data.achievements){
-			var alertPopup = $ionicPopup.alert({
+		     $ionicPopup.alert({
 	             title: 'please fill achievement data to save your edit'
-	    })
+	    });
 		}else if(data.username){
-			User.editProfile(data).then(function(resp){
-				var alertPopup = $ionicPopup.alert({
+			User.editProfile(data).then(function(){
+				 $ionicPopup.alert({
 	             title: 'Your Edit has been Added'
 	             }).then(function(){
 					$scope.editUserModal.hide();
 					$scope.editUserProfileData={};
 					$scope.getUsers();
-	             })
-			})
+	             });
+			});
 		}else{
-			var alertPopup = $ionicPopup.alert({
+		     $ionicPopup.alert({
 	             title: 'No Changes has been recorded'
 	        })
 			.then(function(){
 				$scope.editUserModal.hide();
 				$scope.editUserProfileData={};
 
-			})
+			});
 		}
-	}
+	};
 
 	$scope.editClub=function(){
 		Club.editClub($scope.club.data).then(function(resp){
@@ -226,36 +226,37 @@ angular.module('zarad.club',[])
 				$scope.editClubModal.hide();
 				$scope.getClub();
 			}else{
-				var alertPopup = $ionicPopup.alert({
+				 $ionicPopup.alert({
 	            title: resp.data
 	            })
 	            .then(function(){
 	            	$scope.getClub();
-	            })
+	            });
 			}
-		})
-	}
+		});
+	};
 
 	$scope.AddUser=function(){
 			$scope.clubNewUser.membership=membership;
 			$scope.clubNewUser.club=$scope.club.data.clubName;
 			Club.AddUser($scope.clubNewUser).then(function(resp){
-				var alertPopup = $ionicPopup.alert({
+				 $ionicPopup.alert({
 	             title: 'Your User Name is:'+resp.username
 	             })
 				.then(function(){
 					$scope.addUserModal.hide();
-	             })
+	             });
 			});
 			$scope.clubNewUser={};
 	};
 
 	$scope.show=function(){
-		if($scope.usersToSubscribe !== {} || $scope.usersEndedSubs !== {})
-			return true
-		else 
-			return false
-	}
+		if($scope.usersToSubscribe !== {} || $scope.usersEndedSubs !== {}){
+			return true;
+		}else{ 
+			return false;
+		}
+	};
 	$scope.getAchievmentData=function(data){
 		if(typeof data === 'string'){
 			$scope.clubNewUser.beltColor=data;	
@@ -264,11 +265,11 @@ angular.module('zarad.club',[])
 				$scope.clubNewUser.achievements.place=data;
 			}else{
 				$scope.clubNewUser.achievements={};
-				$scope.clubNewUser.achievements.name="";
+				$scope.clubNewUser.achievements.name='';
 				$scope.clubNewUser.achievements.place=data;
 			}
 		}
-	}
+	};
 
 	$scope.getClub=function(){
 		var username=$window.localStorage.getItem('user');
@@ -276,7 +277,7 @@ angular.module('zarad.club',[])
 			$scope.club.data=resp;
 			 $scope.getUsers();
 
-		})
+		});
 	};
 
 	// Calling in the ng- init club.html
@@ -300,7 +301,7 @@ angular.module('zarad.club',[])
 				//check if the user subscription ended or have 3 days left
 				$scope.checkSubscription(resp.data[i]);
 			}
-		})
+		});
 	};
 
 	$scope.checkSubscription=function(user){
@@ -318,7 +319,7 @@ angular.module('zarad.club',[])
 				valid: user.valid,
 				image: user.image,
 				daysLeft: willFinish
-				})
+				});
 			}
 			//check if user subscibtion finished.
 			if(!user.valid){
@@ -333,9 +334,9 @@ angular.module('zarad.club',[])
 					subscription: willFinish,
 					image:user.image,
 					valid:user.valid
-				})
+				});
 			}
-	}
+	};
 
 
 	$scope.resup=function(user){
@@ -350,18 +351,18 @@ angular.module('zarad.club',[])
        {
          text: '<b>Regester</b>',
          type: 'button button-outline icon icon-left ion-unlocked button-dark bt',
-         onTap: function(e) {
+         onTap: function() {
     	 $scope.renew(user);
          }
        },
      ]
    });
-   myPopup.then(function(res) {
+   myPopup.then(function() {
    });
    $timeout(function() {
       myPopup.close();
    }, 60000);
-}
+};
 
 	$scope.renew = function(user){
 		var months=$scope.getTime();
@@ -378,15 +379,15 @@ angular.module('zarad.club',[])
 		    confirmPopup.then(function(res) {
 			    if(res) {
 			    	User.resub({username : user.username, membership : months})
-			        .then(function(response){
-				        var alertPopup = $ionicPopup.alert({
+			        .then(function(){
+				        $ionicPopup.alert({
 				        title: 'user'+' '+user.firstName +' '+ user.lastName + ' ' +'have beed resubscribed'
 				    	})
 				    	.then(function(){
 				           $scope.getUsers();
 				           $scope.onezoneDatepicker.date="";
-				    	})
-			    	})
+				    	});
+			    	});
 			    }else{
 			    	$scope.onezoneDatepicker.date="";
 			    }
@@ -414,4 +415,4 @@ angular.module('zarad.club',[])
 			return results;
 		}
 	};
-})
+});
