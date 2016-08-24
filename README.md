@@ -4,7 +4,7 @@
 
 # Zarad 
 
-Zarad is app help  the sport clubs to manage  their  activities and facilitate track the players and their history,also it helps player to see the videos related to his club.    
+Zarad is an application that helps JiuJitsu Academies manage their members and facilitate track players achievements plus their history, also it helps each member to see the latest techniques uploaded by the academy.    
 
 
 
@@ -17,6 +17,9 @@ Zarad is app help  the sport clubs to manage  their  activities and facilitate t
 ## Table of Contents
 
 1. [Usage](#Usage)
+1. [ARCHITECTURE](#architecture)
+    1. [Tech Stack](#tech-stack)
+    1. [System Architecture](#system-architecture)
 1. [Requirements](#requirements)
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
@@ -40,30 +43,43 @@ Download Ionic View from Play Store or App store
 Enter this Id : A92B94C3
 ```
 
->To run the app locally:
-
-```sh
-git clone https://github.com/Sportitsu/Zarad.git
-```
-
-```sh
-npm install && bower install
-```
-
-```sh
-Web platform -- > ionic serve
-Phone platform -- > ionic serve --lab
-```
 
 ## Running Tests
 ```sh
-npm test
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
 ```
 
 ## styling guide
 ```sh
 gulp
 ```
+
+## Architecture
+
+### Tech Stack
+
+1) Front-End
+- Ionic  
+- Angular
+
+2) Back-End
+- Node/Express
+- MongoDB
+
+
+3) Testing
+- Mocha
+- Chai
+- Karma 
+- Jasmine
+
+4) Deployment
+- Heroku
+
+
+### System Architecture
+![System Architecture](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/systemArchitecture.jpg "System Architecture")
 
 ## Requirements
 
@@ -78,14 +94,35 @@ gulp
 From within the root directory:
 
 ```sh
+git clone https://github.com/Sportitsu/Zarad.git
+```
+
+```sh
 npm install -g ionic
 npm install
 ```
 
+```sh
+npm install && bower install
+```
+
+```sh
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
+```
+
 
 #APIs Used
+<<<<<<< HEAD
+- We used the Youtube API to collect Academy youtube channel videos. 
+- we used Imgur API to save memory on our database.
+
+#The Database 
+Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
+=======
 - We used the Youtube API to gather details about the videos related to each Academy
 - we used Imgur API to store the tournaments Image .
+>>>>>>> 766a667b35dbe9842bcb4c3b9570cdfcaa322d02
 
 # RESTful Routes
 | Method        | Endpoint      | Description  |
@@ -118,11 +155,6 @@ npm install
 |post|/api/user/goals| add goals for specific user|
 |get|/api/quotes/get|get information of quote |
 |post|/api/quotes/newquote| add new quote to specific user|
-
-
-
-#The Database 
-Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
 
 ### Roadmap
 

@@ -68,14 +68,6 @@ angular.module('zarad.user',['ionic'])
       });
     
    }
-
-    // $scope.biggerImage = function(){
-    //   $scope.modal.show();
-    // }
-
-    // $scope.closeModal = function() {
-    //   $scope.modal.hide();
-    // };
     
     var uploadToIMGUR = function(client_id, imgData, callback) {
       $.ajax({
@@ -131,23 +123,14 @@ angular.module('zarad.user',['ionic'])
    }
 
   
-   // $scope.showFriends = function(){
-   //   $scope.friends.show();
-   // }
-
-
-
-   // $scope.closeLogin = function(){
-   //   $scope.friends.hide();
-   // }
-
-
-
+  
    $scope.myFriends = [];
    $scope.getAllUsers = function(){
      User.getAllUsers()
          .then(function(response){
+          console.log(response);
            for(var i = 0 ; i < response.data.length; i++){
+            console.log(response.data[i].image);
             if($scope.data.club === response.data[i].club && response.data[i].username !== $scope.data.username){
               $scope.myFriends.push(response.data[i]);
             }
@@ -176,13 +159,9 @@ angular.module('zarad.user',['ionic'])
       if($scope.friendAchievements.length === 0){
         $scope.friendMedal = true;
       }
-      // $scope.friendProfile.show();
    }
 
-   // $scope.goBack = function(){
-   //  $scope.friendProfile.hide();
-   // }    
-         // Set Header    
+   // Set Header    
    $scope.isExpanded = false;
 
 

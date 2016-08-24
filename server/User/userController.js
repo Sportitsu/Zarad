@@ -44,7 +44,7 @@ module.exports= {
 					newObject.country = users[i].country;
 					newObject.age = users[i].age;
 					newObject.middleName = users[i].middleName || 'N/A';
-					newObject.image = users[i].image || 'http://i.imgur.com/FlEXhZo.jpg?1'
+					newObject.image = users[i].image || 'http://i.imgur.com/FlEXhZo.jpg?1';
 					newArr.push(newObject);
 				}
 				res.status(200).json(newArr);
@@ -67,7 +67,7 @@ module.exports= {
 				}
 				res.status(200).json(results);
 			}
-		})
+		});
 	},
 
 	signin : function(req, res){
@@ -98,7 +98,7 @@ module.exports= {
 	      		    	} else {
 	      		    		helpers.errorHandler('Club No longer Exists', req, res);
 	      		    	}
-	      		    })
+	      		    });
       			} else {
 			 	    helpers.errorHandler('User Does Not Exist', req, res);
       			}
@@ -171,7 +171,7 @@ module.exports= {
 					user.phone = req.body.phone || user.phone; 
 					user.club = req.body.club || user.club;
 					user.beltColor = req.body.beltColor || user.beltColor;
-					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements  
+					req.body.achievements ? user.achievements.push({ name : req.body.achievements , place:req.body.place}) : user.achievements;
 					user.attendance = req.body.attendance || user.attendance;
 					if(req.body.oldPassword){
 						User.comparePassword(req.body.oldPassword , user.password , res , function(){
@@ -254,10 +254,10 @@ module.exports= {
 						if(saved){
 							res.status(201).send(saved);
 						}
-					})
+					});
 				} else {
 					helpers.errorHandler('User Not Found', req,res);
 				}
-			})
+			});
 	}
 };
