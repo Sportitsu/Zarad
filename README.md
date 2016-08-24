@@ -40,7 +40,7 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 > Preview the app on your phone
 ```sh
 Download Ionic View from Play Store or App store 
-Enter this Id : A92B94C3
+Enter this Id : 4C581605
 ```
 
 
