@@ -1,7 +1,7 @@
 'use strict';
 angular.module('zarad.tournament',['ionic'])
 
-.controller('TournamentController',function($scope, $window, $location,Tournament,$ionicModal){
+.controller('TournamentController',function($scope, $window, Tournament){
 	$scope.AllTournament={};
 	$scope.SearchTournament={};
 	$scope.LikeCtrl=""

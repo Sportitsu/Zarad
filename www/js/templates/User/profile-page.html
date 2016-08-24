@@ -1,9 +1,9 @@
-<ion-view view-title="Home">
+<ion-view view-title="Home" ng-init="initialize();getAllUsers();">
   <div  style="background-image:url('http://www.wpclipart.com/page_frames/background_pages/sky_backgrounds/beautiful_sky_background_page.jpg');width:100%;height:100%;">
       <ion-content ng-class="{expanded:$scope.isExpanded}">
         <div class="hero slide-up" style="background-image: url('http://mystrengthmatters.com/wp-content/uploads/2016/07/Fantastic-Five-The-5-different-types-of-Brazilian-Jiu-Jitsu-black-belts.jpg');">
             <div class="content">
-                <div class="avatar" ng-click="biggerImage()" style="background-image: url('{{data.image}}');"></div>
+                <div class="avatar" ng-click="modal.show();" style="background-image: url('{{data.image}}');"></div>
                 <h3><a class="light" style="color:white">{{data.firstName}}</a></h3>
                 <h4>{{data.club}}</h4>
             </div>
@@ -27,7 +27,7 @@
                 </ul>
                 <p ng-show="noMedal">Soon to become a World Champion!!</p>
                 <br><br>
-                    <button style="margin-left:25%" class="button button-dark" ng-click="showFriends()">Club Members</button>
+                    <button style="margin-left:25%" class="button button-dark" ng-click="friends.show();">Club Members</button>
             <span id="resubscribe" hidden="true" style="color:black;background-color:red;border-radius:5px solid black">Please Resubscribe</span>      
             <br><br><br><br><br>
             </div>

@@ -64,6 +64,9 @@ angular.module('zarad.services',[])
     })
     .catch(function(error){
       return error;
+    })
+    .catch(function(error){
+      return error;
     });
   }
 
@@ -352,7 +355,6 @@ angular.module('zarad.services',[])
   };
 
     var Like=function(Like){
-    console.log(Like)
     return $http({
       method:'POST',
       data:Like,
@@ -402,3 +404,4 @@ angular.module('zarad.services',[])
     addQuote : addQuote
   }
 })
+

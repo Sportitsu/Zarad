@@ -180,81 +180,81 @@ describe('Tournaments DataBase', function(done){
 				})
 		})
 	})
-	//addLike
 	it('should addLike to  tournament when passed the right name key,and username', function(done){
-		var newTour = new Tournament({
-			'name' : 'San Fransisco Elite Tournament' ,
-			'Date' : 'Test' , 
-			'place' : 'Boo' , 
-			'organizer' : 'Bla' , 
-			'details' : 'sdfl' ,
-			'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
-			'like'    :[]
-		})
+	        var newTour = new Tournament({
+	            'name' : 'San Fransisco Elite Tournament' ,
+	            'Date' : 'Test' , 
+	            'place' : 'Boo' , 
+	            'organizer' : 'Bla' , 
+	            'details' : 'sdfl' ,
+	            'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
+	            'like'    :[]
+	        })
 
-		newTour.save(function(err, savedTour){
-			chai.request(server)
-				.post('/api/tournament/addLike')
-				.send({
-					'name' : 'San Fransisco Elite Tournament',
-					'username' : 'PLelham2342'
-				})
-				.end(function(err, res){
-					expect(res.status).to.be.equal(201);
-					expect(res.body.like.length).to.be.equal(1);
-					expect(res.body).to.have.property('name');
-					done();
-				})
-		})
-	})
-	it('should addLike to  tournament when passed the right name key,and username', function(done){
-		var newTour = new Tournament({
-			'name' : 'San Fransisco Elite Tournament' ,
-			'Date' : 'Test' , 
-			'place' : 'Boo' , 
-			'organizer' : 'Bla' , 
-			'details' : 'sdfl' ,
-			'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
-			'like'    :["PLelham2342"]
-		})
-	
-		newTour.save(function(err, savedTour){
-			chai.request(server)
-				.post('/api/tournament/addLike')
-				.send({
-					'name' : 'San Fransisco Elite Tournament',
-					'username' : 'PLelham2342'
-				})
-				.end(function(err, res){
-					expect(res.status).to.be.equal(201);
-					expect(res.body.like.length).to.be.equal(0);
-					expect(res.body).to.have.property('name');
-					done();
-				})
-		})
-	})
-	it('should delete Like from  tournament when passed the right name key,and username agin', function(done){
-		var newTour = new Tournament({
-			'name' : 'San Fransisco Elite Tournament' ,
-			'Date' : 'Test' , 
-			'place' : 'Boo' , 
-			'organizer' : 'Bla' , 
-			'details' : 'sdfl' ,
-			'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
-			'like'    :["PLelham2342"]
-		})
-	
-		newTour.save(function(err, savedTour){
-			chai.request(server)
-				.post('/api/tournament/addLike')
-				.send({
-					'name' : 'San Fransisco Elite ',
-					'username' : 'PLelham2342'
-				})
-				.end(function(err, res){
-					expect(res.status).to.be.equal(500);
-					done();
-				})
-		})
-	})
+	        newTour.save(function(err, savedTour){
+	            chai.request(server)
+	                .post('/api/tournament/addLike')
+	                .send({
+	                    'name' : 'San Fransisco Elite Tournament',
+	                    'username' : 'PLelham2342'
+	                })
+	                .end(function(err, res){
+	                    expect(res.status).to.be.equal(201);
+	                    expect(res.body.like.length).to.be.equal(1);
+	                    expect(res.body).to.have.property('name');
+	                    done();
+	                })
+	        })
+	    })
+	    it('should addLike to  tournament when passed the right name key,and username', function(done){
+	        var newTour = new Tournament({
+	            'name' : 'San Fransisco Elite Tournament' ,
+	            'Date' : 'Test' , 
+	            'place' : 'Boo' , 
+	            'organizer' : 'Bla' , 
+	            'details' : 'sdfl' ,
+	            'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
+	            'like'    :["PLelham2342"]
+	        })
+	    
+	        newTour.save(function(err, savedTour){
+	            chai.request(server)
+	                .post('/api/tournament/addLike')
+	                .send({
+	                    'name' : 'San Fransisco Elite Tournament',
+	                    'username' : 'PLelham2342'
+	                })
+	                .end(function(err, res){
+	                    expect(res.status).to.be.equal(201);
+	                    expect(res.body.like.length).to.be.equal(0);
+	                    expect(res.body).to.have.property('name');
+	                    done();
+	                })
+	        })
+	    })
+	    it('should handle error', function(done){
+	        var newTour = new Tournament({
+	            'name' : 'San Fransisco Elite Tournament' ,
+	            'Date' : 'Test' , 
+	            'place' : 'Boo' , 
+	            'organizer' : 'Bla' , 
+	            'details' : 'sdfl' ,
+	            'poster' : 'www.facebook.com/mohammadalbakri/image.jpg?=234?=lang=EN?&=blabla',
+	            'like'    :["PLelham2342"]
+	        })
+	    
+	        newTour.save(function(err, savedTour){
+	            chai.request(server)
+	                .post('/api/tournament/addLike')
+	                .send({
+	                    'name' : 'San Fransisco Elite ',
+	                    'username' : 'PLelham2342'
+	                })
+	                .end(function(err, res){
+	                    expect(res.status).to.be.equal(500);
+	                    done();
+	                })
+	        })
+    })
+
 });
