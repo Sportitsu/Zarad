@@ -42,18 +42,6 @@ Enter this Id : A92B94C3
 
 >To run the app locally:
 
-```sh
-git clone https://github.com/Sportitsu/Zarad.git
-```
-
-```sh
-npm install && bower install
-```
-
-```sh
-Web platform -- > ionic serve
-Phone platform -- > ionic serve --lab
-```
 
 ## Running Tests
 ```sh
@@ -78,8 +66,21 @@ gulp
 From within the root directory:
 
 ```sh
+git clone https://github.com/Sportitsu/Zarad.git
+```
+
+```sh
 npm install -g ionic
 npm install
+```
+
+```sh
+npm install && bower install
+```
+
+```sh
+Web platform -- > ionic serve
+Phone platform -- > ionic serve --lab
 ```
 
 
