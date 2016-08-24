@@ -78,10 +78,7 @@ gulp
 
 
 ### System Architecture
-
-<p align="center">
-  <img src="masters/screenshots/systemArchitecture.jpg" width="350"/>
-</p>
+![System Architecture](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/systemArchitecture.jpg "System Architecture")
 
 ## Requirements
 
