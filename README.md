@@ -29,10 +29,15 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 
 ## Usage
 
-<p align="center">
-  <img src="masters/screenshots/combine_images.jpg" width="350"/>
-  <img src="masters/screenshots/combine_images2.jpg" width="350"/>
-</p>
+
+
+### As a subscribed Member
+
+![Subscribed](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/combine_images.jpg "Subscribed")
+
+### As a Club Owner
+
+![Club Owner](https://raw.githubusercontent.com/Sportitsu/Zarad/master/masters/screenshots/combine_images2.jpg "Club Ownder")
 
 > Web Browser application link :
 [Click Here](http://zarad.herokuapp.com)
@@ -40,7 +45,7 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 > Preview the app on your phone
 ```sh
 Download Ionic View from Play Store or App store 
-Enter this Id : A92B94C3
+Enter this Id : 4C581605
 ```
 
 
@@ -113,48 +118,12 @@ Phone platform -- > ionic serve --lab
 
 
 #APIs Used
-<<<<<<< HEAD
+
 - We used the Youtube API to collect Academy youtube channel videos. 
 - we used Imgur API to save memory on our database.
 
 #The Database 
 Our Database is built using MongoDB, which holds the main three models, Clubs, Members, Tournaments, Admins
-=======
-- We used the Youtube API to gather details about the videos related to each Academy
-- we used Imgur API to store the tournaments Image .
->>>>>>> 766a667b35dbe9842bcb4c3b9570cdfcaa322d02
-
-# RESTful Routes
-| Method        | Endpoint      | Description  |
-| ------------- |:-------------:| ------------:|
-|Post           |/api/admin/create|create new admin |
-|Post|/api/admin/signin|check if the admin authenticat to use the app|
-|get|/api/admin/x/:username|get the data of admin depend on username.Username must be passed in as the last part of the URL path|
-|post|/api/admin/delete|delete specific admin  |
-|Post|/api/admin/admins|get information of all admin|
-|get|/api/tournament/x/:name|get information of tournament depend on name.name must be passed in as the last part of the URL path|
-|get|/api/tournament/tournaments|get information of all tournaments | 
-|post|/api/tournament/create|create new tournaments|
-|post|/api/tournament/delete|delete specific tournaments|
-|post|/api/tournament/edit'|update tournament information|
-|post|/api/tournament/addLike'| add like on tournament|
-|post|/api/club/register|create new club|
-|get|/api/club/x/:username|get information of club depend on username.username must be passed in as the last part of the URL path|
-|get|/api/clubs| get information of all club|
-|post|/api/club/delete|Remove specific club |
-|post|/api/club/editProfile|update information of club|
-|post|/api/club/signin|check if the club authenticat to use the app|
-|post|/api/club/getclub|get information of club|
-|post|/api/user/delete|delete specific user|
-|post|/api/user/editProfile| update information Profile of user|
-|get|/api/user/x/:username| get information of user depend on username.username must be passed in as the last part of the URL path|
-|get|/api/users| get information of all user|
-|post|/api/user/signin| check if the user authenticat to use the app|
-|post|/api/user/signup| create new user|
-|post|/api/user/resub| check  the user subscribtion to use the app|
-|post|/api/user/goals| add goals for specific user|
-|get|/api/quotes/get|get information of quote |
-|post|/api/quotes/newquote| add new quote to specific user|
 
 ### Roadmap
 
