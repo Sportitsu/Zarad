@@ -89,7 +89,7 @@ gulp
 
 - Node 6.3.x
 - mongoDB 4.1.0
-- ionic 1.3.1
+- Ionic 1.3.1
 
 ## Development
 

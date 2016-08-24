@@ -53,22 +53,6 @@ describe('Videos Controller', function(){
 		expect($scope.flag).toBeDefined();
 	});
 
-	// it('should get the club details for user to get channel id', function(){
-	// 	deferred.resolve({data:{channelId: '214012348'}});
-
-	// 	$scope.$apply();
-
-	// 	expect(Club.getClubForUser).toHaveBeenCalled();
-	// });
-
-	// it('should have a get Video function that works', function(){
-	// 	deferred.resolve({data : {items: [1,2,3,4]}});
-	// 	$scope.getVideo();
-	// 	$scope.$apply();
-
-	// 	expect(true).toBe(true);
-	// });
-
 	it('should handle error when channelId is not defined', function(){
 		deferred.reject('not possible');
 
@@ -318,12 +302,6 @@ describe('User Profile Page controller', function(){
         expect(popup).toHaveBeenCalled();
         expect(true).toBe(true);
 	});
-
-	// it('should be able to take photos', function(){
-	// 	console.log(Camera);
-	// 	// var source = Camera.PictureSourceType.CAMERA;
-	// 	$scope.takePhoto(source);
-	// });
 
 	it('should have an initialize function', function(){
 		expect($scope.initialize).toBeDefined();

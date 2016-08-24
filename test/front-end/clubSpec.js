@@ -7,9 +7,6 @@ describe('Club Controller', function(){
   beforeEach(angular.mock.module('ngCordova'));
   beforeEach(angular.mock.module('ionic-material'));
 
-
-
-
   var $scope , $window , $q , deferred , $location , User, Auth, Club, ionicPopupMock , ionicActionMock , ionicModalMock;
   beforeEach(inject(function($rootScope, $controller, _$window_, _$location_, _$q_, _User_, _Auth_, _Club_, $ionicPopup, $ionicModal, $ionicActionSheet, _$timeout_ ){
 
