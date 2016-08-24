@@ -32,7 +32,7 @@ module.exports ={
 	    		} else {
 	    			helpers.errorHandler('Error Getting Club', req,res);
 	    		}
-	    	})
+	    	});
 	},
 	// Add a new club
 	addClub : function(req,res){
@@ -53,7 +53,7 @@ module.exports ={
 					country  : req.body.country,
 					clubName : req.body.clubName,
 					email : req.body.email,
-					channelId: req.body.channelId || "",
+					channelId: req.body.channelId || '',
 					image: req.body.image || 'http://i.imgur.com/FlEXhZo.jpg?1'
 				});
 				newClub.save(function (error,club) {
@@ -65,7 +65,7 @@ module.exports ={
 							country : club.country,
 							clubName : club.clubName,
 							email : club.email,
-							channelId: req.body.channelId || "",
+							channelId: req.body.channelId || '',
 							image : club.image
 						});
 						res.status(201).send(returnClub);
@@ -100,7 +100,6 @@ module.exports ={
 	signin : function (req,res) {
 		var username = req.body.username;
 		var password = req.body.password;
-		// var key = req.body.username.indexOf('@') === -1 ? key = 'username' : key = 'email';
 		Club.findOne({ username : username})
 		.exec(function (error,club) {
 			if(club){

@@ -41,7 +41,7 @@ module.exports = {
 			if(tournament){
 				res.status(200).send(tournament);
 			}else{
-				res.status(500).send("Not Found");
+				res.status(500).send('Not Found');
 			}
 		});
 	},
@@ -81,7 +81,7 @@ module.exports = {
 		.exec(function(error, tournament){
 			if(tournament){
 				if(tournament.like.indexOf(req.body.username)===-1){
-					tournament.like.push(req.body.username)
+					tournament.like.push(req.body.username);
 				}else{
 					tournament.like.splice(tournament.like.indexOf(req.body.username,1));
 				}

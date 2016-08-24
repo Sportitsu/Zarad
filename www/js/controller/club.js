@@ -4,7 +4,6 @@ angular.module('zarad.club',[])
 	//added somethign for pull request
 	$scope.clubNewUser={};
 	$scope.clubUsers={};
-	// Added to the club.html
 	$scope.club={};
 	$scope.userProfileData={};
 	$scope.editUserProfileData={};
@@ -282,7 +281,6 @@ angular.module('zarad.club',[])
 		})
 	};
 
-	// Calling in the ng- init club.html
 	$scope.getClub();
 
 
