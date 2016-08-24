@@ -17,7 +17,7 @@ Zarad is an application that helps JiuJitsu Academies manage their members and f
 ## Table of Contents
 
 1. [Usage](#Usage)
-1. [ARCHITECTURE](#architecture)
+1. [Architecture](#architecture)
     1. [Tech Stack](#tech-stack)
     1. [System Architecture](#system-architecture)
 1. [Requirements](#requirements)
