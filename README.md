@@ -51,8 +51,7 @@ Enter this Id : 4C581605
 
 ## Running Tests
 ```sh
-Web platform -- > ionic serve
-Phone platform -- > ionic serve --lab
+npm test
 ```
 
 ## styling guide
